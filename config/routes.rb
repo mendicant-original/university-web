@@ -12,6 +12,10 @@ University::Application.routes.draw do |map|
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  
+  namespace :chat do
+    resources :messages
+  end
 
   # Sample resource route with options:
   #   resources :products do
