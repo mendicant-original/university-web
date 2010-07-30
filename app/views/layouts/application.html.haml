@@ -2,8 +2,10 @@
 %html
   %head
     %title RMU
-    = javascript_include_tag 'rails'
+    = javascript_include_tag 'jquery-1.4.2.js', 'rails'
     = csrf_meta_tag
+    
+    = yield(:header_bottom)
 
   %body
     = yield
