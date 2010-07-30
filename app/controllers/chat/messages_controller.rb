@@ -1,5 +1,5 @@
 class Chat::MessagesController < ApplicationController
-  before_filter :authenticate, :only => [:index]
+  before_filter :authenticate
   
   def index
     @messages = Chat::Message.all(:order => "recorded_at DESC")
@@ -23,7 +23,7 @@ class Chat::MessagesController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_basic do |id, password| 
-        id == "api" && password == "cows"
+        id == "rmu" && password == "rmu1337"
     end
   end
 end
