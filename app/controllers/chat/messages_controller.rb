@@ -5,7 +5,7 @@ class Chat::MessagesController < ApplicationController
   before_filter :authenticate_service, :only => [:create]
 
   def index
-    @messages = Chat::Message.all(:order => "recorded_at DESC")
+    @messages = Chat::Message.all(:order => "recorded_at")
   end
   
   def create
