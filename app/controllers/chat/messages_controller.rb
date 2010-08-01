@@ -1,6 +1,9 @@
 class Chat::MessagesController < ApplicationController
-  before_filter :authenticate
-  
+  respond_to :json
+
+  skip_before_filter :authenticate_user!, :only => [:create]
+  before_filter :authenticate_service, :only => [:create]
+
   def index
     @messages = Chat::Message.all(:order => "recorded_at DESC")
   end
@@ -19,11 +22,9 @@ class Chat::MessagesController < ApplicationController
     render :json => chat_message.to_json
   end
   
-  private
-
-  def authenticate
+  def authenticate_service
     authenticate_or_request_with_http_basic do |id, password| 
-        id == "rmu" && password == "rmu1337"
+      id == RMU_ID && password == RMU_PASSWORD
     end
   end
 end

@@ -19,6 +19,8 @@ University::Application.routes.draw do |map|
     resources :messages
   end
 
+  devise_for :users
+
   # Sample resource route with options:
   #   resources :products do
   #     member do
