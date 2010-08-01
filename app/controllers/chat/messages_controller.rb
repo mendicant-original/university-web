@@ -5,7 +5,9 @@ class Chat::MessagesController < ApplicationController
   before_filter :authenticate_service, :only => [:create]
 
   def index
-    @messages = Chat::Message.all(:order => "recorded_at")
+    @messages = Chat::Message.includes(:channel).
+                              where("chat_channels.name = ?", "#rmu-general").
+                              order(:recorded_at)
   end
   
   def create
