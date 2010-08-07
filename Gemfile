@@ -1,12 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.0.beta4'
-gem "devise", :git => "git://github.com/plataformatec/devise.git", 
-              :tag => "v1.1.rc2"
-
-
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem "devise", :path => "vendor/gems/devise"
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'json'
