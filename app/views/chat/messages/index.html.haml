@@ -1,9 +1,3 @@
-- content_for :header_bottom do
-  :javascript
-    $(document).ready(function(){
-      setTimeout("location.reload(true);", 5000);
-    });
-
 %h1 IRC Log
 
 - @messages.each do |message|
