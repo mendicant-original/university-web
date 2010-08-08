@@ -2,6 +2,7 @@ class Chat::MessagesController < ApplicationController
   respond_to :json
 
   skip_before_filter :authenticate_user!, :only => [:create]
+  skip_before_filter :change_password_if_needed, :only => [:create]
   before_filter :authenticate_service, :only => [:create]
 
   def index
