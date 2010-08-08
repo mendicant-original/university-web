@@ -13,7 +13,7 @@ University::Application.routes.draw do |map|
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   
-  root :to => "application#welcome"
+  root :to => "home#show"
   
   namespace :chat do
     resources :messages
@@ -21,6 +21,8 @@ University::Application.routes.draw do |map|
 
   devise_for :users, :controllers => { :sessions => "user_sessions" }
 
+  resource :home, :controller => "home"
+  
   resources :users do
     member do
       post :change_password
