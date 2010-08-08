@@ -19,7 +19,13 @@ University::Application.routes.draw do |map|
     resources :messages
   end
 
-  devise_for :users
+  devise_for :users, :controllers => { :sessions => "user_sessions" }
+
+  resources :users do
+    member do
+      post :change_password
+    end
+  end
 
   # Sample resource route with options:
   #   resources :products do
