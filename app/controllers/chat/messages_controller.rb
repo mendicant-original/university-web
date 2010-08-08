@@ -5,9 +5,18 @@ class Chat::MessagesController < ApplicationController
   before_filter :authenticate_service, :only => [:create]
 
   def index
+    if params[:channel]
+      if current_user.chat_channels.find_by_name(params[:channel])
+        channel = params[:channel]
+      else
+        raise "No Access To This Channel or Invalid Channel!"
+      end
+    end
+
     @messages = Chat::Message.includes(:channel).
-                              where("chat_channels.name = ?", "#rmu-general").
+                              where("chat_channels.name = ?", channel || "#rmu-general").
                               order(:recorded_at)
+
   end
   
   def create
