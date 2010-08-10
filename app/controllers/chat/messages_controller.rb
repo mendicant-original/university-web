@@ -26,10 +26,16 @@ class Chat::MessagesController < ApplicationController
     channel = Chat::Channel.find_or_create_by_name(message["channel"])
     handle  = Chat::Handle.find_or_create_by_name(message["handle"])
     
+    unless message["topic"].blank?
+      topic_id = Chat::Topic.find_or_create_by_name_and_channel_id(
+                   message["topic"], channel.id).id
+    end
+    
     chat_message = Chat::Message.create( :handle_id   => handle.id,
-                                       :channel_id  => channel.id,
-                                       :body        => message["body"],
-                                       :recorded_at => message["recorded_at"])
+                                         :channel_id  => channel.id,
+                                         :body        => message["body"],
+                                         :recorded_at => message["recorded_at"],
+                                         :topic_id    => topic_id)
                                        
     render :json => chat_message.to_json
   end
