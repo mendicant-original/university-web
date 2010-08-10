@@ -13,11 +13,17 @@ class Chat::MessagesController < ApplicationController
         raise "No Access To This Channel or Invalid Channel!"
       end
     end
+    
+    if channel && params[:topic]
+      topic = Chat::Channel.find_by_name(channel).topics.
+                 find_by_name(params[:topic])
+    end
 
     @messages = Chat::Message.includes(:channel).
                               where("chat_channels.name = ?", channel || "#rmu-general").
                               order(:recorded_at)
-
+                              
+    @messages = @messages.where(:topic_id => topic.id) if topic
   end
   
   def create
