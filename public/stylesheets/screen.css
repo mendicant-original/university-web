@@ -1,0 +1,142 @@
+/* line 14, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+/* line 17, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+body {
+  line-height: 1;
+  color: black;
+  background: white;
+}
+
+/* line 19, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 21, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 23, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 25, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: "" "";
+}
+/* line 96, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+}
+
+/* line 27, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 3, ../../app/stylesheets/screen.sass */
+html, body {
+  height: 100%;
+}
+
+/* line 6, ../../app/stylesheets/screen.sass */
+body {
+  font-family: "Gill Sans", "Tacoma", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #00316a;
+}
+
+/* line 12, ../../app/stylesheets/screen.sass */
+#container {
+  width: 970px;
+  margin: 0 auto;
+  border-left: 40px solid #fbe482;
+  border-right: 40px solid #fbe482;
+  min-height: 100%;
+  background-color: white;
+}
+
+/* line 20, ../../app/stylesheets/screen.sass */
+#content {
+  padding: 10px 0;
+  margin: 0 auto;
+  width: 930px;
+}
+
+/* line 25, ../../app/stylesheets/screen.sass */
+h1, h2, h3 {
+  margin: 0.75em 0;
+}
+
+/* line 28, ../../app/stylesheets/screen.sass */
+h1 {
+  font-size: 2em;
+}
+
+/* line 30, ../../app/stylesheets/screen.sass */
+h2 {
+  font-size: 1.75em;
+}
+
+/* line 32, ../../app/stylesheets/screen.sass */
+h3 {
+  font-size: 1.5em;
+}
+
+/* line 35, ../../app/stylesheets/screen.sass */
+a {
+  text-decoration: none;
+}
+
+/* line 38, ../../app/stylesheets/screen.sass */
+#header {
+  margin: 20px 0;
+}
+
+/* line 41, ../../app/stylesheets/screen.sass */
+.channel {
+  margin: 1em;
+}
+/* line 44, ../../app/stylesheets/screen.sass */
+.channel a {
+  display: inline-block;
+  font-size: 1.25em;
+  color: black;
+  margin: 0.25em 0;
+  margin-bottom: 0.5em;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #00316a;
+}
+/* line 53, ../../app/stylesheets/screen.sass */
+.channel a:hover {
+  border-color: #fbe482;
+}
+/* line 56, ../../app/stylesheets/screen.sass */
+.channel .message {
+  margin: 0.25em 1em;
+}

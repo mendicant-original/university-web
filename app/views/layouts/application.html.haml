@@ -2,10 +2,15 @@
 %html
   %head
     %title RMU
+    = stylesheet_tag 'screen', :media => :screen
     = javascript_include_tag 'jquery-1.4.2.js', 'rails'
     = csrf_meta_tag
     
     = yield(:header_bottom)
 
   %body
-    = yield
+    #container
+      #content
+        #header= yield(:header)
+      
+        = yield
