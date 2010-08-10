@@ -1,5 +1,6 @@
 class Chat::Channel < ActiveRecord::Base
   has_many :messages
+  has_many :topics
   
   validates_uniqueness_of :name
   validates_presence_of   :name
