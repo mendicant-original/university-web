@@ -7,7 +7,7 @@
 %h1 IRC Log
 
 %table.messages
-  - @messages.reverse.each do |message|
+  - @messages.each do |message|
     = render :partial => "display", :locals => {:message => message}
     
 #bottom

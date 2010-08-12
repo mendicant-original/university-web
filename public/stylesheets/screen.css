@@ -128,6 +128,7 @@ table.messages td.handle {
 	padding-right: 1em;
 	color: #555;
 	vertical-align: top;
+	max-width: 125px;
 }
 
 table.messages td.recorded_at{
