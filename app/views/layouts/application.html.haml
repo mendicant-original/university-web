@@ -1,7 +1,9 @@
 !!! Strict
 %html
   %head
-    %title RMU
+    %title
+      = yield(:title).blank? ? controller_name.humanize : yield(:title)
+      \- RMU
     = stylesheet_tag 'screen', :media => :screen
     = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo', 'rails'
     = csrf_meta_tag
