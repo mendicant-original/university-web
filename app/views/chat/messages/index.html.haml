@@ -1,16 +1,41 @@
 - content_for :header_bottom do
   :javascript
+    var lastMessageRecordedAt = '#{@messages.last.recorded_at}';
+    var lastMessageId         = #{@messages.last.id};
+  
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
+      
+      setInterval('loadMessages()', 3000);
     });
+    
+    function loadMessages(){
+      $.getJSON('#{chat_messages_path}',
+        { channel:  '#{params[:channel]}',
+          since:    lastMessageRecordedAt,
+          last_id:  lastMessageId,
+          topic:    '#{params[:topic]}'
+        },
+        function(data){
+          if(data.length > 0){
+            lastMessageRecordedAt = data[data.length - 1].recorded_at;
+            lastMessageId         = data[data.length - 1].id;
+            
+            for(var x = 0; x <= data.length - 1; x++){
+              $('table.messages tr:last').after(data[x].html);
+            }
+          }
+        }
+      );
+    }
 
 %h1 IRC Log
 
 - if @more_messages
-  %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true)
+  %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
 
 %table.messages
-  - @messages.reverse.each do |message|
+  - @messages.each do |message|
     = render :partial => "display", :locals => {:message => message}
     
 #bottom

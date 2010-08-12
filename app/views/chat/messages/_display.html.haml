@@ -1,5 +1,4 @@
-.message
-  %tr
-    %td.handle= "#{message.handle.name}:"
-    %td.body= message.body
-    %td.recorded_at= message.recorded_at.strftime("%m/%d/%Y %I:%M%p")
+%tr.message
+  %td.handle= "#{message.handle.name}:"
+  %td.body= message.body
+  %td.recorded_at= message.recorded_at.strftime("%m/%d/%Y %I:%M%p")

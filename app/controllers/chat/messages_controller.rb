@@ -25,11 +25,36 @@ class Chat::MessagesController < ApplicationController
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
     
-    total_messages = @messages.count
+    if params[:since]
+      @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
+                    DateTime.parse(params[:since]), params[:last_id].to_i])
+    else
+      total_messages = @messages.count
     
-    @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
+      @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
     
-    @more_messages = total_messages > @messages.count
+      @more_messages = total_messages > @messages.count
+    end
+    
+    @messages.reverse!
+    
+    respond_to do |format|
+      format.html
+      format.json do
+        json_messages = @messages.map do |message|
+          {
+            :body        => message.body,
+            :handle      => message.handle.name,
+            :recorded_at => message.recorded_at,
+            :id          => message.id,
+            :html        => render_to_string(:partial => 'display.html.haml', 
+                              :locals => {:message => message})
+          }
+        end
+        
+        render :json => json_messages.to_json
+      end
+    end
   end
   
   def create
