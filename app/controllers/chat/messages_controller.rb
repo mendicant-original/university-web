@@ -21,12 +21,15 @@ class Chat::MessagesController < ApplicationController
 
     @messages = Chat::Message.includes(:channel).
                               where("chat_channels.name = ?", channel || "#rmu-general").
-                              order("recorded_at DESC").
-                              limit(200)
+                              order("recorded_at DESC")
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
     
-    @messages.reverse!
+    total_messages = @messages.count
+    
+    @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
+    
+    @more_messages = total_messages > @messages.count
   end
   
   def create

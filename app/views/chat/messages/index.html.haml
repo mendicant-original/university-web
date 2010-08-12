@@ -6,8 +6,11 @@
 
 %h1 IRC Log
 
+- if @more_messages
+  %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true)
+
 %table.messages
-  - @messages.each do |message|
+  - @messages.reverse.each do |message|
     = render :partial => "display", :locals => {:message => message}
     
 #bottom
