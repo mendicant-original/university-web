@@ -7,7 +7,8 @@
   .channel
     %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
     
-    - channel.recent.each do |message|
-      = render :partial => "/chat/messages/display", :locals => { :message => message }
+    %table.messages
+      - channel.recent.each do |message|
+        = render :partial => "/chat/messages/display", :locals => { :message => message }
     - if channel.recent.empty?
       %p There are no recent message for this channel

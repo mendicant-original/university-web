@@ -119,10 +119,52 @@ a {
   border-color: #fbe482;
 }
 
-.message {
-  margin: 0.25em 1em;
+table.messages {
+  margin-left: 1em;
+	width: 98%;
+}
+
+table.messages td.handle {
+	padding-right: 1em;
+	color: #555;
+	vertical-align: top;
+}
+
+table.messages td.recorded_at{
+	vertical-align: top;
+	color: gray;
+	text-align: right;
+	width: 150px;
+}
+
+table.messages td.body{
+	vertical-align: top;
+	max-width: 650px;
+}
+
+table.messages td{
+	padding-bottom: 0.25em;
 }
 
 input{
 	margin: 1em 0;
+}
+
+.pagination{
+	margin: 1em 0.5em;
+	background: silver;
+	padding: 1em 2em;
+	color: #000;
+	border: 1px solid gray;
+	
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.pagination a{
+	color: #000;
+}
+
+.pagination em{
+	color: gray;
 }

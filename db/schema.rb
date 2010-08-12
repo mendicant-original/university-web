@@ -12,46 +12,46 @@
 ActiveRecord::Schema.define(:version => 20100810220318) do
 
   create_table "chat_channel_memberships", :force => true do |t|
-    t.integer  "channel_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "channel_id"
+    t.integer   "user_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "chat_channels", :force => true do |t|
-    t.text     "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text      "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "chat_handles", :force => true do |t|
-    t.text     "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text      "name"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "chat_messages", :force => true do |t|
-    t.text     "body"
-    t.datetime "recorded_at"
-    t.integer  "handle_id"
-    t.integer  "channel_id"
-    t.integer  "topic_id"
+    t.text      "body"
+    t.timestamp "recorded_at"
+    t.integer   "handle_id"
+    t.integer   "channel_id"
+    t.integer   "topic_id"
   end
 
   create_table "chat_topics", :force => true do |t|
-    t.text     "name"
-    t.integer  "channel_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.text      "name"
+    t.integer   "channel_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                   :default => "",   :null => false
-    t.string   "encrypted_password",       :limit => 128, :default => "",   :null => false
-    t.string   "password_salt",                           :default => "",   :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "requires_password_change",                :default => true
+    t.string    "email",                                   :default => "",   :null => false
+    t.string    "encrypted_password",       :limit => 128, :default => "",   :null => false
+    t.string    "password_salt",                           :default => "",   :null => false
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.boolean   "requires_password_change",                :default => true
   end
 
 end

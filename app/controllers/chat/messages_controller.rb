@@ -21,9 +21,11 @@ class Chat::MessagesController < ApplicationController
 
     @messages = Chat::Message.includes(:channel).
                               where("chat_channels.name = ?", channel || "#rmu-general").
-                              order(:recorded_at)
+                              order("recorded_at DESC")
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
+    
+    # @messages = @messages.paginate(:per_page => 50, :page => params[:page])
   end
   
   def create

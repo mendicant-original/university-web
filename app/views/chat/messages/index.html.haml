@@ -1,4 +1,13 @@
+- content_for :header_bottom do
+  :javascript
+    $(document).ready(function(){
+      $.scrollTo('#bottom', { axis: 'y' });
+    });
+
 %h1 IRC Log
 
-- @messages.each do |message|
-  = render :partial => "display", :locals => {:message => message}
+%table.messages
+  - @messages.reverse.each do |message|
+    = render :partial => "display", :locals => {:message => message}
+    
+#bottom

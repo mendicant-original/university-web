@@ -76,6 +76,7 @@ GEM
     tzinfo (0.3.22)
     warden (0.10.7)
       rack (>= 1.0.0)
+    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -86,3 +87,4 @@ DEPENDENCIES
   json
   rails (= 3.0.0.beta4)
   sqlite3-ruby
+  will_paginate (~> 3.0.pre2)
