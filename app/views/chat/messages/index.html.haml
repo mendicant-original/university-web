@@ -4,7 +4,7 @@
     var lastMessageId         = #{@messages.last.id};
   
     $(document).ready(function(){
-      $.scrollTo('#bottom', { axis: 'y' });
+      $.scrollTo('#bottom', );
       
       setInterval('loadMessages()', 3000);
     });
@@ -24,6 +24,8 @@
             for(var x = 0; x <= data.length - 1; x++){
               $('table.messages tr:last').after(data[x].html);
             }
+            
+            $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
         }
       );
