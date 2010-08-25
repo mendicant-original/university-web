@@ -31,6 +31,7 @@ University::Application.routes.draw do |map|
   
   namespace :admin do
     resources :users
+    resources :courses
   end
   
 
