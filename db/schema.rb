@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100825134302) do
+ActiveRecord::Schema.define(:version => 20100825142313) do
 
   create_table "chat_channel_memberships", :force => true do |t|
     t.integer   "channel_id"
@@ -66,6 +66,10 @@ ActiveRecord::Schema.define(:version => 20100825134302) do
     t.timestamp "updated_at"
     t.boolean   "requires_password_change",                :default => true
     t.string    "access_level"
+    t.text      "real_name"
+    t.text      "nickname"
+    t.text      "twitter_account_name"
+    t.text      "github_account_name"
   end
 
 end
