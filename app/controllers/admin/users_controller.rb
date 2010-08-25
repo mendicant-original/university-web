@@ -13,8 +13,6 @@ class Admin::UsersController < Admin::Base
   def create
     @user = User.new(params[:user])
     
-    @user.confirmed = true
-    
     if @user.password.blank? and @user.password_confirmation.blank?
       password = User.random_password
       @user.password              = password
@@ -23,8 +21,6 @@ class Admin::UsersController < Admin::Base
     
     if @user.save 
       update_access_level
-      
-      Notifier.deliver_new_account(@user,password) if password
          
       redirect_to admin_users_path
     else
