@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810220318) do
+ActiveRecord::Schema.define(:version => 20100825134302) do
 
   create_table "chat_channel_memberships", :force => true do |t|
     t.integer   "channel_id"
@@ -45,6 +45,19 @@ ActiveRecord::Schema.define(:version => 20100810220318) do
     t.timestamp "updated_at"
   end
 
+  create_table "course_memberships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", :force => true do |t|
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", :force => true do |t|
     t.string    "email",                                   :default => "",   :null => false
     t.string    "encrypted_password",       :limit => 128, :default => "",   :null => false
@@ -52,6 +65,7 @@ ActiveRecord::Schema.define(:version => 20100810220318) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
     t.boolean   "requires_password_change",                :default => true
+    t.string    "access_level"
   end
 
 end

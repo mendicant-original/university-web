@@ -28,6 +28,11 @@ University::Application.routes.draw do |map|
       post :change_password
     end
   end
+  
+  namespace :admin do
+    resources :users
+  end
+  
 
   # Sample resource route with options:
   #   resources :products do

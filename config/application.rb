@@ -36,6 +36,11 @@ module University
     #   g.template_engine :erb
     #   g.test_framework  :test_unit, :fixture => true
     # end
+    
+    config.after_initialize do
+        require "#{RAILS_ROOT}/app/models/access_level"
+        require "#{RAILS_ROOT}/config/access_level_definitions"
+      end
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

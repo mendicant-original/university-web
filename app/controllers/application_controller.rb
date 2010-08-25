@@ -14,4 +14,11 @@ class ApplicationController < ActionController::Base
       render "users/change_password"
     end
   end
+  
+  private 
+  
+  def current_access_level
+    return current_user.access_level if current_user
+    AccessLevel::User["guest"]
+  end
 end

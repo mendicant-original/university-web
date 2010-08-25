@@ -1,0 +1,8 @@
+- title 'Edit User'
+
+%h1 Edit User
+
+- form_for @user, :url => admin_user_path(@user) do |f|
+  = render :partial => "form", :object => f
+  = f.submit "Update"
+  = link_to "Cancel", admin_users_path

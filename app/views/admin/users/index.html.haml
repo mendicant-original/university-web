@@ -1,0 +1,21 @@
+%h1 Users
+
+- form_tag admin_users_path, :method => :get do
+  = text_field_tag "search", params[:search]
+  = submit_tag "Search"
+%p= link_to "Create User", new_admin_user_path
+
+%table
+  %thead
+    %tr
+      %th Email
+      %th Access&nbsp;Level
+      %th 
+  %tbody
+    - @users.each do |user|
+      %tr{:class => cycle('even','odd')}
+        %td= link_to user.email, edit_admin_user_path(user)
+        %td= user.access_level.to_s
+        %td= link_to("Destroy", admin_user_path(user), :confirm => "Are you sure you wish to delete this user?", :method => 'DELETE') unless user == current_user
+      
+%p= will_paginate @users

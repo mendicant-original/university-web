@@ -1,0 +1,8 @@
+-title 'New User'
+
+%h1 New User
+
+- form_for @user, :url => admin_users_path do |f|
+  = render :partial => "form", :object => f
+  = f.submit "Create"
+  = link_to "Cancel", admin_users_path
