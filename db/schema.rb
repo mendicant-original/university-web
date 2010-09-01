@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100825142313) do
+ActiveRecord::Schema.define(:version => 20100901143926) do
 
   create_table "chat_channel_memberships", :force => true do |t|
     t.integer   "channel_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(:version => 20100825142313) do
     t.integer  "course_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "github_project_url"
   end
 
   create_table "courses", :force => true do |t|

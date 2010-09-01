@@ -28,3 +28,6 @@
     - unless m.object.new_record?
       = m.check_box :_destroy
       = m.label :_destroy, "Remove Course"
+    %br
+    = m.label :github_project_url, "Github Project:"
+    = m.text_field :github_project_url
