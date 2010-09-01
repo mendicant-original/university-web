@@ -3,7 +3,8 @@
 - form_tag admin_users_path, :method => :get do
   = text_field_tag "search", params[:search]
   = submit_tag "Search"
-%p= link_to "Create User", new_admin_user_path
+  
+= button_to "Create User", new_admin_user_path, :method => :get
 
 %table.edit
   %thead
