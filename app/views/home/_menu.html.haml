@@ -1,0 +1,9 @@
+#navigation.admin
+  = link_to "Home", root_path
+  - if current_access_level.allows?(:manage_users)
+    = link_to "Administration", admin_users_path
+  - if current_user
+    %span.right
+      = link_to current_user.email, ""
+      |
+      = link_to "Logout", destroy_user_session_path

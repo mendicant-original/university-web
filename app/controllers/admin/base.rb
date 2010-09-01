@@ -1,6 +1,7 @@
 module Admin
   class Base < ApplicationController
     before_filter :admin_required
+    layout "admin"
     
     private
     

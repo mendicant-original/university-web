@@ -155,7 +155,7 @@ input{
 	margin: 1em 0.5em;
 	background: silver;
 	padding: 1em 2em;
-	color: #000;
+	color: #444;
 	border: 1px solid gray;
 	
 	border-radius: 5px;
@@ -163,11 +163,12 @@ input{
 }
 
 .pagination a{
-	color: #000;
+	color: #222;
 }
 
 .pagination em{
-	color: gray;
+	font-size: 1.3em;
+	color: #000;
 }
 
 p{
@@ -181,3 +182,22 @@ table.edit th{
 table.edit th, table.edit td{
 	padding: 2px 4px;
 }
+
+/* Navigation */
+
+#navigation{
+	background: #eee;
+	padding: 10px;
+	border-bottom: 1px solid silver;
+	color: silver;
+}
+
+#navigation a { color: #000; padding: 4px 8px; }
+#navigation a:visited { color: #000; }
+#navigation a:hover { color: #002E6E;}
+
+span.right { float: right; }
+
+a { color: #002E6E; }
+a:visited { color: #002E6E; }
+a:hover { color: #000; }

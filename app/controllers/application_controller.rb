@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :change_password_if_needed
   
+  helper_method :current_access_level
+  
   def welcome
     render :text => "Welcome to RMU!"
   end
@@ -18,7 +20,7 @@ class ApplicationController < ActionController::Base
   private 
   
   def current_access_level
-    return current_user.access_level if current_user
+    return current_user.access_level if current_user && current_user.access_level
     AccessLevel::User["guest"]
   end
 end
