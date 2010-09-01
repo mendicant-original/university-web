@@ -9,7 +9,7 @@ class Admin::UsersController < Admin::Base
   def new
     @user = User.new
     
-    @user.course_memberships.build
+    build_nested_attributes
   end
   
   def create
@@ -31,9 +31,7 @@ class Admin::UsersController < Admin::Base
   end
   
   def edit
-    @user.course_memberships.build
-    
-    3.times { @user.chat_channel_memberships.build }
+    build_nested_attributes
   end
   
   def update
@@ -70,5 +68,11 @@ class Admin::UsersController < Admin::Base
     access_level = params[:user].delete("access_level")
     
     @user.update_attribute(:access_level, access_level)
+  end
+  
+  def build_nested_attributes
+    @user.course_memberships.build
+    
+    3.times { @user.chat_channel_memberships.build }
   end
 end
