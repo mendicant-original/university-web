@@ -13,7 +13,7 @@ class Admin::CoursesController < Admin::Base
     @course = Course.new(params[:course])
     
     if @course.save 
-      redirect_to admin_users_path
+      redirect_to admin_courses_path
     else
       render :action => :new
     end
@@ -21,7 +21,7 @@ class Admin::CoursesController < Admin::Base
   
   def update
     if @course.update_attributes(params[:course])
-      redirect_to admin_users_path
+      redirect_to admin_courses_path
     else
       render :action => :edit
     end
@@ -32,7 +32,7 @@ class Admin::CoursesController < Admin::Base
     
     flash[:notice] = @course.errors.full_messages.join(",")
     
-    redirect_to admin_users_path
+    redirect_to admin_courses_path
   end
   
   private
