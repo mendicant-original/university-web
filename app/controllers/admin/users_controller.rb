@@ -32,6 +32,8 @@ class Admin::UsersController < Admin::Base
   
   def edit
     @user.course_memberships.build
+    
+    3.times { @user.chat_channel_memberships.build }
   end
   
   def update

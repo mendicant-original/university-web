@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['course_id'].blank? },
     :allow_destroy => true
   
+  accepts_nested_attributes_for :chat_channel_memberships,
+    :reject_if => proc { |attributes| attributes['channel_id'].blank? },
+    :allow_destroy => true
 
   def self.search(search, page)
     paginate :per_page => 20, :page => page,

@@ -51,3 +51,15 @@
     %br
     = m.label :github_project_url, "Github Project:"
     = m.text_field :github_project_url
+    
+%hr
+
+%h2 Chat Channel Memberships
+
+= form.fields_for :chat_channel_memberships do |m|
+  %p
+    = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+      :include_blank => "Select a channel"
+    - unless m.object.new_record?
+      = m.check_box :_destroy
+      = m.label :_destroy, "Remove Channel Access"
