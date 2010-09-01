@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
   has_many :courses, :through => :course_memberships
   
   attr_protected :access_level
+  
+  accepts_nested_attributes_for :course_memberships,
+    :reject_if => proc { |attributes| attributes['course_id'].blank? }
+  
 
   def self.search(search, page)
     paginate :per_page => 20, :page => page,

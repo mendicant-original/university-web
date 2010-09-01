@@ -16,3 +16,12 @@
 %p
   = form.label :access_level
   = user_access_level_select(form.object)
+  
+%hr
+
+%h2 Courses
+
+= form.fields_for :course_memberships do |m|
+  %p
+    = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
+      :include_blank => "Select a course"

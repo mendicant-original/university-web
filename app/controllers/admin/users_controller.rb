@@ -8,6 +8,8 @@ class Admin::UsersController < Admin::Base
   
   def new
     @user = User.new
+    
+    @user.course_memberships.build
   end
   
   def create
@@ -26,6 +28,10 @@ class Admin::UsersController < Admin::Base
     else
       render :action => :new
     end
+  end
+  
+  def edit
+    @user.course_memberships.build
   end
   
   def update
