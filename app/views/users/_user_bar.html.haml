@@ -1,0 +1,5 @@
+- if current_user
+  %span.right
+    = link_to current_user.email, ""
+    |
+    = link_to "Logout", destroy_user_session_path
