@@ -173,3 +173,11 @@ input{
 p{
 	margin: 1.5em 0;
 }
+
+table.edit th{
+	font-weight: bold;
+}
+
+table.edit th, table.edit td{
+	padding: 2px 4px;
+}

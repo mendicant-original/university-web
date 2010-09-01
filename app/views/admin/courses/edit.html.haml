@@ -4,5 +4,3 @@
 
 - form_for @course, :url => admin_course_path(@course) do |f|
   = render :partial => "form", :object => f
-  = f.submit "Update"
-  = link_to "Cancel", admin_courses_path

@@ -26,4 +26,14 @@ class User < ActiveRecord::Base
   def access_level
     AccessLevel::User[read_attribute(:access_level)]
   end
+  
+  def name
+    if !nickname.blank?
+      nickname
+    elsif !real_name.blank?
+      real_name
+    else
+      ""
+    end
+  end
 end

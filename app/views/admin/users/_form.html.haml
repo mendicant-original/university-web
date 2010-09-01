@@ -2,6 +2,14 @@
   = form.label :email
   = form.text_field :email
 
+%p
+  = form.label :real_name
+  = form.text_field :real_name
+
+%p
+  = form.label :nickname
+  = form.text_field :nickname
+
 - if form.object.new_record?
   %p
     %b To manually set the users password enter it below. Otherwise leave the fields blank and a password will be generated and emailed to the user.
@@ -16,6 +24,18 @@
 %p
   = form.label :access_level
   = user_access_level_select(form.object)
+  
+%hr
+
+%p
+  = form.label :github_account_name
+  %br
+  = form.text_field :github_account_name
+  
+%p
+  = form.label :twitter_account_name
+  %br
+  = form.text_field :twitter_account_name
   
 %hr
 
