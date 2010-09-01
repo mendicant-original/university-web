@@ -25,3 +25,6 @@
   %p
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
+    - unless m.object.new_record?
+      = m.check_box :_destroy
+      = m.label :_destroy, "Remove Course"

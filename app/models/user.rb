@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   attr_protected :access_level
   
   accepts_nested_attributes_for :course_memberships,
-    :reject_if => proc { |attributes| attributes['course_id'].blank? }
+    :reject_if => proc { |attributes| attributes['course_id'].blank? },
+    :allow_destroy => true
   
 
   def self.search(search, page)
