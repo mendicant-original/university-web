@@ -1,0 +1,13 @@
+%p
+  = f.label :name
+  %br
+  = f.text_field :name
+  
+%p
+  = f.label :sort_order
+  %br
+  = f.text_field :sort_order
+  
+%p
+  = f.submit @submission_status.new_record? ? 'Create' : 'Save'
+  = link_to 'Cancel', admin_assignments_submission_statuses_path
