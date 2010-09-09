@@ -195,6 +195,8 @@ table.edit th, table.edit td{
 #navigation a { color: #000; padding: 4px 8px; }
 #navigation a:visited { color: #000; }
 #navigation a:hover { color: #002E6E;}
+#navigation a.session { color: gray; }
+#navigation a.session:hover { color: #000; }
 
 span.right { float: right; }
 
