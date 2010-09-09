@@ -203,3 +203,11 @@ span.right { float: right; }
 a { color: #002E6E; }
 a:visited { color: #002E6E; }
 a:hover { color: #000; }
+
+/* Assignment Submissions */
+
+.mass_edit{
+	padding: 1em 0;
+	margin: 0.75em 0;
+	border-bottom: 1px solid #002E6E;
+}

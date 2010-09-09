@@ -1,0 +1,5 @@
+%h1 Edit Assignment
+
+= form_for @assignment, 
+  :url => admin_course_assignment_path(@course, @assignment) do |f|
+  = render :partial => "form", :locals => {:f => f}
