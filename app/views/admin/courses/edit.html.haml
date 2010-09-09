@@ -4,3 +4,8 @@
 
 - form_for @course, :url => admin_course_path(@course) do |f|
   = render :partial => "form", :object => f
+  
+%h2 Assignments
+  
+= render :partial => "/admin/assignments/assignments"
+  

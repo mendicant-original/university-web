@@ -4,7 +4,7 @@ class Admin::AssignmentsController < Admin::Base
   before_filter :find_submission_statuses, :only => [:edit, :update]
   
   def index
-    @assignments = @course.assignments
+
   end
   
   def new

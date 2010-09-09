@@ -1,0 +1,17 @@
+=  button_to "Create Assignment", new_admin_course_assignment_path(@course),
+    :method => :get
+
+%table.edit
+  %thead
+    %tr
+      %th Assignment
+      %th 
+  %tbody
+    - @course.assignments.each do |assignment|
+      %tr{:class => cycle('even','odd')}
+        %td= link_to assignment.name,
+              edit_admin_course_assignment_path(@course, assignment)
+        %td= link_to( "Destroy",
+              admin_course_assignment_path(@course, assignment), 
+              :confirm => "Are you sure you wish to delete this assignment?",
+              :method => 'DELETE')
