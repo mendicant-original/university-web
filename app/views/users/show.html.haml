@@ -1,0 +1,21 @@
+- title @user.name.blank? ? @user.email : @user.name
+
+%h1= @user.name.blank? ? @user.email : @user.name
+
+- unless @user.name.blank?
+  %p
+    Email:
+    = @user.email
+  
+- unless @user.github_account_name.blank?
+  %p
+    Github:
+    = github_account_link @user.github_account_name
+
+- unless @user.twitter_account_name.blank?
+  %p
+    Twitter:
+    = twitter_account_link @user.twitter_account_name
+    
+- if current_user == @user
+  %p= link_to "Edit my personal information", edit_user_path(@user)

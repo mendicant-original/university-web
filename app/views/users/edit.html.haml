@@ -1,0 +1,31 @@
+- title 'Edit Personal Information'
+
+%h1 Edit Personal Information
+
+= form_for @user do |form|
+  %p
+    = form.label :email
+    = form.text_field :email
+
+  %p
+    = form.label :real_name
+    = form.text_field :real_name
+
+  %p
+    = form.label :nickname
+    = form.text_field :nickname
+
+  %hr
+
+  %p
+    = form.label :github_account_name
+    %br
+    = form.text_field :github_account_name
+
+  %p
+    = form.label :twitter_account_name
+    %br
+    = form.text_field :twitter_account_name
+    
+  %p
+    = form.submit 'Update'
