@@ -9,7 +9,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100901143926) do
+ActiveRecord::Schema.define(:version => 20100909192002) do
+
+  create_table "assignment_submission_statuses", :force => true do |t|
+    t.text     "name"
+    t.integer  "sort_order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignment_submissions", :force => true do |t|
+    t.integer  "assignment_id"
+    t.integer  "user_id"
+    t.integer  "submission_status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "course_id"
+    t.text     "string"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "chat_channel_memberships", :force => true do |t|
     t.integer   "channel_id"
