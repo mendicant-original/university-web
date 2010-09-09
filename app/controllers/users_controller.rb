@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   skip_before_filter :change_password_if_needed
 
+  def index
+    @users = User.all.sort_by {|u| u.name }
+  end
+  
   def show
     @user = User.find(params[:id])
   end

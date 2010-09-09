@@ -1,0 +1,8 @@
+%h1 Directory
+
+%table.edit
+  %tr
+    %th Name / Email
+  - @users.each do |user|
+    %tr
+      %td= link_to user.name.blank? ? user.email : user.name, user_path(user)

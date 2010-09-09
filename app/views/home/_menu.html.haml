@@ -1,5 +1,6 @@
 #navigation
   = link_to "Home", root_path
+  = link_to "Directory", users_path
   - if current_access_level.allows?(:manage_users)
     = link_to "Administration", admin_users_path
   = render :partial => "users/user_bar"
