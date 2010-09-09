@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20100909192002) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "course_id"
-    t.text     "string"
+    t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
