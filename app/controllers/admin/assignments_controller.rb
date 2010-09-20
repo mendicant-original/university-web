@@ -1,7 +1,7 @@
 class Admin::AssignmentsController < Admin::Base
   before_filter :find_course
   before_filter :find_assignment, :only => [:edit, :update, :destroy]
-  before_filter :find_submission_statuses, :only => [:edit, :update]
+  before_filter :find_submission_statuses, :only => [:index, :edit, :update]
   
   def index
 

@@ -5,4 +5,6 @@ class Course < ActiveRecord::Base
   
   validates_presence_of :name
   validates_uniqueness_of :name
+  
+  accepts_nested_attributes_for :assignments
 end

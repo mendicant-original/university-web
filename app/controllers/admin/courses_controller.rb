@@ -1,5 +1,6 @@
 class Admin::CoursesController < Admin::Base
   before_filter :find_course, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_submission_statuses, :only => [:edit, :update]
   
   def index
     @courses = Course.all
@@ -21,7 +22,7 @@ class Admin::CoursesController < Admin::Base
   
   def update
     if @course.update_attributes(params[:course])
-      redirect_to admin_courses_path
+      redirect_to request.referer
     else
       render :action => :edit
     end
@@ -39,5 +40,10 @@ class Admin::CoursesController < Admin::Base
   
   def find_course
     @course = Course.find(params[:id])
+  end
+  
+  def find_submission_statuses
+    @statuses = Assignment::SubmissionStatus.order("sort_order").
+                  map {|s| [s.name, s.id] }
   end
 end

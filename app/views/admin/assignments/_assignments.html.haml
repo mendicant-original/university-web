@@ -1,17 +1,31 @@
 =  button_to "Create Assignment", new_admin_course_assignment_path(@course),
     :method => :get
 
-%table.edit
-  %thead
-    %tr
-      %th Assignment
-      %th 
-  %tbody
-    - @course.assignments.each do |assignment|
-      %tr{:class => cycle('even','odd')}
-        %td= link_to assignment.name,
-              edit_admin_course_assignment_path(@course, assignment)
-        %td= link_to( "Destroy",
+= form_for @course, 
+  :url => admin_course_path(@course) do |f|
+
+  %table.edit 
+    %thead 
+      %tr
+        %th Student
+        - @course.assignments.each do |assignment|
+          %th
+            = link_to assignment.name,
+                edit_admin_course_assignment_path(@course, assignment)
+            = link_to( "(Destroy)",
               admin_course_assignment_path(@course, assignment), 
-              :confirm => "Are you sure you wish to delete this assignment?",
-              :method => 'DELETE')
+              :confirm => "Are you sure you wish to delete #{assignment.name}?",
+              :method => 'DELETE') 
+    %tbody
+      - @course.students.each do |student|
+        %tr
+          %td= student.name.blank? ? student.email : student.name
+          - @course.assignments.each do |assignment|
+            = f.fields_for :assignments, assignment do |a|
+              = a.fields_for :submissions, assignment.submission_for(student) do |s|
+                %td.status= s.select :submission_status_id, @statuses
+              
+  %p= f.submit "Save Assignments"
+  
+  
+  
