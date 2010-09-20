@@ -1,5 +1,5 @@
 - if current_user
   %span.right
-    = link_to current_user.email, user_path(current_user)
+    = link_to current_user.email #, user_path(current_user)
     |
     = link_to "Logout", destroy_user_session_path, :class => "session"
