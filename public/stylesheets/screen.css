@@ -101,52 +101,6 @@ a {
   margin: 20px 0;
 }
 
-.channel {
-  margin: 1em;
-}
-
-.channel a {
-  display: inline-block;
-  font-size: 1.25em;
-  color: black;
-  margin: 0.25em 0;
-  margin-bottom: 0.5em;
-  padding-bottom: 4px;
-  border-bottom: 2px solid #00316a;
-}
-
-.channel a:hover {
-  border-color: #fbe482;
-}
-
-table.messages {
-  margin-left: 1em;
-	width: 98%;
-}
-
-table.messages td.handle {
-	padding-right: 1em;
-	color: #555;
-	vertical-align: top;
-	width: 140px;
-}
-
-table.messages td.recorded_at{
-	vertical-align: top;
-	color: gray;
-	text-align: right;
-	width: 150px;
-}
-
-table.messages td.body{
-	vertical-align: top;
-	max-width: 650px;
-}
-
-table.messages td{
-	padding-bottom: 0.25em;
-}
-
 input{
 	margin: 1em 0;
 }
@@ -210,4 +164,67 @@ a:hover { color: #000; }
 	padding: 1em 0;
 	margin: 0.75em 0;
 	border-bottom: 1px solid #002E6E;
+}
+
+/* Dashboard */
+
+.box{
+	display: inline-block;
+	width: 420px;
+	float: left;
+	margin-right: 1em;
+}
+
+.channel {
+  margin: 1em;
+
+}
+
+.channel h4{
+  display: inline-block;
+  font-size: 1.25em;
+  color: black;
+  margin: 0.25em 0;
+  margin-bottom: 0.5em;
+  padding-bottom: 4px;
+}
+
+.channel a:hover {
+  border-bottom: 2px solid #00316a;
+}
+
+.channel .right{
+	float: right;
+	font-size: 0.75em;
+	vertical-align: bottom;
+}
+
+/* IRC Logs */
+
+table.messages {
+  margin-left: 1em;
+	width: 98%;
+}
+
+table.messages td.handle {
+	padding-right: 1em;
+	color: #555;
+	vertical-align: top;
+	width: 140px;
+}
+
+table.messages td.recorded_at{
+	vertical-align: top;
+	color: gray;
+	text-align: right;
+	width: 150px;
+}
+
+table.messages td.body{
+	vertical-align: top;
+	max-width: 650px;
+}
+
+table.messages td{
+	padding-bottom: 0.25em;
 }

@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   has_many :course_memberships
   has_many :courses, :through => :course_memberships
   
+  has_many :assignment_submissions, :class_name => "Assignment::Submission"
+  
   attr_protected :access_level
   
   accepts_nested_attributes_for :course_memberships,

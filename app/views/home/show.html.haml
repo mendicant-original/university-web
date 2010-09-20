@@ -1,14 +1,20 @@
 - content_for :header do
   %h1 Ruby Mendicant University
 
-%h3 IRC Channels
+.box
+  %h3 IRC Channels
 
-- current_user.chat_channels.each do |channel|
-  .channel
-    %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
-    
-    %table.messages
-      - channel.recent.each do |message|
-        = render :partial => "/chat/messages/display", :locals => { :message => message }
-    - if channel.recent.empty?
-      %p There are no recent message for this channel
+  - current_user.chat_channels.each do |channel|
+    .channel
+      %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
+      .right= "(#{channel.last_message_date})"
+      
+.box
+  %h3 Assignments
+  
+  %table.edit
+    - current_user.assignment_submissions.each do |submission|
+      %tr
+        %th= submission.assignment.name
+        %td= submission.status.name
+      
