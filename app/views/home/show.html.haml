@@ -1,21 +1,23 @@
-- content_for :header do
-  %h1 Ruby Mendicant University
-
 .two-col
+  #main
+    .profile
+      %h1
+        = image_tag current_user.gravatar_url(50)
+        = current_user.name
+
   #left
     %h3 IRC Channels
 
     - current_user.chat_channels.each do |channel|
       .channel
-        %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
+        = link_to channel.name, chat_messages_path(:channel => channel.name)
         .right= "(#{channel.last_message_date})"
       
-  #right
+  #right.assignments
     %h3 Assignments
   
-    %table.edit
-      - current_user.assignment_submissions.each do |submission|
-        %tr
-          %th= submission.assignment.name
-          %td= submission.status.name
+    - current_user.assignment_submissions.each do |submission|
+      .assignment
+        = submission.assignment.name
+        .right= submission.status.name
       

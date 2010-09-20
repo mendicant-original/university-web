@@ -1,3 +1,6 @@
+$rmu_blue= #00316a
+$rmu_yellow= #fbe482
+
 html, body
   height: 100%
 
@@ -5,7 +8,7 @@ body
   font-family: "Gill Sans", "Tacoma", "Arial", sans-serif
   margin: 0
   padding: 0
-  background-color: #00316a
+  background-color= $rmu_blue
 
 #container
   width: 970px
@@ -14,8 +17,16 @@ body
   border-right: 40px solid #fbe482
   min-height: 100%
   background-color: white
+  +box-shadow(silver, 0px, 10px, 10px, inset)
 
 #content
   padding: 10px 0
   margin: 0 auto
   width: 930px
+  
+a
+  color: #002E6E
+  &:visited
+    color: #002E6E
+  &:hover
+    color: #000

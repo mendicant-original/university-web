@@ -5,8 +5,13 @@
 
 @import "compass/reset";
 @import "blueprint/grid";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+
 @import "partials/layout";
 @import "partials/dashboard";
+@import "partials/menu";
 
 h1, h2, h3 {
   margin: 0.75em 0;
@@ -68,66 +73,12 @@ table.edit th, table.edit td{
 	padding: 2px 4px;
 }
 
-/* Navigation */
-
-#navigation{
-	background: #eee;
-	padding: 10px;
-	border-bottom: 1px solid silver;
-	color: silver;
-}
-
-#navigation a { color: #000; padding: 4px 8px; }
-#navigation a:visited { color: #000; }
-#navigation a:hover { color: #002E6E;}
-#navigation a.session { color: gray; }
-#navigation a.session:hover { color: #000; }
-
-span.right { float: right; }
-
-a { color: #002E6E; }
-a:visited { color: #002E6E; }
-a:hover { color: #000; }
-
 /* Assignment Submissions */
 
 .mass_edit{
 	padding: 1em 0;
 	margin: 0.75em 0;
 	border-bottom: 1px solid #002E6E;
-}
-
-/* Dashboard */
-
-.box{
-	display: inline-block;
-	width: 420px;
-	float: left;
-	margin-right: 1em;
-}
-
-.channel {
-  margin: 1em;
-
-}
-
-.channel h4{
-  display: inline-block;
-  font-size: 1.25em;
-  color: black;
-  margin: 0.25em 0;
-  margin-bottom: 0.5em;
-  padding-bottom: 4px;
-}
-
-.channel a:hover {
-  border-bottom: 2px solid #00316a;
-}
-
-.channel .right{
-	float: right;
-	font-size: 0.75em;
-	vertical-align: bottom;
 }
 
 /* IRC Logs */
