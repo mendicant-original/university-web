@@ -1,20 +1,21 @@
 - content_for :header do
   %h1 Ruby Mendicant University
 
-.box
-  %h3 IRC Channels
+.two-col
+  #left
+    %h3 IRC Channels
 
-  - current_user.chat_channels.each do |channel|
-    .channel
-      %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
-      .right= "(#{channel.last_message_date})"
+    - current_user.chat_channels.each do |channel|
+      .channel
+        %h4= link_to channel.name, chat_messages_path(:channel => channel.name)
+        .right= "(#{channel.last_message_date})"
       
-.box
-  %h3 Assignments
+  #right
+    %h3 Assignments
   
-  %table.edit
-    - current_user.assignment_submissions.each do |submission|
-      %tr
-        %th= submission.assignment.name
-        %td= submission.status.name
+    %table.edit
+      - current_user.assignment_submissions.each do |submission|
+        %tr
+          %th= submission.assignment.name
+          %td= submission.status.name
       

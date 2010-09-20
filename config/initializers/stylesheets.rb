@@ -2,6 +2,8 @@
 # http://github.com/chriseppstein/compass/issues/issue/130
 # and other posts.
 
+# For Heroku
+
 # Create the dir
 require 'fileutils'
 FileUtils.mkdir_p(Rails.root.join("tmp", "stylesheets", "compiled"))
