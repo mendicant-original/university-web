@@ -1,3 +1,8 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 14, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -17,44 +22,52 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   vertical-align: baseline;
 }
 
+/* line 17, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 body {
   line-height: 1;
   color: black;
   background: white;
 }
 
+/* line 19, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 ol, ul {
   list-style: none;
 }
 
+/* line 21, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 table {
   border-collapse: separate;
   border-spacing: 0;
   vertical-align: middle;
 }
 
+/* line 23, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 caption, th, td {
   text-align: left;
   font-weight: normal;
   vertical-align: middle;
 }
 
+/* line 25, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q, blockquote {
   quotes: "" "";
 }
-
+/* line 96, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 q:before, q:after, blockquote:before, blockquote:after {
   content: "";
 }
 
+/* line 27, ../../../../../.rvm/gems/ruby-1.8.7-p299@rmu-university-web/gems/compass-0.10.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
 a img {
   border: none;
 }
 
+/* line 1, ../../app/stylesheets/layout.sass */
 html, body {
   height: 100%;
 }
 
+/* line 4, ../../app/stylesheets/layout.sass */
 body {
   font-family: "Gill Sans", "Tacoma", "Arial", sans-serif;
   margin: 0;
@@ -62,6 +75,7 @@ body {
   background-color: #00316a;
 }
 
+/* line 10, ../../app/stylesheets/layout.sass */
 #container {
   width: 970px;
   margin: 0 auto;
@@ -71,116 +85,164 @@ body {
   background-color: white;
 }
 
+/* line 18, ../../app/stylesheets/layout.sass */
 #content {
   padding: 10px 0;
   margin: 0 auto;
   width: 930px;
 }
 
+/* line 9, ../../app/stylesheets/screen.scss */
 h1, h2, h3 {
   margin: 0.75em 0;
 }
 
+/* line 13, ../../app/stylesheets/screen.scss */
 h1 {
   font-size: 2em;
 }
 
+/* line 17, ../../app/stylesheets/screen.scss */
 h2 {
   font-size: 1.75em;
 }
 
+/* line 21, ../../app/stylesheets/screen.scss */
 h3 {
   font-size: 1.5em;
 }
 
+/* line 25, ../../app/stylesheets/screen.scss */
 a {
   text-decoration: none;
 }
 
+/* line 29, ../../app/stylesheets/screen.scss */
 #header {
   margin: 20px 0;
 }
 
-input{
-	margin: 1em 0;
+/* line 33, ../../app/stylesheets/screen.scss */
+input {
+  margin: 1em 0;
 }
 
-.pagination{
-	margin: 1em 0.5em;
-	background: silver;
-	padding: 1em 2em;
-	color: #444;
-	border: 1px solid gray;
-	
-	border-radius: 5px;
-	-moz-border-radius: 5px;
+/* line 37, ../../app/stylesheets/screen.scss */
+.pagination {
+  margin: 1em 0.5em;
+  background: silver;
+  padding: 1em 2em;
+  color: #444;
+  border: 1px solid gray;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
-.pagination a{
-	color: #222;
+/* line 48, ../../app/stylesheets/screen.scss */
+.pagination a {
+  color: #222;
 }
 
-.pagination em{
-	font-size: 1.3em;
-	color: #000;
+/* line 52, ../../app/stylesheets/screen.scss */
+.pagination em {
+  font-size: 1.3em;
+  color: #000;
 }
 
-p{
-	margin: 1.5em 0;
+/* line 57, ../../app/stylesheets/screen.scss */
+p {
+  margin: 1.5em 0;
 }
 
-table.edit th{
-	font-weight: bold;
+/* line 61, ../../app/stylesheets/screen.scss */
+table.edit th {
+  font-weight: bold;
 }
 
-table.edit th, table.edit td{
-	padding: 2px 4px;
+/* line 65, ../../app/stylesheets/screen.scss */
+table.edit th, table.edit td {
+  padding: 2px 4px;
 }
 
 /* Navigation */
-
-#navigation{
-	background: #eee;
-	padding: 10px;
-	border-bottom: 1px solid silver;
-	color: silver;
+/* line 71, ../../app/stylesheets/screen.scss */
+#navigation {
+  background: #eee;
+  padding: 10px;
+  border-bottom: 1px solid silver;
+  color: silver;
 }
 
-#navigation a { color: #000; padding: 4px 8px; }
-#navigation a:visited { color: #000; }
-#navigation a:hover { color: #002E6E;}
-#navigation a.session { color: gray; }
-#navigation a.session:hover { color: #000; }
+/* line 78, ../../app/stylesheets/screen.scss */
+#navigation a {
+  color: #000;
+  padding: 4px 8px;
+}
 
-span.right { float: right; }
+/* line 79, ../../app/stylesheets/screen.scss */
+#navigation a:visited {
+  color: #000;
+}
 
-a { color: #002E6E; }
-a:visited { color: #002E6E; }
-a:hover { color: #000; }
+/* line 80, ../../app/stylesheets/screen.scss */
+#navigation a:hover {
+  color: #002E6E;
+}
+
+/* line 81, ../../app/stylesheets/screen.scss */
+#navigation a.session {
+  color: gray;
+}
+
+/* line 82, ../../app/stylesheets/screen.scss */
+#navigation a.session:hover {
+  color: #000;
+}
+
+/* line 84, ../../app/stylesheets/screen.scss */
+span.right {
+  float: right;
+}
+
+/* line 86, ../../app/stylesheets/screen.scss */
+a {
+  color: #002E6E;
+}
+
+/* line 87, ../../app/stylesheets/screen.scss */
+a:visited {
+  color: #002E6E;
+}
+
+/* line 88, ../../app/stylesheets/screen.scss */
+a:hover {
+  color: #000;
+}
 
 /* Assignment Submissions */
-
-.mass_edit{
-	padding: 1em 0;
-	margin: 0.75em 0;
-	border-bottom: 1px solid #002E6E;
+/* line 92, ../../app/stylesheets/screen.scss */
+.mass_edit {
+  padding: 1em 0;
+  margin: 0.75em 0;
+  border-bottom: 1px solid #002E6E;
 }
 
 /* Dashboard */
-
-.box{
-	display: inline-block;
-	width: 420px;
-	float: left;
-	margin-right: 1em;
+/* line 100, ../../app/stylesheets/screen.scss */
+.box {
+  display: inline-block;
+  width: 420px;
+  float: left;
+  margin-right: 1em;
 }
 
+/* line 107, ../../app/stylesheets/screen.scss */
 .channel {
   margin: 1em;
-
 }
 
-.channel h4{
+/* line 112, ../../app/stylesheets/screen.scss */
+.channel h4 {
   display: inline-block;
   font-size: 1.25em;
   color: black;
@@ -189,42 +251,48 @@ a:hover { color: #000; }
   padding-bottom: 4px;
 }
 
+/* line 121, ../../app/stylesheets/screen.scss */
 .channel a:hover {
   border-bottom: 2px solid #00316a;
 }
 
-.channel .right{
-	float: right;
-	font-size: 0.75em;
-	vertical-align: bottom;
+/* line 125, ../../app/stylesheets/screen.scss */
+.channel .right {
+  float: right;
+  font-size: 0.75em;
+  vertical-align: bottom;
 }
 
 /* IRC Logs */
-
+/* line 133, ../../app/stylesheets/screen.scss */
 table.messages {
   margin-left: 1em;
-	width: 98%;
+  width: 98%;
 }
 
+/* line 138, ../../app/stylesheets/screen.scss */
 table.messages td.handle {
-	padding-right: 1em;
-	color: #555;
-	vertical-align: top;
-	width: 140px;
+  padding-right: 1em;
+  color: #555;
+  vertical-align: top;
+  width: 140px;
 }
 
-table.messages td.recorded_at{
-	vertical-align: top;
-	color: gray;
-	text-align: right;
-	width: 150px;
+/* line 145, ../../app/stylesheets/screen.scss */
+table.messages td.recorded_at {
+  vertical-align: top;
+  color: gray;
+  text-align: right;
+  width: 150px;
 }
 
-table.messages td.body{
-	vertical-align: top;
-	max-width: 650px;
+/* line 152, ../../app/stylesheets/screen.scss */
+table.messages td.body {
+  vertical-align: top;
+  max-width: 650px;
 }
 
-table.messages td{
-	padding-bottom: 0.25em;
+/* line 157, ../../app/stylesheets/screen.scss */
+table.messages td {
+  padding-bottom: 0.25em;
 }

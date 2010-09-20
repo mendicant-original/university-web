@@ -1,0 +1,29 @@
+/* line 1, ../../app/stylesheets/layout.sass */
+html, body {
+  height: 100%;
+}
+
+/* line 4, ../../app/stylesheets/layout.sass */
+body {
+  font-family: "Gill Sans", "Tacoma", "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #00316a;
+}
+
+/* line 10, ../../app/stylesheets/layout.sass */
+#container {
+  width: 970px;
+  margin: 0 auto;
+  border-left: 40px solid #fbe482;
+  border-right: 40px solid #fbe482;
+  min-height: 100%;
+  background-color: white;
+}
+
+/* line 18, ../../app/stylesheets/layout.sass */
+#content {
+  padding: 10px 0;
+  margin: 0 auto;
+  width: 930px;
+}

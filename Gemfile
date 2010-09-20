@@ -6,6 +6,7 @@ gem "devise", :path => "vendor/gems/devise"
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'json'
 gem 'haml'
+gem 'compass', ">= 0.10.4"
 
 gem "will_paginate", "~> 3.0.pre2"
 
