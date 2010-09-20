@@ -8,7 +8,7 @@ http_path = "/"
 if Compass::AppIntegration::Rails.env == :development
   css_dir = "public/stylesheets/compiled"
 else
-  css_dir = "tmp/stylesheets/compiled" # For Heroku
+  css_dir = "tmp/stylesheets" # For Heroku
 end
 
 sass_dir = "app/stylesheets"
