@@ -36,7 +36,12 @@
   = form.label :twitter_account_name
   %br
   = form.text_field :twitter_account_name
-  
+
+%p
+  = form.label :project_url
+  %br
+  = form.text_field :project_url
+
 %hr
 
 %h2 Courses
@@ -48,9 +53,6 @@
     - unless m.object.new_record?
       = m.check_box :_destroy
       = m.label :_destroy, "Remove Course"
-    %br
-    = m.label :github_project_url, "Github Project:"
-    = m.text_field :github_project_url
     
 %hr
 

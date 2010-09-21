@@ -4,7 +4,13 @@ class Assignment < ActiveRecord::Base
   accepts_nested_attributes_for :submissions
   
   def submission_for(student)
-    submissions.find_or_create_by_user_id(student.id, 
-      :submission_status_id => Assignment::SubmissionStatus.order("sort_order").first)
+    submission = submissions.find_or_create_by_user_id(student.id)
+    
+    if submission.submission_status_id.nil?
+      submission.update_attribute(:submission_status_id,
+        Assignment::SubmissionStatus.order("sort_order").first) 
+    end
+    
+    submission
   end
 end
