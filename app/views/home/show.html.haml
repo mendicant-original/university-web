@@ -30,12 +30,14 @@
         = submission.assignment.name
         %span.right= submission.status.name
     
-  .left
-    %h4 RMUnicorn Video Blog
+  .left.blog
+    %h4= link_to "RMU Blog",
+          "http://blog.majesticseacreature.com/tag/rubymendicant",
+          :target => "_blank"
     
     %ul
-      %li= link_to "RMUnicorn #5: The Importance of Decentralized Education"
-      %li= link_to "RMUnicorn #4: Five Factors for Improving Education"
+      - @rss_items.each do |item|
+        %li= link_to item.title, item.link, :target => "_blank"
     
     
   .right
