@@ -43,21 +43,38 @@ $blueprint_grid_outer_width: 67.5px
       margin-right: 10px
 
 .channel
-  margin-bottom: 0.25em
+  margin-bottom: 0.5em
   
-  a
-    display: inline-block
-    color: black
-    border-bottom: 1px solid #fff
-  
-    &:hover 
-      border-color: #00316a
+  .title
+    border-bottom: 2px groove
+    border-color= $rmu_red
+    margin-bottom: 0.25em
+    padding-bottom: 3px
+    
+    a
+      display: inline-block
+      color: #000
       
-  span.right
-    float: right
-    font-size: 0.75em
-    vertical-align: bottom
+    span.right
+      float: right
+      font-size: 0.75em
+      vertical-align: bottom
+      margin-top: 0.25em
+      color: #555
+    
+  .message
+    margin-left: 10px
   
+    .handle
+      display: inline-block
+      padding-right: 1em
+      color: #555
+      vertical-align: top
+      width: 100px
+    .body
+      display: inline-block
+      width: 320px
+      
 .assignment
   margin-bottom: 0.25em
   border-bottom: 1px solid #fff

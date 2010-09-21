@@ -13,8 +13,14 @@
 
     - current_user.chat_channels.each do |channel|
       .channel
-        = link_to channel.name, chat_messages_path(:channel => channel.name)
-        %span.right= "(#{channel.last_message_date})"
+        .title
+          = link_to channel.name, chat_messages_path(:channel => channel.name)
+          %span.right= channel.last_message_date
+        .clear
+        - channel.recent.each do |message|
+          .message
+            .handle= "#{message.handle.name}:"
+            .body= message.body
       
   .right
     %h3 Assignments
