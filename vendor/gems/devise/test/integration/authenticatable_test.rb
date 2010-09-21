@@ -1,6 +1,15 @@
 require 'test_helper'
 
 class AuthenticationSanityTest < ActionController::IntegrationTest
+
+  def setup
+    Devise.sign_out_all_scopes = false
+  end
+
+  def teardown
+    Devise.sign_out_all_scopes = false
+  end
+
   test 'home should be accessible without sign in' do
     visit '/'
     assert_response :success
@@ -29,7 +38,7 @@ class AuthenticationSanityTest < ActionController::IntegrationTest
     assert warden.authenticated?(:admin)
   end
 
-  test 'sign out as user should not touch admin authentication' do
+  test 'sign out as user should not touch admin authentication if sign_out_all_scopes is false' do
     sign_in_as_user
     sign_in_as_admin
 
@@ -38,13 +47,33 @@ class AuthenticationSanityTest < ActionController::IntegrationTest
     assert warden.authenticated?(:admin)
   end
 
-  test 'sign out as admin should not touch user authentication' do
+  test 'sign out as admin should not touch user authentication if sign_out_all_scopes is false' do
     sign_in_as_user
     sign_in_as_admin
 
     get destroy_admin_session_path
     assert_not warden.authenticated?(:admin)
     assert warden.authenticated?(:user)
+  end
+
+  test 'sign out as user should also sign out admin if sign_out_all_scopes is true' do
+    Devise.sign_out_all_scopes = true
+    sign_in_as_user
+    sign_in_as_admin
+
+    get destroy_user_session_path
+    assert_not warden.authenticated?(:user)
+    assert_not warden.authenticated?(:admin)
+  end
+
+  test 'sign out as admin should also sign out user if sign_out_all_scopes is true' do
+    Devise.sign_out_all_scopes = true
+    sign_in_as_user
+    sign_in_as_admin
+
+    get destroy_admin_session_path
+    assert_not warden.authenticated?(:admin)
+    assert_not warden.authenticated?(:user)
   end
 
   test 'not signed in as admin should not be able to access admins actions' do
@@ -160,7 +189,7 @@ class AuthenticationRedirectTest < ActionController::IntegrationTest
     follow_redirect!
     sign_in_as_user :visit => false
 
-    assert_template 'users/index'
+    assert_current_url '/users'
     assert_nil session[:"user_return_to"]
   end
 
@@ -176,7 +205,7 @@ class AuthenticationRedirectTest < ActionController::IntegrationTest
     follow_redirect!
     sign_in_as_user :visit => false
 
-    assert_template 'users/index'
+    assert_current_url '/users'
     assert_nil session[:"user_return_to"]
   end
 
@@ -202,7 +231,7 @@ class AuthenticationSessionTest < ActionController::IntegrationTest
     assert_redirected_to new_user_session_path
   end
 
-  test 'allows session to be set by a given scope' do
+  test 'allows session to be set for a given scope' do
     sign_in_as_user
     get '/users'
     assert_equal "Cart", @controller.user_session[:cart]
@@ -249,12 +278,16 @@ class AuthenticationWithScopesTest < ActionController::IntegrationTest
     end
   end
 
-  test 'uses the mapping from the default scope if specified' do
-    swap Devise, :use_default_scope => true do
-      get '/sign_in'
-      assert_response :ok
-      assert_contain 'Sign in'
-    end
+  test 'uses the mapping from router' do
+    sign_in_as_user :visit => "/as/sign_in"
+    assert warden.authenticated?(:user)
+    assert_not warden.authenticated?(:admin)
+  end
+
+  test 'uses the mapping from nested devise_for call' do
+    sign_in_as_user :visit => "/devise_for/sign_in"
+    assert warden.authenticated?(:user)
+    assert_not warden.authenticated?(:admin)
   end
 end
 
@@ -274,6 +307,38 @@ class AuthenticationOthersTest < ActionController::IntegrationTest
   test 'render 404 on roles without mapping' do
     assert_raise AbstractController::ActionNotFound do
       get '/sign_in'
+    end
+  end
+
+  test 'sign in with script name' do
+    assert_nothing_raised do
+      get new_user_session_path, {}, "SCRIPT_NAME" => "/omg"
+      fill_in "email", "user@test.com"
+    end
+  end
+
+  test 'registration in xml format' do
+    assert_nothing_raised do
+      post user_registration_path(:format => 'xml', :user => {:email => "test@example.com", :password => "invalid"} )
+    end
+  end
+
+  test 'does not explode when invalid user class is stored in session' do
+    klass = User
+    paths = ActiveSupport::Dependencies.autoload_paths.dup
+
+    begin
+      sign_in_as_user
+      assert warden.authenticated?(:user)
+
+      Object.send :remove_const, :User
+      ActiveSupport::Dependencies.autoload_paths.clear
+
+      visit "/users"
+      assert_not warden.authenticated?(:user)
+    ensure
+      Object.const_set(:User, klass)
+      ActiveSupport::Dependencies.autoload_paths.replace(paths)
     end
   end
 end

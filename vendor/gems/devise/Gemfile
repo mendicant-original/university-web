@@ -1,7 +1,6 @@
 source "http://rubygems.org"
 
-# Need to install Rails from source
-gem "rails", "3.0.0.beta4"
+gem "rails", "3.0.0.rc2"
 gem "warden", "0.10.7"
 gem "sqlite3-ruby"
 gem "webrat", "0.7.0"
@@ -14,16 +13,6 @@ end
 
 group :mongoid do
   gem "mongo"
-  gem "mongoid", :git => "git://github.com/durran/mongoid.git"
+  gem "mongoid", :git => "git://github.com/mongoid/mongoid.git"
   gem "bson_ext"
-end
-
-group :data_mapper do
-  gem 'dm-core',           '~> 1.0.0', :git => 'git://github.com/datamapper/dm-core'
-  gem 'dm-migrations',     '~> 1.0.0', :git => 'git://github.com/datamapper/dm-migrations'
-  gem 'dm-sqlite-adapter', '~> 1.0.0', :git => 'git://github.com/datamapper/dm-sqlite-adapter'
-  gem 'dm-validations',    '~> 1.0.0', :git => 'git://github.com/datamapper/dm-validations'
-  gem 'dm-serializer',     '~> 1.0.0', :git => 'git://github.com/datamapper/dm-serializer'
-  gem 'dm-timestamps',     '~> 1.0.0', :git => 'git://github.com/datamapper/dm-timestamps'
-  gem 'dm-rails',          '~> 1.0.0', :git => 'git://github.com/datamapper/dm-rails'
 end

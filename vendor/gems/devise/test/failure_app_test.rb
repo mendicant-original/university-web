@@ -77,6 +77,23 @@ class FailureTest < ActiveSupport::TestCase
       assert_equal 'Basic realm="Application"', @response.second["WWW-Authenticate"]
     end
 
+    test 'dont return WWW-authenticate on ajax call if http_authenticatable_on_xhr false' do
+      swap Devise, :http_authenticatable_on_xhr => false do
+        call_failure('formats' => :html, 'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest')
+        assert_equal 302, @response.first
+        assert_equal 'http://test.host/users/sign_in', @response.second["Location"]
+        assert_nil @response.second['WWW-Authenticate']
+      end
+    end
+
+    test 'return WWW-authenticate on ajax call if http_authenticatable_on_xhr true' do
+      swap Devise, :http_authenticatable_on_xhr => true do
+        call_failure('formats' => :html, 'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest')
+        assert_equal 401, @response.first
+        assert_equal 'Basic realm="Application"', @response.second["WWW-Authenticate"]
+      end
+    end
+    
     test 'uses the proxy failure message as response body' do
       call_failure('formats' => :xml, 'warden' => OpenStruct.new(:message => :invalid))
       assert_match '<error>Invalid email or password.</error>', @response.third.body
@@ -88,11 +105,6 @@ class FailureTest < ActiveSupport::TestCase
         assert_equal 401, @response.first
       end
     end
-
-    test 'works for xml http requests' do
-      call_failure('formats' => :html, 'HTTP_X_REQUESTED_WITH' => 'XMLHttpRequest')
-      assert_equal 401, @response.first
-    end
   end
 
   context 'With recall' do
@@ -100,6 +112,7 @@ class FailureTest < ActiveSupport::TestCase
       env = {
         "action_dispatch.request.parameters" => { :controller => "devise/sessions" },
         "warden.options" => { :recall => "new", :attempted_path => "/users/sign_in" },
+        "devise.mapping" => Devise.mappings[:user],
         "warden" => stub_everything
       }
       call_failure(env)

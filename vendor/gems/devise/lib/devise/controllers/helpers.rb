@@ -64,6 +64,16 @@ module Devise
         warden.logout(scope)
       end
 
+      # Sign out all active users or scopes. This helper is useful for signing out all roles
+      # in one click.
+      def sign_out_all_scopes
+        # Not "warden.logout" since we need to sign_out only devise-defined scopes.
+        scopes = Devise.mappings.keys
+        scopes.each { |scope| warden.user(scope) }
+        warden.raw_session.inspect
+        warden.logout(*scopes)
+      end
+
       # Returns and delete the url stored in the session for the given scope. Useful
       # for giving redirect backs after sign up:
       #
@@ -86,13 +96,13 @@ module Devise
       #
       #   map.user_root '/users', :controller => 'users' # creates user_root_path
       #
-      #   map.resources :users do |users|
-      #     users.root # creates user_root_path
+      #   map.namespace :user do |user|
+      #     user.root :controller => 'users' # creates user_root_path
       #   end
       #
       #
-      # If none of these are defined, root_path is used. However, if this default
-      # is not enough, you can customize it, for example:
+      # If the resource root path is not defined, root_path is used. However,
+      # if this default is not enough, you can customize it, for example:
       #
       #   def after_sign_in_path_for(resource)
       #     if resource.is_a?(User) && resource.can_publish?
@@ -164,7 +174,11 @@ module Devise
       # after_sign_out_path_for.
       def sign_out_and_redirect(resource_or_scope)
         scope = Devise::Mapping.find_scope!(resource_or_scope)
-        sign_out(scope)
+        if Devise.sign_out_all_scopes
+          sign_out_all_scopes
+        else
+          sign_out(scope)
+        end
         redirect_to after_sign_out_path_for(scope)
       end
 

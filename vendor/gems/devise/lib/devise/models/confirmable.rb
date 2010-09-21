@@ -45,12 +45,12 @@ module Devise
 
       # Verifies whether a user is confirmed or not
       def confirmed?
-        persisted? && !confirmed_at.nil?
+        !!confirmed_at
       end
 
       # Send confirmation instructions by email
       def send_confirmation_instructions
-        generate_confirmation_token if self.confirmation_token.nil?
+        generate_confirmation_token! if self.confirmation_token.nil?
         ::Devise.mailer.confirmation_instructions(self).deliver
       end
 
@@ -75,15 +75,14 @@ module Devise
       # If you don't want confirmation to be sent on create, neither a code
       # to be generated, call skip_confirmation!
       def skip_confirmation!
-        self.confirmed_at  = Time.now
-        @skip_confirmation = true
+        self.confirmed_at = Time.now
       end
 
       protected
 
         # Callback to overwrite if confirmation is required or not.
         def confirmation_required?
-          !@skip_confirmation
+          !confirmed?
         end
 
         # Checks if the confirmation for the user is within the limit time.
@@ -128,6 +127,10 @@ module Devise
           self.confirmation_sent_at = Time.now.utc
         end
 
+        def generate_confirmation_token!
+          generate_confirmation_token && save(:validate => false)
+        end
+
       module ClassMethods
         # Attempt to find a user by it's email. If a record is found, send new
         # confirmation instructions to it. If not user is found, returns a new user
@@ -149,8 +152,9 @@ module Devise
           confirmable
         end
 
+        # Generate a token checking if one does not already exist in the database.
         def confirmation_token
-          Devise.friendly_token
+          generate_token(:confirmation_token)
         end
 
         Devise::Models.config(self, :confirm_within)

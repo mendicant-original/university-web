@@ -47,7 +47,7 @@ module Devise
     def redirect
       store_location!
       flash[:alert] = i18n_message unless flash[:notice]
-      redirect_to send(:"new_#{scope}_session_path")
+      redirect_to redirect_url
     end
 
   protected
@@ -63,8 +63,12 @@ module Devise
       end
     end
 
+    def redirect_url
+      send(:"new_#{scope}_session_path")
+    end
+
     def http_auth?
-      !Devise.navigational_formats.include?(request.format.to_sym) || request.xhr?
+      !Devise.navigational_formats.include?(request.format.to_sym) || (request.xhr? && Devise.http_authenticatable_on_xhr)
     end
 
     def http_auth_body

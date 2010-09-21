@@ -15,11 +15,25 @@ end
 
 class Warden::SessionSerializer
   def serialize(record)
-    [record.class, record.id]
+    [record.class.name, record.id]
   end
 
   def deserialize(keys)
     klass, id = keys
-    klass.find(:first, :conditions => { :id => id })
+
+    if klass.is_a?(Class)
+      raise "Devise changed how it stores objects in session. If you are seeing this message, " <<
+        "you can fix it by changing one character in your cookie secret, forcing all previous " <<
+        "cookies to expire, or cleaning up your database sessions if you are using a db store."
+    end
+
+    klass.constantize.find(:first, :conditions => { :id => id })
+  rescue NameError => e
+    if e.message =~ /uninitialized constant/
+      Rails.logger.debug "Trying to deserialize invalid class #{klass}"
+      nil
+    else
+      raise
+    end
   end
 end

@@ -5,15 +5,16 @@
 
 Gem::Specification.new do |s|
   s.name = %q{devise}
-  s.version = "1.1.rc2"
+  s.version = "1.1.2"
 
-  s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
+  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jos\303\251 Valim", "Carlos Ant\303\264nio"]
-  s.date = %q{2010-06-23}
+  s.date = %q{2010-09-21}
   s.description = %q{Flexible authentication solution for Rails with Warden}
   s.email = %q{contact@plataformatec.com.br}
   s.extra_rdoc_files = [
     "CHANGELOG.rdoc",
+     "Gemfile.lock",
      "MIT-LICENSE",
      "README.rdoc",
      "TODO"
@@ -21,6 +22,7 @@ Gem::Specification.new do |s|
   s.files = [
     "CHANGELOG.rdoc",
      "Gemfile",
+     "Gemfile.lock",
      "MIT-LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -77,7 +79,6 @@ Gem::Specification.new do |s|
      "lib/devise/models/validatable.rb",
      "lib/devise/modules.rb",
      "lib/devise/orm/active_record.rb",
-     "lib/devise/orm/data_mapper.rb",
      "lib/devise/orm/mongoid.rb",
      "lib/devise/path_checker.rb",
      "lib/devise/rails.rb",
@@ -91,15 +92,17 @@ Gem::Specification.new do |s|
      "lib/devise/strategies/token_authenticatable.rb",
      "lib/devise/test_helpers.rb",
      "lib/devise/version.rb",
-     "lib/generators/devise/devise/devise_generator.rb",
-     "lib/generators/devise/devise/templates/migration.rb",
-     "lib/generators/devise/install/install_generator.rb",
-     "lib/generators/devise/install/templates/README",
-     "lib/generators/devise/install/templates/devise.rb",
-     "lib/generators/devise/views/views_generator.rb",
-     "lib/generators/devise_generator.rb",
+     "lib/generators/active_record/devise_generator.rb",
+     "lib/generators/active_record/templates/migration.rb",
+     "lib/generators/devise/devise_generator.rb",
+     "lib/generators/devise/install_generator.rb",
+     "lib/generators/devise/orm_helpers.rb",
+     "lib/generators/devise/views_generator.rb",
      "lib/generators/devise_install_generator.rb",
-     "lib/generators/devise_views_generator.rb"
+     "lib/generators/devise_views_generator.rb",
+     "lib/generators/mongoid/devise_generator.rb",
+     "lib/generators/templates/README",
+     "lib/generators/templates/devise.rb"
   ]
   s.homepage = %q{http://github.com/plataformatec/devise}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -107,76 +110,35 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Flexible authentication solution for Rails with Warden}
   s.test_files = [
-    "test/controllers/helpers_test.rb",
-     "test/controllers/internal_helpers_test.rb",
-     "test/controllers/url_helpers_test.rb",
-     "test/devise_test.rb",
-     "test/encryptors_test.rb",
-     "test/failure_app_test.rb",
-     "test/integration/authenticatable_test.rb",
-     "test/integration/confirmable_test.rb",
-     "test/integration/database_authenticatable_test.rb",
-     "test/integration/http_authenticatable_test.rb",
-     "test/integration/lockable_test.rb",
-     "test/integration/recoverable_test.rb",
-     "test/integration/registerable_test.rb",
-     "test/integration/rememberable_test.rb",
-     "test/integration/timeoutable_test.rb",
-     "test/integration/token_authenticatable_test.rb",
-     "test/integration/trackable_test.rb",
-     "test/mailers/confirmation_instructions_test.rb",
-     "test/mailers/reset_password_instructions_test.rb",
-     "test/mailers/unlock_instructions_test.rb",
-     "test/mapping_test.rb",
-     "test/models/confirmable_test.rb",
-     "test/models/database_authenticatable_test.rb",
-     "test/models/lockable_test.rb",
-     "test/models/recoverable_test.rb",
-     "test/models/rememberable_test.rb",
-     "test/models/timeoutable_test.rb",
-     "test/models/token_authenticatable_test.rb",
-     "test/models/trackable_test.rb",
-     "test/models/validatable_test.rb",
-     "test/models_test.rb",
-     "test/orm/active_record.rb",
-     "test/orm/data_mapper.rb",
-     "test/orm/mongoid.rb",
-     "test/rails_app/app/active_record/admin.rb",
-     "test/rails_app/app/active_record/shim.rb",
-     "test/rails_app/app/active_record/user.rb",
-     "test/rails_app/app/controllers/admins_controller.rb",
-     "test/rails_app/app/controllers/application_controller.rb",
-     "test/rails_app/app/controllers/home_controller.rb",
-     "test/rails_app/app/controllers/sessions_controller.rb",
-     "test/rails_app/app/controllers/users_controller.rb",
-     "test/rails_app/app/data_mapper/admin.rb",
-     "test/rails_app/app/data_mapper/shim.rb",
-     "test/rails_app/app/data_mapper/user.rb",
-     "test/rails_app/app/helpers/application_helper.rb",
-     "test/rails_app/app/mongoid/admin.rb",
-     "test/rails_app/app/mongoid/shim.rb",
-     "test/rails_app/app/mongoid/user.rb",
-     "test/rails_app/config/application.rb",
-     "test/rails_app/config/boot.rb",
-     "test/rails_app/config/environment.rb",
-     "test/rails_app/config/environments/development.rb",
-     "test/rails_app/config/environments/production.rb",
-     "test/rails_app/config/environments/test.rb",
-     "test/rails_app/config/initializers/backtrace_silencers.rb",
-     "test/rails_app/config/initializers/devise.rb",
-     "test/rails_app/config/initializers/inflections.rb",
-     "test/rails_app/config/initializers/secret_token.rb",
-     "test/rails_app/config/routes.rb",
-     "test/rails_app/db/migrate/20100401102949_create_tables.rb",
-     "test/rails_app/db/schema.rb",
-     "test/routes_test.rb",
-     "test/support/assertions.rb",
-     "test/support/helpers.rb",
-     "test/support/integration.rb",
-     "test/support/test_silencer.rb",
-     "test/support/webrat/integrations/rails.rb",
+    "test/functional/admin/assignments/submission_statuses_controller_test.rb",
+     "test/functional/admin/assignments_controller_test.rb",
+     "test/functional/admin/courses_controller_test.rb",
+     "test/functional/admin/users_controller_test.rb",
+     "test/functional/chat/messages_controller_test.rb",
+     "test/functional/home_controller_test.rb",
+     "test/functional/user_sessions_controller_test.rb",
+     "test/functional/users_controller_test.rb",
+     "test/performance/browsing_test.rb",
      "test/test_helper.rb",
-     "test/test_helpers_test.rb"
+     "test/unit/assignment/submission_status_test.rb",
+     "test/unit/assignment/submission_test.rb",
+     "test/unit/assignment_test.rb",
+     "test/unit/chat/channel_membership_test.rb",
+     "test/unit/chat/channel_test.rb",
+     "test/unit/chat/handle_test.rb",
+     "test/unit/chat/message_test.rb",
+     "test/unit/chat/topic_test.rb",
+     "test/unit/course_membership_test.rb",
+     "test/unit/course_test.rb",
+     "test/unit/helpers/admin/assignments/submission_statuses_helper_test.rb",
+     "test/unit/helpers/admin/assignments_helper_test.rb",
+     "test/unit/helpers/admin/courses_helper_test.rb",
+     "test/unit/helpers/admin/users_helper_test.rb",
+     "test/unit/helpers/chat/messages_helper_test.rb",
+     "test/unit/helpers/home_helper_test.rb",
+     "test/unit/helpers/user_sessions_helper_test.rb",
+     "test/unit/helpers/users_helper_test.rb",
+     "test/unit/user_test.rb"
   ]
 
   if s.respond_to? :specification_version then

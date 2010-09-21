@@ -37,7 +37,7 @@ module Devise
         @password = new_password
 
         if @password.present?
-          self.password_salt = self.class.encryptor_class.salt
+          self.password_salt = self.class.password_salt
           self.encrypted_password = password_digest(@password)
         end
       end
@@ -93,6 +93,14 @@ module Devise
           @encryptor_class ||= ::Devise::Encryptors.const_get(encryptor.to_s.classify)
         end
 
+        def password_salt
+          self.encryptor_class.salt(self.stretches)
+        end
+
+        # We assume this method already gets the sanitized values from the
+        # DatabaseAuthenticatable strategy. If you are using this method on
+        # your own, be sure to sanitize the conditions hash to only include
+        # the proper fields.
         def find_for_database_authentication(conditions)
           find_for_authentication(conditions)
         end

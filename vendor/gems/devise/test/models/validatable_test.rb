@@ -1,8 +1,6 @@
 require 'test_helper'
 
 class ValidatableTest < ActiveSupport::TestCase
-  extend Devise::TestSilencer if [:mongoid, :data_mapper].include?(DEVISE_ORM)
-
   test 'should require email to be set' do
     user = new_user(:email => nil)
     assert user.invalid?
@@ -15,11 +13,11 @@ class ValidatableTest < ActiveSupport::TestCase
 
     user = new_user(:email => '')
     assert user.invalid?
-    assert_not_equal 'has already been taken', user.errors[:email].join
+    assert_no_match(/taken/, user.errors[:email].join)
 
     user.email = existing_user.email
     assert user.invalid?
-    assert_equal 'has already been taken', user.errors[:email].join
+    assert_match(/taken/, user.errors[:email].join)
   end
 
   test 'should require correct email format, allowing blank' do

@@ -126,6 +126,15 @@ class ControllerAuthenticableTest < ActionController::TestCase
     @controller.sign_out(User.new)
   end
 
+  test 'sign out everybody proxy to logout on warden' do
+    Devise.mappings.keys.each { |scope|
+      @mock_warden.expects(:user).with(scope).returns(true)
+    }
+
+    @mock_warden.expects(:logout).with(*Devise.mappings.keys).returns(true)
+    @controller.sign_out_all_scopes
+  end
+
   test 'stored location for returns the location for a given scope' do
     assert_nil @controller.stored_location_for(:user)
     @controller.session[:"user_return_to"] = "/foo.bar"

@@ -69,6 +69,10 @@ module Devise
   mattr_accessor :http_authenticatable
   @@http_authenticatable = true
 
+  # If http authentication is used for ajax requests.  True by default.
+  mattr_accessor :http_authenticatable_on_xhr
+  @@http_authenticatable_on_xhr = true
+
   # If params authenticatable is enabled by default.
   mattr_accessor :params_authenticatable
   @@params_authenticatable = true
@@ -85,9 +89,17 @@ module Devise
   mattr_accessor :password_length
   @@password_length = 6..20
 
-  # Time interval where the remember me token is valid.
+  # The time the user will be remembered without asking for credentials again.
   mattr_accessor :remember_for
   @@remember_for = 2.weeks
+
+  # If true, a valid remember token can be re-used between multiple browsers.
+  mattr_accessor :remember_across_browsers
+  @@remember_across_browsers = true
+
+  # If true, extends the user's remember period when remembered via cookie.
+  mattr_accessor :extend_remember_period
+  @@extend_remember_period = false
 
   # Time interval you can access your account before confirming your account.
   mattr_accessor :confirm_within
@@ -133,10 +145,6 @@ module Devise
   mattr_accessor :unlock_in
   @@unlock_in = 1.hour
 
-  # Tell when to use the default scope, if one cannot be found from routes.
-  mattr_accessor :use_default_scope
-  @@use_default_scope = false
-
   # The default scope which is used by warden.
   mattr_accessor :default_scope
   @@default_scope = nil
@@ -149,6 +157,7 @@ module Devise
   mattr_accessor :token_authentication_key
   @@token_authentication_key = :auth_token
 
+  # Which formats should be treated as navigational.
   mattr_accessor :navigational_formats
   @@navigational_formats = [:html]
 
@@ -156,6 +165,17 @@ module Devise
   mattr_accessor :warden_config
   @@warden_config = nil
   @@warden_config_block = nil
+
+  # When set to true, signing out an user signs out all other scopes.
+  mattr_accessor :sign_out_all_scopes
+  @@sign_out_all_scopes = false
+
+  def self.use_default_scope=(*)
+    ActiveSupport::Deprecation.warn "config.use_default_scope is deprecated and removed from Devise. " <<
+      "If you are using non conventional routes in Devise, all you need to do is to pass the devise " <<
+      "scope in the router DSL:\n\n  as :user do\n    get \"sign_in\", :to => \"devise/sessions\"\n  end\n\n" <<
+      "The method :as is also aliased to :devise_scope. Choose the one you prefer.", caller
+  end
 
   # Default way to setup Devise. Run rails generate devise_install to create
   # a fresh initializer with all configuration values.
@@ -174,10 +194,8 @@ module Devise
   end
   self.mailer = "Devise::Mailer"
 
-  # Register a model in Devise. You can call this manually if you don't want
-  # to use devise routes. Check devise_for in routes to know which options
-  # are available.
-  def self.add_model(resource, options)
+  # Small method that adds a mapping to Devise.
+  def self.add_mapping(resource, options)
     mapping = Devise::Mapping.new(resource, options)
     self.mappings[mapping.name] = mapping
     self.default_scope ||= mapping.name
