@@ -2,15 +2,19 @@
   background: #eee
   padding: 10px
   color: silver
-  +box-shadow(silver, 0px, 0px, 5px)
-  +border-bottom-right-radius(10px)
-  +border-bottom-left-radius(10px)
-  
+  +box-shadow(#000, 0px, 0px, 5px)
+  width: 954px
+  margin-left: -2px
+  position: fixed
   
   .logo
     display: inline-block
     margin-right: 8px
-  
+    color: gray
+    +text-shadow(0, 1px, 0, #fff)
+    
+    img
+      vertical-align: middle
   a 
     color: #000
     padding: 4px 8px

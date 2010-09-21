@@ -4,20 +4,36 @@
       %h1
         = image_tag current_user.gravatar_url(50)
         = current_user.name
+      
+      #clean-gray.block
+        = button_to "Edit your profile", edit_user_path(current_user), :method => :get
 
-  #left
+  .left
     %h3 IRC Channels
 
     - current_user.chat_channels.each do |channel|
       .channel
         = link_to channel.name, chat_messages_path(:channel => channel.name)
-        .right= "(#{channel.last_message_date})"
+        %span.right= "(#{channel.last_message_date})"
       
-  #right.assignments
+  .right
     %h3 Assignments
   
     - current_user.assignment_submissions.each do |submission|
       .assignment
         = submission.assignment.name
-        .right= submission.status.name
-      
+        %span.right= submission.status.name
+    
+  .left
+    %h4 RMUnicorn Video Blog
+    
+    %ul
+      %li= link_to "RMUnicorn #5: The Importance of Decentralized Education"
+      %li= link_to "RMUnicorn #4: Five Factors for Improving Education"
+    
+    
+  .right
+    %h4 University Web News
+    
+    %ul
+      %li Added new icons

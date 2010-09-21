@@ -1,5 +1,6 @@
 $rmu_blue= #00316a
 $rmu_yellow= #fbe482
+$rmu_red= #70130B
 
 html, body
   height: 100%
@@ -8,19 +9,19 @@ body
   font-family: "Gill Sans", "Tacoma", "Arial", sans-serif
   margin: 0
   padding: 0
-  background-color= $rmu_blue
+  background: #454544 url(/images/gradient.png) repeat-x
 
 #container
   width: 970px
   margin: 0 auto
-  border-left: 40px solid #fbe482
-  border-right: 40px solid #fbe482
+  border-left: 2px solid silver
+  border-right: 2px solid silver
   min-height: 100%
   background-color: white
-  +box-shadow(silver, 0px, 10px, 10px, inset)
+  +box-shadow(#000, 0px, 10px, 10px, inset)
 
 #content
-  padding: 10px 0
+  padding: 40px 0 10px 0
   margin: 0 auto
   width: 930px
   
