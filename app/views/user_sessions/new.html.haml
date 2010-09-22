@@ -13,15 +13,13 @@
 - if error = flash[:alert]
   %p{:style=>"color: red;"}= error
 
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'bp'}) do |f|
   %p
     = f.label :email
-    %br
     = f.text_field :email
 
   %p
     = f.label :password
-    %br
     = f.password_field :password
 
   - if devise_mapping.rememberable?
