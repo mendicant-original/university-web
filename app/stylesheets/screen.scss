@@ -5,6 +5,7 @@
 
 @import "compass/reset";
 @import "blueprint/grid";
+@import "blueprint/form";
 @import "compass/css3/border-radius";
 @import "compass/css3/box-shadow";
 @import "compass/css3/text-shadow";
@@ -12,6 +13,7 @@
 @import "partials/layout";
 @import "partials/dashboard";
 @import "partials/menu";
+@import "partials/session";
 
 h1, h2, h3 {
   margin: 0.75em 0;
