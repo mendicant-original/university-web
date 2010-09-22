@@ -29,7 +29,10 @@
       .assignment
         = submission.assignment.name
         %span.right= submission.status.name
-    
+   
+    - if current_user.assignment_submissions.empty?
+      .assignment You currently do not have any assignments.
+      
   .left.blog
     %h4= link_to "RMU Blog",
           "http://blog.majesticseacreature.com/tag/rubymendicant",
