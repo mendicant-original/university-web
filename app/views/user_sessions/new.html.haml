@@ -6,13 +6,10 @@
 
 - title 'Sign in'
 
-.rmu_seal
+/.rmu_seal
 
 = image_tag "rmu_header.png", :alt => "Ruby Mendicant University", 
   :class => "rmu-header"
-
-- if error = flash[:alert]
-  %p{:style=>"color: red;"}= error
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'bp'}) do |f|
   %p
@@ -28,4 +25,6 @@
       = f.check_box :remember_me
       = f.label :remember_me
 
-  .block= f.submit "Sign in", :class => "clean-green"
+  .block= f.submit "Sign in", :class => "blue-pill"
+  
+  .clear
