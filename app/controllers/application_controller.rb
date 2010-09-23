@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :change_password_if_needed
   
   helper_method :current_access_level
-  
-  def welcome
-    render :text => "Welcome to RMU!"
-  end
 
   def change_password_if_needed
     authenticate_user! unless user_signed_in?

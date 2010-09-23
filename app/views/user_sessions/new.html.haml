@@ -2,22 +2,27 @@
   :javascript
     $(document).ready(function(){
       $('#user_email').focus();
+      jQuery("label.infield").inFieldLabels();
     });
 
 - title 'Sign in'
 
 /.rmu_seal
 
-= image_tag "rmu_header.png", :alt => "Ruby Mendicant University", 
-  :class => "rmu-header"
+= image_tag "rmu_seal.png"
+
+%p
+
+/= image_tag "rmu_header.png", :alt => "Ruby Mendicant University", 
+/  :class => "rmu-header"
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'bp'}) do |f|
   %p
-    = f.label :email
+    = f.label :email, :class => 'infield'
     = f.text_field :email
 
   %p
-    = f.label :password
+    = f.label :password, :class => 'infield'
     = f.password_field :password
 
   - if devise_mapping.rememberable?
@@ -25,6 +30,6 @@
       = f.check_box :remember_me
       = f.label :remember_me
 
-  .block= f.submit "Sign in", :class => "blue-pill"
+  .block= f.submit "Sign in", :class => "slick-black"
   
   .clear

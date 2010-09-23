@@ -158,18 +158,20 @@ input.clean-green {
   background: -webkit-gradient(linear, 0% 50%, 0% 51%, from(#c94477), to(#c22b65));
 }
 
-#slick-black button {
+/* slick black
+*******************************************************************************/
+button.slick-black, input.slick-black {
   background: #111;
-  background: -webkit-gradient(linear, 0 0, 0 100%,
-              color-stop(0, rgba(50, 50, 50, 0.9)),
-              color-stop(0.5, rgba(30, 30, 30, 0.9)),
-              color-stop(0.5, rgba(20, 20, 20, 0.9)),
-              color-stop(1, rgba(0, 0, 0, 0.9)));
   background: -moz-linear-gradient(0% 100% 90deg, #FFFFFF, #000000,
               rgba(0, 0, 0, 0.9) 0%,
               rgba(20, 20, 20, 0.9) 50%,
               rgba(30, 30, 30, 0.9) 50%,
               rgba(50, 50, 50, 0.9) 100%);
+  background: -webkit-gradient(linear, 0 0, 0 100%,
+              color-stop(0, rgba(50, 50, 50, 0.9)),
+              color-stop(0.5, rgba(30, 30, 30, 0.9)),
+              color-stop(0.5, rgba(20, 20, 20, 0.9)),
+              color-stop(1, rgba(0, 0, 0, 0.9)));
   border: 0;
   border-radius: 4px;
   -moz-border-radius: 4px;
@@ -179,13 +181,43 @@ input.clean-green {
   -webkit-box-shadow: inset 1px 1px 1px 0px rgba(135, 135, 135, 0.1), inset -1px -1px 1px 0px rgba(135, 135, 135, 0.1);
   color: #fff;
   font-family: "helvetica neue", helvetica, arial, sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: lighter;
   line-height: 1;
-  padding: 12px 0;
+  padding: 6px 0;
   text-shadow: 0px -1px 1px rgba(0, 0, 0, .8), 0 1px 1px rgba(255, 255, 255, 0.3);
-  width: 150px;
+  width: 125px;
 }
+
+button.slick-black:hover, input.slick-black:hover {
+  background: #222;
+  background: -moz-linear-gradient(0% 100% 90deg, #FFFFFF, #000000,
+              rgba(20, 20, 20, 0.9) 0%,
+              rgba(40, 40, 40, 0.9) 50%,
+              rgba(50, 50, 50, 0.9) 50%,
+              rgba(70, 70, 70, 0.9) 100%);
+  background: -webkit-gradient(linear, 0 0, 0 100%,
+              color-stop(0, rgba(70, 70, 70, 0.9)),
+              color-stop(0.5, rgba(50, 50, 50, 0.9)),
+              color-stop(0.5, rgba(40, 40, 40, 0.9)),
+              color-stop(1, rgba(20, 20, 20, 0.9)));
+}
+
+button.slick-black:active, input.slick-black:active {
+  background: #000;
+  background: -moz-linear-gradient(0% 100% 90deg, #FFFFFF, #000000,
+              rgba(0, 0, 0, 0.9) 0%,
+              rgba(10, 10, 10, 0.9) 50%,
+              rgba(20, 20, 20, 0.9) 50%,
+              rgba(30, 30, 30, 0.9) 100%);
+  background: -webkit-gradient(linear, 0 0, 0 100%,
+              color-stop(0, rgba(30, 30, 30, 0.9)),
+              color-stop(0.5, rgba(20, 20, 20, 0.9)),
+              color-stop(0.5, rgba(10, 10, 10, 0.9)),
+              color-stop(1, rgba(0, 0, 0, 0.9)));
+}
+
+
 
 /* inspired by thoughtbot.com */
 #thoughtbot button {
