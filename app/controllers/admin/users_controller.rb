@@ -23,6 +23,7 @@ class Admin::UsersController < Admin::Base
     
     if @user.save 
       update_access_level
+      update_alumni_attributes
          
       redirect_to admin_users_path
     else
@@ -36,6 +37,7 @@ class Admin::UsersController < Admin::Base
   
   def update
     update_access_level
+    update_alumni_attributes
     
     if params[:user][:password].blank?
       params[:user].delete("password")
@@ -68,6 +70,14 @@ class Admin::UsersController < Admin::Base
     access_level = params[:user].delete("access_level")
     
     @user.update_attribute(:access_level, access_level)
+  end
+  
+  def update_alumni_attributes
+    [:alumni_number, :alumni_month, :alumni_year].each do |attribute|
+      value = params[:user].delete(attribute.to_s)
+      
+      @user.update_attribute(attribute, value)
+    end
   end
   
   def build_nested_attributes

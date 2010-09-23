@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100921204404) do
+ActiveRecord::Schema.define(:version => 20100923133845) do
 
   create_table "assignment_submission_statuses", :force => true do |t|
     t.text     "name"
@@ -94,6 +94,9 @@ ActiveRecord::Schema.define(:version => 20100921204404) do
     t.text      "twitter_account_name"
     t.text      "github_account_name"
     t.text      "project_url"
+    t.integer   "alumni_number"
+    t.integer   "alumni_month"
+    t.integer   "alumni_year"
   end
 
 end

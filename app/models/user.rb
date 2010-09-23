@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   has_many :assignment_submissions, :class_name => "Assignment::Submission"
   
-  attr_protected :access_level
+  attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
   
   accepts_nested_attributes_for :course_memberships,
     :reject_if => proc { |attributes| attributes['course_id'].blank? },

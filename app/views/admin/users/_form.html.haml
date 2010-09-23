@@ -44,6 +44,23 @@
 
 %hr
 
+%p
+  = form.label :alumni_number
+  %br
+  = form.text_field :alumni_number
+  
+%p
+  = form.label :alumni_month
+  %br
+  = form.text_field :alumni_month
+
+%p
+  = form.label :alumni_year
+  %br
+  = form.text_field :alumni_year
+
+%hr
+
 %h2 Courses
 
 = form.fields_for :course_memberships do |m|
