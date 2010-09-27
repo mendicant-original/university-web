@@ -1,0 +1,2 @@
+#! /bin/bash
+phd $0 university-web university-web
