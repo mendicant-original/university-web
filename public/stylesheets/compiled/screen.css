@@ -341,15 +341,20 @@ img.rmu-header {
   width: auto;
   float: none;
   color: #888888;
+  position: absolute;
+  top: 10px;
+  left: 78px;
   font-weight: normal;
-  padding-top: 10px;
-  padding-left: 6px;
 }
-/* line 34, ../../../app/stylesheets/partials/_session.sass */
+/* line 35, ../../../app/stylesheets/partials/_session.sass */
 #session form label.infield:after {
   content: "";
 }
 /* line 38, ../../../app/stylesheets/partials/_session.sass */
+#session form p {
+  position: relative;
+}
+/* line 43, ../../../app/stylesheets/partials/_session.sass */
 #session .header {
   background: #aa0000;
   color: white;
@@ -371,12 +376,12 @@ img.rmu-header {
   font-weight: bold;
 }
 
-/* line 47, ../../../app/stylesheets/partials/_session.sass */
+/* line 52, ../../../app/stylesheets/partials/_session.sass */
 .clear {
   clear: both;
 }
 
-/* line 50, ../../../app/stylesheets/partials/_session.sass */
+/* line 55, ../../../app/stylesheets/partials/_session.sass */
 body.session {
   height: auto;
   background: #bbbbbb;
