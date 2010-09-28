@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   layout 'application'
-  before_filter :redirect_to_webby
-  #before_filter :authenticate_user!
-  #before_filter :change_password_if_needed
+  before_filter :authenticate_user!
+  before_filter :change_password_if_needed
   
   helper_method :current_access_level
 
@@ -19,9 +18,5 @@ class ApplicationController < ActionController::Base
   def current_access_level
     return current_user.access_level if current_user && current_user.access_level
     AccessLevel::User["guest"]
-  end
-  
-  def redirect_to_webby
-    redirect_to root_path
   end
 end
