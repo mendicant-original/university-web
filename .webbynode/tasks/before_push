@@ -1,0 +1,1 @@
+scp -r config/initializers/api_access.rb /var/rapp/university-web/config/initializers/api_access.rb
