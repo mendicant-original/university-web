@@ -7,3 +7,4 @@ rmu_config.rb
 public/stylesheets/compiledconfig/database.yml
 db/schema.rb
 config/database.yml
+config/initializers/api_access.rb

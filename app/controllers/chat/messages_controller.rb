@@ -79,7 +79,7 @@ class Chat::MessagesController < ApplicationController
   
   def authenticate_service
     authenticate_or_request_with_http_basic do |id, password| 
-      id == ENV['RMU_SERVICE_ID'] && password == ENV['RMU_SERVICE_PASS']
+      id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
     end
   end
 end
