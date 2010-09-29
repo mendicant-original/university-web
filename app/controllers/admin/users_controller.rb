@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::Base
     if @user.update_attributes(params[:user])
       redirect_to admin_users_path
     else
-      raise @user.errors.inspect
+      #raise @user.errors.inspect
       render :action => :edit
     end
   end
@@ -81,8 +81,7 @@ class Admin::UsersController < Admin::Base
   end
   
   def build_nested_attributes
-    @user.course_memberships.build
-    
-    3.times { @user.chat_channel_memberships.build }
+    @user.course_memberships.build if @user.course_memberships.empty?
+    @user.chat_channel_memberships.build if @user.chat_channel_memberships.empty?
   end
 end

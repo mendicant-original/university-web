@@ -1,8 +1,9 @@
 -title 'New User'
+.form-wrapper
+  %h1 New User
 
-%h1 New User
-
-- form_for @user, :url => admin_users_path do |f|
-  = render :partial => "form", :object => f
-  = f.submit "Create"
-  = link_to "Cancel", admin_users_path
+  - nested_form_for @user, :url => admin_users_path, :html => {:class => 'bp alt'} do |f|
+    = render :partial => "form", :object => f
+    %p
+      = f.submit "Create"
+      = link_to "Cancel", admin_users_path

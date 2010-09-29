@@ -1,3 +1,12 @@
+-if @user.errors.any?
+  #errorExplanation
+    %h2 Whoops, looks like something went wrong.
+    %p Please review the form below and make the appropriate changes.
+    %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+
+%h2 Login Info
 %p
   = form.label :email
   = form.text_field :email
@@ -11,8 +20,8 @@
   = form.text_field :nickname
 
 - if form.object.new_record?
-  %p
-    %b To manually set the users password enter it below. Otherwise leave the fields blank and a password will be generated and emailed to the user.
+  %p.info
+    To manually set the users password enter it below. Otherwise leave the fields blank and a password will be generated and emailed to the user.
 %p
   = form.label :password, form.object.new_record? ? nil : "Change password"
   = form.password_field :password
@@ -25,60 +34,55 @@
   = form.label :access_level
   = user_access_level_select(form.object)
   
-%hr
+%hr.ruler
 
 %p
-  = form.label :github_account_name
-  %br
+  = form.label :github_account_name, "Github Name"
   = form.text_field :github_account_name
   
 %p
-  = form.label :twitter_account_name
-  %br
+  = form.label :twitter_account_name, "Twitter Name"
   = form.text_field :twitter_account_name
 
 %p
   = form.label :project_url
-  %br
   = form.text_field :project_url
 
-%hr
+%hr.ruler.ruler
 
 %p
-  = form.label :alumni_number
-  %br
+  = form.label :alumni_number, "Alumni #"
   = form.text_field :alumni_number
   
 %p
   = form.label :alumni_month
-  %br
   = form.text_field :alumni_month
 
 %p
   = form.label :alumni_year
-  %br
   = form.text_field :alumni_year
 
-%hr
+%hr.ruler
 
 %h2 Courses
-
-= form.fields_for :course_memberships do |m|
-  %p
+.no-label
+  =form.fields_for :course_memberships do |m|
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
-    - unless m.object.new_record?
-      = m.check_box :_destroy
-      = m.label :_destroy, "Remove Course"
+    = m.link_to_remove "Remove"
+
+%p.no-label
+  =form.link_to_add "Add a course", :course_memberships
     
-%hr
+%hr.ruler
 
 %h2 Chat Channel Memberships
 
-= form.fields_for :chat_channel_memberships do |m|
-  %p
+.no-label
+  =form.fields_for :chat_channel_memberships do |m|
     = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a channel"
-    - unless m.object.new_record?
-      = m.check_box :_destroy
-      = m.label :_destroy, "Remove Channel Access"
+    = m.link_to_remove "Remove"
+
+%p.no-label
+  =form.link_to_add "Add a channel", :chat_channel_memberships
