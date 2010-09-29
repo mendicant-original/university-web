@@ -2,7 +2,7 @@
   = form.label :name
   = form.text_field :name
   
-%p  
+%p
   = form.submit @course.new_record? ? "Create" : "Update"
   = link_to "Cancel", admin_courses_path
   
