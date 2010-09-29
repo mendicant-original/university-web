@@ -1,4 +1,4 @@
--if @user.errors.any?
+- if @user.errors.any?
   #errorExplanation
     %h2 Whoops, looks like something went wrong.
     %p Please review the form below and make the appropriate changes.
@@ -22,6 +22,7 @@
 - if form.object.new_record?
   %p.info
     To manually set the users password enter it below. Otherwise leave the fields blank and a password will be generated and emailed to the user.
+    
 %p
   = form.label :password, form.object.new_record? ? nil : "Change password"
   = form.password_field :password
@@ -66,23 +67,23 @@
 
 %h2 Courses
 .no-label
-  =form.fields_for :course_memberships do |m|
+  = form.fields_for :course_memberships do |m|
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
     = m.link_to_remove "Remove"
 
 %p.no-label
-  =form.link_to_add "Add a course", :course_memberships
+  = form.link_to_add "Add a course", :course_memberships
     
 %hr.ruler
 
 %h2 Chat Channel Memberships
 
 .no-label
-  =form.fields_for :chat_channel_memberships do |m|
+  = form.fields_for :chat_channel_memberships do |m|
     = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a channel"
     = m.link_to_remove "Remove"
 
 %p.no-label
-  =form.link_to_add "Add a channel", :chat_channel_memberships
+  = form.link_to_add "Add a channel", :chat_channel_memberships
