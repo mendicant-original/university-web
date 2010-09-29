@@ -2,7 +2,7 @@
 .form-wrapper
   %h1 New User
 
-  - form_for @user, :url => admin_users_path, :html => {:class => 'bp alt'} do |f|
+  - nested_form_for @user, :url => admin_users_path, :html => {:class => 'bp alt'} do |f|
     = render :partial => "form", :object => f
     %p
       = f.submit "Create"

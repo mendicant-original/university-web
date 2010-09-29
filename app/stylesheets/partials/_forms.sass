@@ -49,9 +49,9 @@ form.bp
       color: #666
       font-size: 0.8em
     
-    p.no-label 
+    p.no-label, .no-label 
       margin: 0 0 0 135px
-  
+      
     label
       font-weight: normal
       font-size: 0.9em
@@ -74,3 +74,16 @@ form.bp
     input[type="submit"]
       float: right
       margin: 0.5em 10px
+      
+    // dynamic nested model forms
+    a.add_nested_fields
+      padding: 0 0 0 16px
+      background: url(../../images/plus.png) no-repeat left center
+      margin-top: 1em
+      display: block
+  
+    a.remove_nested_fields
+      padding: 0 0 0 16px
+      background: url(../../images/minus.png) no-repeat left center
+      color: #70130B
+      font-size: 0.8em

@@ -504,7 +504,7 @@ form.bp input[type="submit"] {
   font-size: 0.8em;
 }
 /* line 52, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt p.no-label {
+.form-wrapper form.alt p.no-label, .form-wrapper form.alt .no-label {
   margin: 0 0 0 135px;
 }
 /* line 55, ../../../app/stylesheets/partials/_forms.sass */
@@ -535,6 +535,20 @@ form.bp input[type="submit"] {
 .form-wrapper form.alt input[type="submit"] {
   float: right;
   margin: 0.5em 10px;
+}
+/* line 79, ../../../app/stylesheets/partials/_forms.sass */
+.form-wrapper form.alt a.add_nested_fields {
+  padding: 0 0 0 16px;
+  background: url(../../images/plus.png) no-repeat left center;
+  margin-top: 1em;
+  display: block;
+}
+/* line 85, ../../../app/stylesheets/partials/_forms.sass */
+.form-wrapper form.alt a.remove_nested_fields {
+  padding: 0 0 0 16px;
+  background: url(../../images/minus.png) no-repeat left center;
+  color: #70130b;
+  font-size: 0.8em;
 }
 
  /*Rails default error summary

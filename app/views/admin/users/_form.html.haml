@@ -65,23 +65,24 @@
 %hr.ruler
 
 %h2 Courses
-
-= form.fields_for :course_memberships do |m|
-  %p.no-label
+.no-label
+  =form.fields_for :course_memberships do |m|
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
-    - unless m.object.new_record?
-      = m.check_box :_destroy
-      = m.label :_destroy, "Remove Course"
+    = m.link_to_remove "Remove"
+
+%p.no-label
+  =form.link_to_add "Add a course", :course_memberships
     
 %hr.ruler
 
 %h2 Chat Channel Memberships
 
-= form.fields_for :chat_channel_memberships do |m|
-  %p.no-label
+.no-label
+  =form.fields_for :chat_channel_memberships do |m|
     = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a channel"
-    - unless m.object.new_record?
-      = m.check_box :_destroy
-      = m.label :_destroy, "Remove Channel Access"
+    = m.link_to_remove "Remove"
+
+%p.no-label
+  =form.link_to_add "Add a channel", :chat_channel_memberships
