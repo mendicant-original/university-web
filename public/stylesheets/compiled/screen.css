@@ -388,6 +388,16 @@ body.session {
 }
 
 /* line 1, ../../../app/stylesheets/partials/_forms.sass */
+h1.form-header {
+  background-color: #00316a;
+  color: white;
+  margin: 0 0 1.5em;
+  width: 450px;
+  padding: 5px;
+  font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* line 9, ../../../app/stylesheets/partials/_forms.sass */
 form.bp {
   width: 450px;
 }
@@ -452,63 +462,8 @@ form.bp textarea {
   width: 390px;
   height: 250px;
 }
-/* line 6, ../../../app/stylesheets/partials/_forms.sass */
+/* line 14, ../../../app/stylesheets/partials/_forms.sass */
 form.bp label {
-  display: inline-block;
-  width: 125px;
-}
-/* line 9, ../../../app/stylesheets/partials/_forms.sass */
-form.bp label:after {
-  content: ":";
-}
-/* line 12, ../../../app/stylesheets/partials/_forms.sass */
-form.bp p {
-  margin: 0.25em 0;
-}
-/* line 15, ../../../app/stylesheets/partials/_forms.sass */
-form.bp input[type="submit"] {
-  float: right;
-  margin: 0.5em 10px;
-}
-
-/* line 22, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper h1 {
-  background-color: #00316a;
-  color: white;
-  margin: 0 0 1.5em;
-  width: 450px;
-  padding: 5px;
-  font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-/* line 30, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper h2 {
-  font-size: 1.2em;
-}
-/* line 35, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt hr.ruler {
-  color: #dddddd;
-  background: #dddddd;
-  height: 1px;
-  margin: 1.5em 0;
-  width: 100%;
-  border: none;
-}
-/* line 44, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt p {
-  margin: 0 0 0.5em 0;
-}
-/* line 47, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt p.info {
-  margin: 0 0 0.5em 135px;
-  color: #666666;
-  font-size: 0.8em;
-}
-/* line 52, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt p.no-label, .form-wrapper form.alt .no-label {
-  margin: 0 0 0 135px;
-}
-/* line 55, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt label {
   font-weight: normal;
   font-size: 0.9em;
   color: #333333;
@@ -517,34 +472,65 @@ form.bp input[type="submit"] {
   width: 110px;
   margin-right: 15px;
 }
-/* line 63, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt label:after {
+/* line 22, ../../../app/stylesheets/partials/_forms.sass */
+form.bp label:after {
   content: ":";
 }
-/* line 66, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt input.text, .form-wrapper form.alt input.title, .form-wrapper form.alt input[type="email"], .form-wrapper form.alt input[type="text"], .form-wrapper form.alt input[type="password"] {
-  font-size: 0.9em;
-  color: #555555;
+/* line 25, ../../../app/stylesheets/partials/_forms.sass */
+form.bp p {
+  margin: 0.25em 0;
 }
-/* line 70, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt select {
-  font-size: 0.8em;
-  color: #555555;
-}
-/* line 74, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt input[type="submit"] {
+/* line 28, ../../../app/stylesheets/partials/_forms.sass */
+form.bp input[type="submit"] {
   float: right;
   margin: 0.5em 10px;
 }
-/* line 79, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt a.add_nested_fields {
+/* line 32, ../../../app/stylesheets/partials/_forms.sass */
+form.bp h2 {
+  font-size: 1.2em;
+}
+/* line 35, ../../../app/stylesheets/partials/_forms.sass */
+form.bp hr {
+  color: #dddddd;
+  background: #dddddd;
+  height: 1px;
+  margin: 1.5em 0;
+  width: 100%;
+  border: none;
+}
+/* line 44, ../../../app/stylesheets/partials/_forms.sass */
+form.bp p {
+  margin: 0 0 0.5em 0;
+}
+/* line 47, ../../../app/stylesheets/partials/_forms.sass */
+form.bp p.info {
+  margin: 0 0 0.5em 135px;
+  color: #666666;
+  font-size: 0.8em;
+}
+/* line 52, ../../../app/stylesheets/partials/_forms.sass */
+form.bp p.no-label, form.bp .no-label {
+  margin: 0 0 0 135px;
+}
+/* line 55, ../../../app/stylesheets/partials/_forms.sass */
+form.bp input.text, form.bp input.title, form.bp input[type="email"], form.bp input[type="text"], form.bp input[type="password"] {
+  font-size: 0.9em;
+  color: #555555;
+}
+/* line 59, ../../../app/stylesheets/partials/_forms.sass */
+form.bp select {
+  font-size: 0.8em;
+  color: #555555;
+}
+/* line 64, ../../../app/stylesheets/partials/_forms.sass */
+form.bp a.add_nested_fields {
   padding: 0 0 0 16px;
   background: url(../../images/plus.png) no-repeat left center;
   margin-top: 1em;
   display: block;
 }
-/* line 85, ../../../app/stylesheets/partials/_forms.sass */
-.form-wrapper form.alt a.remove_nested_fields {
+/* line 70, ../../../app/stylesheets/partials/_forms.sass */
+form.bp a.remove_nested_fields {
   padding: 0 0 0 16px;
   background: url(../../images/minus.png) no-repeat left center;
   color: #70130b;

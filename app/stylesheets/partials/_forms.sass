@@ -1,11 +1,24 @@
+h1.form-header
+  background-color: #00316a
+  color: #FFF
+  margin: 0 0 1.5em
+  width: 450px
+  padding: 5px
+  font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif
+
 form.bp
   +blueprint-form
   
   width: 450px
   
   label
+    font-weight: normal
+    font-size: 0.9em
+    color: #333
     display: inline-block
-    width: 125px
+    text-align: right
+    width: 110px
+    margin-right: 15px
     &:after
       content: ":"
       
@@ -15,75 +28,51 @@ form.bp
   input[type="submit"]
     float: right
     margin: 0.5em 10px
-
-
-.form-wrapper
-
-  h1
-    background-color: #00316a
-    color: #FFF
-    margin: 0 0 1.5em
-    width: 450px
-    padding: 5px
-    font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif  
-  
+    
   h2
     font-size: 1.2em
   
-  form.alt
+  hr
+    color: #ddd
+    background: #ddd
+    height: 1px
+    margin: 1.5em 0
+    padding-top 1px
+    width: 100%
+    border: none
     
-    hr.ruler
-      color: #ddd
-      background: #ddd
-      height: 1px
-      margin: 1.5em 0
-      padding-top 1px
-      width: 100%
-      border: none
-
-    p
-      margin: 0 0 0.5em 0
-      
-    p.info
-      margin: 0 0 0.5em 135px
-      color: #666
-      font-size: 0.8em
+  p
+    margin: 0 0 0.5em 0
     
-    p.no-label, .no-label 
-      margin: 0 0 0 135px
-      
-    label
-      font-weight: normal
-      font-size: 0.9em
-      color: #333
-      display: inline-block
-      text-align: right
-      width: 110px
-      margin-right: 15px
-      &:after
-        content: ":"
-      
-    input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
-      font-size: 0.9em
-      color: #555
-    
-    select
-      font-size: 0.8em
-      color: #555
-    
-    input[type="submit"]
-      float: right
-      margin: 0.5em 10px
-      
-    // dynamic nested model forms
-    a.add_nested_fields
-      padding: 0 0 0 16px
-      background: url(../../images/plus.png) no-repeat left center
-      margin-top: 1em
-      display: block
+  p.info
+    margin: 0 0 0.5em 135px
+    color: #666
+    font-size: 0.8em
   
-    a.remove_nested_fields
-      padding: 0 0 0 16px
-      background: url(../../images/minus.png) no-repeat left center
-      color: #70130B
-      font-size: 0.8em
+  p.no-label, .no-label 
+    margin: 0 0 0 135px
+      
+  input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
+    font-size: 0.9em
+    color: #555
+  
+  select
+    font-size: 0.8em
+    color: #555
+    
+  // dynamic nested model forms
+  a.add_nested_fields
+    padding: 0 0 0 16px
+    background: url(../../images/plus.png) no-repeat left center
+    margin-top: 1em
+    display: block
+
+  a.remove_nested_fields
+    padding: 0 0 0 16px
+    background: url(../../images/minus.png) no-repeat left center
+    color: #70130B
+    font-size: 0.8em
+
+
+
+

@@ -1,10 +1,9 @@
 - title 'Edit User'
 
-.form-wrapper
-  %h1 Edit User
+%h1.form-header Edit User
 
-  - nested_form_for @user, :url => admin_user_path(@user), :html => {:class => 'bp alt'} do |f|
-    = render :partial => "form", :object => f
-    %p
-      = f.submit "Update"
-      = link_to "Cancel", admin_users_path
+- nested_form_for @user, :url => admin_user_path(@user), :html => {:class => 'bp'} do |f|
+  = render :partial => "form", :object => f
+  %p
+    = f.submit "Update"
+    = link_to "Cancel", admin_users_path
