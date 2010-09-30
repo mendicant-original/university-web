@@ -1,5 +1,5 @@
-%h1 Edit Assignment Submission Status
+%h1.form-header Edit Assignment Submission Status
 
-= form_for @submission_status, 
+= form_for @submission_status, :html => {:class => "bp"},
   :url => admin_assignments_submission_status_path(@submission_status) do |f|
   = render :partial => "form", :locals => {:f => f}

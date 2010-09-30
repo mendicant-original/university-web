@@ -1,18 +1,19 @@
-%h1 Assignment Submission Statuses
-  
-= button_to "Create Status", new_admin_assignments_submission_status_path, :method => :get
+%h1.form-header Assignment Submission Statuses
 
-%table.edit
+%p.prompt  
+  = link_to "Create Status", new_admin_assignments_submission_status_path
+
+%table.admin
   %thead
     %tr
       %th Status
       %th 
   %tbody
     - @submission_statuses.each do |status|
-      %tr{:class => cycle('even','odd')}
+      %tr
         %td= link_to status.name,
               edit_admin_assignments_submission_status_path(status)
-        %td= link_to( "Destroy",
+        %td.action= link_to( "Destroy",
               admin_assignments_submission_status_path(status), 
               :confirm => "Are you sure you wish to delete this status?",
-              :method => 'DELETE')
+              :method => 'DELETE', :class=> "delete")

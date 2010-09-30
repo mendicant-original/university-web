@@ -1,11 +1,11 @@
 #submissions
-  %h3 Submissions
+  %h2 Submissions
   
   .mass_edit
     = select_tag 'status_update', options_for_select(@statuses)
     = button_to_function "Mass Update", %{ $(':checkbox:checked').parent().siblings('td.status').children('select').val($('#status_update').val()); $(':checkbox:checked').removeAttr('checked') }
   
-  %table.edit
+  %table.admin
     %tr
       %th
       %th Student
@@ -13,7 +13,7 @@
     - @course.students.each do |student|
       = f.fields_for :submissions, @assignment.submission_for(student) do |s|
         %tr
-          %td= check_box_tag student.id, "1"
+          %td.icon= check_box_tag student.id, "1"
           %td= label_tag student.id, 
                 student.name.blank? ? student.email : student.name
           %td.status= s.select :submission_status_id, @statuses

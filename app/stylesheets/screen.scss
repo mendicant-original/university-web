@@ -14,8 +14,10 @@
 @import "partials/dashboard";
 @import "partials/menu";
 @import "partials/session";
+@import "partials/admin";
 @import "partials/forms";
 @import "partials/errors";
+@import "partials/tables";
 
 h1, h2, h3 {
   margin: 0.75em 0;
@@ -77,13 +79,18 @@ table.edit th, table.edit td{
 	padding: 2px 4px;
 }
 
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+
 /* Assignment Submissions */
 
-.mass_edit{
+/*.mass_edit{
 	padding: 1em 0;
 	margin: 0.75em 0;
 	border-bottom: 1px solid #002E6E;
-}
+}*/
 
 /* IRC Logs */
 

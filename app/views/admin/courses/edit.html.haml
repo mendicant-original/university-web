@@ -5,6 +5,8 @@
 - form_for @course, :url => admin_course_path(@course), :html => {:class => 'bp'} do |f|
   = render :partial => "form", :object => f
   
+  %hr
+  
   %h2= link_to "Assignments", admin_course_assignments_path(@course)
   
 = render :partial => "/admin/assignments/assignments"

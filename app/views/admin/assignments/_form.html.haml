@@ -1,11 +1,12 @@
 %p
   = f.label :name
-  %br
   = f.text_field :name
+
+%hr
 
 - unless @assignment.new_record?
   = render :partial => "submissions", :locals => {:f => f}
 
-%p
+%p.submit
   = f.submit @assignment.new_record? ? 'Create' : 'Save'
-  = link_to 'Cancel', admin_course_assignments_path(@course)
+  = link_to 'Cancel', admin_course_assignments_path(@course), :class => "cancel"

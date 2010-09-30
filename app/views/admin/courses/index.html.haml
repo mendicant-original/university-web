@@ -1,8 +1,9 @@
-%h1 Courses
+%h1.form-header Courses
 
-= button_to "Create Course", new_admin_course_path, :method => :get
+%p.prompt
+  = link_to "Create New Course", new_admin_course_path
 
-%table.edit
+%table.admin
   %thead
     %tr
       %th Name
@@ -13,4 +14,4 @@
       %tr{:class => cycle('even','odd')}
         %td= link_to course.name, edit_admin_course_path(course)
         %td= link_to "Assignments", admin_course_assignments_path(course)
-        %td= link_to("Destroy", admin_course_path(course), :confirm => "Are you sure you wish to delete this course?", :method => 'DELETE')
+        %td.action= link_to("Destroy", admin_course_path(course), :confirm => "Are you sure you wish to delete this course?", :method => 'DELETE', :class => "delete")

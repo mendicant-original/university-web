@@ -1,5 +1,5 @@
-%h1 New Assignment
+%h1.form-header New Assignment
 
-= form_for @assignment, 
+= form_for @assignment, :html => {:class => "bp"},
   :url => admin_course_assignments_path(@course) do |f|
   = render :partial => "form", :locals => {:f => f}

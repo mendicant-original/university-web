@@ -1,10 +1,10 @@
-=  button_to "Create Assignment", new_admin_course_assignment_path(@course),
-    :method => :get
+%p.prompt
+  =  link_to "Create New Assignment", new_admin_course_assignment_path(@course)
 
-= form_for @course, 
+= form_for @course, :html => {:class => "bp"},
   :url => admin_course_path(@course) do |f|
 
-  %table.edit 
+  %table.admin 
     %thead 
       %tr
         %th Student
@@ -25,7 +25,8 @@
               = a.fields_for :submissions, assignment.submission_for(student) do |s|
                 %td.status= s.select :submission_status_id, @statuses
               
-  %p= f.submit "Save Assignments"
+  %p.submit 
+    = f.submit "Save Assignments"
   
   
   

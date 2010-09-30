@@ -2,22 +2,22 @@
   = form.label :name
   = form.text_field :name
   
-%p
+%p.submit
   = form.submit @course.new_record? ? "Create" : "Update"
-  = link_to "Cancel", admin_courses_path
+  = link_to "Cancel", admin_courses_path, :class => "cancel"
   
 - unless @course.new_record?
   %hr
   
   %h2 Students
   
-  %table.edit
+  %table.admin
     %tr
       %th Name
       %th Email
       %th Github
       %th Twitter
-      %th Individual project url
+      %th Project URL
     - @course.course_memberships.each do |student_membership|
       %tr
         %td= student_membership.student.name
