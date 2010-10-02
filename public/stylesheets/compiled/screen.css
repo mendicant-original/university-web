@@ -485,66 +485,53 @@ form.bp label:after {
   content: ":";
 }
 /* line 24, ../../../app/stylesheets/partials/_forms.sass */
-form.bp table label {
-  font-size: 1em;
-  width: 100%;
-  margin: 0;
-  text-align: left;
-}
-/* line 29, ../../../app/stylesheets/partials/_forms.sass */
-form.bp table label:after {
-  content: "";
-}
-/* line 32, ../../../app/stylesheets/partials/_forms.sass */
-form.bp table input[type="checkbox"], form.bp table input.checkbox, form.bp table input[type="radio"], form.bp table input.radio {
-  margin: -0.25em 0 0 0;
-}
-/* line 35, ../../../app/stylesheets/partials/_forms.sass */
 form.bp p {
   margin: 0.25em 0;
 }
-/* line 38, ../../../app/stylesheets/partials/_forms.sass */
+/* line 27, ../../../app/stylesheets/partials/_forms.sass */
 form.bp p.submit {
   overflow: hidden;
   *zoom: 1;
   padding: 1px 0;
   margin: 1em 0;
 }
-/* line 44, ../../../app/stylesheets/partials/_forms.sass */
+/* line 33, ../../../app/stylesheets/partials/_forms.sass */
 form.bp input[type="submit"] {
   float: right;
   margin: 0;
   background: #bfbfbf;
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5e5e5), to(#bbbbbb));
-  background: -moz-linear-gradient(0% 100% 90deg, #bbbbbb, #e5e5e5);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #e5e5e5), color-stop(100%, #bbbbbb));
+  background-image: -moz-linear-gradient(top, #e5e5e5 0%, #bbbbbb 100%);
+  background-image: linear-gradient(top, #e5e5e5 0%, #bbbbbb 100%);
   border: 1px solid #cccccc;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  box-shadow: inset 0px 1px 3px #f5f5f5;
-  -moz-box-shadow: inset 0px 1px 3px #f5f5f5;
-  -webkit-box-shadow: inset 0px 1px 3px #f5f5f5;
+  -webkit-border-radius: 3px 3px;
+  -moz-border-radius: 3px / 3px;
+  -o-border-radius: 3px / 3px;
+  -ms-border-radius: 3px / 3px;
+  -khtml-border-radius: 3px / 3px;
+  border-radius: 3px / 3px;
+  -moz-box-shadow: #f5f5f5 0px 1px 3px 0;
+  -webkit-box-shadow: #f5f5f5 0px 1px 3px 0;
+  -o-box-shadow: #f5f5f5 0px 1px 3px 0;
+  box-shadow: #f5f5f5 0px 1px 3px 0;
   color: #333333;
-  font-family: "lucida grande", sans-serif;
-  font-size: 12px;
   font-weight: bold;
-  line-height: 1;
   padding: 4px;
   text-align: center;
-  text-shadow: 0 1px 0px #eeeeee;
+  text-shadow: #eeeeee 1px 0 1px;
 }
-/* line 66, ../../../app/stylesheets/partials/_forms.sass */
+/* line 47, ../../../app/stylesheets/partials/_forms.sass */
 form.bp a.cancel {
   display: block;
   margin-top: 5px;
   float: left;
   text-decoration: underline;
 }
-/* line 72, ../../../app/stylesheets/partials/_forms.sass */
+/* line 53, ../../../app/stylesheets/partials/_forms.sass */
 form.bp h2 {
   font-size: 1.2em;
 }
-/* line 75, ../../../app/stylesheets/partials/_forms.sass */
+/* line 56, ../../../app/stylesheets/partials/_forms.sass */
 form.bp hr {
   color: #dddddd;
   background: #dddddd;
@@ -553,43 +540,58 @@ form.bp hr {
   width: 100%;
   border: none;
 }
-/* line 84, ../../../app/stylesheets/partials/_forms.sass */
+/* line 65, ../../../app/stylesheets/partials/_forms.sass */
 form.bp p {
   margin: 0 0 0.5em 0;
 }
-/* line 87, ../../../app/stylesheets/partials/_forms.sass */
+/* line 68, ../../../app/stylesheets/partials/_forms.sass */
 form.bp p.info {
   margin: 0 0 0.5em 135px;
   color: #666666;
   font-size: 0.8em;
 }
-/* line 92, ../../../app/stylesheets/partials/_forms.sass */
+/* line 73, ../../../app/stylesheets/partials/_forms.sass */
 form.bp p.no-label, form.bp .no-label {
   margin: 0 0 0 135px;
 }
-/* line 95, ../../../app/stylesheets/partials/_forms.sass */
+/* line 76, ../../../app/stylesheets/partials/_forms.sass */
 form.bp input.text, form.bp input.title, form.bp input[type="email"], form.bp input[type="text"], form.bp input[type="password"] {
   font-size: 0.9em;
   color: #555555;
 }
-/* line 99, ../../../app/stylesheets/partials/_forms.sass */
+/* line 80, ../../../app/stylesheets/partials/_forms.sass */
 form.bp select {
   font-size: 0.8em;
   color: #555555;
 }
-/* line 103, ../../../app/stylesheets/partials/_forms.sass */
+/* line 86, ../../../app/stylesheets/partials/_forms.sass */
+form.bp table label {
+  font-size: 1em;
+  width: 100%;
+  margin: 0;
+  text-align: left;
+}
+/* line 91, ../../../app/stylesheets/partials/_forms.sass */
+form.bp table label:after {
+  content: "";
+}
+/* line 94, ../../../app/stylesheets/partials/_forms.sass */
+form.bp table input[type="checkbox"], form.bp table input.checkbox, form.bp table input[type="radio"], form.bp table input.radio {
+  margin: -0.25em 0 0 0;
+}
+/* line 97, ../../../app/stylesheets/partials/_forms.sass */
 form.bp table select {
   font-size: 1em;
   margin: 0;
 }
-/* line 108, ../../../app/stylesheets/partials/_forms.sass */
+/* line 102, ../../../app/stylesheets/partials/_forms.sass */
 form.bp a.add_nested_fields {
   padding: 0 0 0 16px;
   background: url(../../images/plus.png) no-repeat left center;
   margin-top: 1em;
   display: block;
 }
-/* line 114, ../../../app/stylesheets/partials/_forms.sass */
+/* line 108, ../../../app/stylesheets/partials/_forms.sass */
 form.bp a.remove_nested_fields {
   padding: 0 0 0 16px;
   background: url(../../images/minus.png) no-repeat left center;
@@ -597,25 +599,25 @@ form.bp a.remove_nested_fields {
   font-size: 0.8em;
 }
 
-/* line 118, ../../../app/stylesheets/partials/_forms.sass */
+/* line 113, ../../../app/stylesheets/partials/_forms.sass */
 body.admin form.bp, body.admin h1.form-header {
   width: 650px;
 }
-/* line 120, ../../../app/stylesheets/partials/_forms.sass */
+/* line 115, ../../../app/stylesheets/partials/_forms.sass */
 body.admin label {
   width: 210px;
 }
-/* line 122, ../../../app/stylesheets/partials/_forms.sass */
+/* line 117, ../../../app/stylesheets/partials/_forms.sass */
 body.admin p.no-label, body.admin .no-label, body.admin p.info {
   margin-left: 235px;
 }
-/* line 125, ../../../app/stylesheets/partials/_forms.sass */
+/* line 120, ../../../app/stylesheets/partials/_forms.sass */
 body.admin p.prompt {
   width: 650px;
   margin: 0 0 0.33em;
   text-align: right;
 }
-/* line 129, ../../../app/stylesheets/partials/_forms.sass */
+/* line 124, ../../../app/stylesheets/partials/_forms.sass */
 body.admin p.prompt a {
   background: url(../../images/right_arrow.gif) no-repeat 100% 0.45em;
   padding-right: 14px;
@@ -708,42 +710,42 @@ table.admin tr:hover td {
   color: #339;
 }
 
-/* line 22, ../../../app/stylesheets/screen.scss */
+/* line 23, ../../../app/stylesheets/screen.scss */
 h1, h2, h3 {
   margin: 0.75em 0;
 }
 
-/* line 26, ../../../app/stylesheets/screen.scss */
+/* line 27, ../../../app/stylesheets/screen.scss */
 h1 {
   font-size: 2em;
 }
 
-/* line 30, ../../../app/stylesheets/screen.scss */
+/* line 31, ../../../app/stylesheets/screen.scss */
 h2 {
   font-size: 1.75em;
 }
 
-/* line 34, ../../../app/stylesheets/screen.scss */
+/* line 35, ../../../app/stylesheets/screen.scss */
 h3 {
   font-size: 1.5em;
 }
 
-/* line 38, ../../../app/stylesheets/screen.scss */
+/* line 39, ../../../app/stylesheets/screen.scss */
 a {
   text-decoration: none;
 }
 
-/* line 42, ../../../app/stylesheets/screen.scss */
+/* line 43, ../../../app/stylesheets/screen.scss */
 #header {
   margin: 20px 0;
 }
 
-/* line 46, ../../../app/stylesheets/screen.scss */
+/* line 47, ../../../app/stylesheets/screen.scss */
 input {
   margin: 1em 0;
 }
 
-/* line 50, ../../../app/stylesheets/screen.scss */
+/* line 51, ../../../app/stylesheets/screen.scss */
 .pagination {
   margin: 1em 0.5em;
   background: silver;
@@ -754,33 +756,33 @@ input {
   -moz-border-radius: 5px;
 }
 
-/* line 61, ../../../app/stylesheets/screen.scss */
+/* line 62, ../../../app/stylesheets/screen.scss */
 .pagination a {
   color: #222;
 }
 
-/* line 65, ../../../app/stylesheets/screen.scss */
+/* line 66, ../../../app/stylesheets/screen.scss */
 .pagination em {
   font-size: 1.3em;
   color: #000;
 }
 
-/* line 70, ../../../app/stylesheets/screen.scss */
+/* line 71, ../../../app/stylesheets/screen.scss */
 p {
   margin: 1.5em 0;
 }
 
-/* line 74, ../../../app/stylesheets/screen.scss */
+/* line 75, ../../../app/stylesheets/screen.scss */
 table.edit th {
   font-weight: bold;
 }
 
-/* line 78, ../../../app/stylesheets/screen.scss */
+/* line 79, ../../../app/stylesheets/screen.scss */
 table.edit th, table.edit td {
   padding: 2px 4px;
 }
 
-/* line 82, ../../../app/stylesheets/screen.scss */
+/* line 83, ../../../app/stylesheets/screen.scss */
 .clearfix {
   overflow: hidden;
   *zoom: 1;
@@ -793,13 +795,13 @@ table.edit th, table.edit td {
 	border-bottom: 1px solid #002E6E;
 }*/
 /* IRC Logs */
-/* line 97, ../../../app/stylesheets/screen.scss */
+/* line 98, ../../../app/stylesheets/screen.scss */
 table.messages {
   margin-left: 1em;
   width: 98%;
 }
 
-/* line 102, ../../../app/stylesheets/screen.scss */
+/* line 103, ../../../app/stylesheets/screen.scss */
 table.messages td.handle {
   padding-right: 1em;
   color: #555;
@@ -807,7 +809,7 @@ table.messages td.handle {
   width: 140px;
 }
 
-/* line 109, ../../../app/stylesheets/screen.scss */
+/* line 110, ../../../app/stylesheets/screen.scss */
 table.messages td.recorded_at {
   vertical-align: top;
   color: gray;
@@ -815,13 +817,13 @@ table.messages td.recorded_at {
   width: 150px;
 }
 
-/* line 116, ../../../app/stylesheets/screen.scss */
+/* line 117, ../../../app/stylesheets/screen.scss */
 table.messages td.body {
   vertical-align: top;
   max-width: 650px;
 }
 
-/* line 121, ../../../app/stylesheets/screen.scss */
+/* line 122, ../../../app/stylesheets/screen.scss */
 table.messages td {
   padding-bottom: 0.25em;
 }
