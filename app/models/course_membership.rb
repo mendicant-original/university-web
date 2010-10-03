@@ -1,6 +1,6 @@
 class CourseMembership < ActiveRecord::Base
-  before_destroy :destory_assignment_submissions
-  after_create   :create_assignment_submissions
+  before_destroy :destory_assignment_submissions, :destroy_channel_membership
+  after_create   :create_assignment_submissions, :create_channel_membership
   
   belongs_to :student, :class_name => "User", :foreign_key => "user_id"
   belongs_to :course
@@ -17,9 +17,23 @@ class CourseMembership < ActiveRecord::Base
       end
   end
   
+  def destroy_channel_membership
+    if course.channel
+      channel_membership = student.chat_channel_memberships.where(["channel_id = ?", course.channel.id]).first
+      channel_membership.destroy if channel_membership
+    end
+  end
+  
   def create_assignment_submissions
     course.assignments.each do |assignment|
       assignment.submission_for(student)
     end
   end
+  
+  def create_channel_membership
+    if course.channel && !student.chat_channels.include?(course.channel)
+      Chat::ChannelMembership.create(:user => student, :channel => course.channel)
+    end
+  end
+  
 end

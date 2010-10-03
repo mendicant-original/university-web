@@ -1,6 +1,9 @@
 %p
   = form.label :name
   = form.text_field :name
+%p.no-label
+  = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+    :include_blank => "Select a channel"  
   
 %p.submit
   = form.submit @course.new_record? ? "Create" : "Update"
