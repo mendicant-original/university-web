@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
   has_many :chat_channels, :through => :chat_channel_memberships, :source => :channel, :class_name => "Chat::Channel"
 
-  has_many :course_memberships
+  has_many :course_memberships, :dependent => :destroy
   has_many :courses, :through => :course_memberships
   
   has_many :assignment_submissions, :class_name => "Assignment::Submission"

@@ -11,7 +11,7 @@ class CourseMembership < ActiveRecord::Base
   private
   
   def destory_assignment_submissions
-    student.assignment_submissions.includes(:assignment).
+    Assignment::Submission.where(:user_id => user_id).includes(:assignment).
       where(["assignments.course_id = ?", self.course_id]).each do |sub|
         sub.delete
       end
