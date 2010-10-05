@@ -16,7 +16,7 @@ en:
       inactive: 'Your account was not activated yet.'
     user_sessions:
       user:
-        signed_in: 'Signed in successfully.'
+        signed_in: 'Signed in successfully.' 
     sessions:
       signed_in: 'Signed in successfully.'
       signed_out: 'Signed out successfully.'
