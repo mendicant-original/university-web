@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     
     @user.update_attributes(params[:user])
     
+    flash[:notice] = "Profile sucessfully updated"
+    
     redirect_to user_path(@user)
   end 
     
