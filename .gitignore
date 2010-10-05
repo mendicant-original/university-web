@@ -8,3 +8,4 @@ public/stylesheets/compiled/*
 db/schema.rb
 config/database.yml
 config/initializers/api_access.rb
+config/initializers/entrance_exam_hash.rb

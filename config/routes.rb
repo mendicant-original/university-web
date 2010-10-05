@@ -40,6 +40,11 @@ University::Application.routes.draw do |map|
     end
   end
   
+  get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
+       :as => 'entrance_exam'
+  post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',
+       :as => 'submit_entrance_exam'
+  
 
   # Sample resource route with options:
   #   resources :products do
