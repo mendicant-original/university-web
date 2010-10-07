@@ -1,0 +1,21 @@
+%h1= "#{@assignment.name} Review"
+
+%p= @review.description
+
+%h3 Comments
+
+#comments
+  - @review.comments.order('created_at').each do |comment|
+    .comment
+      .author
+        = image_tag comment.user.gravatar_url(24)
+        = comment.user.name
+      = comment.comment_text
+  - if @review.comments.empty?
+    %h4 There are currently no comments!
+  
+  = form_for @review.comments.build, 
+    :url => comment_assignment_review_path(@assignment, @review) do |f|
+
+    %p= f.text_area :comment_text
+    %p= f.submit "Post comment"
