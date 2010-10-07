@@ -11,9 +11,9 @@ class ExamsController < ApplicationController
   end
   
   def submit_exam
-    exam_url       = params[:user].delete('exam_submission')
+    exam_url       = params[:user].delete('exam_submission')    
     @user          = User.new(params[:user])
-    @entrance_exam = @user.exam_submissions.build
+    @entrance_exam = @user.exam_submissions.new(:url => exam_url['url'])
     
     if exam_url['url'].blank?
       @user.errors.add(:exam_url, "cannot be blank")
