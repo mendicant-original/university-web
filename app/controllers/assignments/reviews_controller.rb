@@ -19,6 +19,8 @@ class Assignments::ReviewsController < ApplicationController
     @review = @submission.reviews.new(params[:assignment_review])
     
     if @review.save
+      UserMailer.review_created(@review).deliver
+      
       flash[:notice] = "Review submitted"
       redirect_to root_path
     else
@@ -34,8 +36,23 @@ class Assignments::ReviewsController < ApplicationController
     
   end
   
+  def update
+    @review.update_attribute(:closed, true)
+    
+    @review.submission.update_attributes(params[:assignment_review]['assignment_submission'])
+    
+    flash[:notice] = "Review closed"
+    
+    UserMailer.review_closed(@review, current_user).deliver
+    
+    redirect_to root_path
+  end
+  
   def comment
-    @review.comments.create(params[:comment].merge(:user_id => current_user.id))
+    comment = @review.comments.create(params[:comment].
+                merge(:user_id => current_user.id))
+    
+    UserMailer.review_comment_created(comment, @review, current_user).deliver
     
     redirect_to assignment_review_path(@assignment, @review)
   end
@@ -52,9 +69,9 @@ class Assignments::ReviewsController < ApplicationController
   end
   
   def student_or_instructor_only
-    find_review
+    find_review if params[:id]
     
-    if @review.submission.user != current_user and
+    if (@review && @review.submission.user != current_user) and
        !@assignment.course.instructors.include?(current_user)
       
       raise "Access Denied"

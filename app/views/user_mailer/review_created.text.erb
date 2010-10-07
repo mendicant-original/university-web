@@ -1,0 +1,8 @@
+<%= @review.submission.user.name %> has requested a review for <%= @review.submission.assignment.name %>
+
+-----
+
+<%= @review.description %>
+
+-----
+<%= assignment_review_url(@review.submission.assignment, @review, :only_path => false) %>
