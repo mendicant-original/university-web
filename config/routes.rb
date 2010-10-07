@@ -34,10 +34,8 @@ University::Application.routes.draw do |map|
     resources :courses do
       resources :assignments
     end
-    
-    namespace :assignments do
-      resources :submission_statuses
-    end
+
+    resources :submission_statuses
   end
   
   get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
