@@ -10,12 +10,24 @@
       .author
         = image_tag comment.user.gravatar_url(24)
         = comment.user.name
-      = comment.comment_text
+      = comment.to_html.html_safe
   - if @review.comments.empty?
     %h4 There are currently no comments!
   
-  = form_for @review.comments.build, 
-    :url => comment_assignment_review_path(@assignment, @review) do |f|
+  - unless @review.closed?
+    = form_for @review.comments.build, 
+      :url => comment_assignment_review_path(@assignment, @review) do |f|
 
-    %p= f.text_area :comment_text
-    %p= f.submit "Post comment"
+      %p= f.text_area :comment_text
+      %p= f.submit "Post comment"
+
+.clear
+
+%hr
+
+- if @review.course.instructors.include?(current_user) && !@review.closed?
+  = form_for @review, :url => assignment_review_path(@assignment, @review) do |f|
+    = f.submit "Close Review"
+    = f.fields_for @review.submission do |s|
+      = s.select :submission_status_id,
+        SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}

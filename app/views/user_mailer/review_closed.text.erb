@@ -1,0 +1,18 @@
+<%= @closed_by.name %> has closed the review for <%= @review.submission.user.name %>'s '<%= @review.submission.assignment.name %>
+
+Current Submission Status: <%= @review.submission.status.name %>
+-----
+
+<%= @review.description %>
+
+==== Comments ====
+
+<% @review.comments.order('created_at').each do |comment| %>
+-----
+
+<%= comment.comment_text %>
+- <%= comment.user.name %>
+
+<% end %>
+-----
+<%= assignment_review_url(@review.submission.assignment, @review, :only_path => false) %>
