@@ -14,6 +14,12 @@
   
     - current_user.courses.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
+      
+    - if current_user.instructed_courses.any?
+      %h3 Courses
+      
+      - current_user.instructed_courses.each do |course|
+        = render :partial => "course", :locals => {:course => course}
 
   .left
     %h3 IRC Channels
