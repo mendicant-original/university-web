@@ -1,0 +1,7 @@
+- if current_user.exam_submissions.any?
+  %h3 Exams
+  
+- current_user.exam_submissions.each do |exam_submission|
+  .assignment
+    = exam_submission.exam.name
+    %span.right= exam_submission.submission_status.name

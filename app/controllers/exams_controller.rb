@@ -2,28 +2,27 @@ class ExamsController < ApplicationController
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
   
-  before_filter :find_course, :only => [:submit_exam]
+  before_filter :find_exam, :only => [:submit_exam]
   before_filter :find_submitted_status, :only => [:submit_exam]
   
   def entrance
     @user = User.new
+    @entrance_exam = @user.exam_submissions.build
   end
   
   def submit_exam
-    @user = User.new(params[:user])
+    exam_url       = params[:user].delete('exam_submission')
+    @user          = User.new(params[:user])
+    @entrance_exam = @user.exam_submissions.build
     
-    if @user.entrance_exam_url.blank?
-      @user.errors.add(:entrance_exam_url, "cannot be blank")
+    if exam_url['url'].blank?
+      @user.errors.add(:exam_url, "cannot be blank")
       render :action => :entrance
-      
-    elsif @user.save
-      
-      @user.course_memberships.create(:course_id => @course.id)
-      
-      @course.assignments.first.submission_for(@user).
-        update_attribute(:submission_status_id, @submitted.id)
-        
+    elsif @user.save        
       @user.update_attribute(:requires_password_change, false)
+
+      @user.exam_submissions.create(exam_url.merge(:submission_status_id => @submitted.id,
+                                                   :exam_id              => @exam.id))
       
       flash[:notice] = "Exam sucessfully submitted."
       
@@ -37,8 +36,8 @@ class ExamsController < ApplicationController
   
   private
   
-  def find_course
-    @course = Course.find_by_name(ENTRANCE_EXAM_NAME)
+  def find_exam
+    @exam = Exam.find_by_name(ENTRANCE_EXAM_NAME)
   end
   
   def find_submitted_status
