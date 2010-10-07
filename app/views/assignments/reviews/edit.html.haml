@@ -3,7 +3,7 @@
 %p= @review.description
 
 - if current_user != @review.submission.user
-  %p= @review.user.name
+  %p= @review.submission.user.name
 
 %h3 Comments
 
