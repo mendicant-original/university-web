@@ -6,4 +6,12 @@ class Assignment::Submission < ActiveRecord::Base
   belongs_to :assignment
   
   has_many :reviews
+  
+  def review
+    reviews.where(:closed => false).first
+  end
+  
+  def open_review?
+    !!review
+  end
 end

@@ -8,7 +8,12 @@
     - course.assignments.each do |assignment|
       - submission = assignment.submission_for(current_user)
       %th.cu.status{:style => "background-color: ##{submission.status.hex_color}"}
-        = button_to "Submit for review"
+        - if submission.open_review?
+          = link_to "Review", assignment_review_path(assignment.id, submission.review.id)
+        - else
+          = button_to "Submit for review",
+            new_assignment_review_path(assignment.id),
+            :method => :get
   - (course.students - [current_user]).each do |student|
     %tr
       %td= student.name

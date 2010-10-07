@@ -30,7 +30,11 @@ University::Application.routes.draw do |map|
   end
   
   resources :assignments do
-    resources :reviews, :controller => "Assignments::Reviews"
+    resources :reviews, :controller => "Assignments::Reviews" do
+      member do
+        post :comment
+      end
+    end
   end
   
   namespace :admin do
