@@ -1,0 +1,17 @@
+%table.status
+  %tr
+    %th= course.name
+    - course.assignments.each do |assignment|
+      %th.status= assignment.name
+  %tr
+    %th.cu= current_user.name
+    - course.assignments.each do |assignment|
+      - submission = assignment.submission_for(current_user)
+      %th.cu.status{:style => "background-color: ##{submission.status.hex_color}"}
+        = button_to "Submit for review"
+  - (course.students - [current_user]).each do |student|
+    %tr
+      %td= student.name
+      - course.assignments.each do |assignment|
+        - submission = assignment.submission_for(student)
+        %td.status{:style => "background-color: ##{submission.status.hex_color}"}= submission.status.name

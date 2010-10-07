@@ -1,5 +1,5 @@
 .two-col
-  #main
+  .main
     .profile
       %h1
         = image_tag current_user.gravatar_url(50)
@@ -7,6 +7,13 @@
       
       #clean-gray.block
         = button_to "Edit your profile", edit_user_path(current_user), :method => :get
+
+  .main
+    - if current_user.assignment_submissions.any?
+      %h3 Assignments
+  
+    - current_user.courses.each do |course|
+      = render :partial => "assignments", :locals => {:course => course}
 
   .left
     %h3 IRC Channels
@@ -22,29 +29,12 @@
             .handle= "#{message.handle.name}:"
             .body= message.body
       
-  .right
-    %h3 Assignments
+  .right.blog.last
   
-    - current_user.assignment_submissions.each do |submission|
-      .assignment
-        = submission.assignment.name
-        %span.right= submission.status.name
-   
-    - if current_user.assignment_submissions.empty?
-      .assignment You currently do not have any assignments.
-      
-  .left.blog
     %h4= link_to "RMU Blog",
           "http://blog.majesticseacreature.com/tag/rubymendicant",
           :target => "_blank"
-    
+
     %ul
       - @rss_items.each do |item|
         %li= link_to item.title, item.link, :target => "_blank"
-    
-    
-  .right
-    %h4 University Web News
-    
-    %ul
-      %li Coming soon ...

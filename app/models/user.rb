@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     elsif !real_name.blank?
       real_name
     else
-      ""
+      email[/([^\@]*)@.*/,1]
     end
   end
   
