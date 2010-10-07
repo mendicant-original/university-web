@@ -1,5 +1,6 @@
 class Assignment < ActiveRecord::Base
-  has_many :submissions, :class_name => "Assignment::Submission"
+  has_many :submissions, :class_name => "Assignment::Submission", 
+                         :dependent  => :delete_all
   
   belongs_to :course
   

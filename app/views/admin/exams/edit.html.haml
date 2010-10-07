@@ -1,0 +1,10 @@
+%h1 Edit Exam
+
+= form_for @exam, :url => admin_exam_path(@exam) do |f|
+  = render :partial => "form", :locals => {:f => f}
+  
+  %table.edit
+    = f.fields_for :exam_submissions do |e|
+      %tr
+        %td= e.object.user.name
+        %td= e.select :submission_status_id, SubmissionStatus.all.map {|s| [s.name, s.id]}
