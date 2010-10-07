@@ -33,7 +33,7 @@ class Chat::MessagesController < ApplicationController
     
       @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
     
-      @more_messages = total_messages > @messages.count
+      @more_messages = total_messages > @messages.length
     end
     
     @messages.reverse!
