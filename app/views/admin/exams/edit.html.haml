@@ -6,5 +6,5 @@
   %table.edit
     = f.fields_for :exam_submissions do |e|
       %tr
-        %td= e.object.user.name
+        %td= "#{e.object.user.name} (#{e.object.user.email})"
         %td= e.select :submission_status_id, SubmissionStatus.all.map {|s| [s.name, s.id]}
