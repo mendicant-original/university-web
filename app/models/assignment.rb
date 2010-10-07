@@ -1,6 +1,8 @@
 class Assignment < ActiveRecord::Base
   has_many :submissions, :class_name => "Assignment::Submission"
   
+  belongs_to :course
+  
   accepts_nested_attributes_for :submissions
   
   def submission_for(student)
