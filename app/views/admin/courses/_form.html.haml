@@ -1,6 +1,16 @@
 %p
   = form.label :name
   = form.text_field :name
+
+%h2 Instructors
+
+= form.fields_for :course_instructor_associations do |m|
+  %p
+    = m.select :instructor_id, User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
+      :include_blank => "Select an instructor"
+    = m.link_to_remove "Remove"
+  
+%p= form.link_to_add "Add an instructor", :course_instructor_associations
   
 %p
   = form.submit @course.new_record? ? "Create" : "Update"
