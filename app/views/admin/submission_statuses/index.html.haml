@@ -6,11 +6,13 @@
   %thead
     %tr
       %th Status
+      %th Color
       %th 
   %tbody
     - @submission_statuses.each do |status|
       %tr{:class => cycle('even','odd')}
         %td= link_to status.name, edit_admin_submission_status_path(status)
+        %td{:style => "background-color: ##{status.hex_color}"}
         %td= link_to( "Destroy", admin_submission_status_path(status), 
               :confirm => "Are you sure you wish to delete this status?",
               :method => 'DELETE')
