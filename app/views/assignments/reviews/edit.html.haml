@@ -1,9 +1,8 @@
-%h1= "#{@assignment.name} Review"
+%h1
+  = "#{@assignment.name} Review"
+  = " (#{@review.submission.user.name})" if current_user != @review.submission.user
 
 %p= @review.description
-
-- if current_user != @review.submission.user
-  %p= @review.submission.user.name
 
 %h3 Comments
 
