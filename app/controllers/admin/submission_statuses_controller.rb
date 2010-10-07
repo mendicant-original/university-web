@@ -2,7 +2,7 @@ class Admin::SubmissionStatusesController < Admin::Base
   before_filter :find_submission_status, :only => [:edit, :update, :destroy]
   
   def index
-    @submission_statuses = SubmissionStatus.all
+    @submission_statuses = SubmissionStatus.order('sort_order')
   end
   
   def new
