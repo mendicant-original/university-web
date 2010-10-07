@@ -43,6 +43,7 @@ University::Application.routes.draw do |map|
       resources :assignments
     end
 
+    resources :exams
     resources :submission_statuses
   end
   
