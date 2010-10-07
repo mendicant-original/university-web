@@ -35,9 +35,10 @@
       = f.label :twitter_account_name, "Twitter Name"
       = f.text_field :twitter_account_name
 
-    %p
-      = f.label :entrance_exam_url
-      = f.text_field :entrance_exam_url
+    = f.fields_for @entrance_exam do |e|
+      %p
+        = e.label :url, "Exam URL"
+        = e.text_field :url
       
     %p
       = f.submit "Submit Entrance Exam"
