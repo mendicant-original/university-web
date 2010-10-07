@@ -38,5 +38,5 @@
         %td
           = twitter_account_link student_membership.student.twitter_account_name
         %td= github_project_link student_membership.student.project_url
-        %td= link_to student_membership.student.entrance_exam_url,
-            student_membership.student.entrance_exam_url
+        %td= link_to(student_membership.student.entrance_exam_url,
+            student_membership.student.entrance_exam_url) unless student_membership.student.entrance_exam_url.blank?
