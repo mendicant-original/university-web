@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['channel_id'].blank? },
     :allow_destroy => true
     
-  has_many :exam_submissions
+  has_many :exam_submissions, :dependent => :delete_all
 
   def self.search(search, page)
     paginate :per_page => 20, :page => page,
