@@ -10,7 +10,7 @@
         - submission = assignment.submission_for(student)
         %td.status{:style => "background-color: ##{submission.status.hex_color}"}
           - if submission.open_review?
-            = button_to "Review", 
+            = button_to "Enter review", 
               assignment_review_path(assignment.id, submission.review.id),
               :method => :get
           - else
