@@ -8,7 +8,7 @@
       #clean-gray.block
         = button_to "Edit your profile", edit_user_path(current_user), :method => :get
 
-  .main
+  .main  
     - if current_user.assignment_submissions.any?
       %h3 Assignments
   
@@ -34,13 +34,15 @@
           .message
             .handle= "#{message.handle.name}:"
             .body= message.body
-      
-  .right.blog.last
-  
-    %h4= link_to "RMU Blog",
-          "http://blog.majesticseacreature.com/tag/rubymendicant",
-          :target => "_blank"
-
-    %ul
-      - @rss_items.each do |item|
-        %li= link_to item.title, item.link, :target => "_blank"
+  .right
+    = render :partial => "exams"
+    
+  -# right.blog.last
+  -# 
+  -#  %h4= link_to "RMU Blog",
+  -#        "http://blog.majesticseacreature.com/tag/rubymendicant",
+  -#        :target => "_blank"
+  -# 
+  -#  %ul
+  -#    - @rss_items.each do |item|
+  -#      %li= link_to item.title, item.link, :target => "_blank"

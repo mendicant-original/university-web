@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :chat_channel_memberships,
     :reject_if => proc { |attributes| attributes['channel_id'].blank? },
     :allow_destroy => true
+    
+  has_many :exam_submissions
 
   def self.search(search, page)
     paginate :per_page => 20, :page => page,
