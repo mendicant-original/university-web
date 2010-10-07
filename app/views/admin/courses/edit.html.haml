@@ -2,7 +2,7 @@
 
 %h1 Edit Course
 
-- form_for @course, :url => admin_course_path(@course) do |f|
+= nested_form_for @course, :url => admin_course_path(@course) do |f|
   = render :partial => "form", :object => f
   
 %h2= link_to "Assignments", admin_course_assignments_path(@course)
