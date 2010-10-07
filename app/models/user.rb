@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   
   has_many :assignment_submissions, :class_name => "Assignment::Submission"
   
+  has_many :course_instructor_associations, :foreign_key => "instructor_id"
+  
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
   
   accepts_nested_attributes_for :course_memberships,
@@ -46,5 +48,9 @@ class User < ActiveRecord::Base
     hash = Digest::MD5.hexdigest(email.downcase)
     
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}"
+  end
+  
+  def instructed_courses
+    course_instructor_associations.map {|c| c.course }
   end
 end
