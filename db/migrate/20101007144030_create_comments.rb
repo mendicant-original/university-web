@@ -1,7 +1,9 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.belongs_to :commentable
+      t.integer    :commentable_id
+      t.string     :commentable_type
+      
       t.belongs_to :user
       
       t.text       :comment_text
