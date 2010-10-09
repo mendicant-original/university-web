@@ -21,6 +21,7 @@ class Chat::MessagesController < ApplicationController
 
     @messages = Chat::Message.includes(:channel).
                               where("chat_channels.name = ?", channel || "#rmu-general").
+                              where("chat_messages.body ilike '%' || ? || '%'", (params[:search].nil? ? "" : params[:search] )).
                               order("recorded_at DESC")
                               
     @messages = @messages.where(:topic_id => topic.id) if topic

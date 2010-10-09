@@ -2,8 +2,8 @@
 
 - content_for :header_bottom do
   :javascript
-    var lastMessageRecordedAt = '#{@messages.last.recorded_at}';
-    var lastMessageId         = #{@messages.last.id};
+    var lastMessageRecordedAt = '#{@messages.size == 0 ? "" : @messages.last.recorded_at}';
+    var lastMessageId         = #{@messages.size == 0 ? 0 : @messages.last.id};
   
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
@@ -41,8 +41,18 @@
 - if @more_messages
   %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
 
+- form_tag chat_messages_path, :method => :get do
+  = text_field_tag "search", params[:search]
+  = hidden_field_tag "channel", params[:channel]
+  = submit_tag "Search"
+
+
 %table.messages
-  - @messages.each do |message|
-    = render :partial => "display", :locals => {:message => message}
-    
+  - if @messages.size == 0
+    = render :partial => "no_results"
+  - else
+    - @messages.each do |message|
+      = render :partial => "display", :locals => {:message => message}
+
+
 #bottom
