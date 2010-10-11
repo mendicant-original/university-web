@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   has_many :instructors, :through => :course_instructor_associations
   
   has_many :assignments
+  belongs_to :channel, :class_name => "Chat::Channel"
   
   validates_presence_of :name
   validates_uniqueness_of :name

@@ -9,7 +9,11 @@
     = m.select :instructor_id, User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
       :include_blank => "Select an instructor"
     = m.link_to_remove "Remove"
-  
+    
+%p.no-label
+  = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+    :include_blank => "Select a channel"  
+
 %p= form.link_to_add "Add an instructor", :course_instructor_associations
   
 %p
