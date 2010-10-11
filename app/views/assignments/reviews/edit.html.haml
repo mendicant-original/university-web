@@ -2,6 +2,9 @@
   = "#{@assignment.name} Review"
   = " (#{@review.submission.user.name})" if current_user != @review.submission.user
 
+  - if @review.closed?
+    %h2 This review is closed.
+
 %p= @review.description
 
 %h3 Comments
@@ -16,18 +19,18 @@
   - if @review.comments.empty?
     %h4 There are currently no comments!
   
-  - unless @review.closed?
-    = form_for @review.comments.build, 
-      :url => comment_assignment_review_path(@assignment, @review) do |f|
+  = form_for @review.comments.build, 
+    :url => comment_assignment_review_path(@assignment, @review) do |f|
 
-      %p= f.text_area :comment_text
-      %p= f.submit "Post comment"
+    %p= f.text_area :comment_text
+    %p= f.submit "Post comment"
 
 .clear
 
-%hr
-
 - if @review.course.instructors.include?(current_user) && !@review.closed?
+  
+  %hr
+
   = form_for @review, :url => assignment_review_path(@assignment, @review) do |f|
     = f.submit "Close Review"
     = f.fields_for @review.submission do |s|
