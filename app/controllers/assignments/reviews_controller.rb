@@ -36,10 +36,10 @@ class Assignments::ReviewsController < ApplicationController
     
   end
   
-  def update
-    @review.update_attribute(:closed, true)
-    
+  def update    
     @review.submission.update_attributes(params[:assignment_review]['assignment_submission'])
+    
+    @review.close!(current_user)
     
     flash[:notice] = "Review closed"
     
