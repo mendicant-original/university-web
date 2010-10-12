@@ -9,9 +9,9 @@ table.admin
   	font-size: 0.9em;
   	font-weight: normal;
   	padding: 8px;
-  	background: #b9c9fe;
-  	border-top: 2px solid #00316a;
-  	border-bottom: 1px solid #fff;
+  	//background: #b9c9fe;
+  	border: 2px solid #00316a;
+  	border-width: 2px 0;
   	color: #00316a;
   }
   
@@ -19,9 +19,9 @@ table.admin
   {
   	padding: 8px;
   	font-size: 0.9em;
-  	background: #e8edff; 
-  	border-bottom: 1px solid #fff;
-  	color: #669;
+  	//background: #e8edff; 
+  	border-bottom: 1px solid #ddd;
+  	//color: #669;
   	border-top: 1px solid transparent;
   }
   
@@ -37,8 +37,8 @@ table.admin
   
   tr:hover td
   {
-  	background: #d0dafd;
-  	color: #339;
+  	background: #eee;
+  	//color: #339;
   }
   
 }//table

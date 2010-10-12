@@ -1,24 +1,25 @@
 %p
   = form.label :name
   = form.text_field :name
-%p.no-label
-  = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
-    :include_blank => "Select a channel"  
       
 %p
   = form.label :channel_id, "Course IRC Channel"
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "None"
+    
+%hr
 
 %h2 Instructors
+= form.link_to_add "Add an instructor", :course_instructor_associations
 
 = form.fields_for :course_instructor_associations do |m|
   %p
+    = m.label :instructor_id, "Course Instructor"
     = m.select :instructor_id, User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
       :include_blank => "Select an instructor"
     = m.link_to_remove "Remove"
 
-%p= form.link_to_add "Add an instructor", :course_instructor_associations
+
   
 %p.submit
   = form.submit @course.new_record? ? "Create" : "Update"

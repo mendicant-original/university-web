@@ -8,9 +8,8 @@
   
 %p
   = f.label :hex_color
-  %br
   = f.text_field :hex_color
   
-%p
+%p.submit
   = f.submit @submission_status.new_record? ? 'Create' : 'Save'
   = link_to 'Cancel', admin_submission_statuses_path, :class => "cancel"

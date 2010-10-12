@@ -66,24 +66,25 @@
 %hr
 
 %h2 Courses
-.no-label
-  = form.fields_for :course_memberships do |m|
+= form.link_to_add "Add a course", :course_memberships
+
+= form.fields_for :course_memberships do |m|
+  %p.no-label
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
     = m.link_to_remove "Remove"
-
-%p.no-label
-  = form.link_to_add "Add a course", :course_memberships
+  
       
 %hr
 
 %h2 Chat Channel Memberships
+= form.link_to_add "Add a channel", :chat_channel_memberships
 
-.no-label
-  = form.fields_for :chat_channel_memberships do |m|
+= form.fields_for :chat_channel_memberships do |m|
+  %p.no-label
     = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a channel"
     = m.link_to_remove "Remove"
 
-%p.no-label
-  = form.link_to_add "Add a channel", :chat_channel_memberships
+
+  

@@ -1,9 +1,6 @@
 h1.form-header
-  background-color: #00316a
-  color: #FFF
-  margin: 0 0 1.5em
-  width: 450px
-  padding: 5px
+  color: #00316a
+  margin: 0 0 1.2em
   font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif
 
 form.bp
@@ -20,7 +17,15 @@ form.bp
     width: 110px
     margin-right: 15px
     &:after
-      content: ":"      
+      content: ":"  
+      
+  label.infield
+    position: absolute
+    top: 15px
+    left: 0
+    text-align: left
+    margin: 0 0 0 5px
+      
   p
     margin: 0.25em 0
     
@@ -44,21 +49,10 @@ form.bp
     text-align: center
     +text-shadow(#eee, 1px, 0)
     margin: 0.5em 10px
-  
-textarea
-  width: 920px
-  padding: 5px
+    
+  input[type="submit"]:hover
+    +linear-gradient(color-stops(#bbb, #e5e5e5))
 
-
-.form-wrapper
-
-  h1
-    background-color: #00316a
-    color: #FFF
-    margin: 0 0 1.5em
-    width: 450px
-    padding: 5px
-    font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif
   
   a.cancel
     display: block
@@ -118,11 +112,24 @@ textarea
   a.add_nested_fields
     padding: 0 0 0 16px
     background: url(../../images/plus.png) no-repeat left center
-    margin-top: 1em
+    margin-bottom: 1em
     display: block
 
   a.remove_nested_fields
     @include delete(0.8em)
+    display: inline-block
+    margin-left: 8px
+
+form.search
+  p
+    position: relative
+    
+  input[type="submit"].inline
+    float: left
+    margin: 0.8em 10px
+    
+  input
+    float: left
 
 
 body.admin
@@ -141,6 +148,8 @@ body.admin
       background: url(../../images/right_arrow.gif) no-repeat 100% 0.45em
       padding-right: 14px
     
-    
-
+       
+textarea
+  width: 920px
+  padding: 5px
 

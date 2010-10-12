@@ -2,8 +2,7 @@
 
 %p
   = f.label :name
-  %br
   = f.text_field :name
-%p
+%p.submit
   = f.submit
-  = link_to 'Cancel', admin_exams_path
+  = link_to 'Cancel', admin_exams_path, :class => "cancel"

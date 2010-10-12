@@ -1,8 +1,9 @@
-%h1 Exams
+%h1.form-header Exams
 
-= button_to "Create Exam", new_admin_exam_path, :method => :get
+%p.prompt
+  = link_to "Create Exam", new_admin_exam_path
 
-%table.edit
+%table.admin
   %thead
     %tr
       %th Name
@@ -11,4 +12,4 @@
     - @exams.each do |exam|
       %tr{:class => cycle('even','odd')}
         %td= link_to exam.name, edit_admin_exam_path(exam)
-        %td= link_to("Destroy", admin_exam_path(exam), :confirm => "Are you sure you wish to delete this exam?", :method => 'DELETE')
+        %td.action= link_to("Destroy", admin_exam_path(exam), :confirm => "Are you sure you wish to delete this exam?", :method => 'DELETE', :class => "delete")
