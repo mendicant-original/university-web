@@ -1,0 +1,46 @@
+%h1 Entrance Exam Submission
+
+.form-wrapper
+  = form_for @user, :url => submit_entrance_exam_path, 
+    :html => {:class => 'bp alt'} do |f|
+    = error_messages_for(@user)
+  
+    %p
+      = f.label :email
+      = f.text_field :email
+
+    %p
+      = f.label :real_name
+      = f.text_field :real_name
+
+    %p
+      = f.label :nickname
+      = f.text_field :nickname
+
+    %p
+      = f.label :password
+      = f.password_field :password
+
+    %p
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+
+    %hr.ruler
+
+    %p
+      = f.label :github_account_name, "Github Name"
+      = f.text_field :github_account_name
+
+    %p
+      = f.label :twitter_account_name, "Twitter Name"
+      = f.text_field :twitter_account_name
+
+    = f.fields_for @entrance_exam do |e|
+      %p
+        = e.label :url, "Exam URL"
+        = e.text_field :url
+      
+    %p
+      = f.submit "Submit Entrance Exam"
+      
+    .clear

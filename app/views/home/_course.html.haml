@@ -1,0 +1,17 @@
+%table.status
+  %tr
+    %th= course.name
+    - course.assignments.each do |assignment|
+      %th.status= assignment.name
+  - course.students.each do |student|
+    %tr
+      %td= student.name
+      - course.assignments.each do |assignment|
+        - submission = assignment.submission_for(student)
+        %td.status{:style => "background-color: ##{submission.status.hex_color}"}
+          - if submission.open_review?
+            = button_to "Enter review", 
+              assignment_review_path(assignment.id, submission.review.id),
+              :method => :get
+          - else
+            = submission.status.name

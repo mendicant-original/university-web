@@ -29,16 +29,28 @@ University::Application.routes.draw do |map|
     end
   end
   
+  resources :assignments do
+    resources :reviews, :controller => "Assignments::Reviews" do
+      member do
+        post :comment
+      end
+    end
+  end
+  
   namespace :admin do
     resources :users
     resources :courses do
       resources :assignments
     end
-    
-    namespace :assignments do
-      resources :submission_statuses
-    end
+
+    resources :exams
+    resources :submission_statuses
   end
+  
+  get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
+       :as => 'entrance_exam'
+  post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',
+       :as => 'submit_entrance_exam'
   
 
   # Sample resource route with options:

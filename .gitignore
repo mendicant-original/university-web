@@ -4,7 +4,9 @@ log/*.log
 tmp/**/*
 .rvmrc
 rmu_config.rb
-public/stylesheets/compiled
+public/stylesheets/compiled/*
 db/schema.rb
 config/database.yml
 config/initializers/api_access.rb
+config/initializers/entrance_exam.rb
+config/initializers/setup_mail.rb

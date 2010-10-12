@@ -5,7 +5,7 @@ $blueprint_grid_outer_width: 67.5px
 
 .two-col
   +container
-  #main
+  div.main
     +column(12, true)
   div.left
     +column(6)
@@ -79,9 +79,30 @@ $blueprint_grid_outer_width: 67.5px
   margin-bottom: 0.25em
   border-bottom: 1px solid #fff
   
-  .right
+  span.right
     float: right
     
 .blog ul
   margin-left: 20px
   list-style-type: disc
+  
+table.status
+  width: 100%
+  
+  border-collapse: collapse
+  
+  td, th
+    padding: 3px 5px
+    border: 1px solid #bbb
+    border-style: collapse
+    
+    &.status
+      text-align: center
+  
+  th.cu
+    font-style: bold
+    font-size: 1.25em
+    padding: 10px
+  
+  td
+    color: gray

@@ -4,6 +4,21 @@
 %p.no-label
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "Select a channel"  
+      
+%p
+  = form.label :channel_id, "Course IRC Channel"
+  = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+    :include_blank => "None"
+
+%h2 Instructors
+
+= form.fields_for :course_instructor_associations do |m|
+  %p
+    = m.select :instructor_id, User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
+      :include_blank => "Select an instructor"
+    = m.link_to_remove "Remove"
+
+%p= form.link_to_add "Add an instructor", :course_instructor_associations
   
 %p.submit
   = form.submit @course.new_record? ? "Create" : "Update"
@@ -20,7 +35,8 @@
       %th Email
       %th Github
       %th Twitter
-      %th Project URL
+      %th Individual project url
+      %th Entrance Exam
     - @course.course_memberships.each do |student_membership|
       %tr
         %td= student_membership.student.name
@@ -30,3 +46,5 @@
         %td
           = twitter_account_link student_membership.student.twitter_account_name
         %td= github_project_link student_membership.student.project_url
+        %td= link_to(student_membership.student.entrance_exam_url,
+            student_membership.student.entrance_exam_url) unless student_membership.student.entrance_exam_url.blank?
