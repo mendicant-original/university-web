@@ -18,6 +18,7 @@ group :test do
   gem 'stories'
   gem 'contest'
   gem 'test-unit'
+  gem 'factory_girl_rails'
 end
 
 # Use unicorn as the web server
