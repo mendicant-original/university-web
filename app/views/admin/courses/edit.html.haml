@@ -5,6 +5,7 @@
 = nested_form_for @course, :url => admin_course_path(@course), :html => {:class => 'bp'} do |f|
   = render :partial => "form", :object => f
   
+  %hr.spacer
   
   %h2= link_to "Assignments", admin_course_assignments_path(@course)
   

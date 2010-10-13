@@ -1,9 +1,16 @@
 %h1.form-header Edit Exam
 
-= form_for @exam, :url => admin_exam_path(@exam) do |f|
+= form_for @exam, :url => admin_exam_path(@exam), :html => {:class => "bp"} do |f|
   = render :partial => "form", :locals => {:f => f}
+  %hr.spacer
   
-  %table.edit
+  %table.admin
+    %thead
+      %tr
+        %th Name
+        %th Email
+        %th Status
+        %th Url
     = f.fields_for :exam_submissions do |e|
       %tr
         %td= link_to e.object.user.name,
