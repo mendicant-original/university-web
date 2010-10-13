@@ -22,6 +22,10 @@ class Assignment::Review < ActiveRecord::Base
     update_attributes(closed_attr)
   end
   
+  def description_html
+    RDiscount.new(description).to_html.html_safe
+  end
+  
   private
   
   def update_submission_status
