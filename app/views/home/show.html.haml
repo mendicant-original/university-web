@@ -2,7 +2,7 @@
   .main
     .profile
       %h1
-        = image_tag current_user.gravatar_url(50)
+        = image_tag current_user.gravatar_url(50), :alt => ""
         = current_user.name
       
       #clean-gray.block
