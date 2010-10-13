@@ -6,7 +6,7 @@
 
 %h1.form-header Users
 
-- form_tag admin_users_path, :class => "bp search", :method => :get do
+= form_tag admin_users_path, :class => "bp search", :method => :get do
   %p.clearfix
     = label_tag "search", "Search Users", :class => 'infield'
     = text_field_tag "search", params[:search]
