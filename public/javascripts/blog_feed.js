@@ -9,8 +9,8 @@ $(function() {
       $(".blog ul").empty();
       
       $(feed.entries).each(function(){
-        $(".blog ul").append('<li><a href="' + this.link + '">' +
-                             this.title + '</a></li>');
+        $(".blog ul").append('<li><a target="_blank" href="' + this.link
+                             + '">' + this.title + '</a></li>');
       });
     },
     
