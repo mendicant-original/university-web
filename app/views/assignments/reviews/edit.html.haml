@@ -1,3 +1,26 @@
+- content_for :header_bottom do
+  :javascript
+    $(document).ready(function(){
+      $('.comment a.edit').click(function(e){
+        $(e.currentTarget).parents('.comment').children('.content').click();
+      });
+      
+      $('.comment[data-editable=true]').each(function(i,el){
+        id = $(el).attr('data-id');
+      
+        $(el).children(".content").editable('#{comments_path}/' + id, {
+          type:      'textarea',
+          method:    'PUT',
+          indicator: 'Saving ...',
+          cancel:    'Cancel',
+          submit:    'Save',
+          loadurl:   '#{comments_path}/' + id,
+          width:     '905px'
+        });
+      })      
+      
+    });
+
 %h1
   = "#{@assignment.name} Review"
   = " (#{@review.submission.user.name})" if current_user != @review.submission.user
@@ -11,33 +34,20 @@
 
 #comments
   - @review.comments.order('created_at').each do |comment|
-    .comment{:data => {:id => comment.id}}
+    .comment{:data => { :id => comment.id, 
+                        :editable => (comment.user == current_user).inspect }}
       .header
         = image_tag comment.user.gravatar_url(24)
         = comment.user.name
         .controls
           - if current_user == comment.user
-            = link_to_function '', 
-              %{$(".comment[data-id=#{comment.id}] .content").click()}, 
-              :class => "edit", :title => "Edit"
+            = link_to '', '#', :class => "edit", :title => "Edit"
             = link_to '', comment_path(comment),
               :class   => "remove", :title  => "Delete",
               :method  => :delete,  :remote => true,
               :confirm => "Are you sure you wish to delete this comment?"
         
       .content= comment.to_html.html_safe
-      - if current_user == comment.user
-        :javascript
-          $(".comment[data-id=#{comment.id}] .content").
-          editable('#{comment_path(comment.id)}', {
-            type:      'textarea',
-            method:    'PUT',
-            indicator: 'Saving ...',
-            cancel:    'Cancel',
-            submit:    'Save',
-            loadurl:   '#{comment_path(comment.id)}',
-            width:     '905px'    
-          });
   - if @review.comments.empty?
     %h4 There are currently no comments!
   
