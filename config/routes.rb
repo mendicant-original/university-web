@@ -47,6 +47,8 @@ University::Application.routes.draw do
     resources :submission_statuses
   end
   
+  resources :comments
+  
   get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
        :as => 'entrance_exam'
   post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',

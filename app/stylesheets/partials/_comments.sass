@@ -1,35 +1,69 @@
+= comment_markdown
+  ul
+    margin: 1em 0 1em 2em
+    list-style-position: outside
+    list-style-type: disc
+    li
+      margin: 0.5em 0
+  em
+    font-style: italic
+  strong
+    font-weight: bold
+    
+  pre
+    font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
+    background-color: #eee
+    border: 1px solid #999
+    padding: 10px
+    font-size: 0.91em
+    +border-radius(5px)
+    color: #444
+    
+.description
+  +comment_markdown
+
 #comments
+
   .comment
     margin: 20px 0
-    border-bottom: 1px solid #ccc
+    border: 1px solid #ccc
     
-    ul
-      margin: 1em 0 1em 2em
-      list-style-position: outside
-      list-style-type: disc
-      li
-        margin: 0.5em 0
-    em
-      font-style: italic
-    strong
-      font-weight: bold
+    +comment_markdown
       
-    pre
-      font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
-      background-color: #eee
-      border: 1px solid #999
-      padding: 10px
-      font-size: 0.91em
-      +border-radius(5px)
-      color: #444
-      
-    .author
-      float: right
+    .header
       padding: 5px
-      
+      background-color: #ccc
+      color: #333
+      +linear-gradient(color-stops(#F0F0F0, #ccc))
+        
       img
         vertical-align: middle
         margin-right: 5px
+        
+      .controls
+        float: right
+        display: inline-block
+        
+        a
+          vertical-align: middle
+          width: 16px
+          height: 16px
+          display: inline-block
+          margin-left: 5px
+          
+          &.edit
+            background: transparent url(/images/icons/comments/edit.png) 0 0  no-repeat
+            &:hover
+              background-position: 0 -16px
+          
+          &.remove
+            background: transparent url(/images/icons/comments/remove.png) 0 0  no-repeat
+            &:hover
+              background-position: 0 -16px
+    
+    .content
+      padding: 5px
+      background-color: #fff
         
   form.new_comment
     textarea
