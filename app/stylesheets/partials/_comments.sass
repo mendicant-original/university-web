@@ -1,28 +1,34 @@
+= comment_markdown
+  ul
+    margin: 1em 0 1em 2em
+    list-style-position: outside
+    list-style-type: disc
+    li
+      margin: 0.5em 0
+  em
+    font-style: italic
+  strong
+    font-weight: bold
+    
+  pre
+    font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
+    background-color: #eee
+    border: 1px solid #999
+    padding: 10px
+    font-size: 0.91em
+    +border-radius(5px)
+    color: #444
+    
+.description
+  +comment_markdown
+
 #comments
 
   .comment
     margin: 20px 0
     border: 1px solid #ccc
     
-    ul
-      margin: 1em 0 1em 2em
-      list-style-position: outside
-      list-style-type: disc
-      li
-        margin: 0.5em 0
-    em
-      font-style: italic
-    strong
-      font-weight: bold
-      
-    pre
-      font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
-      background-color: #eee
-      border: 1px solid #999
-      padding: 10px
-      font-size: 0.91em
-      +border-radius(5px)
-      color: #444
+    +comment_markdown
       
     .header
       padding: 5px
