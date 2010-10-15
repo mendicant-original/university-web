@@ -9,10 +9,11 @@
       - submission = assignment.submission_for(current_user)
       %td.status{:style => "background-color: ##{submission.status.hex_color}"}
         - if submission.open_review?
-          = button_to "Enter review", assignment_review_path(assignment.id, submission.review.id), :method => :get
+          = button_to "Enter review", review_path(submission.review),
+                      :method => :get
         - else
           = button_to "Submit for review",
-            new_assignment_review_path(assignment.id),
+            new_review_path(assignment),
             :method => :get
         = submission.status.name
   - (course.students - [current_user]).each do |student|

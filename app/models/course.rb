@@ -15,4 +15,18 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :course_instructor_associations,
     :reject_if => proc { |attributes| attributes['instructor_id'].blank? },
     :allow_destroy => true
+    
+  scope :active, lambda {
+    where(["(start_date <= ? AND end_date >= ?) OR " +
+           "(start_date IS ? AND end_date IS ?)", 
+           Date.today, Date.today, nil, nil])
+  }
+  
+  def start_end
+    if start_date.nil? or end_date.nil?
+      ""
+    else
+      "#{start_date.strftime("%d %B %Y")} thru #{end_date.strftime("%d %B %Y")}"
+    end
+  end
 end

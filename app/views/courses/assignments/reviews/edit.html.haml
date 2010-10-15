@@ -22,7 +22,7 @@
     });
 
 %h1
-  = "#{@assignment.name} Review"
+  = course_header
   = " (#{@review.submission.user.name})" if current_user != @review.submission.user
 
   - if @review.closed?
@@ -52,7 +52,7 @@
     %h4 There are currently no comments!
   
   = form_for @review.comments.build, 
-    :url => comment_assignment_review_path(@assignment, @review) do |f|
+    :url => comment_course_assignment_review_path(@review.course, @assignment, @review) do |f|
 
     %p= f.text_area :comment_text
     %p= f.submit "Post comment"
@@ -63,7 +63,7 @@
   
   %hr
 
-  = form_for @review, :url => assignment_review_path(@assignment, @review) do |f|
+  = form_for @review, :url => review_path(@review) do |f|
     = f.submit "Close Review"
     = f.fields_for @review.submission do |s|
       = s.select :submission_status_id,

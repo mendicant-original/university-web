@@ -1,5 +1,5 @@
 class Assignment::Review < ActiveRecord::Base
-  after_create :update_submission_status
+  after_create :update_submission_status, :create_activity
   
   belongs_to :submission
   belongs_to :closed_by, :class_name => "User"
@@ -11,6 +11,18 @@ class Assignment::Review < ActiveRecord::Base
     submission.assignment.course
   end
   
+  def status
+    if closed?
+      if closed_by
+        "Closed on #{closed_date.strftime("%d %B %Y")} by #{closed_by.name}"
+      else
+        "Closed"
+      end
+    else
+      "Open"
+    end
+  end
+  
   def close!(user)
     closed_attr = {
       :closed               => true, 
@@ -20,6 +32,30 @@ class Assignment::Review < ActiveRecord::Base
     }
     
     update_attributes(closed_attr)
+    
+    submission.assignment.activities.create({
+      :user_id       => user.id,
+      :submission_id => submission,
+      :description   => "#{user.name} closed a review",
+      :activity_type => self.class.name,
+      :activity_id   => self.id
+    })
+    
+    UserMailer.review_closed(self, user).deliver
+  end
+  
+  def create_comment(comment_data)
+    comment = comments.create(comment_data)
+    
+    submission.assignment.activities.create({
+      :user_id       => comment.user,
+      :submission_id => submission,
+      :description   => "#{comment.user.name} commented on a review",
+      :activity_type => comment.class.name,
+      :activity_id   => comment.id
+    })
+    
+    UserMailer.review_comment_created(comment, self, comment.user).deliver
   end
   
   def description_html
@@ -34,5 +70,15 @@ class Assignment::Review < ActiveRecord::Base
     
       submission.save
     end
+  end
+  
+  def create_activity
+    submission.assignment.activities.create({
+      :user_id       => submission.user,
+      :submission_id => submission,
+      :description   => "#{submission.user.name} requested a review",
+      :activity_type => self.class.name,
+      :activity_id   => self.id
+    })
   end
 end

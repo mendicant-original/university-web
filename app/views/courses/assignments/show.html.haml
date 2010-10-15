@@ -1,0 +1,9 @@
+- title @assignment.name
+
+%h1= course_header
+
+%h2= link_to "Reviews", reviews_path(@assignment)
+
+- @assignment.recent_activity(10).each do |activity|
+  .activity
+    = link_to activity.description, activity_path(activity)

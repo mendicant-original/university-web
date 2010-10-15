@@ -5,4 +5,4 @@
 <%= @review.description %>
 
 -----
-<%= assignment_review_url(@review.submission.assignment, @review, :only_path => false) %>
+<%= course_assignment_review_url(@review.course, @review.submission.assignment, @review, :only_path => false) %>

@@ -1,15 +1,15 @@
-class Assignments::ReviewsController < ApplicationController
+class Courses::Assignments::ReviewsController < ApplicationController
   before_filter :find_assignment_submission
   before_filter :find_review, :only => [:show, :edit, :update, :comment]
   before_filter :students_and_instructors_only
   
   def index
-    @reviews = Assignment::Review.where(:submission_id => @submission.id)
+    @reviews = @assignment.reviews.order("updated_at DESC")
   end
   
   def new
     if @submission.open_review?
-      redirect_to assignment_review_path(@assignment.id, @submission.review.id)
+      redirect_to course_assignment_review_path(@assignment.course, @assignment.id, @submission.review.id)
     else
       @review = @submission.reviews.build
     end
@@ -43,18 +43,13 @@ class Assignments::ReviewsController < ApplicationController
     
     flash[:notice] = "Review closed"
     
-    UserMailer.review_closed(@review, current_user).deliver
-    
     redirect_to root_path
   end
   
   def comment
-    comment = @review.comments.create(params[:comment].
-                merge(:user_id => current_user.id))
+    @review.create_comment(params[:comment].merge(:user_id => current_user.id))
     
-    UserMailer.review_comment_created(comment, @review, current_user).deliver
-    
-    redirect_to assignment_review_path(@assignment, @review)
+    redirect_to course_assignment_review_path(@assignment.course, @assignment, @review)
   end
   
   private
