@@ -1,7 +1,7 @@
 class Assignments::ReviewsController < ApplicationController
   before_filter :find_assignment_submission
   before_filter :find_review, :only => [:show, :edit, :update, :comment]
-  before_filter :student_or_instructor_only, :except => [:index]
+  before_filter :students_and_instructors_only
   
   def index
     @reviews = Assignment::Review.where(:submission_id => @submission.id)
@@ -68,14 +68,12 @@ class Assignments::ReviewsController < ApplicationController
     @review = Assignment::Review.find(params[:id])
   end
   
-  def student_or_instructor_only
-    find_review if params[:id]
-    
-    if (@review && @review.submission.user != current_user) and
+  def students_and_instructors_only
+    if !@assignment.course.students.include?(current_user) and
        !@assignment.course.instructors.include?(current_user)
       
-      raise "Access Denied"
-      
+       flash[:notice] = "You are not enrolled in this course!"
+       redirect_to courses_path 
     end
   end
 end
