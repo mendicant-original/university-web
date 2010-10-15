@@ -1,0 +1,6 @@
+#courses
+  - @courses.active.each do |course|
+    = link_to course_path(course) do
+      .course
+        = course.name
+        .start_end= course.start_end
