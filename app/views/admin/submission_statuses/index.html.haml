@@ -1,8 +1,9 @@
-%h1 Submission Statuses
+%h1.form-header Submission Statuses
   
-= button_to "Create Status", new_admin_submission_status_path, :method => :get
+%p.prompt
+  = link_to "Create Status", new_admin_submission_status_path
 
-%table.edit
+%table.admin
   %thead
     %tr
       %th Status
@@ -13,6 +14,6 @@
       %tr{:class => cycle('even','odd')}
         %td= link_to status.name, edit_admin_submission_status_path(status)
         %td{:style => "background-color: ##{status.hex_color}"}
-        %td= link_to( "Destroy", admin_submission_status_path(status), 
+        %td.action= link_to( "Destroy", admin_submission_status_path(status), 
               :confirm => "Are you sure you wish to delete this status?",
-              :method => 'DELETE')
+              :method => 'DELETE', :class => "delete")

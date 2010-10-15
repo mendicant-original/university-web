@@ -1,5 +1,19 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :validatable
+  
+  validates :twitter_account_name, :length => { :maximum => 15 },
+                                   :format   => { :with => /^\w+$/, 
+                                                  :message => "can only contain letters, numbers or underscores.",
+                                                  :allow_blank => true }
+                                                  
+  validates :github_account_name, :length => { :maximum => 40 },
+                                  :format   => { :with => /^(?!-)[a-z\d-]+/i,
+                                                 :message => "can only contain alphanumeric characters and dashes. 
+                                                 Cannot start with a dash",
+                                                 :allow_blank => true }                  
+                      
+  validate :real_name_or_nick_name_required
+  
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
   has_many :chat_channels, :through => :chat_channel_memberships, :source => :channel, :class_name => "Chat::Channel"
 
@@ -54,5 +68,9 @@ class User < ActiveRecord::Base
   
   def instructed_courses
     course_instructor_associations.map {|c| c.course }
+  end
+  
+  def real_name_or_nick_name_required 
+    errors.add(:base, "You need to provide either a real name or a nick name") if real_name.blank? and nickname.blank? 
   end
 end

@@ -1,93 +1,165 @@
+h1.form-header
+  color: #00316a
+  margin: 0 0 1.2em
+  font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif
+
 form.bp
   +blueprint-form
   
   width: 450px
   
   label
+    font-weight: normal
+    font-size: 0.9em
+    color: #333
     display: inline-block
-    width: 125px
+    text-align: right
+    width: 110px
+    margin-right: 15px
     &:after
-      content: ":"
+      content: ":"  
+      
+  label.infield
+    position: absolute
+    top: 15px
+    left: 0
+    text-align: left
+    margin: 0 0 0 5px
+    color: #888
+    &:after
+      content: ""
       
   p
     margin: 0.25em 0
     
-  input[type="submit"]
-    float: right
-    margin: 0.5em 10px
+  p.submit
+    overflow: hidden
+    *zoom: 1
+    padding: 1px 0
+    margin: 1em 0
+
   
+  a.cancel
+    display: block
+    margin-top: 5px
+    float: left
+    line-height: 1.5em
+    text-decoration: underline
+    
+  h2
+    font-size: 1.2em
+  
+  hr
+    color: #ddd
+    background: #ddd
+    height: 1px
+    margin: 1.5em 0
+    padding-top 1px
+    width: 100%
+    border: none
+    
+  hr.spacer
+    color: none
+    background: transparent
+    
+  p
+    margin: 0 0 0.5em 0
+    
+  p.info
+    margin: 0 0 0.5em 135px
+    color: #666
+    font-size: 0.8em
+  
+  p.no-label, .no-label 
+    margin: 0 0 0 135px
+      
+  input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
+    font-size: 0.9em
+    color: #555
+  
+  select
+    font-size: 0.8em
+    color: #555
+    
+  // overrides for tables in forms
+    
+  table label
+    font-size: 1em
+    width: 100%
+    margin: 0
+    text-align: left
+    &:after
+      content: ""
+  table 
+    input[type="checkbox"], input.checkbox, input[type="radio"], input.radio
+      margin: -0.25em 0 0 0
+    
+  table select
+    font-size: 1em
+    margin: 0
+    
+  // dynamic nested model forms
+  a.add_nested_fields
+    padding: 0 0 0 16px
+    background: url(../../images/plus.png) no-repeat left center
+    margin-bottom: 1em
+    display: block
+
+  a.remove_nested_fields
+    @include delete(0.8em)
+    display: inline-block
+    margin-left: 8px
+
+form.search
+  p
+    position: relative
+    
+  input[type="submit"].inline
+    float: left
+    margin: 0.7em 10px
+    
+  input
+    float: left
+
+
+body.admin
+  form.bp, h1.form-header
+    width: 650px
+  label
+    width: 210px
+  p.no-label, .no-label, p.info 
+    margin-left: 230px
+  
+  p.prompt
+    width: 650px
+    margin: 0 0 0.33em
+    text-align: right
+    a 
+      background: url(../../images/right_arrow.gif) no-repeat 100% 0.45em
+      padding-right: 14px
+
+input[type="submit"]
+  float: right
+  margin: 0
+  background: #D5D5D5
+  +linear-gradient(color-stops(#F0F0F0, #D5D5D5))
+  border: 1px solid #ccc
+  +border-radius(3px, 3px)
+  +box-shadow(#f5f5f5, 0px, 1px, 3px)
+  color: #333
+  font-weight: bold
+  padding: 4px 6px
+  font-size: 0.8em
+  text-align: center
+  +text-shadow(#eee, 1px, 0)
+  margin: 0.5em 0 10px
+
+input[type="submit"]:hover
+  background: #E5E5E5
+  +linear-gradient(color-stops(#F0F0F0, #E5E5E5))   
+  border: 1px solid #ABABAB 
+       
 textarea
   width: 920px
   padding: 5px
 
-
-.form-wrapper
-
-  h1
-    background-color: #00316a
-    color: #FFF
-    margin: 0 0 1.5em
-    width: 450px
-    padding: 5px
-    font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif  
-  
-  h2
-    font-size: 1.2em
-  
-  form.alt
-    
-    hr.ruler
-      color: #ddd
-      background: #ddd
-      height: 1px
-      margin: 1.5em 0
-      padding-top 1px
-      width: 100%
-      border: none
-
-    p
-      margin: 0 0 0.5em 0
-      
-    p.info
-      margin: 0 0 0.5em 135px
-      color: #666
-      font-size: 0.8em
-    
-    p.no-label, .no-label 
-      margin: 0 0 0 135px
-      
-    label
-      font-weight: normal
-      font-size: 0.9em
-      color: #333
-      display: inline-block
-      text-align: right
-      width: 110px
-      margin-right: 15px
-      &:after
-        content: ":"
-      
-    input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
-      font-size: 0.9em
-      color: #555
-    
-    select
-      font-size: 0.8em
-      color: #555
-    
-    input[type="submit"]
-      float: right
-      margin: 0.5em 10px
-      
-    // dynamic nested model forms
-    a.add_nested_fields
-      padding: 0 0 0 16px
-      background: url(../../images/plus.png) no-repeat left center
-      margin-top: 1em
-      display: block
-  
-    a.remove_nested_fields
-      padding: 0 0 0 16px
-      background: url(../../images/minus.png) no-repeat left center
-      color: #70130B
-      font-size: 0.8em

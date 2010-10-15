@@ -1,4 +1,4 @@
-University::Application.routes.draw do |map|
+University::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -46,6 +46,8 @@ University::Application.routes.draw do |map|
     resources :exams
     resources :submission_statuses
   end
+  
+  resources :comments
   
   get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
        :as => 'entrance_exam'

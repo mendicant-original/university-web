@@ -36,13 +36,14 @@
             .body= message.body
   .right
     = render :partial => "exams"
-    
-  -# right.blog.last
-  -# 
-  -#  %h4= link_to "RMU Blog",
-  -#        "http://blog.majesticseacreature.com/tag/rubymendicant",
-  -#        :target => "_blank"
-  -# 
-  -#  %ul
-  -#    - @rss_items.each do |item|
-  -#      %li= link_to item.title, item.link, :target => "_blank"
+  
+  .right.blog.last
+    %h4= link_to "RMU Blog",
+          "http://blog.majesticseacreature.com/tag/rubymendicant",
+          :target => "_blank"
+   
+    %ul
+      %li Loading...
+  
+  - content_for :header_bottom do
+    = javascript_include_tag "jquery.jgfeed-min", "blog_feed"

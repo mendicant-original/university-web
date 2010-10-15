@@ -1,7 +1,7 @@
 %p
   = form.label :name
   = form.text_field :name
-  
+      
 %p
   = form.label :start_date
   = form.text_field :start_date, :class => "datepicker"
@@ -14,27 +14,31 @@
   = form.label :channel_id, "Course IRC Channel"
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "None"
+    
+%hr
 
 %h2 Instructors
+= form.link_to_add "Add an instructor", :course_instructor_associations
 
 = form.fields_for :course_instructor_associations do |m|
   %p
+    = m.label :instructor_id, "Course Instructor"
     = m.select :instructor_id, User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
       :include_blank => "Select an instructor"
     = m.link_to_remove "Remove"
 
-%p= form.link_to_add "Add an instructor", :course_instructor_associations
+
   
-%p
+%p.submit
   = form.submit @course.new_record? ? "Create" : "Update"
-  = link_to "Cancel", admin_courses_path
+  = link_to "Cancel", admin_courses_path, :class => "cancel"
   
 - unless @course.new_record?
   %hr
   
   %h2 Students
   
-  %table.edit
+  %table.admin
     %tr
       %th Name
       %th Email

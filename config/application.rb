@@ -38,8 +38,8 @@ module University
     # end
     
     config.after_initialize do
-        require "#{RAILS_ROOT}/app/models/access_level"
-        require "#{RAILS_ROOT}/config/access_level_definitions"
+        require "#{Rails.root}/app/models/access_level"
+        require "#{Rails.root}/config/access_level_definitions"
       end
 
     # Configure the default encoding used in templates for Ruby 1.9.

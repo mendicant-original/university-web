@@ -1,6 +1,6 @@
 -title 'New Course'
 
-%h1 New Course
+%h1.form-header New Course
 
-- nested_form_for @course, :url => admin_courses_path do |f|
+- nested_form_for @course, :url => admin_courses_path, :html => {:class => "bp"} do |f|
   = render :partial => "form", :object => f

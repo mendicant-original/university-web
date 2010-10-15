@@ -1,0 +1,41 @@
+table.admin
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 0.8em;
+	width: 650px;
+	
+	th
+  {
+  	font-size: 0.9em;
+  	font-weight: normal;
+  	padding: 8px;
+  	border: 2px solid #00316a;
+  	border-width: 2px 0;
+  	color: #00316a;
+  }
+  
+  td
+  {
+  	padding: 8px;
+  	font-size: 0.9em; 
+  	border-bottom: 1px solid #ddd;
+  	border-top: 1px solid transparent;
+  }
+  
+  td.action 
+  {
+    text-align: right;
+  }
+  
+  td.icon 
+  {
+    width: 20px;
+  }
+  
+  tr:hover td
+  {
+  	background: #F9F9F9;
+  }
+  
+}//table
+
