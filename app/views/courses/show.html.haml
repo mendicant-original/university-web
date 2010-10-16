@@ -15,4 +15,6 @@
             
 - if @course.channel
   = render :partial => "/chat/recent",
-          :locals => {:channel => @course.channel}
+          :locals => {:channel            => @course.channel, 
+                      :full_body          => true,
+                      :number_of_messages => 10 }

@@ -3,7 +3,8 @@
     = link_to channel.name, chat_messages_path(:channel => channel.name)
     %span.right= channel.last_message_date
   .clear
-  - channel.recent.each do |message|
+  - number_of_messages ||= 2
+  - channel.recent(number_of_messages).each do |message|
     .message
       .handle= "#{message.handle.name}:"
-      .body= message.body
+      .body{:class => (defined?(full_body) ? 'full' : '')}= message.body
