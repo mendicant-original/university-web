@@ -47,8 +47,10 @@ class User < ActiveRecord::Base
   has_many :exam_submissions, :dependent => :delete_all
 
   def self.search(search, page)
+    sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
+                    map {|field| "#{field} LIKE :search"}.join(" OR ")
     paginate :per_page => 20, :page => page,
-             :conditions => ['email LIKE ?', "%#{search}%"], :order => 'email'
+             :conditions => [sql_condition, {:search => "%#{search}%"}], :order => 'email'
   end
 
   def self.random_password
