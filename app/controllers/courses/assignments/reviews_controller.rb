@@ -1,5 +1,5 @@
-class Courses::Assignments::ReviewsController < ApplicationController
-  before_filter :find_assignment_submission
+class Courses::Assignments::ReviewsController < Courses::Assignments::Base
+  before_filter :find_submission
   before_filter :find_review, :only => [:show, :edit, :update, :comment]
   before_filter :students_and_instructors_only
   
@@ -54,8 +54,7 @@ class Courses::Assignments::ReviewsController < ApplicationController
   
   private
   
-  def find_assignment_submission
-    @assignment = Assignment.find(params[:assignment_id])
+  def find_submission
     @submission = @assignment.submission_for(current_user)
   end
   

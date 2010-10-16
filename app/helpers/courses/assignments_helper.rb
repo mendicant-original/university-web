@@ -1,10 +1,8 @@
 module Courses::AssignmentsHelper
   def activity_path(activity)
-    id = activity.activity_id
-    
-    case activity.activity_type
-      when "Comment" then review_path(Assignment::Review.find(Comment.find(id).commentable_id))
-      when "Assignment::Review" then review_path(Assignment::Review.find(id))
+    case activity.actionable
+      when Comment then review_path(activity.actionable.commentable)
+      when Assignment::Review then review_path(activity.actionable)
     end
   end
   

@@ -6,6 +6,7 @@ class Assignment::Review < ActiveRecord::Base
   belongs_to :submission_status
   
   has_many :comments, :as => :commentable
+  has_many :actions,  :as => :actionable
   
   def course
     submission.assignment.course
@@ -37,8 +38,7 @@ class Assignment::Review < ActiveRecord::Base
       :user_id       => user.id,
       :submission_id => submission,
       :description   => "#{user.name} closed a review",
-      :activity_type => self.class.name,
-      :activity_id   => self.id
+      :actionable    => self
     })
     
     UserMailer.review_closed(self, user).deliver
@@ -51,8 +51,7 @@ class Assignment::Review < ActiveRecord::Base
       :user_id       => comment.user,
       :submission_id => submission,
       :description   => "#{comment.user.name} commented on a review",
-      :activity_type => comment.class.name,
-      :activity_id   => comment.id
+      :actionable    => comment
     })
     
     UserMailer.review_comment_created(comment, self, comment.user).deliver
@@ -77,8 +76,7 @@ class Assignment::Review < ActiveRecord::Base
       :user_id       => submission.user,
       :submission_id => submission,
       :description   => "#{submission.user.name} requested a review",
-      :activity_type => self.class.name,
-      :activity_id   => self.id
+      :actionable    => self
     })
   end
 end

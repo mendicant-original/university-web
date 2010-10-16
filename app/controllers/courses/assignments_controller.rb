@@ -1,15 +1,8 @@
-class Courses::AssignmentsController < ApplicationController
-  before_filter :find_course
+class Courses::AssignmentsController < Courses::Base
   before_filter :students_and_instructors_only
   
   def show
     @assignment = @course.assignments.find(params[:id])
-  end
-  
-  private
-  
-  def find_course
-    @course = Course.find(params[:course_id])
   end
   
   private
