@@ -5,7 +5,7 @@ class Course < ActiveRecord::Base
   has_many :course_instructor_associations, :dependent  => :delete_all
   has_many :instructors, :through => :course_instructor_associations
   
-  has_many :assignments
+  has_many   :assignments
   belongs_to :channel, :class_name => "Chat::Channel"
   
   validates_presence_of :name
@@ -20,6 +20,12 @@ class Course < ActiveRecord::Base
     where(["(start_date <= ? AND end_date >= ?) OR " +
            "(start_date IS ? AND end_date IS ?)", 
            Date.today, Date.today, nil, nil])
+  }
+  
+  # TODO: Replace with archive flag
+  #
+  scope :archived, lambda {
+    where(["end_date < ?", Date.today])
   }
   
   def start_end

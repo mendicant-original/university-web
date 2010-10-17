@@ -1,7 +1,6 @@
 class Courses::Assignments::ReviewsController < Courses::Assignments::Base
   before_filter :find_submission
   before_filter :find_review, :only => [:show, :edit, :update, :comment]
-  before_filter :students_and_instructors_only
   
   def index
     @reviews = @assignment.reviews.order("updated_at DESC")
@@ -60,14 +59,5 @@ class Courses::Assignments::ReviewsController < Courses::Assignments::Base
   
   def find_review
     @review = Assignment::Review.find(params[:id])
-  end
-  
-  def students_and_instructors_only
-    if !@assignment.course.students.include?(current_user) and
-       !@assignment.course.instructors.include?(current_user)
-      
-       flash[:notice] = "You are not enrolled in this course!"
-       redirect_to courses_path 
-    end
   end
 end

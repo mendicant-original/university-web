@@ -1,8 +1,19 @@
 %h1 Courses
 
 #courses
+  - if @courses.active.any?
+    .label Active
   - @courses.active.each do |course|
-    = link_to course_path(course) do
-      .course
-        .name= course.name
-        .start_end= course.start_end
+    = render :partial => "course", :locals => { :course => course }
+  
+  - if @instructed.any?
+    .label Teaching    
+  - @instructed.each do |course|
+    = render :partial => "course", :locals => { :course => course }
+        
+  - if @courses.archived.any?
+    .label Archived    
+  - @courses.archived.each do |course|
+    = render :partial => "course", :locals => { :course   => course,
+                                                :archived => true}
+  

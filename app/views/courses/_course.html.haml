@@ -1,0 +1,4 @@
+= link_to course_path(course) do
+  .course{:class => (defined?(archived) ? 'archived' : '')}
+    .name= course.name
+    .start_end= course.start_end

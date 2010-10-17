@@ -1,4 +1,8 @@
 #reviews, #courses
+  .label
+    margin: 1em 0
+    color: #888
+
   .review, .course
     border-bottom: 1px solid #eee
     margin-bottom: 1em
@@ -10,6 +14,10 @@
       font-size: 1.25em
     .status, .start_end
       float: right
+      
+    &.archived
+      .name
+        font-size: 1em
       
 #assignments
   .assignment
