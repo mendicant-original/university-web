@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   has_many :assignment_submissions,   :class_name => "Assignment::Submission"
   
   has_many :course_instructor_associations, :foreign_key => "instructor_id"
+  has_many :comments,                       :as          => :commentable
   
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
   
@@ -42,6 +43,10 @@ class User < ActiveRecord::Base
   
   accepts_nested_attributes_for :chat_channel_memberships,
     :reject_if => proc { |attributes| attributes['channel_id'].blank? },
+    :allow_destroy => true
+    
+  accepts_nested_attributes_for :comments,
+    :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
     
   has_many :exam_submissions, :dependent => :delete_all
