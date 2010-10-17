@@ -49,8 +49,10 @@ class User < ActiveRecord::Base
   def self.search(search, page)
     sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
                     map {|field| "#{field} LIKE :search"}.join(" OR ")
+
     paginate :per_page => 20, :page => page,
-             :conditions => [sql_condition, {:search => "%#{search}%"}], :order => 'email'
+             :conditions => [sql_condition, {:search => "%#{search}%"}], 
+             :order => 'email'
   end
 
   def self.random_password
@@ -70,6 +72,19 @@ class User < ActiveRecord::Base
     else
       email[/([^\@]*)@.*/,1]
     end
+  end
+
+  def alumni_number=(number)
+    if alumni_number.nil? and not number.nil?
+      alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
+      alumni_channel_membership = chat_channel_memberships.find_by_channel_id(alumni_channel.id)
+
+      if alumni_channel_membership.nil?
+        chat_channel_memberships.create(:channel => alumni_channel)
+      end
+    end    
+
+    write_attribute(:alumni_number, number)
   end
   
   def gravatar_url(size=40)
