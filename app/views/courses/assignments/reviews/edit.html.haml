@@ -34,20 +34,7 @@
 
 #comments
   - @review.comments.order('created_at').each do |comment|
-    .comment{:data => { :id => comment.id, 
-                        :editable => (comment.user == current_user).inspect }}
-      .header
-        = image_tag comment.user.gravatar_url(24)
-        = comment.user.name
-        .controls
-          - if current_user == comment.user
-            = link_to '', '#', :class => "edit", :title => "Edit"
-            = link_to '', comment_path(comment),
-              :class   => "remove", :title  => "Delete",
-              :method  => :delete,  :remote => true,
-              :confirm => "Are you sure you wish to delete this comment?"
-        
-      .content= comment.to_html.html_safe
+    = render :partial => "/comments/show", :locals => { :comment => comment }
   - if @review.comments.empty?
     %h4 There are currently no comments!
   

@@ -86,5 +86,13 @@
       :include_blank => "Select a channel"
     = m.link_to_remove "Remove"
 
+%hr
 
-  
+%h2 Comments
+
+= form.link_to_add "Add a comment", :comments
+
+= form.fields_for :comments do |c|
+  %p.no-label
+    = c.text_area :comment_text
+    = c.link_to_remove "Remove"
