@@ -71,6 +71,19 @@ class User < ActiveRecord::Base
       email[/([^\@]*)@.*/,1]
     end
   end
+
+  def alumni_number=(number)
+    if alumni_number.nil? and not number.nil?
+      alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
+      alumni_channel_membership = Chat::ChannelMembership.find_by_user_id_and_channel_id(id, alumni_channel.id)
+
+      if alumni_channel_membership.nil?
+        chat_channel_memberships << Chat::ChannelMembership.new(:channel => alumni_channel)
+      end
+    end    
+
+    write_attribute(:alumni_number, number)
+  end
   
   def gravatar_url(size=40)
     hash = Digest::MD5.hexdigest(email.downcase)

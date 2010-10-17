@@ -64,6 +64,7 @@ class Admin::UsersController < Admin::Base
   
   def find_user
     @user = User.find(params[:id])
+
   end
   
   def update_access_level
@@ -75,12 +76,6 @@ class Admin::UsersController < Admin::Base
   def update_alumni_attributes
     [:alumni_number, :alumni_month, :alumni_year].each do |attribute|
       value = params[:user].delete(attribute.to_s)
-      
-      if attribute == :alumni_number and @user[:alumni_number].nil? and not value.nil?
-        alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
-        @user.chat_channel_memberships << Chat::ChannelMembership.new(:channel => alumni_channel)
-      end
-
       @user.update_attribute(attribute, value)
     end
   end
