@@ -4,7 +4,7 @@
   For Assignment:
   %b= @assignment.name
   
-= form_for @review do |f|
+= form_for @review, :url => reviews_path(@assignment) do |f|
   %p
     Description of submission:
     %br

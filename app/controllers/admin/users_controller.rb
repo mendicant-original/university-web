@@ -3,7 +3,6 @@ class Admin::UsersController < Admin::Base
   
   def index
     @users = User.search(params[:search], params[:page])
-    
   end
   
   def new
@@ -64,6 +63,7 @@ class Admin::UsersController < Admin::Base
   
   def find_user
     @user = User.find(params[:id])
+
   end
   
   def update_access_level

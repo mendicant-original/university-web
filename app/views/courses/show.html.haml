@@ -1,3 +1,20 @@
 - title @course.name
 
 %h1= @course.name
+
+#assignments
+  - @course.assignments.each do |assignment|
+    .assignment
+      .name= link_to assignment.name, 
+                    course_assignment_path(@course, assignment)
+      .description= #assignment.notes
+      .recent
+        - assignment.recent_activity.each do |activity|
+          .activity
+            = link_to activity.description, activity_path(activity)
+            
+- if @course.channel
+  = render :partial => "/chat/recent",
+          :locals => {:channel            => @course.channel, 
+                      :full_body          => true,
+                      :number_of_messages => 10 }

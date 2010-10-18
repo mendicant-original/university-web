@@ -25,15 +25,7 @@
     %h3 IRC Channels
 
     - current_user.chat_channels.each do |channel|
-      .channel
-        .title
-          = link_to channel.name, chat_messages_path(:channel => channel.name)
-          %span.right= channel.last_message_date
-        .clear
-        - channel.recent.each do |message|
-          .message
-            .handle= "#{message.handle.name}:"
-            .body= message.body
+      = render :partial => "/chat/recent", :locals => {:channel => channel}
   .right
     = render :partial => "exams"
   

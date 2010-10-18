@@ -1,0 +1,8 @@
+%h1= course_header
+
+#reviews
+  - @reviews.each do |review|
+    = link_to review_path(review) do
+      .review
+        .user= review.submission.user.name
+        .status= review.status

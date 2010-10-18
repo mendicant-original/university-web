@@ -3,7 +3,8 @@ class CoursesController < ApplicationController
   before_filter :students_and_instructors_only, :only => [:show]
   
   def index
-    @courses = current_user.courses
+    @courses    = current_user.courses
+    @instructed = current_user.instructed_courses
   end
   
   def show
