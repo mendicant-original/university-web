@@ -1,6 +1,6 @@
 %table.status{:'data-id' => course.id}
   %tr
-    %th= course.name
+    %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
       %th.status= assignment.name
   %tr
@@ -23,5 +23,7 @@
         - submission = assignment.submission_for(student)
         %td.status{:style => "background-color: ##{submission.status.hex_color}"}= submission.status.name
         
-%p= link_to_function 'Show classmates', 
-  %{$('table[data-id=#{course.id}] tr.classmate').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' classmates')}
+  %tr.toggle
+    %td{:colspan => course.assignments.count + 1}
+      = link_to_function 'Show classmates', 
+        %{$('table[data-id=#{course.id}] tr.classmate').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' classmates')}
