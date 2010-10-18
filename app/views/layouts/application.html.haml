@@ -21,5 +21,11 @@
         - unless yield(:secondary_navigation).blank?
           .secondary
             = yield(:secondary_navigation)
+        #flash
+          - flash.each do |flashtype, message|
+            %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
+              = message
+            :javascript
+              setTimeout("$('div.flash').slideUp()", 4000);
       #content{:class => (yield(:secondary_navigation).blank? ? '' : 'tall')}
         = yield

@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
     if !@course.students.include?(current_user) and
        !@course.instructors.include?(current_user)
       
-      flash[:notice] = "You are not enrolled in this course!"
+      flash[:error] = "You are not enrolled in this course!"
       redirect_to courses_path
     end
   end

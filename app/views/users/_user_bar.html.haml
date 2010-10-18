@@ -1,20 +1,5 @@
 %span.right
-  - if notice = flash[:notice]
-    #notice= notice
-    :javascript
-      function hideNotice(){
-        $('#notice').fadeOut();
-        setTimeout('showSession()', 500);
-      }
-      function showSession(){
-        $('#session_links').fadeIn();
-      }
-      
-      setTimeout('hideNotice()', 3000);
-      
-      $('#notice').effect('highlight', {}, 2000);
-  - if current_user
-    #session_links{:style => (notice ? 'display:none' : nil)}
-      = link_to current_user.email, edit_user_path(current_user)
-      &bull;
-      = link_to "Logout", destroy_user_session_path, :class => "session"
+  #session_links
+    = link_to current_user.email, edit_user_path(current_user)
+    &bull;
+    = link_to "Logout", destroy_user_session_path, :class => "session"
