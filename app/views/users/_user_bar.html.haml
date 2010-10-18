@@ -16,5 +16,5 @@
   - if current_user
     #session_links{:style => (notice ? 'display:none' : nil)}
       = link_to current_user.email, edit_user_path(current_user)
-      |
+      &bull;
       = link_to "Logout", destroy_user_session_path, :class => "session"

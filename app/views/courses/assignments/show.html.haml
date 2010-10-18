@@ -1,6 +1,8 @@
 - title @assignment.name
 
-%h1= course_header
+= render :partial => "menu"
+
+%h1= @assignment.name
 
 %h2= link_to "Reviews", reviews_path(@assignment)
 
