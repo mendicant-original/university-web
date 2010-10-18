@@ -8,14 +8,27 @@
     color: silver
     +box-shadow(#000, 0px, 0px, 5px)
     width: 950px
+    z-index: 5
+    position: fixed
   .secondary
-    background: #333
+    background: #666 
     padding: 10px
-    color: #bbb
+    color: #aaa
     width: 950px
+    z-index: 2
+    position: absolute
+    top: 38px
+    
+    .anchor
+      padding: 10px
+      margin: -10px 0 -10px -10px
+      background-color= $rmu_red
+      color: #fff
+      display: inline-block
+      +border-right-radius(15px)
     
     a
-      color: #ddd
+      color: #eee
       
       &:hover
         color: #fff
