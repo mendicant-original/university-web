@@ -1,10 +1,24 @@
 #navigation
-  background: #eee
-  padding: 10px
-  color: silver
-  +box-shadow(#000, 0px, 0px, 5px)
   width: 950px
   position: fixed
+  
+  .primary
+    background: #eee
+    padding: 10px
+    color: silver
+    +box-shadow(#000, 0px, 0px, 5px)
+    width: 950px
+  .secondary
+    background: #333
+    padding: 10px
+    color: #bbb
+    width: 950px
+    
+    a
+      color: #ddd
+      
+      &:hover
+        color: #fff
   
   .logo
     display: inline-block
@@ -22,6 +36,9 @@
     &:hover
       color: #002E6E
     
+    &.active
+      border-bottom: 2px solid
+      border-color= $rmu_red
   a.session
     color: gray
     &:hover
