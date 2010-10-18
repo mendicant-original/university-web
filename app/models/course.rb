@@ -19,13 +19,13 @@ class Course < ActiveRecord::Base
   scope :active, lambda {
     where(["(start_date <= ? AND end_date >= ?) OR " +
            "(start_date IS ? AND end_date IS ?)", 
-           Date.today, Date.today, nil, nil])
+           Date.today, Date.today, nil, nil]).order('start_date')
   }
   
   # TODO: Replace with archive flag
   #
   scope :archived, lambda {
-    where(["end_date < ?", Date.today])
+    where(["end_date < ?", Date.today]).order('start_date')
   }
   
   def start_end
