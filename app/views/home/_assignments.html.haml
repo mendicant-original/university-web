@@ -24,4 +24,4 @@
         %td.status{:style => "background-color: ##{submission.status.hex_color}"}= submission.status.name
         
 %p= link_to_function 'Show classmates', 
-  %{$('table[data-id=#{course.id}] tr.classmate').show(); $(this).remove()}
+  %{$('table[data-id=#{course.id}] tr.classmate').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' classmates')}
