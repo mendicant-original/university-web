@@ -25,6 +25,9 @@ University::Application.routes.draw do
     end
   end
   
+  get  "terms/:id/registration" => 'terms#registration', :as => 'registration'
+  post "terms/:id/registration" => 'terms#register'
+  
   namespace :admin do
     resources :users
     resources :courses do

@@ -28,4 +28,16 @@ class Course < ActiveRecord::Base
       "#{start_date.strftime("%d %B %Y")} thru #{end_date.strftime("%d %B %Y")}"
     end
   end
+  
+  def class_size
+    students.count
+  end
+  
+  def available_slots
+    class_size_limit - class_size
+  end
+  
+  def full?
+    available_slots <= 0
+  end
 end
