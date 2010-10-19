@@ -7,11 +7,18 @@
     .course{:class => (course.full? ? 'full' : '')}
       .name= course.name
       .available_slots
-        - if course.full?
-          Full
-        - else
+        - unless course.full?
           = "#{course.available_slots} Openings"
-      - unless course.full?
+      - if course.full?
+        .right
+          Course is full
+      - else
         = button_to "Register", 
           registration_path(@term, :course_id => course.id),
           :confirm => "You have selected to take #{course.name}. Is this correct?"
+          
+  .course
+    .name Waitlist
+    = button_to "Register", 
+      registration_path(@term, :wait_list => true),
+      :confirm => "You have selected to join the wait list. Is this correct?"

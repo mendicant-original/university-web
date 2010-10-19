@@ -9,6 +9,9 @@
         = button_to "Edit your profile", edit_user_path(current_user), :method => :get
 
   .main  
+    - current_user.open_registrations.each do |term|
+      = render :partial => "registration", :locals => {:term => term}
+      
     - if current_user.courses.active.any?
       %h3 Assignments
   
