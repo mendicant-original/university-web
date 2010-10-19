@@ -16,17 +16,8 @@ class Course < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['instructor_id'].blank? },
     :allow_destroy => true
     
-  scope :active, lambda {
-    where(["(start_date <= ? AND end_date >= ?) OR " +
-           "(start_date IS ? AND end_date IS ?)", 
-           Date.today, Date.today, nil, nil]).order('start_date')
-  }
-  
-  # TODO: Replace with archive flag
-  #
-  scope :archived, lambda {
-    where(["end_date < ?", Date.today]).order('start_date')
-  }
+  scope :active,   lambda { where(:archived => false).order('start_date') }
+  scope :archived, lambda { where(:archived => true).order('start_date') }
   
   def start_end
     if start_date.nil? or end_date.nil?

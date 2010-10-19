@@ -9,6 +9,10 @@
 %p
   = form.label :end_date
   = form.text_field :end_date, :class => "datepicker"
+  
+%p
+  = form.label :archived
+  = form.check_box :archived
 
 %p
   = form.label :channel_id, "Course IRC Channel"
