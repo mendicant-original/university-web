@@ -101,12 +101,23 @@ table.status
   border-collapse: collapse
   
   td, th
-    padding: 3px 5px
-    border: 1px solid #bbb
+    padding: 4px 5px
     border-style: collapse
+    border-bottom: 1px solid #bbb
     
     &.status
-      text-align: center
+      text-align: left
+      
+      .status
+        display: inline-block
+        -moz-border-radius: 3px
+        width: 10px
+        height: 10px
+        border: 1px solid #000
+        
+      hr
+        color: #ccc
+        background: #fff
   
   th.cu
     font-style: bold
@@ -114,7 +125,7 @@ table.status
     padding: 10px
   
   td
-    color: gray
+    color: #444
     
   tr.toggle
     background-color: #eee

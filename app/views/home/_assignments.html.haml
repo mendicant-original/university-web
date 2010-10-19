@@ -7,21 +7,22 @@
     %th.cu= current_user.name
     - course.assignments.each do |assignment|
       - submission = assignment.submission_for(current_user)
-      %td.status{:style => "background-color: ##{submission.status.hex_color}"}
+      %td.status
         - if submission.open_review?
-          = button_to "Enter review", review_path(submission.review),
-                      :method => :get
+          = link_to "Enter review", review_path(submission.review)
         - else
-          = button_to "Submit for review",
-            new_review_path(assignment),
-            :method => :get
+          = link_to "Submit for review", new_review_path(assignment)
+        %hr
+        .status{:style => "background-color: ##{submission.status.hex_color}"}
         = submission.status.name
   - (course.students - [current_user]).each do |student|
     %tr.classmate{:style => 'display:none;'}
       %td= student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
-        %td.status{:style => "background-color: ##{submission.status.hex_color}"}= submission.status.name
+        %td.status
+          .status{:style => "background-color: ##{submission.status.hex_color}"}
+          = submission.status.name
         
   %tr.toggle
     %td{:colspan => course.assignments.count + 1}

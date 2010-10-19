@@ -8,12 +8,11 @@
       %td= student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
-        %td.status{:style => "background-color: ##{submission.status.hex_color}"}
+        %td.status
+          .status{:style => "background-color: ##{submission.status.hex_color}"}
           - if submission.open_review?
-            = button_to "Enter review", 
-              review_path(submission.review),
-              :method => :get
-          - else
+            = link_to "Enter review", review_path(submission.review)
+          - else  
             = submission.status.name
   %tr.toggle
     %td{:colspan => course.assignments.count + 1}
