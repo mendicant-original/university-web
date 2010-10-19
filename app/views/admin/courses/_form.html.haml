@@ -18,6 +18,11 @@
   = form.label :channel_id, "Course IRC Channel"
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "None"
+
+%p
+  = form.label :term_id
+  = form.select :term_id, Term.all.map {|t| [t.name, t.id] },
+    :include_blank => true
     
 %hr
 

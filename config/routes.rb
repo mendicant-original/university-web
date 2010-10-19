@@ -32,6 +32,7 @@ University::Application.routes.draw do
     end
 
     resources :exams
+    resources :terms
     resources :submission_statuses
   end
   
