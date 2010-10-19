@@ -118,6 +118,8 @@ class User < ActiveRecord::Base
     where(["terms.registration_open = ?", true]).
     map { |e| e.exam.term }
     
-    # Reject if already in a course for that term or on waitlist
+    terms.reject do |t| 
+      t.students.include?(self) || courses.where(:term_id => t.id).any?
+    end
   end
 end
