@@ -2,7 +2,7 @@
   %tr
     %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
-      %th.status= assignment.name
+      %th.status= link_to assignment.name, assignment_path(assignment)
   - course.students.each do |student|
     %tr.student{:style => "display:none;"}
       %td= student.name
