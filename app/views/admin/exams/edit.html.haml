@@ -17,4 +17,4 @@
           edit_admin_user_path(e.object.user.id)
         %td= e.object.user.email
         %td= e.select :submission_status_id, SubmissionStatus.all.map {|s| [s.name, s.id]}
-        %td= link_to e.object.url, e.object.url
+        %td= link_to e.object.url, e.object.url, :target => "_blank"

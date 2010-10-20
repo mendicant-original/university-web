@@ -1,10 +1,10 @@
-#navigation
+.primary
   .logo 
     = image_tag "rmu_small.png"
     RMU
-  = link_to "Home", root_path
-  = link_to "Courses", courses_path
-  - # link_to "Directory", users_path
-  - if current_access_level.allows?(:manage_users)
-    = link_to "Administration", admin_users_path
-  = render :partial => "users/user_bar"
+  - if current_user
+    = link_to "Home", root_path
+    = link_to "Courses", courses_path
+    - if current_access_level.allows?(:manage_users)
+      = link_to "Administration", admin_users_path, :class => "admin"
+    = render :partial => "users/user_bar"

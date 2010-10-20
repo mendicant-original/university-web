@@ -1,0 +1,7 @@
+- content_for :secondary_navigation do
+  .anchor= link_to "Courses", courses_path
+  = link_to @course.name, course_path(@course)
+  &#0187;
+  = link_to @assignment.name, assignment_path(@assignment)
+  &bull;
+  = link_to "Reviews", reviews_path(@assignment)

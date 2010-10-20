@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
     :allow_destroy => true
     
   has_many :exam_submissions, :dependent => :delete_all
+  has_many :exams,            :through => :exam_submissions
 
   def self.search(search, page)
     sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
@@ -106,6 +107,25 @@ class User < ActiveRecord::Base
     if real_name.blank? and nickname.blank?
       errors.add(:base, 
                  "You need to provide either a real name or a nick name")
+    end
+  end
+  
+  # Returns all terms which are:
+  # * Open for registration (Term#registration_open == true)
+  # * User took an exam which was approved
+  # * User isn't on the waitlist
+  # * User isn't registered for a course
+  #
+  def open_registrations
+    approved = SubmissionStatus.where(:name => "Approved").first
+    
+    terms = exam_submissions.where(:submission_status_id => approved).
+    includes([:exam => :term]).
+    where(["terms.registration_open = ?", true]).
+    map { |e| e.exam.term }
+    
+    terms.reject do |t| 
+      t.students.include?(self) || courses.where(:term_id => t.id).any?
     end
   end
 end

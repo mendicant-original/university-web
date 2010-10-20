@@ -8,13 +8,24 @@
     = stylesheet_link_tag 'compiled/print.css', :media => 'print'
     /[if IE]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'buttons.css'
-    = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo', 'jquery.jeditable.js', 'jquery-ui', 'application', 'rails'
+    = stylesheet_link_tag 'buttons.css', 'smoothness/jquery-ui.css'
+    = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo', 'jquery.jeditable.js', 'jquery-ui', 'nested_form', 'application', 'rails'
     = csrf_meta_tag
     
     = yield(:header_bottom)
 
   %body
     #container
-      = render :partial => "/home/menu"
-      #content= yield
+      #navigation
+        = render :partial => "/home/menu"
+        - unless yield(:secondary_navigation).blank?
+          .secondary
+            = yield(:secondary_navigation)
+        #flash
+          - flash.each do |flashtype, message|
+            %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
+              = message
+            :javascript
+              setTimeout("$('div.flash').slideUp()", 4000);
+      #content{:class => (yield(:secondary_navigation).blank? ? '' : 'tall')}
+        = yield

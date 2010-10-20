@@ -25,6 +25,9 @@ University::Application.routes.draw do
     end
   end
   
+  get  "terms/:id/registration" => 'terms#registration', :as => 'registration'
+  post "terms/:id/registration" => 'terms#register'
+  
   namespace :admin do
     resources :users
     resources :courses do
@@ -32,14 +35,16 @@ University::Application.routes.draw do
     end
 
     resources :exams
+    resources :terms
     resources :submission_statuses
   end
   
   resources :comments
   
-  get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
-       :as => 'entrance_exam'
-  post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',
-       :as => 'submit_entrance_exam'
+  # TODO Remove these routes and replace with Exam#hash_url
+  #get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
+  #     :as => 'entrance_exam'
+  #post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',
+  #     :as => 'submit_entrance_exam'
   
 end

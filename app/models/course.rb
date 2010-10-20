@@ -8,6 +8,8 @@ class Course < ActiveRecord::Base
   has_many   :assignments
   belongs_to :channel, :class_name => "Chat::Channel"
   
+  belongs_to :term
+  
   validates_presence_of :name
   validates_uniqueness_of :name
   
@@ -16,17 +18,8 @@ class Course < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['instructor_id'].blank? },
     :allow_destroy => true
     
-  scope :active, lambda {
-    where(["(start_date <= ? AND end_date >= ?) OR " +
-           "(start_date IS ? AND end_date IS ?)", 
-           Date.today, Date.today, nil, nil])
-  }
-  
-  # TODO: Replace with archive flag
-  #
-  scope :archived, lambda {
-    where(["end_date < ?", Date.today])
-  }
+  scope :active,   lambda { where(:archived => false).order('start_date') }
+  scope :archived, lambda { where(:archived => true).order('start_date') }
   
   def start_end
     if start_date.nil? or end_date.nil?
@@ -34,5 +27,17 @@ class Course < ActiveRecord::Base
     else
       "#{start_date.strftime("%d %B %Y")} thru #{end_date.strftime("%d %B %Y")}"
     end
+  end
+  
+  def class_size
+    students.count
+  end
+  
+  def available_slots
+    class_size_limit - class_size
+  end
+  
+  def full?
+    available_slots <= 0
   end
 end

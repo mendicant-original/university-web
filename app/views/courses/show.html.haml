@@ -1,5 +1,13 @@
 - title @course.name
 
+- content_for :secondary_navigation do
+  .anchor= link_to "Courses", courses_path
+  = link_to @course.name, course_path(@course)
+  - if @course.channel
+    &bull;
+    = link_to "IRC: #{@course.channel.name}",
+      chat_messages_path(:channel => @course.channel.name)
+
 %h1= @course.name
 
 #assignments

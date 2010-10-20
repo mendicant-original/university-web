@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Assignments::ReviewsControllerTest < ActionController::TestCase
+class WaitlistedStudentTest < ActiveSupport::TestCase
   # Replace this with your real tests.
   test "the truth" do
     assert true

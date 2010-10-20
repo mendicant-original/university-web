@@ -1,10 +1,36 @@
 #navigation
-  background: #eee
-  padding: 10px
-  color: silver
-  +box-shadow(#000, 0px, 0px, 5px)
   width: 950px
   position: fixed
+  
+  .primary
+    background: #eee
+    padding: 10px
+    color: silver
+    +box-shadow(#000, 0px, 0px, 5px)
+    width: 950px
+    z-index: 5
+    position: relative
+  .secondary
+    background: #666 
+    padding: 10px
+    color: #aaa
+    width: 950px
+    z-index: 2
+    position: relative
+    
+    .anchor
+      padding: 10px
+      margin: -10px 0 -10px -10px
+      background-color= $rmu_red
+      color: #fff
+      display: inline-block
+      +border-right-radius(15px)
+      
+    a
+      color: #eee
+      
+      &:hover, &:visited
+        color: #fff
   
   .logo
     display: inline-block
@@ -22,6 +48,9 @@
     &:hover
       color: #002E6E
     
+    &.active
+      border-bottom: 2px solid
+      border-color= $rmu_red
   a.session
     color: gray
     &:hover

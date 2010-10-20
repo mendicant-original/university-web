@@ -3,7 +3,7 @@ class Admin::CoursesController < Admin::Base
   before_filter :find_submission_statuses, :only => [:edit, :update]
   
   def index
-    @courses = Course.all
+    @courses = Course.order('start_date')
   end
   
   def new

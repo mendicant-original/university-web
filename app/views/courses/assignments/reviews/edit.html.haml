@@ -1,3 +1,5 @@
+= render :partial => "courses/assignments/menu"
+
 - content_for :header_bottom do
   :javascript
     $(document).ready(function(){
@@ -22,7 +24,7 @@
     });
 
 %h1
-  = course_header
+  Review
   = " (#{@review.submission.user.name})" if current_user != @review.submission.user
 
   - if @review.closed?

@@ -1,0 +1,4 @@
+%h1.form-header New Term
+
+= form_for @term, :url => admin_terms_path, :html => {:class => "bp"} do |f|
+  = render :partial => "form", :locals => {:f => f}

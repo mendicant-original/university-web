@@ -12,6 +12,7 @@
 @import "compass/css3/gradient";
 
 @import "partials/layout";
+@import "partials/flash";
 @import "partials/dashboard";
 @import "partials/menu";
 @import "partials/session";
@@ -21,6 +22,7 @@
 @import "partials/tables";
 @import "partials/comments";
 @import "partials/courses";
+@import "partials/registration";
 
 h1, h2, h3 {
   margin: 0.75em 0;
@@ -118,7 +120,7 @@ table.messages td.recorded_at{
 
 table.messages td.body{
 	vertical-align: top;
-	max-width: 650px;
+	max-width: 625px;
 }
 
 table.messages td{

@@ -9,11 +9,24 @@
 %p
   = form.label :end_date
   = form.text_field :end_date, :class => "datepicker"
+  
+%p
+  = form.label :class_size_limit
+  = form.text_field :class_size_limit
+  
+%p
+  = form.label :archived
+  = form.check_box :archived
 
 %p
   = form.label :channel_id, "Course IRC Channel"
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "None"
+
+%p
+  = form.label :term_id
+  = form.select :term_id, Term.all.map {|t| [t.name, t.id] },
+    :include_blank => true
     
 %hr
 
