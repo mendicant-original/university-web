@@ -55,5 +55,20 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(@attrs.merge({:twitter_account_name => "", :github_account_name => ""}))
     assert user.valid?
     assert user.save
-  end  
+  end
+  
+  test "name should return nickname if available" do
+    user = User.create!(@attrs)
+    assert_equal @attrs[:nickname], user.name
+  end
+  
+  test "name should return real name if nickname is not available" do
+    user = User.create!(@attrs.merge(:nickname => ""))
+    assert_equal @attrs[:real_name], user.name
+  end
+  
+#  test "course instructed should return list of courses the current user has instructed"
+#  test "open registrations should only include submissions that were approved"
+#  test "open registrations should return nil if the user is currently on the waitlist"
+#  test "open registrations should return nil if the user is currently registered for a course"
 end
