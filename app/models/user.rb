@@ -110,6 +110,12 @@ class User < ActiveRecord::Base
     end
   end
   
+  # Returns all terms which are:
+  # * Open for registration (Term#registration_open == true)
+  # * User took an exam which was approved
+  # * User isn't on the waitlist
+  # * User isn't registered for a course
+  #
   def open_registrations
     approved = SubmissionStatus.where(:name => "Approved").first
     
