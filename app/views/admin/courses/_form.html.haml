@@ -46,12 +46,6 @@
   = form.submit @course.new_record? ? "Create" : "Update"
   = link_to "Cancel", admin_courses_path, :class => "cancel"
   
-- unless @course.new_record?
-  %hr
-  
-  %h2 Students
-  
-  = render :partial => "students", :locals => {:students => @course.students}
 
 - content_for :header_bottom do
   :javascript
