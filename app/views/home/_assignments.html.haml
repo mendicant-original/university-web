@@ -8,13 +8,8 @@
     - course.assignments.each do |assignment|
       - submission = assignment.submission_for(current_user)
       %td.status
-        - if submission.open_review?
-          = link_to "Enter review", review_path(submission.review)
-        - else
-          = link_to "Submit for review", new_review_path(assignment)
-        %hr
         .status{:style => "background-color: ##{submission.status.hex_color}"}
-        = submission.status.name
+        = link_to submission.status.name, submission_path(submission)
   - (course.students - [current_user]).each do |student|
     %tr.classmate{:style => 'display:none;'}
       %td= student.name

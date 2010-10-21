@@ -3,35 +3,25 @@ class UserMailer < ActionMailer::Base
   
   default :from => "rmu.management@gmail.com"
   
-  def review_comment_created(comment, review, current_user)
-    @comment = comment
-    @review  = review 
+  def submission_comment_created(comment)
+    @comment    = comment
+    @submission = comment.commentable
     
-    subject = "[rmu-review] #{review.submission.assignment.name}: " +
-              "#{review.submission.user.name}"
+    subject = "[rmu-submission] #{@submission.assignment.name}: " +
+              "#{@submission.user.name}"
     
-    mail(:to      => to_from_review(review, current_user.email), 
+    mail(:to      => to_from_submission(@submission, @comment.user.email), 
          :subject => subject)
   end
   
-  def review_created(review)
-    @review = review
+  def submission_updated(activity)
+    @submission = activity.actionable
+    @user       = activity.user
     
-    subject = "[rmu-review] #{review.submission.assignment.name}: " +
-              "#{review.submission.user.name}"
+    subject = "[rmu-submission] #{@submission.assignment.name}: " +
+              "#{@submission.user.name}"
     
-    mail(:to      => to_from_review(review, ''),
-         :subject => subject)
-  end
-  
-  def review_closed(review, current_user)
-    @review    = review
-    @closed_by = current_user
-    
-    subject = "[rmu-review] #{review.submission.assignment.name}: " +
-              "#{review.submission.user.name}"
-    
-    mail(:to      => to_from_review(review, current_user.email),
+    mail(:to      => to_from_submission(@submission, @user.email),
          :subject => subject)
   end
 end

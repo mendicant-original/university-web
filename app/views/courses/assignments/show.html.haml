@@ -4,7 +4,7 @@
 
 %h1= @assignment.name
 
-%h2= link_to "Reviews", reviews_path(@assignment)
+%h2= link_to "Submissions", submissions_path(@assignment)
 
 - @assignment.recent_activity(10).each do |activity|
   .activity

@@ -2,7 +2,8 @@ class Assignment < ActiveRecord::Base
   has_many :submissions, :class_name => "Assignment::Submission", 
                          :dependent  => :destroy
   has_many :reviews,     :through    => :submissions
-  has_many :activities,  :dependent  => :delete_all
+  has_many :activities,  :as         => :actionable,  
+                         :dependent  => :delete_all
   
   belongs_to :course
   

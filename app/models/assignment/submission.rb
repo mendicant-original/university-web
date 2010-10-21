@@ -5,13 +5,34 @@ class Assignment::Submission < ActiveRecord::Base
   belongs_to :user
   belongs_to :assignment
   
-  has_many :reviews, :dependent => :delete_all
+  # TODO Remove after server data migration
+  has_many :reviews,  :dependent => :delete_all
   
-  def review
-    reviews.where(:closed => false).first
+  has_many :comments,   :as => :commentable, :dependent => :delete_all
+  has_many :activities, :as => :actionable,  :dependent => :delete_all
+  
+  def create_comment(comment_data)
+    comment = comments.create(comment_data)
+    
+    Assignment::Activity.create({
+      :user_id       => comment.user,
+      :description   => "#{comment.user.name} commented on a review",
+      :actionable    => comment
+    })
+    
+    UserMailer.submission_comment_created(comment).deliver
   end
   
-  def open_review?
-    !!review
+  def update_status(user, new_status)
+    activity = activities.create({
+      :user_id       => user.id,
+      :description   => "Updated status from #{self.status.name} to " +
+                        new_status.name
+    })
+    
+    update_attribute(:submission_status_id, new_status.id)
+    
+    UserMailer.submission_updated(activity).deliver
   end
+  
 end
