@@ -24,4 +24,13 @@ namespace :users do
                                         :submission_status_id => status.id)
     end
   end
+  
+  task :update_nickname => :environment do
+    User.insufficient_information.each do |missing_info_user|
+      nickname = missing_info_user.email[/([^\@]*)@.*/,1]
+      missing_info_user.nickname = nickname
+      missing_info_user.save!
+    end
+    
+  end
 end

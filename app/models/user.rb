@@ -51,6 +51,9 @@ class User < ActiveRecord::Base
     
   has_many :exam_submissions, :dependent => :delete_all
   has_many :exams,            :through => :exam_submissions
+  
+  scope :insufficient_information, 
+        :conditions => ["(real_name = '' OR real_name IS NULL) AND (nickname = '' OR nickname IS NULL)"]
 
   def self.search(search, page)
     sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
