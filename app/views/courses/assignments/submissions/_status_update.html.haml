@@ -1,0 +1,5 @@
+.activity
+  .header
+    = image_tag activity.user.gravatar_url(24)
+    = activity.user.name
+    .details= activity.description.downcase

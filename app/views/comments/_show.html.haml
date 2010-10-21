@@ -3,6 +3,7 @@
   .header
     = image_tag comment.user.gravatar_url(24)
     = comment.user.name
+    .details made a comment
     .controls
       - if current_user == comment.user
         = link_to '', '#', :class => "edit", :title => "Edit"

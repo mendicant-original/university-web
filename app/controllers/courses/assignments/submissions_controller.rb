@@ -1,31 +1,29 @@
 class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   before_filter :find_submission, :only => %w(show edit update comment)
-  
+  before_filter :student_and_instructor_only, :only => %w(update)
   def index
     @submissions = @assignment.submissions
   end
   
   def show
-    redirect_to :action => :edit
+    respond_to do |format|
+      format.html { redirect_to :action => :edit }
+      format.js   { render :text => "hai!" }
+    end    
   end
   
   def edit
     
   end
   
-  def update
-    unless @course.instructors.include? current_user
-      flash[:error] = "Only course instructors can update submissions"
+  def update 
+    new_status = SubmissionStatus.find(params[:assignment_submission]['submission_status_id'])
+    
+    if @submission.update_status(current_user, new_status)
+      flash[:notice] = "Assignment submission sucessfully updated."
       redirect_to :action => :edit
     else
-      new_status = SubmissionStatus.find(params[:assignment_submission]['submission_status_id'])
-      
-      if @submission.update_status(current_user, new_status)
-        flash[:notice] = "Assignment submission sucessfully updated."
-        redirect_to course_assignment_path(@course, @assignment)
-      else
-        render :action => :edit
-      end
+      render :action => :edit
     end
   end
   
@@ -40,5 +38,14 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   
   def find_submission
     @submission = Assignment::Submission.find(params[:id])
+  end
+  
+  def student_and_instructor_only
+    unless @course.instructors.include? current_user or
+           @submission.user == current_user
+      flash[:error] = "Only course instructors can update submissions"
+      redirect_to :action => :edit
+      return
+    end
   end
 end

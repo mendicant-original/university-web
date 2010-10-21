@@ -19,8 +19,20 @@
           loadurl:   '#{comments_path}/' + id,
           width:     '905px'
         });
-      })      
+      });
       
+      console.debug("#{submission_path(@submission)}");
+      
+      $('.description').editable('#{submission_path(@submission)}', {
+        type:      'textarea',
+        height:    '200px',
+        width:     '917px',
+        method:    'PUT',
+        indicator: 'Saving ...',
+        cancel:    'Cancel',
+        submit:    'Save',
+        loadurl:   '#{submission_path(@submission)}',
+      });
     });
 
 %h1
@@ -29,15 +41,14 @@
 
 - # TODO: Add description to submission
 .description
-  DESCRIPTION
-  
-%h3 Comments
+  = @submission.description_html
 
-#comments
-  - @submission.comments.order('created_at').each do |comment|
-    = render :partial => "/comments/show", :locals => { :comment => comment }
-  - if @submission.comments.empty?
-    %h4 There are currently no comments!
+#activity.comments
+  - @submission.activities.order('created_at').each do |activity|
+    = render_activity(activity)
+    
+  - if @submission.activities.empty?
+    %h3 There has been no activity for this submission!
   
   = form_for @submission.comments.build, 
     :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|

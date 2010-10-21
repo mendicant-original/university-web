@@ -9,12 +9,12 @@ class Assignment::Submission < ActiveRecord::Base
   has_many :reviews,  :dependent => :delete_all
   
   has_many :comments,   :as => :commentable, :dependent => :delete_all
-  has_many :activities, :as => :actionable,  :dependent => :delete_all
+  has_many :activities, :dependent => :delete_all
   
   def create_comment(comment_data)
     comment = comments.create(comment_data)
     
-    Assignment::Activity.create({
+    activities.create({
       :user_id       => comment.user,
       :description   => "#{comment.user.name} commented on a review",
       :actionable    => comment
@@ -25,14 +25,19 @@ class Assignment::Submission < ActiveRecord::Base
   
   def update_status(user, new_status)
     activity = activities.create({
-      :user_id       => user.id,
-      :description   => "Updated status from #{self.status.name} to " +
-                        new_status.name
+      :user_id     => user.id,
+      :description => "Updated status from #{self.status.name} to " +
+                      new_status.name,
+      :actionable  => self
     })
     
     update_attribute(:submission_status_id, new_status.id)
     
     UserMailer.submission_updated(activity).deliver
+  end
+  
+  def description_html
+    RDiscount.new(description || "").to_html.html_safe
   end
   
 end

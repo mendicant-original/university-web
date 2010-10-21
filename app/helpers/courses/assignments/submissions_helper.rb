@@ -12,4 +12,14 @@ module Courses::Assignments::SubmissionsHelper
   def submissions_path(assignment)
     course_assignment_submissions_path(assignment.course, assignment) 
   end
+  
+  def render_activity(activity)
+    if Comment === activity.actionable
+      render( :partial => "/comments/show", 
+              :locals => { :comment => activity.actionable })
+    elsif Assignment::Submission === activity.actionable
+      render( :partial => "status_update", 
+              :locals => { :activity => activity })
+    end
+  end
 end
