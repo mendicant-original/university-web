@@ -47,8 +47,7 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   end
   
   def student_and_instructor_only
-    unless @course.instructors.include? current_user or
-           @submission.user == current_user
+    unless @submissions.editable_by?(current_user)
       flash[:error] = "Only course instructors can update submissions"
       redirect_to :action => :edit
       return

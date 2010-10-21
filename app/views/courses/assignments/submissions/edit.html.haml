@@ -20,17 +20,24 @@
           width:     '905px'
         });
       });
-      
-      $('.description').editable('#{submission_path(@submission)}/description',{
-        type:      'textarea',
-        height:    '200px',
-        width:     '917px',
-        indicator: 'Saving ...',
-        cancel:    'Cancel',
-        submit:    'Save',
-        loadurl:   '#{submission_path(@submission)}.text'
-      });
     });
+    
+  - if @submission.editable_by?(current_user)
+    :javascript
+      $(function(){
+        var editPath = '#{submission_path(@submission)}/description';
+      
+        $('.description').editable(editPath, {
+          type:      'textarea',
+          height:    '200px',
+          width:     '917px',
+          indicator: 'Saving ...',
+          cancel:    'Cancel',
+          submit:    'Save',
+          loadurl:   '#{submission_path(@submission)}.text',
+          tooltip   : 'Click to edit...'
+        });
+      })
 
 %h1
   Submission

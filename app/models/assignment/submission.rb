@@ -52,4 +52,7 @@ class Assignment::Submission < ActiveRecord::Base
     RDiscount.new(description || "").to_html.html_safe
   end
   
+  def editable_by?(user)
+    assignment.course.instructors.include?(user) or self.user == user
+  end
 end
