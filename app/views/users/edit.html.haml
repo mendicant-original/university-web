@@ -30,7 +30,8 @@
   
   %p
     = form.label :time_zone
-    = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => true, :default => ""
+    = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort,
+                            :include_blank => true, :default => ""
     
   %p
     = form.submit 'Update'
