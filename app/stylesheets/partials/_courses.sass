@@ -32,7 +32,7 @@ $blueprint_grid_outer_width: 67.5px
       .name
         font-size: 1em
       
-#assignments
+#assignments, #submissions
   border-left: 1px solid #eee
   border-right: 1px solid #eee
   margin-bottom: 1em
@@ -40,7 +40,25 @@ $blueprint_grid_outer_width: 67.5px
   .header
     background-color: #eee
     padding: 0.5em 0.25em
+    font-size: 1.1em
 
-  .assignment
+  .assignment, .submission, .status
     border-bottom: 1px solid #eee
     padding: 0.5em 0.25em
+    
+#submissions
+  .submission
+    padding-left: 1em
+    &.current
+      background-color: #9ab6d0
+  
+  .status
+    border-color: #999
+    color: #333
+    .box
+      display: inline-block
+      -moz-border-radius: 3px
+      width: 10px
+      height: 10px
+      border: 1px solid #000
+      margin-right: 0.5em
