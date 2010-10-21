@@ -1,0 +1,14 @@
+%table.admin
+  %tr
+    %th Name
+    %th Email
+    %th Github
+    %th Twitter
+    %th Project
+  - students.each do |student|
+    %tr
+      %td= student.name
+      %td= student.email
+      %td= github_account_link student.github_account_name
+      %td= twitter_account_link student.twitter_account_name
+      %td= github_project_link student.project_url

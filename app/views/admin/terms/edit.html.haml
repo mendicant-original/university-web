@@ -2,3 +2,23 @@
 
 = form_for @term, :url => admin_term_path(@term), :html => {:class => "bp"} do |f|
   = render :partial => "form", :locals => {:f => f}
+  
+%hr
+
+%h3 Courses
+
+- @term.courses.order("start_date").each do |course|
+  %p= course.name
+  
+  = render :partial => "/admin/courses/students", 
+            :locals => { :students => course.students }
+
+%h3 Wait list
+
+= render :partial => "admin/courses/students",
+          :locals => { :students => @term.students }
+
+%h3 Not Registered
+
+= render :partial => "admin/courses/students",
+          :locals => { :students => @unregistered}

@@ -21,7 +21,7 @@ class Admin::TermsController < Admin::Base
   end
   
   def edit
-    
+    @unregistered = @term.exams.map {|e| e.users }.flatten.select {|u| u.open_registrations.any? }
   end
   
   def update
