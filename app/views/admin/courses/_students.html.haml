@@ -7,7 +7,7 @@
     %th Project
   - students.each do |student|
     %tr
-      %td= student.name
+      %td= link_to student.name, admin_user_path(student)
       %td= student.email
       %td= github_account_link student.github_account_name
       %td= twitter_account_link student.twitter_account_name

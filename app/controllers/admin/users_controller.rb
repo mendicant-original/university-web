@@ -5,6 +5,10 @@ class Admin::UsersController < Admin::Base
     @users = User.search(params[:search], params[:page])
   end
   
+  def show
+    redirect_to edit_admin_user_path(@user)
+  end
+  
   def new
     @user = User.new
     
