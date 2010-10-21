@@ -55,4 +55,12 @@ class Assignment::Submission < ActiveRecord::Base
   def editable_by?(user)
     assignment.course.instructors.include?(user) or self.user == user
   end
+  
+  def last_active_on
+    if activities.any?
+      activities.last.created_at
+    else
+      updated_at
+    end
+  end
 end

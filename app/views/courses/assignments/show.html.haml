@@ -4,8 +4,4 @@
 
 %h1= @assignment.name
 
-%h2= link_to "Submissions", submissions_path(@assignment)
-
-- @assignment.recent_activity(10).each do |activity|
-  .activity
-    = link_to activity.description, activity_path(activity)
+= @assignment.description_html

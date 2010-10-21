@@ -20,7 +20,7 @@ class Assignment < ActiveRecord::Base
     submission
   end
   
-  def recent_activity(limit=2)
-    recent = activities.order("updated_at DESC").limit(limit).reverse
+  def description_html
+    RDiscount.new(description || "").to_html.html_safe
   end
 end

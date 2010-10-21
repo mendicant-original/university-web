@@ -40,4 +40,8 @@ class Course < ActiveRecord::Base
   def full?
     available_slots <= 0
   end
+  
+  def description_html
+    RDiscount.new(description || "").to_html.html_safe
+  end
 end
