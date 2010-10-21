@@ -10,14 +10,16 @@
 
 %h1= @course.name
 
-= @course.description_html
+.course-two-col
+  .main
+    .description= @course.description_html
 
-#assignments
-  - @course.assignments.each do |assignment|
-    .assignment
-      .name= link_to assignment.name, 
-                    course_assignment_path(@course, assignment)
-      .description= assignment.description
+  .right
+    #assignments
+      .header Assignments
+      - @course.assignments.each do |assignment|
+        .assignment= link_to assignment.name, 
+                        course_assignment_path(@course, assignment)
             
 - if @course.channel
   = render :partial => "/chat/recent",
