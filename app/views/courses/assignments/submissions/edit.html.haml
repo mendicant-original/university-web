@@ -21,17 +21,14 @@
         });
       });
       
-      console.debug("#{submission_path(@submission)}");
-      
-      $('.description').editable('#{submission_path(@submission)}', {
+      $('.description').editable('#{submission_path(@submission)}/description',{
         type:      'textarea',
         height:    '200px',
         width:     '917px',
-        method:    'PUT',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
-        loadurl:   '#{submission_path(@submission)}',
+        loadurl:   '#{submission_path(@submission)}.text'
       });
     });
 

@@ -15,6 +15,7 @@ class UserMailer < ActionMailer::Base
   end
   
   def submission_updated(activity)
+    @activity   = activity
     @submission = activity.actionable
     @user       = activity.user
     

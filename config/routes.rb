@@ -20,6 +20,7 @@ University::Application.routes.draw do
       resources :submissions, :controller => "Courses::Assignments::Submissions" do
         member do
           post :comment
+          post :description
         end
       end
     end

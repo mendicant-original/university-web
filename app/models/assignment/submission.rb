@@ -36,6 +36,18 @@ class Assignment::Submission < ActiveRecord::Base
     UserMailer.submission_updated(activity).deliver
   end
   
+  def update_description(user, new_description)
+    activity = activities.create({
+      :user_id     => user.id,
+      :description => "Updated description",
+      :actionable  => self
+    })
+    
+    update_attribute(:description, new_description)
+    
+    UserMailer.submission_updated(activity).deliver
+  end
+  
   def description_html
     RDiscount.new(description || "").to_html.html_safe
   end
