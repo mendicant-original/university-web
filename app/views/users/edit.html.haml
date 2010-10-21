@@ -3,6 +3,7 @@
 %h1.form-header Edit Personal Information
 
 = form_for @user, :html => {:class => 'bp'} do |form|
+  = error_messages_for(@user)
   %p
     = form.label :email
     = form.text_field :email
@@ -26,6 +27,10 @@
   %p
     = form.label :project_url
     = form.text_field :project_url
+  
+  %p
+    = form.label :time_zone
+    = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => true, :default => ""
     
   %p
     = form.submit 'Update'
