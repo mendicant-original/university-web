@@ -37,7 +37,8 @@ class ExamsController < ApplicationController
   private
   
   def find_exam
-    @exam = Exam.find_by_name(ENTRANCE_EXAM_NAME)
+    # TODO: Replace w/ Exam#hash lookup
+    #@exam = Exam.find_by_name(ENTRANCE_EXAM_NAME)
   end
   
   def find_submitted_status

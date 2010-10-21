@@ -1,0 +1,113 @@
+== University Web
+
+This Ruby on Rails application provides facilities to support a community of teachers and learners. It currently offers the essentials needed to manage multiple courses, and we are now also developing other features for enabling members of the community to work together.
+
+University Web is developed by the {Ruby Mendicant University}[http://university.rubymendicant.com] (RMU), a rapidly growing online learning community, and it is our core infrastructure. We expect it to become potentially useful to other organizations, and hope that it will be adopted elsewhere as it becomes mature.
+
+Whether you are a member of RMU or a developer interested in systems for learning and education, we encourage you to check out the source code:
+
+http://github.com/rmu/university-web
+
+If you are not a member of RMU, please get in touch through our public channels:
+
+* <b>Email:</b> http://groups.google.com/group/ruby-mendicant-university----public
+* <b>IRC:</b> #rmu-public
+
+=== Key Features
+
+University Web is very young but it is constantly improving. The following key features are already in use on our Website:
+
+* Administration of course admissions
+* Course management
+* Assignment tracking 
+* A clean and user-friendly interface for students
+* IRC channel integration
+
+== Installation
+
+University Web is a standard Ruby on Rails 3 application. It does require a number of additional gems, so if you use RVM, we recommend that you create a separate gemset specifically for this application.
+
+Our systems run {PostgreSQL}[http://www.postgresql.org] databases, but you may use any database that Rails supports. If you do not wish to set up PostgreSQL on your development system, use SQLite.
+
+<b>Always use the latest source code:</b> We are constantly working on this application, with bug fixes and new features added daily, so please use the very latest source code.
+
+=== Setting Up a Development Copy: Step by Step
+
+To install a development version of University Web, follow these steps:
+
+1. Fork our GitHub repository: http://github.com/rmu/university-web
+2. Clone the fork to your computer
+3. If you use RVM, create a new gemset: <tt>rvm gemset create uni-web</tt>
+4. If you use RVM, switch to the new gemset: <tt>rvm gemset use uni-web</tt>
+5. Run <tt>bundle install</tt> to get all of the dependencies
+
+You will see an error when the <tt>pg</tt> gem installs unless you have PostgreSQL installed on your system. Ignore this if you intend to use another database, such as SQLite.
+
+To configure University Web:
+
+1. Create a <tt>database.yml</tt> file in <tt>db</tt>. The <tt>db</tt> directory contains an example <tt>database.yml</tt> for PostgreSQL.
+2. Run the Rails tasks to initialize a development and a test database:
+
+* <tt>rake db:migrate</tt>
+* <tt>rake db:test:prepare</tt>
+
+Finally, run the test suite to make sure everything is working correctly:
+
+<tt>rake test</tt>
+
+== Using University Web
+
+=== Users
+
+* University Web user accounts may be either admins, students, or guests.
+* Every account is identified by email address.
+* The admin users may access all of the management features of University Web by choosing <b>Administration</b> from the navigation menu at the top of page.
+* The management features of University Web enable admin users to perform the standard task for running courses, such as creating other user accounts for students and guests, defining the courses and managing assignment submissions.
+
+=== Terms and Exams
+
+* Each term is a group of one or more courses.
+* To create a new term, login as an admin user, and choose <b>Administration > Terms > Create Term</b>.
+* Optionally you create an exam for the term, such as an entrance exam.
+
+=== Courses
+
+* To create a new course, choose <b>Administration > Courses > Create New Course</b>.
+* Once you have created a course, use the course form to attach a user to it as an instructor, along with students and assignments. The next section explains assignments.
+* You may group courses into terms. Courses don't have to be associated with a term.
+
+=== Assignments
+
+* Each course may have one or more assignments attached to it.
+* To create or manage assignments for a course, choose <b>Administration > Courses</b>, click on the <b>Assignments</b> link next to the name of the course, and choose <b>Create New Assignment</b>.
+* Once an assignment has been created, some or all of the students in the course may then be set that assignment.
+* The students may use the University Web interface to submit work for an assignment.
+* The course instructor can then review the submissions for an assignment, and take appropriate actions, such as commenting or marking the assignment as completed.
+
+== Contributing
+
+FIXME: This probably needs to mention Pivotal Tracker
+
+Contributors retain copyright to their work but must agree to release their contributions under the {Affero GPL version 1}[http://www.affero.org/oagpl.html]
+
+If you would like to help with developing University Web, please get in touch! Our contact details are at the top of this file.
+
+Here is the ideal process for fixing a bug or a developing a new feature:
+
+1. Fork our repository and set up your development copy of University Web, as explained in the previous section
+2. Open a ticket on our {GitHub issue tracker}[http://github.com/rmu/university-web/issues]
+3. Make a change to the code, including appropriate tests
+4. Ensure that the test suite passes on Ruby 1.8.7 and Ruby 1.9.2
+5. If your change affects something in this README, please update it
+6. Push the changes back to your fork on GitHub
+7. Send a pull request through GitHub
+
+=== Testing
+
+We use test/unit with contest[http://github.com/citrusbyte/contest] and stories[http://github.com/citrusbyte/stories] for testing, with  Mocha[http://github.com/floehopper/mocha] for mocks support. Acceptance tests are developed with Webrat[http://github.com/brynary/webrat].
+
+The standard <tt>bundle install</tt> process automatically downloads this stack. If you have any questions about these tools, please just ask.
+
+------
+
+University Web - a {Ruby Mendicant University}[http://university.rubymendicant.com] project
