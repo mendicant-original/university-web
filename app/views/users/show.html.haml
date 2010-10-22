@@ -6,6 +6,11 @@
   %p
     Email:
     = @user.email
+    
+- unless @user.time_zone.blank?
+  %p
+    Time zone:
+    = @user.time_zone    
   
 - unless @user.github_account_name.blank?
   %p
