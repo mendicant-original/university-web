@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   end
   
   def set_timezone
-    unless current_user.time_zone.blank?
+    unless current_user && current_user.time_zone.blank?
       Time.zone = current_user.time_zone
     end
   end
