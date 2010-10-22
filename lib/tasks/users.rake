@@ -26,7 +26,8 @@ namespace :users do
   end
   
   task :update_nickname => :environment do
-    User.insufficient_information.each do |missing_info_user|
+    conditions = "(real_name = '' OR real_name IS NULL) AND (nickname = '' OR nickname IS NULL)"
+    User.where(conditions).each do |missing_info_user|
       nickname = missing_info_user.email[/([^\@]*)@.*/,1]
       missing_info_user.nickname = nickname
       missing_info_user.save!
