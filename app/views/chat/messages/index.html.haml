@@ -1,41 +1,41 @@
 - title params[:channel]
 
-- content_for :header_bottom do
-  :javascript
-    var lastMessageRecordedAt = '#{@messages.last.recorded_at}';
-    var lastMessageId         = #{@messages.last.id};
+- unless params[:commit]
+  - content_for :header_bottom do
+    :javascript
+      var lastMessageRecordedAt = '#{@messages.last.recorded_at}';
+      var lastMessageId         = #{@messages.last.id};
   
-    $(document).ready(function(){
-      $.scrollTo('#bottom', { axis: 'y' });
+      $(document).ready(function(){
+        $.scrollTo('#bottom', { axis: 'y' });
       
-      if(#{!params[:commit]})
         setInterval('loadMessages()', 3000);
-    });
+      });
     
-    function loadMessages(){
-      $.getJSON('#{chat_messages_path}',
-        { channel:  '#{params[:channel]}',
-          since:    lastMessageRecordedAt,
-          last_id:  lastMessageId,
-          topic:    '#{params[:topic]}'
-        },
-        function(data){
-          if(data.length > 0){
-            lastMessageRecordedAt = data[data.length - 1].recorded_at;
-            lastMessageId         = data[data.length - 1].id;
+      function loadMessages(){
+        $.getJSON('#{chat_messages_path}',
+          { channel:  '#{params[:channel]}',
+            since:    lastMessageRecordedAt,
+            last_id:  lastMessageId,
+            topic:    '#{params[:topic]}'
+          },
+          function(data){
+            if(data.length > 0){
+              lastMessageRecordedAt = data[data.length - 1].recorded_at;
+              lastMessageId         = data[data.length - 1].id;
             
-            var scrollToMessage = isScrollBottom();
+              var scrollToMessage = isScrollBottom();
             
-            for(var x = 0; x <= data.length - 1; x++){
-              $('table.messages tr:last').after(data[x].html);
+              for(var x = 0; x <= data.length - 1; x++){
+                $('table.messages tr:last').after(data[x].html);
+              }
+            
+              if(scrollToMessage == true)
+                $.scrollTo('table.messages tr:last', { axis: 'y' });
             }
-            
-            if(scrollToMessage == true)
-              $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
-        }
-      );
-    }
+        );
+      }
 
 %h1 IRC Log
 
@@ -43,7 +43,7 @@
   %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
 
 = form_tag(chat_messages_path, :method => :get) do
-  = hidden_field_tag :channel, params[:channel] if params[:channel]
+  = hidden_field_tag :channel, params[:channel]
   = hidden_field_tag :topic, params[:topic] if params[:topic]
 
   %p
@@ -55,6 +55,7 @@
     = select_datetime @end_time, :start_year => 2010, :end_year => Date.today.year, :prefix => :end, :prompt => true
 
   %p
+    = link_to "Reset filters", chat_messages_path(:channel => params[:channel])
     = submit_tag 'Filter'
 
 

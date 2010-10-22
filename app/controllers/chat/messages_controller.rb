@@ -30,6 +30,7 @@ class Chat::MessagesController < ApplicationController
     
     if params[:commit]
       @messages = @messages.where(:recorded_at => @start_time..@end_time)
+      @more_messages = true
     elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     DateTime.parse(params[:since]), params[:last_id].to_i])
