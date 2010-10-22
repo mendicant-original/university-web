@@ -8,7 +8,8 @@
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
       
-      setInterval('loadMessages()', 3000);
+      if(#{!params[:commit]})
+        setInterval('loadMessages()', 3000);
     });
     
     function loadMessages(){
@@ -40,6 +41,22 @@
 
 - if @more_messages
   %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
+
+= form_tag(chat_messages_path, :method => :get) do
+  = hidden_field_tag :channel, params[:channel] if params[:channel]
+  = hidden_field_tag :topic, params[:topic] if params[:topic]
+
+  %p
+    = label_tag "Start"
+    = select_datetime @start_time, :start_year => 2010, :end_year => Date.today.year, :prefix => :start, :prompt => true
+
+  %p
+    = label_tag "End"
+    = select_datetime @end_time, :start_year => 2010, :end_year => Date.today.year, :prefix => :end, :prompt => true
+
+  %p
+    = submit_tag 'Filter'
+
 
 %table.messages
   - @messages.each do |message|

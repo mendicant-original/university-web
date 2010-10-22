@@ -25,7 +25,12 @@ class Chat::MessagesController < ApplicationController
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
     
-    if params[:since]
+    @start_time = parse_time_from_params(params[:start])
+    @end_time = parse_time_from_params(params[:end])
+    
+    if params[:commit]
+      @messages = @messages.where(:recorded_at => @start_time..@end_time)
+    elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     DateTime.parse(params[:since]), params[:last_id].to_i])
     else
@@ -82,4 +87,16 @@ class Chat::MessagesController < ApplicationController
       id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
     end
   end
+  
+  private
+  def parse_time_from_params(hash)
+    return Date.today unless hash
+  
+    Time.new( hash[:year].to_i,
+              hash[:month].to_i,
+              hash[:day].to_i,
+              hash[:hour].to_i,
+              hash[:minute].to_i )
+  end
+
 end
