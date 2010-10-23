@@ -7,7 +7,6 @@ gem 'json'
 gem 'haml'
 gem 'compass', ">= 0.10.4"
 gem 'rack', '~> 1.2.1'
-gem 'pg'
 
 gem "will_paginate", "~> 3.0.pre2"
 
@@ -20,6 +19,10 @@ group :test do
   gem 'test-unit'
   gem 'factory_girl'
   gem 'factory_girl_rails'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Use unicorn as the web server
