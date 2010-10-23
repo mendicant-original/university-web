@@ -21,6 +21,9 @@ group :test do
   gem 'factory_girl_rails'
 end
 
+# if you're not using PostGreSQL for local development,
+# try installing gems with
+#   bundle install --without=production
 group :production do
   gem 'pg'
 end
