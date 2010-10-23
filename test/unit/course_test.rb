@@ -4,9 +4,8 @@ class CourseTest < ActiveSupport::TestCase
 
   context 'a Course with two slots and one student' do
     setup do
-      @subject = Course.create!(:name => 'A Course', :class_size_limit => 2)
-      user = User.create!(:nickname => 'Me', :email => 'anybody@example.org', :password => '123456', :password_confirmation => '123456')
-      @subject.students << user
+      @subject = Factory(:course, :class_size_limit => 2)
+      @subject.students << Factory(:user)
     end
 
     should 'not be full' do
