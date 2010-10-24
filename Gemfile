@@ -7,6 +7,7 @@ gem 'json'
 gem 'haml'
 gem 'compass', ">= 0.10.4"
 gem 'rack', '~> 1.2.1'
+gem 'pg'
 
 gem "will_paginate", "~> 3.0.pre2"
 
@@ -19,13 +20,6 @@ group :test do
   gem 'test-unit'
   gem 'factory_girl'
   gem 'factory_girl_rails'
-end
-
-# if you're not using PostGreSQL for local development,
-# try installing gems with
-#   bundle install --without=production
-group :production do
-  gem 'pg'
 end
 
 # Use unicorn as the web server
