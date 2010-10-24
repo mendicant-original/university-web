@@ -7,6 +7,7 @@ gem 'json'
 gem 'haml'
 gem 'compass', ">= 0.10.4"
 gem 'rack', '~> 1.2.1'
+gem 'pg'
 
 gem "will_paginate", "~> 3.0.pre2"
 
@@ -45,11 +46,4 @@ end
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'mysql2'
-end
-
-local_gemfile_path = File.expand_path('../Gemfile.local', __FILE__)
-if File.exist?(local_gemfile_path)
-  load local_gemfile_path
-else
-  puts 'No local Gemfile. Did you copy Gemfile.local.example to Gemfile.local?'
 end

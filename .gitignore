@@ -3,7 +3,6 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 .rvmrc
-Gemfile.local
 rmu_config.rb
 public/stylesheets/compiled/*
 db/schema.rb

@@ -1,6 +1,0 @@
-# Gemfile.local contains extra dependencies that you need on your local
-# environment, but which other developers do not. The prime example is
-# the PostGreSQL support gem, "pg." Simply copy this file to
-# Gemfile.local and edit that file as you please.
-
-gem 'pg'
