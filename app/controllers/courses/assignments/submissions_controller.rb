@@ -19,7 +19,9 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   def description
     @submission.update_description(current_user, params[:value])
     
-    render :text => @submission.description_html
+    respond_to do |format|
+      format.text
+    end
   end
   
   def update    

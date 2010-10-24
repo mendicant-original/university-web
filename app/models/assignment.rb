@@ -19,8 +19,4 @@ class Assignment < ActiveRecord::Base
     
     submission
   end
-  
-  def description_html
-    RDiscount.new(description || "").to_html.html_safe
-  end
 end

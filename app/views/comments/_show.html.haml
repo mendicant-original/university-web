@@ -13,4 +13,4 @@
           :confirm => "Are you sure you wish to delete this comment?"
       - else
         .on= comment.on
-  .content= comment.to_html.html_safe
+  .content= md(comment.comment_text)

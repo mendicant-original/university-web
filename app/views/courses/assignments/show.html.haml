@@ -6,7 +6,8 @@
 
 .course-two-col
   .main
-    .description= @assignment.description_html
+    .description= md(@assignment.description)
+    .notes= md(@assignment.notes)
 
   .right
     #submissions

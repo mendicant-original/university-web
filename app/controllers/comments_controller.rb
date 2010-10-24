@@ -9,7 +9,9 @@ class CommentsController < ApplicationController
   def update
     @comment.update_attribute(:comment_text, params[:value])
     
-    render :text => @comment.to_html
+    respond_to do |format|
+      format.text
+    end
   end
   
   def destroy

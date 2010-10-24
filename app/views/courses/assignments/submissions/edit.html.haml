@@ -43,9 +43,7 @@
   Submission
   = " (#{@submission.user.name})" if current_user != @submission.user
 
-- # TODO: Add description to submission
-.description
-  = @submission.description_html
+.description= md(@submission.description)
 
 #activity.comments
   - @submission.activities.order('created_at').each do |activity|
