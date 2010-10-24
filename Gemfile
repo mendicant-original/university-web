@@ -7,6 +7,7 @@ gem 'json'
 gem 'haml'
 gem 'compass', ">= 0.10.4"
 gem 'rack', '~> 1.2.1'
+gem 'pg'
 
 gem "will_paginate", "~> 3.0.pre2"
 
