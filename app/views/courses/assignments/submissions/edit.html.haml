@@ -40,8 +40,8 @@
       })
 
 %h1
+  = "#{@submission.user.name}'s " if current_user != @submission.user
   Submission
-  = " (#{@submission.user.name})" if current_user != @submission.user
 
 .description= md(@submission.description)
 
