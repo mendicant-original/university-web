@@ -10,6 +10,28 @@ $blueprint_grid_outer_width: 67.5px
     +append(1)
   div.right
     +column(3, true)
+    
+  #description
+    +comment_markdown
+    p
+      margin-top: 0
+      
+  h2.header
+    border-top: 1px solid #eee
+    padding: 0.5em 0
+    font-size: 1.5em
+    color: #666
+    
+    .controls
+      display: inline-block
+      float: right
+      
+      input
+        margin: 0
+        
+  #notes
+    +comment_markdown
+  
 
 #reviews, #courses
   .label

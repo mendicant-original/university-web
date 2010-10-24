@@ -17,6 +17,10 @@ University::Application.routes.draw do
   
   resources :courses do
     resources :assignments, :controller => "Courses::Assignments" do
+      member do
+        post :notes
+      end
+      
       resources :submissions, :controller => "Courses::Assignments::Submissions" do
         member do
           post :comment

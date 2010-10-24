@@ -2,13 +2,43 @@
 
 = render :partial => "menu"
 
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      $('#edit_notes').click(function(){
+        $('#notes').click();
+      });
+      
+      var editPath = '#{assignment_path(@assignment)}/notes';
+    
+      $('#notes').editable(editPath, {
+        type:      'textarea',
+        height:    '200px',
+        width:     '610px',
+        indicator: 'Saving ...',
+        cancel:    'Cancel',
+        submit:    'Save',
+        loadurl:   '#{assignment_path(@assignment)}.text',
+        tooltip   : 'Click to edit...'
+      });
+    });
+
 %h1= @assignment.name
 
 .course-two-col
   .main
-    .description= md(@assignment.description)
-    .notes= md(@assignment.notes)
-
+    #description= md(@assignment.description)
+    %h2.header
+      Notes
+      .controls
+        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #notes= md(@assignment.notes)
+    
+    %h2.header Activity
+    #activity
+      - @assignment.activities.each do |activity|
+        = render :partial => "/courses/activity", 
+                :locals => {:activity => activity}
   .right
     #submissions
       .header Submissions
