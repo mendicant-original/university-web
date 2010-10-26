@@ -45,9 +45,11 @@ class Assignment::Submission < ActiveRecord::Base
       :actionable  => self
     )
     
+    send_email = description.blank?
+    
     update_attribute(:description, new_description)
     
-    UserMailer.submission_updated(activity).deliver
+    UserMailer.submission_updated(activity).deliver if send_email
   end
   
   def editable_by?(user)
