@@ -6,7 +6,7 @@ class Assignment::Review < ActiveRecord::Base
   belongs_to :submission_status
   
   has_many :comments, :as => :commentable
-  has_many :actions,  :as => :actionable
+  has_many :actions,  :as => :actionable, :dependent => :delete_all
   
   def course
     submission.assignment.course
