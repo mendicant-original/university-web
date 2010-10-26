@@ -1,3 +1,5 @@
+- title "#{@submission.user.name}'s #{@assignment.name} Submission"
+
 = render :partial => "courses/assignments/menu"
 
 - content_for :header_bottom do
@@ -48,9 +50,6 @@
 .comments
   - @submission.activities.order('created_at').each do |activity|
     = render_activity(activity)
-    
-  - if @submission.activities.empty?
-    %h3 There has been no activity for this submission!
   
   = form_for @submission.comments.build, 
     :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|

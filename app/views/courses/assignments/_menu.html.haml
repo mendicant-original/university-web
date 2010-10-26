@@ -3,5 +3,6 @@
   = link_to @course.name, course_path(@course)
   &#0187;
   = link_to @assignment.name, assignment_path(@assignment)
-  &bull;
-  = link_to "Submissions", submissions_path(@assignment)
+  - if @submission
+    &bull;
+    = link_to @submission.user.name, submission_path(@submission)
