@@ -6,14 +6,23 @@ $blueprint_grid_outer_width: 60px
 .course-two-col
   +container
   div.main
-    +column(9)
-    +append(1)
+    display: inline
+    float: left
+    margin-right: 40px
+    padding-right: 5px
+    width: 660px
   div.right
-    +column(3, true)
+    display: inline
+    float: left
+    margin-right: 0
+    width: 200px
     margin-top: 2em
     &.fixed
       position: fixed
       top: 85px
+      
+  td.status
+    font-size: 0.8em !important
     
   #description
     +comment_markdown
