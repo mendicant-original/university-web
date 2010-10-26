@@ -7,9 +7,11 @@ namespace :reviews do
     Assignment::Review.all.each do |review|
       submission = review.submission
       
-      review.comments.each do |comment|
-        comment.commentable = submission
-        comment.save!
+      if submission
+        review.comments.each do |comment|
+          comment.commentable = submission
+          comment.save!
+        end
       end
     end
   end
