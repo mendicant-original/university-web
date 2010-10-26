@@ -23,15 +23,10 @@
       });
     });
 
-%h1
-  - if current_access_level.allows?(:manage_users)
-    = button_to "Edit", edit_admin_course_assignment_path(@course, @assignment),
-      :class  => "clean-gray small",
-      :method => :get
-  = @assignment.name
-
 .course-two-col
   .main
+    %h1= @assignment.name
+  
     #description= md(@assignment.description)
     %h2.header
       Notes

@@ -6,3 +6,7 @@
   - if @submission
     &bull;
     = link_to @submission.user.name, submission_path(@submission)
+  - if current_access_level.allows?(:manage_users)
+    &bull;
+    = link_to "Edit this assignment", 
+      edit_admin_course_assignment_path(@course, @assignment)

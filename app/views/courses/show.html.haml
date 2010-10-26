@@ -7,6 +7,9 @@
     &bull;
     = link_to "IRC: #{@course.channel.name}",
       chat_messages_path(:channel => @course.channel.name)
+  - if current_access_level.allows?(:manage_users)
+    &bull;
+    = link_to "Edit this course", edit_admin_course_path(@course)
       
 - content_for :header_bottom do
   :javascript
@@ -29,15 +32,12 @@
       });
     });
 
-%h1
-  - if current_access_level.allows?(:manage_users)
-    = button_to "Edit", edit_admin_course_path(@course),
-      :class  => "clean-gray small",
-      :method => :get
-  = @course.name
+
 
 .course-two-col
   .main
+    %h1= @course.name
+  
     #description= @course.description_html
     
     %h2.header
@@ -45,6 +45,8 @@
       .controls
         %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     #notes= md(@course.notes)
+    
+    = render :partial => "home/assignments", :locals => {:course => @course}
 
     %h2.header Activity
     #activity
@@ -52,7 +54,7 @@
         = render :partial => "activity", 
                 :locals => {:activity => activity}
 
-  .right
+  .right.fixed
     #assignments
       .header Assignments
       - @course.assignments.each do |assignment|
