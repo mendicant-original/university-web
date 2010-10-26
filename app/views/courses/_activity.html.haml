@@ -1,13 +1,15 @@
 .activity
-  .type{:class => activity.type.downcase}= activity.type
-  
-  -  if @assignment.nil?
-    .assignment
-      = link_to activity.assignment.name, assignment_path(activity.assignment)
+  = image_tag current_user.gravatar_url(24), :alt => ""
+  = link_to activity.user.name, user_path(activity.user)
+  = activity.description.downcase
   -  if activity.submission
-    .submission= activity.submission.user.name
+    on
+    = "#{activity.submission.user.name}'s"
+    = link_to "submission ",
+      activity_path(activity)
+  -  if @assignment.nil?
+    for
+    = link_to activity.assignment.name, assignment_path(activity.assignment)
     
-  = link_to activity.description, activity_path(activity)
-  .by
-    by
-    = activity.user.name
+
+    
