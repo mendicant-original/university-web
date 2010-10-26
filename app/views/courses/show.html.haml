@@ -29,7 +29,12 @@
       });
     });
 
-%h1= @course.name
+%h1
+  - if current_access_level.allows?(:manage_users)
+    = button_to "Edit", edit_admin_course_path(@course),
+      :class  => "clean-gray small",
+      :method => :get
+  = @course.name
 
 .course-two-col
   .main
