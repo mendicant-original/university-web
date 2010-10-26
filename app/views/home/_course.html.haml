@@ -10,7 +10,7 @@
         - submission = assignment.submission_for(student)
         %td.status
           .status{:style => "background-color: ##{submission.status.hex_color}"}
-            = link_to submission.status.name, submission_path(submission)
+          = link_to submission.status.name, submission_path(submission)
   %tr.toggle
     %td{:colspan => course.assignments.count + 1}
       = link_to_function "Show students", 

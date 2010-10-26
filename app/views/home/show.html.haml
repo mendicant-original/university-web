@@ -8,6 +8,22 @@
       #clean-gray.block
         = button_to "Edit your profile", edit_user_path(current_user), :method => :get
 
+  .left
+    %h3 IRC Channels
+
+    - current_user.chat_channels.each do |channel|
+      = render :partial => "/chat/recent", :locals => {:channel => channel}
+  .right
+    = render :partial => "exams"
+
+  .right.blog.last
+    %h4= link_to "RMU Blog",
+          "http://blog.majesticseacreature.com/tag/rubymendicant",
+          :target => "_blank"
+
+    %ul
+      %li Loading...
+
   .main  
     - current_user.open_registrations.each do |term|
       = render :partial => "registration", :locals => {:term => term}
@@ -23,22 +39,6 @@
       
       - current_user.instructed_courses.each do |course|
         = render :partial => "course", :locals => {:course => course}
-
-  .left
-    %h3 IRC Channels
-
-    - current_user.chat_channels.each do |channel|
-      = render :partial => "/chat/recent", :locals => {:channel => channel}
-  .right
-    = render :partial => "exams"
-  
-  .right.blog.last
-    %h4= link_to "RMU Blog",
-          "http://blog.majesticseacreature.com/tag/rubymendicant",
-          :target => "_blank"
-   
-    %ul
-      %li Loading...
   
   - content_for :header_bottom do
     = javascript_include_tag "jquery.jgfeed-min", "blog_feed"

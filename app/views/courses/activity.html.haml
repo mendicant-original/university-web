@@ -1,9 +1,0 @@
-.activity
-  .course= activity.course.name if @course.nil?
-  .assignment= activity.assignment.name if @assignment.nil?
-  .submission= activity.submission.user.name if activity.submission
-  .type= activity.actionable.class.name
-  = activity.description
-  .by
-    by
-    = activity.user.name
