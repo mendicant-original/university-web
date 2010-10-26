@@ -1,5 +1,6 @@
 namespace :users do 
-  
+
+  desc 'import users from emails.txt, using a default password for each'
   task :import => :environment do
     File.foreach("#{RAILS_ROOT}/emails.txt") do |f|
       email = f.chomp
@@ -11,7 +12,8 @@ namespace :users do
       end
     end
   end
-  
+
+  desc 'set nickname for all users lacking one'
   task :update_nickname => :environment do
     conditions = "(real_name = '' OR real_name IS NULL) AND (nickname = '' OR nickname IS NULL)"
     User.where(conditions).each do |missing_info_user|
@@ -20,6 +22,6 @@ namespace :users do
       missing_info_user.save!
       puts [missing_info_user.email, nickname].join(': ')
     end
-    
+
   end
 end

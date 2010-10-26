@@ -10,12 +10,6 @@ class Chat::Channel < ActiveRecord::Base
   end
   
   def last_message_date
-    message = messages.order("recorded_at DESC").first
-    
-    if message.nil?
-      "No Messages"
-    else
-      message.recorded_at.strftime("Last Message: %m/%d/%Y %I:%M%p")
-    end
+    messages.order("recorded_at DESC").first.try(:recorded_at)
   end
 end

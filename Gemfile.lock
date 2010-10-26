@@ -44,6 +44,10 @@ GEM
     contest (0.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    factory_girl (1.3.2)
+    factory_girl_rails (1.0)
+      factory_girl (~> 1.3)
+      rails (>= 3.0.0.beta4)
     haml (3.0.18)
     i18n (0.4.1)
     json (1.4.5)
@@ -99,6 +103,8 @@ DEPENDENCIES
   compass (>= 0.10.4)
   contest
   devise!
+  factory_girl
+  factory_girl_rails
   haml
   json
   mysql2

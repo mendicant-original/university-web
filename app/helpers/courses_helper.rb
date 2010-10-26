@@ -21,4 +21,14 @@ module CoursesHelper
       link_to( @course.name, course_path(@course))
     end
   end
+
+  def course_dates(course)
+    duration = course.start_end
+    if duration
+      "#{duration.begin.strftime("%d %B %Y")} thru #{duration.end.strftime("%d %B %Y")}"
+    else
+      ''
+    end
+  end
+
 end
