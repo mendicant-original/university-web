@@ -2,7 +2,7 @@
 
 -----
 
-<%= @activity.description %>
+<%= @activity.context.blank? ? @activity.description : @activity.context %>
 
 -----
 Please do not reply to this email. Instead reply from:
