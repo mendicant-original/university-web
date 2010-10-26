@@ -36,9 +36,10 @@
     
     %h2.header Activity
     #activity
-      - @assignment.recent_activities.each do |activity|
+      - @activities.each do |activity|
         = render :partial => "/courses/activity", 
                 :locals => {:activity => activity}
+      = will_paginate @activities
   .right
     #submissions
       .header Submissions

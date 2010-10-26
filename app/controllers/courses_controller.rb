@@ -8,6 +8,8 @@ class CoursesController < ApplicationController
   end
   
   def show
+    @activities = @course.activities.paginate(:page => params[:page])
+    
     respond_to do |format|
       format.html
       format.text { render :text => @course.notes }

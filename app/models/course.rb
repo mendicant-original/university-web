@@ -45,7 +45,7 @@ class Course < ActiveRecord::Base
     RDiscount.new(description || "").to_html.html_safe
   end
   
-  def recent_activities
+  def activities
     assignments.map { |a| a.recent_activities }.flatten
   end
 end

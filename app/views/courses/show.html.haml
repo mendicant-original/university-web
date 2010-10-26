@@ -50,9 +50,10 @@
 
     %h2.header Activity
     #activity
-      - @course.recent_activities.each do |activity|
+      - @activities.each do |activity|
         = render :partial => "activity", 
                 :locals => {:activity => activity}
+      = will_paginate @activities
 
   .right.fixed
     #assignments
