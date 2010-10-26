@@ -11,7 +11,6 @@
     for
     = link_to activity.assignment.name, assignment_path(activity.assignment)
   
-  / - unless activity.context.blank?
   .context
     .time
       = time_ago_in_words(activity.created_at)
