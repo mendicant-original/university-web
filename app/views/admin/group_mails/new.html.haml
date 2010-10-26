@@ -1,0 +1,41 @@
+-content_for :header_bottom do
+  = javascript_include_tag "group_mail"
+
+
+%h1.form-header Send Broadcast Email
+
+= form_for @group_mail, :url => admin_group_mails_path, :html => {:class => 'bp mailer'} do |form|
+
+  = error_messages_for(@group_mail)
+  
+  %p
+    = form.label :group_type, "Type of Group"
+    = form.select :group_type, ["All", "Course", "Term"], {:include_blank => " - select - "}
+
+  %p.no-label
+    - if @group
+      = form.select :group_id, @group.map {|group| [group[:caption], group[:value]]}, {:include_blank => "Pick a #{@group_mail.group_type}"}, {:style => "width: 180px"}
+    - else
+      = form.select :group_id, [], {}, {:disabled => true, :style => "width: 180px"}
+  
+  %p
+    = form.label :to, "Recipients (To)", :class => "top"
+    = form.text_area :to, :rows => 5
+    
+  %p
+    = form.label :cc
+    = form.text_field :cc
+  %p
+    = form.label :bcc
+    = form.text_field :bcc    
+  %p
+    = form.label :subject
+    = form.text_field :subject
+    
+  %p
+    = form.label :content, :class => "top"
+    = form.text_area :content, :rows => 15
+
+  %p.submit
+    = form.submit "Send Mail"
+    = link_to "Cancel", admin_users_path, :class => "cancel"
