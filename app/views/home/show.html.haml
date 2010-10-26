@@ -29,16 +29,13 @@
       = render :partial => "registration", :locals => {:term => term}
       
     - if current_user.courses.active.any?
-      %h3 Assignments
+      %h3 Current Progress
   
     - current_user.courses.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
-      
-    - if current_user.instructed_courses.any?
-      %h3 Courses
-      
-      - current_user.instructed_courses.each do |course|
-        = render :partial => "course", :locals => {:course => course}
+          
+    - current_user.instructed_courses.each do |course|
+      = render :partial => "assignments", :locals => {:course => course}
   
   - content_for :header_bottom do
     = javascript_include_tag "jquery.jgfeed-min", "blog_feed"

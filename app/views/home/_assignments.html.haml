@@ -3,15 +3,16 @@
     %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
       %th.status= link_to assignment.name, assignment_path(assignment)
-  %tr
-    %th.cu= current_user.name
-    - course.assignments.each do |assignment|
-      - submission = assignment.submission_for(current_user)
-      %td.status
-        .status{:style => "background-color: ##{submission.status.hex_color}"}
-        = link_to submission.status.name, submission_path(submission)
+  - if course.students.include?(current_user)
+    %tr
+      %th.cu= current_user.name
+      - course.assignments.each do |assignment|
+        - submission = assignment.submission_for(current_user)
+        %td.status
+          .status{:style => "background-color: ##{submission.status.hex_color}"}
+          = link_to submission.status.name, submission_path(submission)
   - (course.students - [current_user]).each do |student|
-    %tr.classmate{:style => 'display:none;'}
+    %tr.student{:style => 'display:none;'}
       %td= student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
@@ -21,5 +22,5 @@
         
   %tr.toggle
     %td{:colspan => course.assignments.count + 1}
-      = link_to_function 'Show classmates', 
-        %{$('table[data-id=#{course.id}] tr.classmate').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' classmates')}
+      = link_to_function 'Show students', 
+        %{$('table[data-id=#{course.id}] tr.student').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' students')}
