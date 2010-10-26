@@ -1,5 +1,5 @@
 .activity
-  = image_tag current_user.gravatar_url(24), :alt => ""
+  = image_tag activity.user.gravatar_url(24), :alt => ""
   = link_to activity.user.name, user_path(activity.user)
   = activity.description.downcase
   -  if activity.submission
