@@ -17,16 +17,17 @@ namespace :reviews do
   desc 'create activities for comments with no activites'
   task :generate_activities => :environment do
     Comment.where(:commentable_type => "Assignment::Submission").each do |c|
-      a = Assignment::Activity.where(:actionable => c)
-      unless a
-        a.create(
+      a = Assignment::Activity.where(:actionable_type => "Comment",
+                                     :actionable_id   => c.id)
+      if a.empty?
+        activity = a.create(
           :submission_id => c.commentable.id, 
           :user_id       => c.user.id,
           :description   => "made a comment",
           :context       => ActivityHelper.context_snippet(c.comment_text)
         )
         
-        a.update_attribute(:created_at, c.created_at)
+        activity.update_attribute(:created_at, c.created_at)
       end
     end
   end
