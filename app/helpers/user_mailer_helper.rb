@@ -1,8 +1,8 @@
 module UserMailerHelper
   
-  def to_from_review(review, exclude_emails)
-    to =  review.submission.assignment.course.instructors.map {|i| i.email }
-    to << review.submission.user.email
+  def to_from_submission(submission, exclude_emails)
+    to =  submission.assignment.course.instructors.map {|i| i.email }
+    to << submission.user.email
     
     to.uniq - [exclude_emails]
   end

@@ -2,7 +2,8 @@ class Assignment < ActiveRecord::Base
   has_many :submissions, :class_name => "Assignment::Submission", 
                          :dependent  => :destroy
   has_many :reviews,     :through    => :submissions
-  has_many :activities,  :dependent  => :delete_all
+  has_many :activities,  :as         => :actionable,  
+                         :dependent  => :delete_all
   
   belongs_to :course
   
@@ -19,7 +20,8 @@ class Assignment < ActiveRecord::Base
     submission
   end
   
-  def recent_activity(limit=2)
-    recent = activities.order("updated_at DESC").limit(limit).reverse
+  def recent_activities
+    (activities + submissions.map {|s| s.activities }).flatten.
+    sort_by {|a| a.created_at}.reverse
   end
 end

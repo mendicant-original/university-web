@@ -35,6 +35,11 @@ input[type="submit"]::-moz-focus-inner {
   width: 150px;
 }
 
+input.clean-gray.small {
+	width: 75px;
+	padding: 5px 0;
+}
+
 #clean-gray form div input:hover, input.clean-gray:hover {
   background: #dfdfdf;
   background: -moz-linear-gradient(0% 100% 90deg, #aaa, #dfdfdf);

@@ -1,0 +1,10 @@
+<%= @user.name %> has updated a submission for <%= @submission.assignment.name %>
+
+-----
+
+<%= @activity.context.blank? ? @activity.description : @activity.context %>
+
+-----
+Please do not reply to this email. Instead reply from:
+
+<%= course_assignment_submission_url(@submission.assignment.course, @submission.assignment, @submission, :only_path => false) %>

@@ -40,4 +40,12 @@ class Course < ActiveRecord::Base
   def full?
     available_slots <= 0
   end
+  
+  def description_html
+    RDiscount.new(description || "").to_html.html_safe
+  end
+  
+  def activities
+    assignments.map { |a| a.recent_activities }.flatten
+  end
 end

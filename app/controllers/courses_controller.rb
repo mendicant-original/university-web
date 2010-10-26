@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-  before_filter :find_course, :only => [:show]
-  before_filter :students_and_instructors_only, :only => [:show]
+  before_filter :find_course, :only => [:show, :notes]
+  before_filter :students_and_instructors_only, :only => [:show, :notes]
   
   def index
     @courses    = current_user.courses
@@ -8,7 +8,20 @@ class CoursesController < ApplicationController
   end
   
   def show
+    @activities = @course.activities.paginate(:page => params[:page])
     
+    respond_to do |format|
+      format.html
+      format.text { render :text => @course.notes }
+    end
+  end
+
+  def notes
+    @course.update_attribute(:notes, params[:value])
+
+    respond_to do |format|
+      format.text
+    end
   end
   
   private

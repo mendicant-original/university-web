@@ -21,10 +21,12 @@
     
 .description
   +comment_markdown
+  p
+    margin-top: 0
 
-#comments
+#comments, .comments
 
-  .comment
+  .comment, .activity
     margin: 20px 0
     border: 1px solid #ccc
     
@@ -39,6 +41,18 @@
       img
         vertical-align: middle
         margin-right: 5px
+        
+      .details
+        display: inline-block
+        +text-shadow(0, 1px, 0, #fff)
+        color: #777
+      
+      .on
+        display: inline-block
+        float: right
+        padding-top: 5px
+        color: #888
+        font-size: 0.9em
         
       .controls
         float: right

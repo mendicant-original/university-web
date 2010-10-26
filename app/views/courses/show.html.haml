@@ -7,22 +7,57 @@
     &bull;
     = link_to "IRC: #{@course.channel.name}",
       chat_messages_path(:channel => @course.channel.name)
+  - if current_access_level.allows?(:manage_users)
+    &bull;
+    = link_to "Edit this course", edit_admin_course_path(@course)
+      
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      $('#edit_notes').click(function(){
+        $('#notes').click();
+      });
 
-%h1= @course.name
+      var editPath = '#{course_path(@course)}/notes';
 
-#assignments
-  - @course.assignments.each do |assignment|
-    .assignment
-      .name= link_to assignment.name, 
-                    course_assignment_path(@course, assignment)
-      .description= #assignment.notes
-      .recent
-        - assignment.recent_activity.each do |activity|
-          .activity
-            = link_to activity.description, activity_path(activity)
-            
-- if @course.channel
-  = render :partial => "/chat/recent",
-          :locals => {:channel            => @course.channel, 
-                      :full_body          => true,
-                      :number_of_messages => 10 }
+      $('#notes').editable(editPath, {
+        type:      'textarea',
+        height:    '200px',
+        width:     '680px',
+        indicator: 'Saving ...',
+        cancel:    'Cancel',
+        submit:    'Save',
+        loadurl:   '#{course_path(@course)}.text',
+        tooltip   : 'Click to edit...'
+      });
+    });
+
+
+
+.course-two-col
+  .main
+    %h1= @course.name
+  
+    #description= @course.description_html
+    
+    %h2.header
+      Notes
+      .controls
+        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #notes= md(@course.notes)
+    
+    = render :partial => "home/assignments", :locals => {:course => @course}
+
+    %h2.header Activity
+    #activity
+      - @activities.each do |activity|
+        = render :partial => "activity", 
+                :locals => {:activity => activity}
+      = will_paginate @activities
+
+  .right.fixed
+    #assignments
+      .header Assignments
+      - @course.assignments.each do |assignment|
+        .assignment= link_to assignment.name, 
+                        course_assignment_path(@course, assignment)

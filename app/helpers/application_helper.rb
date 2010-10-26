@@ -16,4 +16,8 @@ module ApplicationHelper
       end
     end
   end
+  
+  def md(text)
+    RDiscount.new(text || "").to_html.html_safe
+  end
 end

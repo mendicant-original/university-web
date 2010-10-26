@@ -6,4 +6,4 @@ Comment from <%= @comment.user.name %>
 -----
 Please do not reply to this email. Instead reply from:
 
-<%= course_assignment_review_url(@review.course, @review.submission.assignment, @review, :only_path => false) %>
+<%= course_assignment_submission_url(@submission.assignment.course, @submission.assignment, @submission, :only_path => false) %>

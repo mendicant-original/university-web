@@ -1,0 +1,10 @@
+= render :partial => "courses/assignments/menu"
+
+%h1 Submissions
+
+#reviews
+  - @submissions.each do |submission|
+    = link_to submission_path(submission) do
+      .review
+        .user= submission.user.name
+        .status= submission.status.name

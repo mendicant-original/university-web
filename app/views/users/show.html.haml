@@ -1,16 +1,13 @@
 - title @user.name.blank? ? @user.email : @user.name
 
-%h1= @user.name.blank? ? @user.email : @user.name
+.profile
+  %h1
+    = image_tag current_user.gravatar_url(50), :alt => ""
+    = @user.name
 
-- unless @user.name.blank?
-  %p
-    Email:
-    = @user.email
-    
-- unless @user.time_zone.blank?
-  %p
-    Time zone:
-    = @user.time_zone    
+%p
+  Email:
+  = @user.email
   
 - unless @user.github_account_name.blank?
   %p

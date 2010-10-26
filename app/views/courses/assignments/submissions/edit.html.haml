@@ -1,0 +1,71 @@
+- title "#{@submission.user.name}'s #{@assignment.name} Submission"
+
+= render :partial => "courses/assignments/menu"
+
+- content_for :header_bottom do
+  :javascript
+    $(document).ready(function(){
+      $('.comment a.edit').click(function(e){
+        $(e.currentTarget).parents('.comment').children('.content').click();
+      });
+      
+      $('.comment[data-editable=true]').each(function(i,el){
+        id = $(el).attr('data-id');
+      
+        $(el).children(".content").editable('#{comments_path}/' + id, {
+          type:      'textarea',
+          method:    'PUT',
+          indicator: 'Saving ...',
+          cancel:    'Cancel',
+          submit:    'Save',
+          loadurl:   '#{comments_path}/' + id,
+          width:     '905px'
+        });
+      });
+    });
+    
+  - if @submission.editable_by?(current_user)
+    :javascript
+      $(function(){
+        var editPath = '#{submission_path(@submission)}/description';
+      
+        $('.description').editable(editPath, {
+          type:      'textarea',
+          height:    '200px',
+          width:     '917px',
+          indicator: 'Saving ...',
+          cancel:    'Cancel',
+          submit:    'Save',
+          loadurl:   '#{submission_path(@submission)}.text',
+          tooltip   : 'Click to edit...'
+        });
+      })
+
+%h1
+  = "#{@submission.user.name}'s " if current_user != @submission.user
+  Submission
+
+.description= md(@submission.description)
+
+.comments
+  - @submission.activities.order('created_at').each do |activity|
+    = render_activity(activity)
+  
+  = form_for @submission.comments.build, 
+    :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
+
+    %p= f.text_area :comment_text
+    %p= f.submit "Post comment"
+
+.clear
+
+- if @course.instructors.include?(current_user)
+  
+  %hr
+
+  = form_for @submission, :url => submission_path(@submission) do |f|
+    = f.submit "Update Status"
+    = f.select :submission_status_id,
+      SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}
+        
+  .clear
