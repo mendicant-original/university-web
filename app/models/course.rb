@@ -46,6 +46,7 @@ class Course < ActiveRecord::Base
   end
   
   def activities
-    assignments.map { |a| a.recent_activities }.flatten
+    assignments.map { |a| a.recent_activities }.flatten.
+    sort_by {|a| a.created_at }.reverse
   end
 end
