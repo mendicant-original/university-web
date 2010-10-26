@@ -5,7 +5,7 @@ $(function() {
   });
   
   $("#group_mail_group_id").change(function() {
-    $("#group_mail_to").val("");
+    $("#group_mail_recipients").val("");
     var group_id = $(this).val();
     var group_type = $('#group_mail_group_type').val();
     populateRecipients(group_type, group_id);
@@ -14,11 +14,11 @@ $(function() {
 });
 
 function populateRecipients(group_type, group_id) {
-  $.get('/admin/group_mails/user_emails.js',
+  $.get('/admin/group_mails/user_emails.text',
     { group_type: group_type,
       group_id: group_id },
     function(data){
-      $("#group_mail_to").val(data);
+      $("#group_mail_recipients").val(data);
     });
 };
 
@@ -26,7 +26,7 @@ function adjustGroupSelect() {
   var group_type = $('#group_mail_group_type').val();
   
   // reset dependent inputs
-  $("#group_mail_to").val("");
+  $("#group_mail_recipients").val("");
   $("#group_mail_group_id").emptySelect();
   $("#group_mail_group_id").attr("disabled", true);
   
@@ -37,7 +37,7 @@ function adjustGroupSelect() {
       populateRecipients("All");
       break;
     default:
-      $.getJSON('/admin/group_mails/update_group_select.js',
+      $.getJSON('/admin/group_mails/update_group_select.json',
         { group_type: group_type },
         function(data){
           $("#group_mail_group_id").attr("disabled", false);

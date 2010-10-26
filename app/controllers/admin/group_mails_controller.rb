@@ -19,7 +19,7 @@ class Admin::GroupMailsController < Admin::Base
   
   def update_group_select
     respond_to do |format|
-      format.js {
+      format.json {
         @group = GroupMail.identify_group(params[:group_type])
         render :json => @group.to_json
       }
@@ -28,8 +28,9 @@ class Admin::GroupMailsController < Admin::Base
   
   def user_emails
     respond_to do |format|
-      format.js {
-        @to_emails = GroupMail.find_group_emails(params[:group_type], params[:group_id])
+      format.text {
+        @to_emails = GroupMail.find_group_emails(params[:group_type], 
+                     params[:group_id])
         render :text => @to_emails
       }
     end

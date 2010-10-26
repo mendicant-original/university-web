@@ -3,9 +3,9 @@ class GroupMail
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   
-  attr_accessor :to, :cc, :bcc, :subject, :content, :group_type, :group_id
+  attr_accessor :recipients, :subject, :content, :group_type, :group_id
   
-  validates_presence_of :to, :content, :subject
+  validates_presence_of :recipients, :content, :subject
   
   def initialize(attributes = {})
     attributes.each do |name, value|  

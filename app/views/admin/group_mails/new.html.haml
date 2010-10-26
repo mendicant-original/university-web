@@ -13,21 +13,15 @@
     = form.select :group_type, ["All", "Course", "Term"], {:include_blank => " - select - "}
 
   %p.no-label
-    - if @group
+    - if !@group.blank?
       = form.select :group_id, @group.map {|group| [group[:caption], group[:value]]}, {:include_blank => "Pick a #{@group_mail.group_type}"}, {:style => "width: 180px"}
     - else
       = form.select :group_id, [], {}, {:disabled => true, :style => "width: 180px"}
   
   %p
-    = form.label :to, "Recipients (To)", :class => "top"
-    = form.text_area :to, :rows => 5
-    
-  %p
-    = form.label :cc
-    = form.text_field :cc
-  %p
-    = form.label :bcc
-    = form.text_field :bcc    
+    = form.label :recipients, :class => "top"
+    = form.text_area :recipients, :rows => 5
+     
   %p
     = form.label :subject
     = form.text_field :subject

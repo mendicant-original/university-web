@@ -4,7 +4,7 @@ class GroupMailerTest < ActionMailer::TestCase
   
   setup do
     student_emails = "one@two.com, two@three.com, three@four.com"
-    gm = GroupMail.new(:to => student_emails, :subject => "News", 
+    gm = GroupMail.new(:recipients => student_emails, :subject => "News", 
                        :content => "Listen up!")
     @email = GroupMailer.mass_email(gm).deliver
   end
@@ -13,9 +13,14 @@ class GroupMailerTest < ActionMailer::TestCase
     assert !ActionMailer::Base.deliveries.empty?
   end
   
+  test "sends email to rmu.management@gmail.com by default" do
+    assert @email.to.include?("rmu.management@gmail.com")
+    assert_equal 1, @email.to.length
+  end
+  
   test "sends group email to all specified students" do
-    assert_equal 3, @email.to.length
-    assert @email.to.include?("two@three.com")
+    assert_equal 3, @email.bcc.length
+    assert @email.bcc.include?("two@three.com")
   end
   
   test "sends the right email" do
