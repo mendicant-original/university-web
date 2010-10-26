@@ -14,22 +14,24 @@ class Assignment::Submission < ActiveRecord::Base
   def create_comment(comment_data)
     comment = comments.create(comment_data)
     
-    activities.create({
+    activities.create(
       :user_id       => comment.user.id,
-      :description   => "Made a comment",
+      :description   => "made a comment",
+      :context       => ActivityHelper.context_snippet(comment.comment_text),
       :actionable    => comment
-    })
+    )
     
     UserMailer.submission_comment_created(comment).deliver
   end
   
   def update_status(user, new_status)
-    activity = activities.create({
+    activity = activities.create(
       :user_id     => user.id,
-      :description => "Updated status from #{self.status.name} to " +
-                      new_status.name,
+      :description => "updated status",
+      :context     => "Updated status from *#{self.status.name}* to " +
+                      "*#{new_status.name}*",
       :actionable  => self
-    })
+    )
     
     update_attribute(:submission_status_id, new_status.id)
     
@@ -37,11 +39,11 @@ class Assignment::Submission < ActiveRecord::Base
   end
   
   def update_description(user, new_description)
-    activity = activities.create({
+    activity = activities.create(
       :user_id     => user.id,
-      :description => "Updated description",
+      :description => "updated description",
       :actionable  => self
-    })
+    )
     
     update_attribute(:description, new_description)
     
