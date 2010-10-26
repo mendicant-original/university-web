@@ -16,11 +16,12 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     
-    @user.update_attributes(params[:user])
-    
-    flash[:notice] = "Profile sucessfully updated"
-    
-    redirect_to user_path(@user)
+    if @user.update_attributes(params[:user]) 
+      flash[:notice] = "Profile sucessfully updated"
+      redirect_to user_path(@user)
+    else
+      render :action => :edit
+    end
   end 
     
 

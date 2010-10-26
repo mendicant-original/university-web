@@ -23,9 +23,9 @@ class Course < ActiveRecord::Base
   
   def start_end
     if start_date.nil? or end_date.nil?
-      ""
+      nil
     else
-      "#{start_date.strftime("%d %B %Y")} thru #{end_date.strftime("%d %B %Y")}"
+      start_date..end_date
     end
   end
   

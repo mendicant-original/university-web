@@ -56,4 +56,19 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
   
+  test "name should return nickname if available" do
+    user = User.new(@attrs)
+    assert_equal @attrs[:nickname], user.name
+  end
+  
+  test "name should return real name if nickname is not available" do
+    user = User.new(@attrs.merge(:nickname => ""))
+    assert_equal @attrs[:real_name], user.name
+  end
+  
+  test "name should return email id if both nickname and real name are not available" do
+    user = User.new(@attrs.merge(:nickname => "", :real_name => ""))
+    assert_equal "one", user.name
+  end
+  
 end

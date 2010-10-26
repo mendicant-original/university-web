@@ -1,7 +1,7 @@
 .channel
   .title
     = link_to channel.name, chat_messages_path(:channel => channel.name)
-    %span.right= channel.last_message_date
+    %span.right= last_message_timestamp_for_channel(channel)
   .clear
   - number_of_messages ||= 2
   - channel.recent(number_of_messages).each do |message|

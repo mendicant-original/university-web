@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   layout 'application'
   before_filter :authenticate_user!
   before_filter :change_password_if_needed
+  before_filter :set_timezone
+  
   
   helper_method :current_access_level
 
@@ -10,6 +12,12 @@ class ApplicationController < ActionController::Base
 
     if current_user.requires_password_change?
       render "users/change_password"
+    end
+  end
+  
+  def set_timezone
+    if current_user && !current_user.time_zone.blank?
+      Time.zone = current_user.time_zone
     end
   end
   

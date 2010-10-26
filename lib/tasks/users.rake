@@ -1,5 +1,6 @@
 namespace :users do 
-  
+
+  desc 'import users from emails.txt, using a default password for each'
   task :import => :environment do
     File.foreach("#{RAILS_ROOT}/emails.txt") do |f|
       email = f.chomp
@@ -11,17 +12,16 @@ namespace :users do
       end
     end
   end
-  
-  task :migrate_exams => :environment do
-    exam_course = Course.find_by_name(ENTRANCE_EXAM_NAME)
-    real_exam   = Exam.find_or_create_by_name(ENTRANCE_EXAM_NAME)
-    
-    exam_course.students.each do |student|
-      status = exam_course.assignments.first.submission_for(student).status
-      
-      real_exam.exam_submissions.create(:user_id => student.id, 
-                                        :url     => student.entrance_exam_url,
-                                        :submission_status_id => status.id)
+
+  desc 'set nickname for all users lacking one'
+  task :update_nickname => :environment do
+    conditions = "(real_name = '' OR real_name IS NULL) AND (nickname = '' OR nickname IS NULL)"
+    User.where(conditions).each do |missing_info_user|
+      nickname = missing_info_user.email[/([^\@]*)@.*/,1]
+      missing_info_user.nickname = nickname
+      missing_info_user.save!
+      puts [missing_info_user.email, nickname].join(': ')
     end
+
   end
 end

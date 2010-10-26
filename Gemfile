@@ -18,6 +18,8 @@ group :test do
   gem 'stories'
   gem 'contest'
   gem 'test-unit'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
 # Use unicorn as the web server
@@ -43,4 +45,5 @@ end
 
 group :development do
   gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'mysql2'
 end
