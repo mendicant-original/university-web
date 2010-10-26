@@ -1,0 +1,41 @@
+#activity
+  margin-bottom: 1em
+  .activity
+    clear: right
+    padding: 2px 0
+    border-bottom: 1px solid #eee
+    
+    div
+      display: inline-block
+      width: 75px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      vertical-align: middle
+      
+    .course, .assignment, .submission, .type
+      padding: 5px 3px
+      font-size: 12px
+    .type
+      width: 60px
+      &.submission
+        background-color: #C4ABFE
+      &.comment
+        background-color: #9AB6D0
+      &.review
+        background-color: #9AB6D0
+    .submission
+      background-color: #eee
+    .assignment
+      background-color: #FFCEFF
+      
+      a
+        color: #000
+    
+      
+    .by
+      float: right
+      font-size: 0.75em
+      color: #999
+      width: auto
+      padding: 5px

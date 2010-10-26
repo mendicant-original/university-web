@@ -7,12 +7,46 @@
     &bull;
     = link_to "IRC: #{@course.channel.name}",
       chat_messages_path(:channel => @course.channel.name)
+      
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      $('#edit_notes').click(function(){
+        $('#notes').click();
+      });
+
+      var editPath = '#{course_path(@course)}/notes';
+
+      $('#notes').editable(editPath, {
+        type:      'textarea',
+        height:    '200px',
+        width:     '680px',
+        indicator: 'Saving ...',
+        cancel:    'Cancel',
+        submit:    'Save',
+        loadurl:   '#{course_path(@course)}.text',
+        tooltip   : 'Click to edit...'
+      });
+    });
 
 %h1= @course.name
 
 .course-two-col
   .main
-    .description= @course.description_html
+    #description= @course.description_html
+    
+    %h2.header
+      Notes
+      .controls
+        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #notes= md(@course.notes)
+    
+    %h2.header Activity
+    #activity
+      - @course.recent_activities.each do |activity|
+        = render :partial => "activity", 
+                :locals => {:activity => activity}
+
 
   .right
     #assignments

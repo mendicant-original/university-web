@@ -14,7 +14,7 @@
       $('#notes').editable(editPath, {
         type:      'textarea',
         height:    '200px',
-        width:     '610px',
+        width:     '680px',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
@@ -36,7 +36,7 @@
     
     %h2.header Activity
     #activity
-      - @assignment.activities.each do |activity|
+      - @assignment.recent_activities.each do |activity|
         = render :partial => "/courses/activity", 
                 :locals => {:activity => activity}
   .right

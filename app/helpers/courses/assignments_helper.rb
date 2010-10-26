@@ -1,8 +1,8 @@
 module Courses::AssignmentsHelper
   def activity_path(activity)
     case activity.actionable
-      when Comment then review_path(activity.actionable.commentable)
-      when Assignment::Review then review_path(activity.actionable)
+      when Comment then submission_path(activity.actionable.commentable)
+      when Assignment::Submission then submission_path(activity.actionable)
     end
   end
   

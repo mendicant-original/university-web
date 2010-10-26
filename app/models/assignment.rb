@@ -19,4 +19,9 @@ class Assignment < ActiveRecord::Base
     
     submission
   end
+  
+  def recent_activities
+    (activities + submissions.map {|s| s.activities }).flatten.
+    sort_by {|a| a.created_at}.reverse
+  end
 end

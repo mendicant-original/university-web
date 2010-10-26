@@ -44,4 +44,8 @@ class Course < ActiveRecord::Base
   def description_html
     RDiscount.new(description || "").to_html.html_safe
   end
+  
+  def recent_activities
+    assignments.map { |a| a.recent_activities }.flatten
+  end
 end

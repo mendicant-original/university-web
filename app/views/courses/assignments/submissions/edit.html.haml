@@ -45,7 +45,7 @@
 
 .description= md(@submission.description)
 
-#activity.comments
+.comments
   - @submission.activities.order('created_at').each do |activity|
     = render_activity(activity)
     

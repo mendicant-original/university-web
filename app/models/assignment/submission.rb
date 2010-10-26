@@ -16,7 +16,7 @@ class Assignment::Submission < ActiveRecord::Base
     
     activities.create({
       :user_id       => comment.user,
-      :description   => "#{comment.user.name} commented on a review",
+      :description   => "Made a comment",
       :actionable    => comment
     })
     
