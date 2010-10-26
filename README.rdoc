@@ -12,6 +12,7 @@ If you are not a member of RMU, please get in touch through our public channels:
 
 * <b>Email:</b> http://groups.google.com/group/ruby-mendicant-university----public
 * <b>IRC:</b> #rmu-public
+* <b>Twitter:</b> #RbMU
 
 === Key Features
 
