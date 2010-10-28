@@ -5,7 +5,9 @@ class Course < ActiveRecord::Base
   has_many :course_instructor_associations, :dependent  => :delete_all
   has_many :instructors, :through => :course_instructor_associations
   
-  has_many   :assignments, :dependent  => :destroy
+  has_many   :assignments, :dependent => :destroy,
+                           :order     => "created_at"
+
   belongs_to :channel, :class_name => "Chat::Channel"
   
   belongs_to :term
