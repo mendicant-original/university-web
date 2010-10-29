@@ -15,9 +15,15 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').click();
+        $('#notes').trigger("edit");
       });
 
+      $('#notes').click(function(e){
+        if (e.target.tagName != "A") {
+          $('#notes').trigger("edit");
+        }
+      });
+      
       var editPath = '#{course_path(@course)}/notes';
 
       $('#notes').editable(editPath, {
@@ -28,7 +34,8 @@
         cancel:    'Cancel',
         submit:    'Save',
         loadurl:   '#{course_path(@course)}.text',
-        tooltip   : 'Click to edit...'
+        tooltip:   'Click to edit...',
+        event:     'edit'
       });
     });
 

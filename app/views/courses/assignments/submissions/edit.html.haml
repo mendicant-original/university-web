@@ -6,11 +6,19 @@
   :javascript
     $(document).ready(function(){
       $('.comment a.edit').click(function(e){
-        $(e.currentTarget).parents('.comment').children('.content').click();
+        $(e.currentTarget).parents('.comment').children('.content').
+        trigger('edit');
       });
+      
+      
       
       $('.comment[data-editable=true]').each(function(i,el){
         id = $(el).attr('data-id');
+        
+        $(el).children(".content").click(function(e){
+          if (e.target.tagName != "A")
+            $(e.target).trigger('edit');
+        });
       
         $(el).children(".content").editable('#{comments_path}/' + id, {
           type:      'textarea',
@@ -19,7 +27,8 @@
           cancel:    'Cancel',
           submit:    'Save',
           loadurl:   '#{comments_path}/' + id,
-          width:     '905px'
+          width:     '905px',
+          event:     'edit'
         });
       });
     });
@@ -29,6 +38,10 @@
       $(function(){
         var editPath = '#{submission_path(@submission)}/description';
       
+        $('.description').click(function(e){
+          if (e.target.tagName != "A") $(e.target).trigger('edit');
+        });
+      
         $('.description').editable(editPath, {
           type:      'textarea',
           height:    '200px',
@@ -37,7 +50,8 @@
           cancel:    'Cancel',
           submit:    'Save',
           loadurl:   '#{submission_path(@submission)}.text',
-          tooltip   : 'Click to edit...'
+          tooltip:   'Click to edit...',
+          event:     'edit'
         });
       })
 
