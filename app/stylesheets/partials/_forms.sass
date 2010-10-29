@@ -19,6 +19,10 @@ form.bp
     &:after
       content: ":"  
       
+  label.top
+    vertical-align: top
+    margin-top: 0.5em
+      
   label.infield
     position: absolute
     top: 15px
@@ -71,7 +75,7 @@ form.bp
     font-size: 0.8em
   
   p.no-label, .no-label 
-    margin: 0 0 0 135px
+    margin: 0 0 0 129px
       
   input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
     font-size: 0.9em
@@ -83,6 +87,8 @@ form.bp
     
   textarea
     width: 300px
+    height: 1%
+    //overflow: auto
     
   // overrides for tables in forms
     
@@ -123,6 +129,15 @@ form.search
     
   input
     float: left
+    
+form.mailer
+  width: 90%
+  
+  input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
+    width: 60%
+
+  textarea
+    width: 60%
 
 
 body.admin

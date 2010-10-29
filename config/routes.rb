@@ -46,6 +46,12 @@ University::Application.routes.draw do
     resources :exams
     resources :terms
     resources :submission_statuses
+    resources :group_mails, :only => [:new, :create] do
+      collection do
+        get :update_group_select
+        get :user_emails
+      end
+    end
   end
   
   resources :comments
