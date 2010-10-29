@@ -6,7 +6,13 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').click();
+        $('#notes').trigger("edit");
+      });
+
+      $('#notes').click(function(e){
+        if (e.target.tagName != "A") {
+          $('#notes').trigger("edit");
+        }
       });
       
       var editPath = '#{assignment_path(@assignment)}/notes';
@@ -19,7 +25,8 @@
         cancel:    'Cancel',
         submit:    'Save',
         loadurl:   '#{assignment_path(@assignment)}.text',
-        tooltip   : 'Click to edit...'
+        tooltip:   'Click to edit...',
+        event:     'edit'
       });
     });
 
