@@ -1,5 +1,10 @@
 class DocumentsController < ApplicationController
   
+  def index
+    @documents = Document.where(:public_internal => true).
+      order("title").paginate(:page => params[:page])
+  end
+  
   def show
     @document = Document.find(params[:id])
     

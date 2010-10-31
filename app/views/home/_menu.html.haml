@@ -5,6 +5,7 @@
   - if current_user
     = link_to "Home", root_path
     = link_to "Courses", courses_path
+    = link_to "Documents", documents_path
     - if current_access_level.allows?(:manage_users)
       = link_to "Administration", admin_users_path, :class => "admin"
     = render :partial => "users/user_bar"
