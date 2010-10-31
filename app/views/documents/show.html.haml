@@ -1,0 +1,11 @@
+- title @document.title
+
+#document
+
+  %h1= @document.title
+
+  #body= md(@document.body)
+
+  %hr
+
+  = link_to "Back", :back

@@ -34,6 +34,8 @@ University::Application.routes.draw do
     end
   end
   
+  resources :documents
+  
   get  "terms/:id/registration" => 'terms#registration', :as => 'registration'
   post "terms/:id/registration" => 'terms#register'
   

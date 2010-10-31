@@ -39,8 +39,6 @@
       });
     });
 
-
-
 .course-two-col
   .main
     %h1= @course.name
@@ -54,6 +52,12 @@
     #notes= md(@course.notes)
     
     = render :partial => "home/assignments", :locals => {:course => @course}
+    
+    %h2.header Documents
+    
+    #documents
+      - @course.documents.each do |document|
+        = link_to document.title, document_path(document)
 
     %h2.header Activity
     #activity
