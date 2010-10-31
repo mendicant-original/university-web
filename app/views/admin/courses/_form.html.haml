@@ -35,6 +35,7 @@
 %hr
 
 %h2 Instructors
+
 = form.link_to_add "Add an instructor", :course_instructor_associations
 
 = form.fields_for :course_instructor_associations do |m|
@@ -44,7 +45,18 @@
       :include_blank => "Select an instructor"
     = m.link_to_remove "Remove"
 
+%hr
 
+%h2 Documents
+
+= form.link_to_add "Add a document", :course_documents
+
+= form.fields_for :course_documents do |d|
+  %p
+    = d.label :document_id, "Document"
+    = d.select :document_id, Document.order("title").map {|c| [c.title, c.id]},
+      :include_blank => "Select a document"
+    = d.link_to_remove "Remove"
   
 %p.submit
   = form.submit @course.new_record? ? "Create" : "Update"
