@@ -1,0 +1,10 @@
+- title 'New Document'
+
+%h1.form-header New Document
+
+= form_for @document, :url => admin_documents_path, 
+  :html => {:class => 'bp'} do |f|
+  = render :partial => "form", :object => f
+  %p.submit
+    = f.submit "Create"
+    = link_to "Cancel", admin_documents_path, :class => "cancel"

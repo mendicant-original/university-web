@@ -1,0 +1,25 @@
+%h1.form-header Documents
+
+= form_tag admin_documents_path, :class => "bp search", :method => :get do
+  %p.clearfix
+    = text_field_tag "search", params[:search]
+    = submit_tag "Search", :class => "inline"
+  %hr
+
+%p.prompt  
+  = link_to "Create New Document", new_admin_document_path
+
+%table.admin
+  %thead
+    %tr
+      %th Title
+      %th 
+  %tbody
+    - @documents.each do |document|
+      %tr
+        %td= link_to document.title, edit_admin_document_path(document)
+        %td= link_to "Destroy", admin_document_path(document),
+            :confirm => "Are you sure you wish to delete this document?",
+            :method => 'DELETE', :class => "delete"
+  
+%p= will_paginate @documents

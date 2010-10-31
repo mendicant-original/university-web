@@ -1,0 +1,10 @@
+- title 'Edit Document'
+
+%h1.form-header Edit Document
+
+= form_for @document, :url => admin_document_path(@document),
+  :html => {:class => 'bp'} do |f|
+  = render :partial => "form", :object => f
+  %p.submit
+    = f.submit "Save"
+    = link_to "Cancel", admin_documents_path, :class => "cancel"

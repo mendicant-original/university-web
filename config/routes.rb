@@ -52,6 +52,8 @@ University::Application.routes.draw do
         get :user_emails
       end
     end
+    
+    resources :documents
   end
   
   resources :comments
