@@ -2,7 +2,7 @@ class Admin::DocumentsController < Admin::Base
   before_filter :find_document, :only => [:edit, :show, :update, :destroy]
   
   def index
-    @documents = Document.order("created_at")
+    @documents = Document.order("title")
     
     if params[:search]
       search = "%#{params[:search]}%"

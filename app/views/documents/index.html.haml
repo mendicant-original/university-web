@@ -1,6 +1,6 @@
 %h1 Documents
 
 - @documents.each do |document|
-  %h4= link_to document.title, document_path(document)
+  %h3= link_to document.title, document_path(document)
   
 %p= will_paginate @documents
