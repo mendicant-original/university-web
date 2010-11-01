@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
     ids = course_memberships.where(:access_level => 'instructor').
       map(&:course_id)
     
-    Course.where(:id => ids)
+    Course.where(:id => ids).order("start_date")
   end
   
   def real_name_or_nick_name_required 
