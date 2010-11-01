@@ -1,6 +1,6 @@
 class Courses::Base < ApplicationController
   before_filter :find_course
-  before_filter :students_and_instructors_only
+  before_filter :course_members_only
   
   private
   
@@ -8,10 +8,8 @@ class Courses::Base < ApplicationController
     @course = Course.find(params[:course_id])
   end
   
-  def students_and_instructors_only
-    if !@course.students.include?(current_user) and
-       !@course.instructors.include?(current_user)
-      
+  def course_members_only
+    unless @course.users.include?(current_user)
        flash[:error] = "You are not enrolled in this course!"
        redirect_to courses_path 
     end

@@ -1,12 +1,16 @@
 class CourseMembership < ActiveRecord::Base
   before_destroy :destory_assignment_submissions, :destroy_channel_membership
-  after_create   :create_assignment_submissions, :create_channel_membership
+  after_create   :create_assignment_submissions,  :create_channel_membership
   
-  belongs_to :student, :class_name => "User", :foreign_key => "user_id"
+  belongs_to :user
   belongs_to :course
   
-  validates_presence_of :course_id #, :user_id
+  validates_presence_of :course_id
   validates_uniqueness_of :course_id, :scope => [:user_id]
+  
+  def access_level
+    AccessLevel::Course[read_attribute(:access_level)]
+  end
   
   private
   
@@ -26,13 +30,13 @@ class CourseMembership < ActiveRecord::Base
   
   def create_assignment_submissions
     course.assignments.each do |assignment|
-      assignment.submission_for(student)
+      assignment.submission_for(user) if access_level.allows?(:create_submissions)
     end
   end
   
   def create_channel_membership
-    if course.channel && !student.chat_channels.include?(course.channel)
-      Chat::ChannelMembership.create(:user => student, :channel => course.channel)
+    if course.channel && !user.chat_channels.include?(course.channel)
+      Chat::ChannelMembership.create(:user => user, :channel => course.channel)
     end
   end
   

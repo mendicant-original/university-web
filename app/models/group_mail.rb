@@ -39,14 +39,14 @@ class GroupMail
         map {|student| student.email }.join(", ")
       when "Course"
         course = Course.find group_id
-        course.students.map {|student| student.email }.join(", ")
+        course.users.map {|student| student.email }.join(", ")
       when "Term"
         term = Term.find group_id
     
         student_emails = []
         # students who took a course in this term
         term.courses.each do |course|
-        	student_emails <<	course.students.
+        	student_emails <<	course.users.
         	                  map { |student| student.email }
         end
         # waitlisted students

@@ -1,8 +1,8 @@
 require "set"
 
 class AccessLevel
-  User  = Class.new(self)
-  Group = Class.new(self)
+  User   = Class.new(self)
+  Course = Class.new(self)
   
   def self.definitions
     @definitions ||= Hash.new
