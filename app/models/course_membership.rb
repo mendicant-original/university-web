@@ -23,7 +23,7 @@ class CourseMembership < ActiveRecord::Base
   
   def destroy_channel_membership
     if course.channel
-      channel_membership = student.chat_channel_memberships.where(["channel_id = ?", course.channel.id]).first
+      channel_membership = user.chat_channel_memberships.where(["channel_id = ?", course.channel.id]).first
       channel_membership.destroy if channel_membership
     end
   end
