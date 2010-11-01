@@ -38,16 +38,16 @@
 
 = form.link_to_add "Add an instructor", :course_memberships
 
-- @course.course_memberships.where(:access_level => 'instructor').each do |inst|
-  = form.fields_for :course_memberships, inst do |m|
-    %p
-      = m.label :user_id, "Instructor"
-      = m.select :user_id, 
-        User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
-        :include_blank => "Select an instructor"
+= form.fields_for :course_memberships,
+ @course.course_memberships.where(:access_level => 'instructor').all do |m|
+  %p
+    = m.label :user_id, "Instructor"
+    = m.select :user_id, 
+      User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
+      :include_blank => "Select an instructor"
 
-      = m.hidden_field :access_level, :value => 'instructor'
-      = m.link_to_remove "Remove"
+    = m.hidden_field :access_level, :value => 'instructor'
+    = m.link_to_remove "Remove"
 
 %hr
 
