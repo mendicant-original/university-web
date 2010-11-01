@@ -59,7 +59,8 @@
         %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     #notes= md(@course.notes)
     
-    = render :partial => "home/assignments", :locals => {:course => @course}
+    = render :partial => "dashboard/assignments", 
+      :locals => {:course => @course}
 
     %h2.header Activity
     #activity

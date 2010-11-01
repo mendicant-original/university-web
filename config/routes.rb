@@ -1,5 +1,5 @@
 University::Application.routes.draw do
-  root :to => "home#show"
+  root :to => "dashboard#show"
   
   namespace :chat do
     resources :messages

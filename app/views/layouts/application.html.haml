@@ -17,7 +17,7 @@
   %body
     #container
       #navigation
-        = render :partial => "/home/menu"
+        = render :partial => "/shared/menu"
         - unless yield(:secondary_navigation).blank?
           .secondary
             = yield(:secondary_navigation)
