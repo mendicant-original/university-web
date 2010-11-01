@@ -33,7 +33,7 @@ namespace :reviews do
   end
   
   desc 'create comments for review descriptions'
-  task :generate_comments_for_descriptions do
+  task :generate_comments_for_descriptions => :environment do
     Assignment::Review.all.each do |review|
       submission = review.submission
       
