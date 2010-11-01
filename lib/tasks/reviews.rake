@@ -31,4 +31,18 @@ namespace :reviews do
       end
     end
   end
+  
+  desc 'create comments for review descriptions'
+  task :generate_comments_for_descriptions do
+    Assignment::Review.all.each do |review|
+      submission = review.submission
+      
+      c = submission.comments.create(
+        :user_id      => submission.user_id,
+        :comment_text => review.description
+      )
+      
+      c.update_attribute(:created_at, review.created_at)
+    end
+  end
 end
