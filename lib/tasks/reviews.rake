@@ -37,12 +37,14 @@ namespace :reviews do
     Assignment::Review.all.each do |review|
       submission = review.submission
       
-      c = submission.comments.create(
-        :user_id      => submission.user_id,
-        :comment_text => review.description
-      )
+      if submission
+        c = submission.comments.create(
+          :user_id      => submission.user_id,
+          :comment_text => review.description
+        )
       
-      c.update_attribute(:created_at, review.created_at)
+        c.update_attribute(:created_at, review.created_at)
+      end
     end
   end
 end
