@@ -46,7 +46,7 @@ class Course < ActiveRecord::Base
   end
   
   def class_size
-    course_memberships.where(:access_level => "student").count
+    students.count
   end
   
   def available_slots

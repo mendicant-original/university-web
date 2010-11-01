@@ -70,6 +70,7 @@
   %p.no-label
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
+    = m.hidden_field :access_level, :value => 'student'
     = m.link_to_remove "Remove"
   
       

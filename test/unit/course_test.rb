@@ -5,7 +5,8 @@ class CourseTest < ActiveSupport::TestCase
   context 'a Course with two slots and one student' do
     setup do
       @subject = Factory(:course, :class_size_limit => 2)
-      @subject.students << Factory(:user)
+      @subject.course_memberships.create(:user => Factory(:user),
+        :access_level => 'student')
     end
 
     should 'not be full' do

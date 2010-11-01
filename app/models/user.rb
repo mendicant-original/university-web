@@ -100,7 +100,10 @@ class User < ActiveRecord::Base
   end
   
   def instructed_courses
-    course_instructor_associations.map {|c| c.course }
+    ids = course_memberships.where(:access_level => 'instructor').
+      map(&:course_id)
+    
+    Course.where(:id => ids)
   end
   
   def real_name_or_nick_name_required 
