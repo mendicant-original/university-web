@@ -13,11 +13,12 @@
   %thead
     %tr
       %th Title
-      %th 
+      %th{:colspan => 2}
   %tbody
     - @documents.each do |document|
       %tr
         %td= link_to document.title, edit_admin_document_path(document)
+        %td= link_to "Preview", document_path(document)
         %td= link_to "Destroy", admin_document_path(document),
             :confirm => "Are you sure you wish to delete this document?",
             :method => 'DELETE', :class => "delete"
