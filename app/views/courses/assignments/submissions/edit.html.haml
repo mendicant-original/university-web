@@ -12,7 +12,7 @@
       
       // Toggle Status / Description update messages
       $('.header').click(function(e){
-        $(e.target).siblings('.content').toggle();
+        $(e.target).siblings('.content').slideToggle();
       });
       
       $('.comment[data-editable=true]').each(function(i,el){
