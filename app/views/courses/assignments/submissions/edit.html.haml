@@ -10,7 +10,10 @@
         trigger('edit');
       });
       
-      
+      // Toggle Status / Description update messages
+      $('.header').click(function(e){
+        $(e.target).siblings('.content').toggle();
+      });
       
       $('.comment[data-editable=true]').each(function(i,el){
         id = $(el).attr('data-id');
@@ -61,6 +64,12 @@
 
 .description= md(@submission.description)
 
+- if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
+  = form_for @submission, :url => submission_path(@submission) do |f|
+    = f.submit "Request Review", :style => "float: left;"
+    = f.hidden_field :submission_status_id, 
+      :value => SubmissionStatus.find_by_name("Submitted").try(:id)
+      
 .comments
   - @submission.activities.order('created_at').each do |activity|
     = render_activity(activity)

@@ -2,7 +2,9 @@
   .header
     = image_tag activity.user.gravatar_url(24)
     = activity.user.name
-    .details= activity.description.downcase
+    .details
+      = activity.description
     .on
       = time_ago_in_words activity.created_at
       ago
+  .content{:style => "display:none;"}= md(activity.context)
