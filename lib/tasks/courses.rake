@@ -7,8 +7,8 @@ namespace :courses do
         cm.update_attribute(:access_level, 'student')
       end
       
-      course.instructors.each do |instructor|
-        cm = course.course_memberships.create(:user_id => instructor.id)
+      CourseInstructorAssociation.where(:course_id => course.id).each do |instructor|
+        cm = course.course_memberships.create(:user_id => instructor.instructor_id)
         
         cm.update_attribute(:access_level, 'instructor')
       end
