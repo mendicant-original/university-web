@@ -6,7 +6,7 @@ AccessLevel::User.instance_eval do
     :permissions => [:do_stuff]
 
   define "admin", 
-    :permissions => [:manage_users]
+    :permissions => [:manage_users, :manage_documents]
 end
 
 AccessLevel::Course.instance_eval do
