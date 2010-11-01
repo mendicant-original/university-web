@@ -5,11 +5,15 @@ class CourseMembership < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
   
-  validates_presence_of :course_id
+  validates_presence_of   :course_id
   validates_uniqueness_of :course_id, :scope => [:user_id]
   
   def access_level
     AccessLevel::Course[read_attribute(:access_level)]
+  end
+  
+  def access_level=(al)
+    write_attribute(:access_level, al)
   end
   
   private

@@ -1,16 +1,16 @@
 - content_for :secondary_navigation do
   .anchor= link_to "Courses", courses_path
-  - if @courses.active.any?
-    - @courses.active.each_with_index do |course, i|
+  - if @courses.active.student(current_user).any?
+    - @courses.active.student(current_user).each_with_index do |course, i|
       = link_to course.name, course_path(course)
       = "&bull;".html_safe unless i == @courses.active.count - 1
 
 %h1 Courses
 
 #courses
-  - if @courses.active.any?
+  - if @courses.active.student(current_user).any?
     .label Active
-  - @courses.active.each do |course|
+  - @courses.active.student(current_user).each do |course|
     = render :partial => "course", :locals => { :course => course }
   
   - if @instructed.any?
@@ -18,9 +18,9 @@
   - @instructed.each do |course|
     = render :partial => "course", :locals => { :course => course }
         
-  - if @courses.archived.any?
+  - if @courses.archived.student(current_user).any?
     .label Archived    
-  - @courses.archived.each do |course|
+  - @courses.archived.student(current_user).each do |course|
     = render :partial => "course", :locals => { :course   => course,
                                                 :archived => true}
   

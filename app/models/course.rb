@@ -15,15 +15,20 @@ class Course < ActiveRecord::Base
   validates_uniqueness_of :name
   
   accepts_nested_attributes_for :assignments
+  
   accepts_nested_attributes_for :course_memberships,
     :reject_if => proc { |attributes| attributes['user_id'].blank? },
-    :allow_destroy => true  
+    :allow_destroy => true
+    
   accepts_nested_attributes_for :course_documents,
     :reject_if => proc { |attributes| attributes['document_id'].blank? },
     :allow_destroy => true
   
   scope :active,   lambda { where(:archived => false).order('start_date') }
   scope :archived, lambda { where(:archived => true ).order('start_date') }
+  scope :student, lambda { |user| includes(:course_memberships).
+    where(["course_memberships.user_id = ? AND \
+            course_memberships.access_level = ?", user.id, 'student']) }
   
   def students
     course_member_by_type('student')
