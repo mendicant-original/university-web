@@ -28,10 +28,10 @@
     - current_user.open_registrations.each do |term|
       = render :partial => "registration", :locals => {:term => term}
       
-    - if current_user.courses.active.any?
+    - if current_user.courses.active.student(current_user).any?
       %h3 Current Progress
   
-    - current_user.courses.active.each do |course|
+    - current_user.courses.active.student(current_user).each do |course|
       = render :partial => "assignments", :locals => {:course => course}
           
     - current_user.instructed_courses.each do |course|
