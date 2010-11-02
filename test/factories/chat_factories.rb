@@ -8,21 +8,12 @@ end
 
 Factory.define :chat_topic, :class => Chat::Topic do |t|
   t.name 'testing'
-  t.channel { |_| Factory(:chat_channel) }
+  t.association :channel, :factory => :chat_channel
 end
 
 Factory.define :chat_message, :class => Chat::Message do |m|
-  m.topic   { |message|
-    Factory(:chat_topic, :channel => message.channel)
-  }
-  m.handle  { |_| Factory(:chat_handle) }
-  m.channel { |message|
-    if message.topic? && message.topic.channel?
-      message.topic.channel
-    else
-      Factory(:chat_channel)
-    end
-  }
-  m.recorded_at { |_| 3.minutes.ago }
-  m.body "Could anyone take a look at this?"
+  m.association :handle,  :factory => :chat_handle
+  m.association :channel, :factory => :chat_channel
+  m.recorded_at 3.minutes.ago
+  m.body        "Could anyone take a look at this?"
 end

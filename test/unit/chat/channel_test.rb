@@ -6,7 +6,6 @@ class Chat::ChannelTest < ActiveSupport::TestCase
 
     setup do
       @subject = Factory(:chat_channel)
-      @topic   = Factory(:chat_topic, :channel => @subject)
     end
 
     context 'with no messages' do
@@ -19,8 +18,7 @@ class Chat::ChannelTest < ActiveSupport::TestCase
       setup do
         3.times do
           @subject.messages << Factory.build(:chat_message,
-                                :channel => nil,
-                                :topic => @topic)
+                                             :channel => @channel)
         end
       end
 
