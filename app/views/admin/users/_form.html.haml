@@ -66,7 +66,8 @@
 %h2 Courses
 = form.link_to_add "Add a course", :course_memberships
 
-= form.fields_for :course_memberships do |m|
+= form.fields_for :course_memberships,
+  @user.course_memberships.where(:access_level => 'student').all do |m|
   %p.no-label
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
