@@ -15,5 +15,8 @@
     .time
       = time_ago_in_words(activity.created_at)
       ago
-    = md(activity.context)
+    - if Assignment::Submission === activity.actionable
+      = md(activity.context)
+    - else
+      = activity.context
     
