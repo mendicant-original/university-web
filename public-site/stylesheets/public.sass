@@ -1,2 +1,89 @@
+=border_radius_right($radius)
+  -moz-border-radius-topright: $radius
+  -webkit-border-top-right-radius: $radius
+  -o-border-top-right-radius: $radius
+  -ms-border-top-right-radius: $radius
+  -khtml-border-top-right-radius: $radius
+  border-top-right-radius: $radius
+  -moz-border-radius-bottomright: $radius
+  -webkit-border-bottom-right-radius: $radius
+  -o-border-bottom-right-radius: $radius
+  -ms-border-bottom-right-radius: $radius
+  -khtml-border-bottom-right-radius: $radius
+  border-bottom-right-radius: $radius
+  
+=border_radius_left($radius)
+  -moz-border-radius-topleft: $radius
+  -webkit-border-top-left-radius: $radius
+  -o-border-top-left-radius: $radius
+  -ms-border-top-left-radius: $radius
+  -khtml-border-top-left-radius: $radius
+  border-top-left-radius: $radius
+  -moz-border-radius-bottomleft: $radius
+  -webkit-border-bottom-left-radius: $radius
+  -o-border-bottom-left-radius: $radius
+  -ms-border-bottom-left-radius: $radius
+  -khtml-border-bottom-left-radius: $radius
+  border-bottom-left-radius: $radius
+  
+
 body
-  color: red
+  font-family: "Gill Sans", "Tacoma", "Arial", sans-serif
+  background-color: silver
+  padding: 0
+  margin: 0
+
+#header
+  img.logo
+    float: left
+    margin-right: 20px
+  h1
+    font-family: "Baskerville Old Face", "Century Schoolbook", "Tw Cen MT", sans-serif
+    color: #70120B
+    display: inline
+    margin: 0
+    font-size: 40px
+    letter-spacing: 3px
+    
+  ul.menu
+    margin: 0
+    list-style: none
+    
+    li
+      float: left
+      background-color: #cccccc
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #cccccc))
+      background-image: -moz-linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
+      background-image: linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
+      padding: 4px 10px
+      text-shadow: 0 1px 0 white
+      font-size: 14px
+      letter-spacing: 1px
+      
+      &.first
+        +border_radius_left(5px)
+      &.last
+        +border_radius_right(5px)
+        
+      a
+        text-decoration: none
+        text-shadow: 0 1px 0 white
+        color: #666
+        
+        &.current
+          color: #000
+          
+        &:hover
+          color: #222
+          
+
+#container
+  width: 970px
+  margin: 0 auto
+  background-color: white
+
+#content, #header
+  padding: 10px
+  margin: 0 auto
+  width: 930px
+  clear: both

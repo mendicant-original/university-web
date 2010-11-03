@@ -1,6 +1,12 @@
 require 'haml'
 require 'pathname'
 
+module Haml::Helpers
+  def current_page(name, current)
+    'current' if name == current
+  end
+end
+
 namespace :"public-site" do 
   
   desc 'Generates the static public site'
@@ -14,7 +20,8 @@ namespace :"public-site" do
       reject {|v| v.to_s[/layout.haml/] }
     
     views.each do |view|
-      static_html = Haml::Engine.new(layout).to_html do
+      current = view.basename.to_s.gsub('.haml','').downcase
+      static_html = Haml::Engine.new(layout).to_html(Object.new, :current => current) do
         File.read(view)
       end
       output = File.join(output_path, view.basename.to_s.gsub(/haml/,'html'))
