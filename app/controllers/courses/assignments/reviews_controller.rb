@@ -21,7 +21,7 @@ class Courses::Assignments::ReviewsController < Courses::Assignments::Base
       UserMailer.review_created(@review).deliver
       
       flash[:notice] = "Review submitted"
-      redirect_to root_path
+      redirect_to dashboard_path
     else
       render :action => :new
     end
@@ -42,7 +42,7 @@ class Courses::Assignments::ReviewsController < Courses::Assignments::Base
     
     flash[:notice] = "Review closed"
     
-    redirect_to root_path
+    redirect_to dashboard_path
   end
   
   def comment

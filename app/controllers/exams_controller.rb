@@ -28,7 +28,7 @@ class ExamsController < ApplicationController
       
       sign_in(@user)
       
-      redirect_to root_path
+      redirect_to dashboard_path
     else
       render :action => :entrance
     end

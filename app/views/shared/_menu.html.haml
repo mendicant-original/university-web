@@ -3,7 +3,7 @@
     = image_tag "rmu_small.png"
     RMU
   - if current_user
-    = link_to "Home", root_path
+    = link_to "Home", dashboard_path
     = link_to "Courses", courses_path
     = link_to "Documents", documents_path
     - if current_access_level.allows?(:manage_users)

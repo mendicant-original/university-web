@@ -1,6 +1,8 @@
 University::Application.routes.draw do
   root :to => "dashboard#show"
   
+  resource :dashboard, :controller => "dashboard"
+  
   namespace :chat do
     resources :messages
   end

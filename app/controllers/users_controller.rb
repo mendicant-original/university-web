@@ -32,7 +32,7 @@ class UsersController < ApplicationController
     if current_user.valid?
       current_user.requires_password_change = false
       current_user.save
-      redirect_to root_path
+      redirect_to dashboard_path
     else
       flash[:alert] = current_user.errors.full_messages
     end

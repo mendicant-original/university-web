@@ -15,7 +15,7 @@ class TermsController < ApplicationController
         current_user.course_memberships.create(:course_id => course.id)
       
         flash[:notice] = "You have sucessfully enrolled in #{course.name}"
-        redirect_to root_path
+        redirect_to dashboard_path
       else
         flash[:error] = "#{course.name} is either full or not part of this term"
         redirect_to registration_path
@@ -24,7 +24,7 @@ class TermsController < ApplicationController
       @term.waitlisted_students.create(:student_id => current_user.id)
       
       flash[:notice] = "You have sucessfully joined the #{@term.name} wait list"
-      redirect_to root_path
+      redirect_to dashboard_path
     end
   end
   
@@ -37,7 +37,7 @@ class TermsController < ApplicationController
   def allowed_students_only
     unless current_user.open_registrations.include? @term
       flash[:error] = "You are not authorized to register for this term"
-      redirect_to root_path
+      redirect_to dashboard_path
       return
     end
   end
