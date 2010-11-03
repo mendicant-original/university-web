@@ -22,7 +22,7 @@ namespace :"public-site" do
     views.each do |view|
       current = view.basename.to_s.gsub('.haml','').downcase
       static_html = Haml::Engine.new(layout).to_html(Object.new, :current => current) do
-        File.read(view)
+        Haml::Engine.new(File.read(view)).to_html
       end
       output = File.join(output_path, view.basename.to_s.gsub(/haml/,'html'))
       
