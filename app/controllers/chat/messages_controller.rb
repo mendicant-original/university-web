@@ -22,15 +22,8 @@ class Chat::MessagesController < ApplicationController
 
     @messages = @messages.order("recorded_at DESC")
     
-    if params[:from] && params[:until] && params[:until] != "now"
-      @messages = @messages.where :recorded_at =>
-          Time.parse(params[:from])..Time.parse(params[:until])
-    elsif params[:until] && params[:until] != "now"
-      @messages = @messages.where ["recorded_at < ?",
-                                   Time.parse(params[:until])]
-    elsif params[:from]
-      @messages = @messages.where ["recorded_at > ?",
-                                   Time.parse(params[:from])]
+    if params[:from] || (params[:until] && params[:until] != "now")
+      filter_messages
     elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     Time.parse(params[:since]), params[:last_id].to_i])
@@ -82,6 +75,22 @@ class Chat::MessagesController < ApplicationController
   def authenticate_service
     authenticate_or_request_with_http_basic do |id, password| 
       id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
+    end
+  end
+  
+  private
+  def filter_messages
+    if params[:from] && params[:until] && params[:until] != "now"
+      @messages = @messages.where :recorded_at =>
+          Time.parse(params[:from])..Time.parse(params[:until])
+      
+    elsif params[:until] && params[:until] != "now"
+      @messages = @messages.where ["recorded_at < ?",
+                                   Time.parse(params[:until])]
+      
+    elsif params[:from]
+      @messages = @messages.where ["recorded_at > ?",
+                                   Time.parse(params[:from])]
     end
   end
 end
