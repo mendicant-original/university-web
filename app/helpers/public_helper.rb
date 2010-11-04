@@ -26,4 +26,12 @@ module PublicHelper
     alumnus.alumni_preferences.show_github && 
     !alumnus.github_account_name.blank?
   end
+  
+  def alumnus_image(alumnus)
+    if alumnus.alumni_preferences.show_on_public_site
+      alumnus.gravatar_url(64)
+    else
+      "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=64"
+    end
+  end
 end
