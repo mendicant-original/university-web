@@ -8,5 +8,9 @@ module Chat::MessagesHelper
       'No Messages'
     end
   end
+  
+  def update_with_recent_messages?
+    !@messages.empty? && (!params[:until] || params[:until] == "now")
+  end
 
 end
