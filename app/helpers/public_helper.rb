@@ -8,10 +8,10 @@ module PublicHelper
       if alumnus.alumni_preferences.show_real_name
         !alumnus.real_name.blank? ? alumnus.real_name : alumnus.nickname
       else 
-        !alumnus.nickname.blank? ? alumnus.nickname : "Alumnus ##{alumnus.alumni_number}"
+        !alumnus.nickname.blank? ? alumnus.nickname : "Anonymous"
       end
     else
-      "Alumnus ##{alumnus.alumni_number}"
+      "Anonymous"
     end
   end
   
