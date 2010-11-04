@@ -10,8 +10,13 @@
   .box
     width: 284px
     margin: 0 10px
-    background: #f1f1f1
+    background: #e1e1e1
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #e1e1e1))
+    background-image: -moz-linear-gradient(top, #f0f0f0 0%, #e1e1e1 100%)
+    background-image: linear-gradient(top, #f0f0f0 0%, #e1e1e1 100%)
     display: inline-block
+    +border_radius(5px)
+    border: 1px solid #eee
     
     h3
       font-weight: normal
