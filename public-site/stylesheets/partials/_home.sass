@@ -8,16 +8,32 @@
     
 #overview
   .box
-    width: 284px
-    margin: 0 10px
-    background: #e1e1e1
-    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #e1e1e1))
-    background-image: -moz-linear-gradient(top, #f0f0f0 0%, #e1e1e1 100%)
-    background-image: linear-gradient(top, #f0f0f0 0%, #e1e1e1 100%)
-    display: inline-block
+    border: 1px solid #999999
+    width: 283px
+    margin: 10px 0
+    margin-right: 2em
+    background: #eee
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #eee), color-stop(100%, #ddd))
+    background-image: -moz-linear-gradient(top, #eee 0%, #ddd 100%)
+    background-image: linear-gradient(top, #eee 0%, #ddd 100%)
     +border_radius(5px)
-    border: 1px solid #eee
+    float: left
+    clear: left
     
     h3
       font-weight: normal
       text-align: center
+      color: #70120B
+      
+    &:hover
+      h3
+        text-decoration: underline
+      
+  .info
+    margin: 10px 0
+    padding: 15px
+    vertical-align: middle
+    font-size: 1.25em
+    color: #222
+  .clear
+    clear: both
