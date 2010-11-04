@@ -1,6 +1,6 @@
 - title params[:channel]
 
-- unless params[:commit]
+- if !params[:commit] && !@messages.empty?
   - content_for :header_bottom do
     :javascript
       var lastMessageRecordedAt = '#{@messages.last.recorded_at}';

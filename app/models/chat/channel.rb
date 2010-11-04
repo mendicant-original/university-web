@@ -5,6 +5,8 @@ class Chat::Channel < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of   :name
   
+  DEFAULT_CHANNEL = "#rmu-general"
+  
   def recent(number_of_messages=2)
     messages.order("recorded_at DESC").limit(number_of_messages).reverse
   end
