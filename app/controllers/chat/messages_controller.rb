@@ -23,7 +23,12 @@ class Chat::MessagesController < ApplicationController
     @messages = @messages.order("recorded_at DESC")
     
     if params[:from] || (params[:until] && params[:until] != "now")
-      filter_messages
+      begin
+        filter_messages
+      rescue ArgumentError
+        flash[:error] = "Could not parse provided Time"
+        redirect_to :back and return
+      end
     elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     Time.parse(params[:since]), params[:last_id].to_i])

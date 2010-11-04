@@ -111,6 +111,12 @@ class Chat::MessagesControllerTest < ActionController::TestCase
         assert assigns(:messages).include?(@old_message)
         assert !assigns(:messages).include?(@recent_message)
       end
+      
+      test "redirects to channel if time filters cannot be read" do
+        request.env["HTTP_REFERER"] = chat_messages_path
+        get :index, :commit => "Filter", :from  => "bad filter"
+        assert_redirected_to chat_messages_path
+      end
     end
   end
 end
