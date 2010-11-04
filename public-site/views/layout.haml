@@ -4,26 +4,29 @@
     %title Ruby Mendicant University
     %link{:href=>"/stylesheets/public.css",:type=>"text/css",:rel=>"stylesheet"}
   %body
-    #container
-      #header
+    #header
+      #logo
         %img.logo{:src=>"/images/rmu_logo.png"}
         %h1 Ruby Mendicant University
-        %ul.menu
-          %li.first
-            %a{:href=>"/", :class => current_page('index', current)} Home
-          %li 
-            %a{:href=>"/library.html", 
-              :class => current_page('library', current)} Library
-          %li 
-            %a{:href=>"/projects.html", 
-              :class => current_page('projects', current)} Projects
-          %li
-            %a{:href=>"/alumni.html", 
-              :class => current_page('alumni', current)} Alumni
-          %li
-            %a{:href=>"/contact.html", 
-              :class => current_page('contact', current)} Contact
-          %li.last
-            %a{:href=>"/users/sign_in"} Sign into University-Web
-        
+      
+      #menu_bar
+        .center
+          %ul.menu
+            %li.first
+              %a{:href=>"/", :class => current_page('index', current)} Home
+            %li
+              %a{:href=>"/contact.html", 
+                :class => current_page('contact', current)} About RMU
+            %li 
+              %a{:href=>"/library.html", 
+                :class => current_page('library', current)} Learning Resources
+            %li 
+              %a{:href=>"/projects.html", 
+                :class => current_page('projects', current)} Code
+            %li
+              %a{:href=>"/alumni.html", 
+                :class => current_page('alumni', current)} Alumni List
+            %li.last
+              %a{:href=>"/users/sign_in"} Sign in
+    #container 
       #content= yield
