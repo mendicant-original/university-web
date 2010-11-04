@@ -1,16 +1,24 @@
 #alumni
-  - 7.times do |t|
+  - alumni.each do |alumnus|
     .alumnus
       .name 
-        Jordan Byron
+        = alumnus.real_name || alumnus.nickname
       
         .badge
-          %img{:src => "http://www.gravatar.com/avatar/6d2661c5a65f24c8f0bb579b6e0a0d81?s=64"}
+          %img{:src => alumnus.gravatar_url(64)}
       
       .information
-        .month October 2010
+        .month
+          = Date::MONTHNAMES[alumnus.alumni_month]
+          = alumnus.alumni_year
         .social
-          %a{:href => "http://github.com/jordanbyron"}
-            %img{:src => "/images/icons/social/github.png"}
-          %a{:href => "http://www.twitter.com/jordan_byron"}
-            %img{:src => "/images/icons/social/twitter.png"}
+          - unless alumnus.github_account_name.blank?
+            %a{:href => "http://github.com/#{alumnus.github_account_name}"}
+              %img{:src => "/images/icons/social/github.png"}
+          - else
+            %img{:src => "/images/icons/social/github_disabled.png"}
+          - unless alumnus.twitter_account_name.blank?
+            %a{:href => "http://www.twitter.com/#{alumnus.twitter_account_name}"}
+              %img{:src => "/images/icons/social/twitter.png"}
+          - else
+            %img{:src => "/images/icons/social/twitter_disabled.png"}

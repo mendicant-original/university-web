@@ -10,7 +10,7 @@ end
 namespace :"public-site" do 
   
   desc 'Generates the static public site'
-  task :generate do
+  task :generate => :environment do
     public_site_root = File.join(Rails.root, 'public-site')
     output_path      = File.join(Rails.root, 'public')
     
@@ -19,10 +19,12 @@ namespace :"public-site" do
     views  = Pathname.glob(File.join(public_site_root, 'views', '*.haml')).
       reject {|v| v.to_s[/layout.haml/] }
     
+    alumni = User.all.select {|u| !u.alumni_number.blank? }.sort_by(&:alumni_number)
+    
     views.each do |view|
       current = view.basename.to_s.gsub('.haml','').downcase
       static_html = Haml::Engine.new(layout).to_html(Object.new, :current => current) do
-        Haml::Engine.new(File.read(view)).to_html
+        Haml::Engine.new(File.read(view)).to_html(Object.new, :alumni  => alumni)
       end
       output = File.join(output_path, view.basename.to_s.gsub(/haml/,'html'))
       
