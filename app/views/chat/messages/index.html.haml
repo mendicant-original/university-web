@@ -39,8 +39,7 @@
 
 %h1 IRC Log
 
-- if @more_messages
-  %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
+%p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
 
 = form_tag(chat_messages_path, :method => :get) do
   = hidden_field_tag :channel, params[:channel]

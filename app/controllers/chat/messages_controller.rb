@@ -27,16 +27,11 @@ class Chat::MessagesController < ApplicationController
     
     if params[:commit]
       @messages = @messages.where(:recorded_at => @start_time..@end_time)
-      @more_messages = true
     elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     DateTime.parse(params[:since]), params[:last_id].to_i])
     else
-      total_messages = @messages.count
-    
       @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
-    
-      @more_messages = total_messages > @messages.length
     end
     
     @messages.reverse!
