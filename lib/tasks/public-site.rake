@@ -19,12 +19,10 @@ namespace :"public-site" do
     views  = Pathname.glob(File.join(public_site_root, 'views', '*.haml')).
       reject {|v| v.to_s[/layout.haml/] }
     
-    alumni = User.order("alumni_number").select {|u| u.alumnus? }
-    
     views.each do |view|
       current = view.basename.to_s.gsub('.haml','').downcase
       static_html = Haml::Engine.new(layout).to_html(Object.new, :current => current) do
-        Haml::Engine.new(File.read(view)).to_html(Object.new, :alumni  => alumni)
+        Haml::Engine.new(File.read(view)).to_html
       end
       output = File.join(output_path, view.basename.to_s.gsub(/haml/,'html'))
       

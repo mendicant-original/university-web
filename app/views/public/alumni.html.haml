@@ -1,14 +1,8 @@
 #alumni
-  - alumni.each do |alumnus|
+  - @alumni.each do |alumnus|
     .alumnus
-      .name 
-        - if alumnus.alumni_preferences.show_on_public_site
-          - if alumnus.alumni_preferences.show_real_name
-            = !alumnus.real_name.blank? ? alumnus.real_name : alumnus.nickname
-          - else 
-            = !alumnus.nickname.blank? ? alumnus.nickname : "Alumnus ##{alumnus.alumni_number}"
-        - else
-          Alumnus ##{alumnus.alumni_number}
+      .name
+        = alumnus_name(alumnus)
       
         .badge
           %img{:src => alumnus.gravatar_url(64)}
@@ -18,13 +12,13 @@
           = Date::MONTHNAMES[alumnus.alumni_month]
           = alumnus.alumni_year
         .social
-          - if alumnus.alumni_preferences.show_on_public_site && alumnus.alumni_preferences.show_github && !alumnus.github_account_name.blank?
+          - if show_github?(alumnus)
             %a{:href => "http://github.com/#{alumnus.github_account_name}",
               :title => alumnus.github_account_name}
               %img{:src => "/images/icons/social/github.png"}
           - else
             %img{:src => "/images/icons/social/github_disabled.png"}
-          - if alumnus.alumni_preferences.show_on_public_site && alumnus.alumni_preferences.show_twitter && !alumnus.twitter_account_name.blank?
+          - if show_twitter?(alumnus)
             %a{:href => "http://www.twitter.com/#{alumnus.twitter_account_name}",
               :title => alumnus.twitter_account_name}
               %img{:src => "/images/icons/social/twitter.png"}

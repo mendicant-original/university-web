@@ -1,6 +1,8 @@
 University::Application.routes.draw do
   root :to => "dashboard#show"
   
+  get "alumni" => 'public#alumni'
+  
   resource :dashboard, :controller => "dashboard"
   
   namespace :chat do
