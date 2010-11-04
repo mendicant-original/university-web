@@ -31,7 +31,8 @@ namespace :"public-site" do
     
     sass = File.read(File.join(Rails.root, 'public-site', 'stylesheets', 'public.sass'))
     
-    css      = Sass::Engine.new(sass).to_css
+    css      = Sass::Engine.new(sass,
+      :load_paths => [File.join(Rails.root, 'public-site', 'stylesheets')]).to_css
     css_file = File.join(output_path, 'stylesheets', 'public.css')
     
     File.open(css_file, 'w') { |f| f.puts(css) }
