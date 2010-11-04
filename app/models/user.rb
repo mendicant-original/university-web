@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
   
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
   
+  has_one :alumni_preferences
+  
+  accepts_nested_attributes_for :alumni_preferences
+  
   accepts_nested_attributes_for :course_memberships,
     :reject_if => proc { |attributes| attributes['course_id'].blank? },
     :allow_destroy => true
@@ -91,6 +95,10 @@ class User < ActiveRecord::Base
     end    
 
     write_attribute(:alumni_number, number)
+  end
+  
+  def alumnus?
+    !alumni_number.nil?
   end
   
   def gravatar_url(size=40)

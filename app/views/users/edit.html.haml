@@ -32,6 +32,30 @@
     = form.label :time_zone
     = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort,
                             :include_blank => true, :default => ""
+  
+  - if @user.alumnus?
     
+    %hr
+
+    %h2 Alumni Preferences
+    
+    = form.fields_for :alumni_preferences do |p|
+      
+      %p
+        = p.label :show_on_public_site, "Visible to public"
+        = p.check_box :show_on_public_site
+        
+      %p
+        = p.label :show_twitter
+        = p.check_box :show_twitter
+      
+      %p
+        = p.label :show_github
+        = p.check_box :show_github
+        
+      %p
+        = p.label :show_real_name
+        = p.check_box :show_real_name
+  
   %p
     = form.submit 'Update'
