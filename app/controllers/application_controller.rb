@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :change_password_if_needed
   before_filter :set_timezone
   
-  
   helper_method :current_access_level
 
   def change_password_if_needed
