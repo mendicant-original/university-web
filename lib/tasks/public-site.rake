@@ -5,6 +5,10 @@ module Haml::Helpers
   def current_page(name, current)
     'current' if name == current
   end
+  
+  def markdown(file)
+    RDiscount.new(File.read(File.join(Rails.root, 'public-site', 'views', file))).to_html
+  end
 end
 
 namespace :"public-site" do 
