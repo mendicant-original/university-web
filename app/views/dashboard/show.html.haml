@@ -16,9 +16,17 @@
   .right
     = render :partial => "exams"
 
-  .right.blog.last
+  #majestic_blog.right.blog.last
     %h4= link_to "RMU Blog",
           "http://blog.majesticseacreature.com/tag/rubymendicant",
+          :target => "_blank"
+
+    %ul
+      %li Loading...
+  
+  #learning_blog.right.blog.last
+    %h4= link_to "Education Reimagined Blog",
+          "http://educationreimagined.com/",
           :target => "_blank"
 
     %ul
