@@ -21,7 +21,7 @@ class Chat::MessagesControllerTest < ActionController::TestCase
       assert assigns(:messages).include?(@default_channel.messages.first)
     end
     
-    test "raises an exception if channel is not on the current user list" do
+    test "redirects to root if channel is not on the current user list" do
       forbidden_channel = Factory(:chat_channel, :name => "#forbidden")
       
       get :index, :channel => forbidden_channel.name
@@ -47,7 +47,7 @@ class Chat::MessagesControllerTest < ActionController::TestCase
       assert_equal topic.messages.count, assigns(:messages).count
     end
     
-    test "with since param load only last messages" do
+    test "load only last messages if last received message is provided" do
       old_message     = Factory(:chat_message, :channel => @default_channel,
                                 :recorded_at => 10.minutes.ago)
       current_message = Factory(:chat_message, :channel => @default_channel,
@@ -61,6 +61,56 @@ class Chat::MessagesControllerTest < ActionController::TestCase
       assert assigns(:messages).include?(new_message)
       assert !assigns(:messages).include?(current_message)
       assert !assigns(:messages).include?(old_message)
+    end
+    
+    context "filtering results" do
+      tests Chat::MessagesController
+      
+      setup do
+        @oldest_message = Factory(:chat_message, :channel => @default_channel,
+                                  :recorded_at => 5.hours.ago)
+        @old_message    = Factory(:chat_message, :channel => @default_channel,
+                                  :recorded_at => 3.hours.ago)
+        @recent_message = Factory(:chat_message, :channel => @default_channel,
+                                  :recorded_at => 30.minutes.ago)
+      end
+      
+      test "with a 'from' time" do
+        get :index, :commit => "Filter", :from => 1.hour.ago.to_s
+        assert !assigns(:messages).include?(@oldest_message)
+        assert !assigns(:messages).include?(@old_message)
+        assert assigns(:messages).include?(@recent_message)
+      end
+      
+      test "with a 'from' time and 'until' time of 'now'" do
+        get :index, :commit => "Filter", :from => 1.hour.ago.to_s,
+                                         :until => "now"
+        assert !assigns(:messages).include?(@oldest_message)
+        assert !assigns(:messages).include?(@old_message)
+        assert assigns(:messages).include?(@recent_message)
+      end
+      
+      test "with a 'until' time" do
+        get :index, :commit => "Filter", :until => 1.hour.ago.to_s
+        assert assigns(:messages).include?(@oldest_message)
+        assert assigns(:messages).include?(@old_message)
+        assert !assigns(:messages).include?(@recent_message)
+      end
+      
+      test "with a 'until' time of 'now'" do
+        get :index, :commit => "Filter", :until => "now"
+        assert assigns(:messages).include?(@oldest_message)
+        assert assigns(:messages).include?(@old_message)
+        assert assigns(:messages).include?(@recent_message)
+      end
+      
+      test "with both a 'from' and a 'until' time" do
+        get :index, :commit => "Filter", :from  => 4.hours.ago.to_s,
+                                         :until => 1.hour.ago.to_s
+        assert !assigns(:messages).include?(@oldest_message)
+        assert assigns(:messages).include?(@old_message)
+        assert !assigns(:messages).include?(@recent_message)
+      end
     end
   end
 end

@@ -37,7 +37,7 @@
         );
       }
 
-%h1 IRC Log
+%h1= params[:channel]
 
 %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
 
@@ -46,15 +46,14 @@
   = hidden_field_tag :topic, params[:topic] if params[:topic]
 
   %p
-    = label_tag "Start"
-    = select_datetime @start_time, :start_year => 2010, :end_year => Date.today.year, :prefix => :start, :prompt => true
+    = label_tag "From"
+    = text_field_tag :from, params[:from] || @messages.first.recorded_at, :size => 40
 
   %p
-    = label_tag "End"
-    = select_datetime @end_time, :start_year => 2010, :end_year => Date.today.year, :prefix => :end, :prompt => true
+    = label_tag "Until"
+    = text_field_tag :until, params[:until] || "now", :size => 40
 
   %p
-    = link_to "Reset filters", chat_messages_path(:channel => params[:channel])
     = submit_tag 'Filter'
 
 

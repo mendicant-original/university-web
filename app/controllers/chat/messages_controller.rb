@@ -13,7 +13,7 @@ class Chat::MessagesController < ApplicationController
       redirect_to(root_path) and return
     end
     
-    topic = channel.topics.find_by_name(params[:topic])
+    topic = channel.topics.find_by_name(params[:topic]) if params[:topic]
     if topic
       @messages = topic.messages
     else
@@ -22,14 +22,18 @@ class Chat::MessagesController < ApplicationController
 
     @messages = @messages.order("recorded_at DESC")
     
-    @start_time = parse_time_from_params(params[:start])
-    @end_time = parse_time_from_params(params[:end])
-    
-    if params[:commit]
-      @messages = @messages.where(:recorded_at => @start_time..@end_time)
+    if params[:from] && params[:until] && params[:until] != "now"
+      @messages = @messages.where :recorded_at =>
+          Time.parse(params[:from])..Time.parse(params[:until])
+    elsif params[:until] && params[:until] != "now"
+      @messages = @messages.where ["recorded_at < ?",
+                                   Time.parse(params[:until])]
+    elsif params[:from]
+      @messages = @messages.where ["recorded_at > ?",
+                                   Time.parse(params[:from])]
     elsif params[:since]
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
-                    DateTime.parse(params[:since]), params[:last_id].to_i])
+                    Time.parse(params[:since]), params[:last_id].to_i])
     else
       @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
     end
@@ -80,16 +84,4 @@ class Chat::MessagesController < ApplicationController
       id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
     end
   end
-  
-  private
-  def parse_time_from_params(hash)
-    return Date.today unless hash
-  
-    Time.new( hash[:year].to_i,
-              hash[:month].to_i,
-              hash[:day].to_i,
-              hash[:hour].to_i,
-              hash[:minute].to_i )
-  end
-
 end
