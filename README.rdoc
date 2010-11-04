@@ -89,7 +89,7 @@ Finally, run the test suite to make sure everything is working correctly:
 
 FIXME: This probably needs to mention Pivotal Tracker
 
-Contributors retain copyright to their work but must agree to release their contributions under the {Affero GPL version 1}[http://www.affero.org/oagpl.html]
+Contributors retain copyright to their work but must agree to release their contributions under the {Affero GPL version 3}[http://www.gnu.org/licenses/agpl.html]
 
 If you would like to help with developing University Web, please get in touch! Our contact details are at the top of this file.
 
