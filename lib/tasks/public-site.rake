@@ -40,5 +40,10 @@ namespace :"public-site" do
     css_file = File.join(output_path, 'stylesheets', 'public.css')
     
     File.open(css_file, 'w') { |f| f.puts(css) }
+    
+    # Copy the latest layout for the alumni listing
+    #
+    `cp #{File.join(public_site_root, 'views', 'layout.haml')} \
+        #{File.join(Rails.root, 'app', 'views', 'layouts', 'static.html.haml')}`
   end
 end
