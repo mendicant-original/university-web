@@ -6,25 +6,21 @@ class Chat::MessagesController < ApplicationController
   before_filter :authenticate_service, :only => [:create]
 
   def index
-    if params[:channel]
-      if current_user.chat_channels.find_by_name(params[:channel])
-        channel = params[:channel]
-      else
-        flash[:error] = "You don't have access or this channel is invalid."
-        redirect_to(root_path) and return
-      end
+    params[:channel] ||= Chat::Channel::DEFAULT_CHANNEL
+    channel = current_user.chat_channels.find_by_name(params[:channel])
+    unless channel
+      flash[:error] = "You don't have access or this channel is invalid."
+      redirect_to(root_path) and return
     end
     
-    if channel && params[:topic]
-      topic = Chat::Channel.find_by_name(channel).topics.
-                 find_by_name(params[:topic])
+    topic = channel.topics.find_by_name(params[:topic])
+    if topic
+      @messages = topic.messages
+    else
+      @messages = channel.messages
     end
 
-    @messages = Chat::Message.includes(:channel).
-                              where("chat_channels.name = ?", channel || "#rmu-general").
-                              order("recorded_at DESC")
-                              
-    @messages = @messages.where(:topic_id => topic.id) if topic
+    @messages = @messages.order("recorded_at DESC")
     
     @start_time = parse_time_from_params(params[:start])
     @end_time = parse_time_from_params(params[:end])
