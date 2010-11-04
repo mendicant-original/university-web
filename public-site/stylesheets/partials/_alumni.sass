@@ -1,0 +1,48 @@
+#alumni
+  .alumnus
+    width: 283px
+    margin: 10px
+    background: #f1f1f1
+    display: inline-block
+    
+    +border_radius_top(5px)
+    
+    .name
+      +border_radius_top(5px)
+      font-size: 1.5em
+      padding: 10px
+      text-align: center
+      color: #aaa
+      text-shadow: 0 1px 0 #000
+      background: #333
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #555), color-stop(100%, #333))
+      background-image: -moz-linear-gradient(top, #555 0%, #333 100%)
+      background-image: linear-gradient(top, #555 0%, #333 100%)
+    
+    .information
+      padding: 5px
+      
+      .month
+        margin-top: 5px
+        display: inline-block
+        color: #555
+      
+      .social
+        float: right
+        text-align: right
+        a
+          img
+            border: none
+
+    .badge
+      padding: 5px
+      float: left
+      margin-right: 10px
+      color: #bbb
+      text-align: right
+      text-shadow: none
+      color: #333
+      
+      img
+        display: block
+        -moz-box-shadow: 0 0 5px 0 black

@@ -1,0 +1,89 @@
+html, body
+  height: 100%
+
+body
+  font-family: "Gill Sans", "Tacoma", "Arial", sans-serif
+  padding: 0
+  margin: 0
+
+#header
+  background: #eee
+  padding-top: 10px
+  #logo
+    position: relative
+    z-index: 100
+    width: 650px
+    margin: 0 auto
+    text-align: right
+
+
+  img.logo
+    float: left
+  h1
+    font-family: "Baskerville Old Face", "Century Schoolbook", "Tw Cen MT", serif
+    color: #70120B
+    display: inline-block
+    margin: 9px 10px 0 0 
+    font-size: 2.25em
+    letter-spacing: 3px
+
+  #menu_bar
+    margin: 10px 0
+    background-color: #404040
+    height: 15px
+    text-align: center
+
+  .center
+    position: relative
+    text-align: left
+    margin: 0 auto
+  
+  ul.menu
+    padding: 0
+    display: inline-block
+    list-style: none
+    margin: 0
+    -moz-border-radius: 5px
+    -webkit-border: 5px
+    border-radius: 5px
+    border: 1px solid #999999
+    position: relative
+    top: -5px
+    
+    li
+      float: left
+      background-color: #cccccc
+      background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #cccccc))
+      background-image: -moz-linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
+      background-image: linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
+      padding: 4px 10px
+      text-shadow: 0 1px 0 white
+      font-size: 14px
+      letter-spacing: 1px
+      
+      &.first
+        +border_radius_left(5px)
+      &.last
+        +border_radius_right(5px)
+        
+      a
+        text-decoration: none
+        text-shadow: 0 1px 0 white
+        color: #666
+        
+        &.current
+          color: #000
+          
+        &:hover
+          color: #222
+
+#container
+  width: 970px
+  margin: 0 auto
+  background-color: white
+
+#content
+  padding: 10px
+  margin: 0 auto
+  width: 930px
+  clear: both
