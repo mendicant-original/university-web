@@ -23,9 +23,9 @@ class Chat::MessagesControllerTest < ActionController::TestCase
     
     test "raises an exception if channel is not on the current user list" do
       forbidden_channel = Factory(:chat_channel, :name => "#forbidden")
-      assert_raise do
-        get :index, :channel => forbidden_channel.name
-      end
+      
+      get :index, :channel => forbidden_channel.name
+      assert_redirected_to root_path
     end
     
     test "load messages from provided channel" do

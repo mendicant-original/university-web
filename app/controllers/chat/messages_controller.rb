@@ -10,7 +10,8 @@ class Chat::MessagesController < ApplicationController
       if current_user.chat_channels.find_by_name(params[:channel])
         channel = params[:channel]
       else
-        raise "No Access To This Channel or Invalid Channel!"
+        flash[:error] = "You don't have access or this channel is invalid."
+        redirect_to(root_path) and return
       end
     end
     
