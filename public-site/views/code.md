@@ -19,7 +19,7 @@ Each student is required to work on an individual project during their core skil
 	<li><a href="http://github.com/chipiga/forum_engine">forum_engine</a> (Pavel Chipiga): Forum engine built on Rails 3</li>
 	<li><a href="http://github.com/justinramel/groupy">groupy</a> (Justin Ramel) ActiveDirectory Group Management Utility</li>
 	<li><a href="http://github.com/soulim/prism">prism</a> (Alex Soulim): WebSocket Server for chat</li>
-	<li><a href="http://github.com/ruanwz/gstore">gstore</a> (David Ruan): Ruby client library for the Google Storage <span class="caps">API</span></li>
+	<li><a href="http://github.com/ruanwz/gstore">gstore</a> (David Ruan): Some Enhancements to Ruby client library for the Google Storage API<span class="caps">API</span></li>
 	<li><a href="http://groups.google.com/group/prawn-ruby/browse_thread/thread/e2c3ac97065db4ca/2fd7a9b4ba60be6d?lnk=gst&amp;q=examples#2fd7a9b4ba60be6d">Prawn Reference Guide / Examples Refactoring</a> (Felipe Doria)</li>
 	<li><a href="http://github.com/lucasefe/themes_for_rails">themes_for_rails</a> (Lucas Florio): Theme support for Rails 3</li>
 	<li><a href="http://github.com/wpiekutowski/montgomery">montogomery</a> (Wojciech Piekutowski): A lightweight object mapper for MongoDB</li>
