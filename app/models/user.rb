@@ -53,7 +53,16 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
     
-  has_many :exam_submissions, :dependent => :delete_all
+  has_many :exam_submissions, :dependent => :delete_all do
+    def open
+      all.reject do |e|
+        term = e.exam.term
+        
+        term.students.include?(e.user) || 
+        e.user.courses.where(:term_id => term.id).any?
+      end
+    end
+  end
   has_many :exams,            :through => :exam_submissions
 
   def self.search(search, page)
