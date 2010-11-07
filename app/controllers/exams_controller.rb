@@ -38,7 +38,7 @@ class ExamsController < ApplicationController
   
   def find_exam
     # TODO: Replace w/ Exam#hash lookup
-    #@exam = Exam.find_by_name(ENTRANCE_EXAM_NAME)
+    @exam = Exam.find_by_name("RubyConf 2010")
   end
   
   def find_submitted_status
