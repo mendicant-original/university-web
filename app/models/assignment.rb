@@ -14,7 +14,7 @@ class Assignment < ActiveRecord::Base
     
     if submission.submission_status_id.nil?
       submission.update_attribute(:submission_status_id,
-        Assignment::SubmissionStatus.order("sort_order").first) 
+        SubmissionStatus.order("sort_order").first.id) 
     end
     
     submission

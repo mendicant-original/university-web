@@ -12,7 +12,10 @@ class TermsController < ApplicationController
     # TODO clean this up
     if course
       if @term.courses.include?(course) && !course.full?
-        current_user.course_memberships.create(:course_id => course.id)
+        current_user.course_memberships.create(
+          :course_id    => course.id, 
+          :access_level => 'student'
+        )
       
         flash[:notice] = "You have sucessfully enrolled in #{course.name}"
         redirect_to dashboard_path
