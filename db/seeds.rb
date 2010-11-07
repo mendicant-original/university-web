@@ -54,6 +54,10 @@ course = Course.create(:name => "RubyConf 101", :channel_id => channel.id,
   :start_date => Date.today, :end_date => Date.civil(2010, 11, 14), 
   :term_id => term.id, :class_size_limit => 10, :description => "RubyConf 2010",
   :notes => "*TODO* Add more notes ...")
+  
+Course.create(:name => "Advanced Ruby",
+  :start_date => Date.today, :end_date => Date.civil(2010, 11, 14), 
+  :term_id => term.id, :class_size_limit => 0)
 
 ###############
 # Assignments #
