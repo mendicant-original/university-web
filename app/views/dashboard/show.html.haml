@@ -21,16 +21,16 @@
           "http://blog.majesticseacreature.com/tag/rubymendicant",
           :target => "_blank"
 
-    %ul
-      %li Loading...
+    :plain
+      <ul><li><a href="http://blog.majesticseacreature.com/possible-revenue-models-for-rmu" target="_blank">Possible Revenue Models for RMU</a></li><li><a href="http://blog.majesticseacreature.com/last-minute-rmu-exam-submissions" target="_blank">Last-Minute RMU Exam Submissions</a></li><li><a href="http://blog.majesticseacreature.com/rmunicorn-11-technology-update-3" target="_blank">RMUnicorn #11: Technology Update #3</a></li><li><a href="http://blog.majesticseacreature.com/rmunicorn-10-self-sustainable-education" target="_blank">RMUnicorn #10: Self Sustainable Education</a></li><li><a href="http://blog.majesticseacreature.com/rmunicorn-9-free-content-in-education" target="_blank">RMUnicorn #9: Free Content in Education</a></li></ul>
   
-  #learning_blog.right.blog.last
-    %h4= link_to "Education Reimagined Blog",
-          "http://educationreimagined.com/",
-          :target => "_blank"
-
-    %ul
-      %li Loading...
+  / #learning_blog.right.blog.last
+  /   %h4= link_to "Education Reimagined Blog",
+  /         "http://educationreimagined.com/",
+  /         :target => "_blank"
+  / 
+  /   %ul
+  /     %li Loading...
 
   .main  
     - current_user.open_registrations.each do |term|
@@ -44,6 +44,3 @@
           
     - current_user.instructed_courses.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
-  
-  - content_for :header_bottom do
-    = javascript_include_tag "jquery.jgfeed-min", "blog_feed"
