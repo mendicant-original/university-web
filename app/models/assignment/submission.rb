@@ -21,7 +21,7 @@ class Assignment::Submission < ActiveRecord::Base
       :actionable    => comment
     )
     
-    UserMailer.submission_comment_created(comment).deliver
+    #UserMailer.submission_comment_created(comment).deliver
   end
   
   def update_status(user, new_status)
@@ -35,7 +35,7 @@ class Assignment::Submission < ActiveRecord::Base
     
     update_attribute(:submission_status_id, new_status.id)
     
-    UserMailer.submission_updated(activity).deliver
+    #UserMailer.submission_updated(activity).deliver
   end
   
   def update_description(user, new_description)
@@ -49,7 +49,7 @@ class Assignment::Submission < ActiveRecord::Base
     
     update_attribute(:description, new_description)
     
-    UserMailer.submission_updated(activity).deliver if send_email
+    #UserMailer.submission_updated(activity).deliver if send_email
   end
   
   def editable_by?(user)

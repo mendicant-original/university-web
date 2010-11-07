@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
   
   default :from => "rmu.management@gmail.com"
   
-  def submission_comment_created(comment)
+  def submission_comment_created(comment)    
     @comment    = comment
     @submission = comment.commentable
     
@@ -14,7 +14,7 @@ class UserMailer < ActionMailer::Base
          :subject => subject)
   end
   
-  def submission_updated(activity)
+  def submission_updated(activity)    
     @activity   = activity
     @submission = activity.actionable
     @user       = activity.user

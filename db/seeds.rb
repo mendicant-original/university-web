@@ -4,6 +4,7 @@ Term.destroy_all
 Exam.destroy_all
 Chat::Channel.destroy_all
 SubmissionStatus.destroy_all
+Document.destroy_all
 
 #######################
 # Submission Statuses #
@@ -106,6 +107,8 @@ me = User.create(:real_name => "Jordan Byron", :email => "jordan.byron@gmail.com
 me.update_attribute(:access_level, "admin")
 me.update_attribute(:requires_password_change, false)
 
+me.course_memberships.create(:course_id => course.id, :access_level => 'student')
+
 greg = User.create(:real_name => "Gregory Brown", 
                    :email => "gregory_brown@letterboxes.org",
                    :password => "temp123", :password_confirmation => "temp123",
@@ -131,4 +134,22 @@ course.course_memberships.create(:user_id => greg.id, :access_level => "instruct
   student.update_attribute(:access_level, 'student')
   student.course_memberships.create(:course_id => course.id, 
     :access_level => 'student')
+end
+
+#########################
+# Activities / Comments #
+#########################
+
+course.assignments.each do |assignment|
+  5.times do
+    student   = course.students[rand(8)]
+    commentor = (course.students + [greg])[rand(9)]
+    
+    submission = assignment.submission_for(student)
+    
+    submission.create_comment(
+      :user_id      => commentor.id, 
+      :comment_text => Faker::Lorem.paragraphs.join("\n\n")
+    )
+  end
 end
