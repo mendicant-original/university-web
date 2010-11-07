@@ -13,6 +13,8 @@ gem "will_paginate", "~> 3.0.pre2"
 
 gem 'rdiscount'
 
+gem 'faker'
+
 group :test do
   gem 'webrat'
   gem 'stories'
