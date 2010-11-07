@@ -28,7 +28,22 @@ general_channel = Chat::Channel.create(:name => "rmu-general")
 # IRC Logs #
 ############
 
-# TODO: Load sample conversations from file
+chatter_one   = Chat::Handle.create(:name => Faker::Internet.user_name)
+chatter_two   = Chat::Handle.create(:name => Faker::Internet.user_name)
+chatter_three = Chat::Handle.create(:name => Faker::Internet.user_name)
+
+messages = [
+  {:handle_id => chatter_one.id,   :body => "my guess is that the build tools have solidified"},
+  {:handle_id => chatter_two.id,   :body => "yeah suppose so"},
+  {:handle_id => chatter_three.id, :body => "yeah Gentoo is a rolling release, I'm still getting regular updates on my Gentoo install"},
+  {:handle_id => chatter_one.id,   :body => "#{chatter_three.name}: yeah, but that's debian for you"},
+  {:handle_id => chatter_one.id,   :body => "Truth be told, I'm loving the Arch approach to the point where I doubt I'll ever go back to a Debain or Redhat based distro for development anything"},
+  {:handle_id => chatter_two.id,   :body => "I think I'm unusual though in that I'm willing to troubleshoot bugs in order to be constantly up-to-date, and not have to fight my distro for control"},
+]
+
+messages.each_with_index do |message, i|
+  channel.messages.create(message.merge(:recorded_at => Time.now + i.minutes))
+end
 
 #########
 # Terms #
