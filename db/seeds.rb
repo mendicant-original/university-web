@@ -21,12 +21,19 @@ SubmissionStatus.destroy_all
 ############
 
 channel = Chat::Channel.create(:name => "rmu-rubyconf")
+general_channel = Chat::Channel.create(:name => "rmu-general")
+
+############
+# IRC Logs #
+############
+
+# TODO: Load sample conversations from file
 
 #########
 # Terms #
 #########
 
-term = Term.create(:name => "2010", :registration_open => true)
+term = Term.create(:name => "Fall 2010", :registration_open => true)
 
 #########
 # Exams #
@@ -96,12 +103,14 @@ course.course_memberships.create(:user_id => greg.id, :access_level => "instruct
   student_name = Faker::Name.name
   student = User.create(
     :real_name => student_name, 
-    :email => Faker::Internet.email(student_name),
-    :password => "temp123", :password_confirmation => "temp123"
+    :email => Faker::Internet.free_email(student_name),
+    :password => "temp123", :password_confirmation => "temp123",
+    :twitter_account_name => Faker::Internet.user_name(student_name),
+    :github_account_name  => Faker::Internet.user_name(student_name)
   )
 
   student.update_attribute(:requires_password_change, false)
-  
+  student.update_attribute(:access_level, 'student')
   student.course_memberships.create(:course_id => course.id, 
     :access_level => 'student')
 end
