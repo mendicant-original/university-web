@@ -81,6 +81,20 @@ course.assignments.create(
   :notes       => "*TODO* Fill out notes"
 )
 
+#############
+# Documents #
+#############
+
+Pathname.glob(File.join(Rails.root, 'db', 'seed_data', 'documents', '*.md')).each do |doc|
+  Document.create(
+    :title           => doc.basename.to_s.gsub('.md','').humanize,
+    :body            => File.read(doc),
+    :public_internal => true
+  )
+end
+
+course.course_documents.create(:document_id => Document.first.id)
+
 #########
 # Users #
 #########
