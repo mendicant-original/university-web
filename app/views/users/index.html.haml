@@ -1,8 +1,11 @@
 %h1 Directory
 
-%table.edit
-  %tr
-    %th Name / Email
+#directory
   - @users.each do |user|
-    %tr
-      %td= link_to user.name.blank? ? user.email : user.name, user_path(user)
+    .user
+      .name
+        .icon= image_tag user.gravatar_url(64)
+        = user.name
+        .since= user_since(user)
+      
+      .clear
