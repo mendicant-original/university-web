@@ -12,5 +12,7 @@
           :method  => :delete,  :remote => true,
           :confirm => "Are you sure you wish to delete this comment?"
       - else
-        .on= comment.on
+        .on
+          = time_ago_in_words comment.on
+          ago
   .content= md(comment.comment_text)
