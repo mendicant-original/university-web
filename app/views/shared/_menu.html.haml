@@ -1,7 +1,8 @@
 .primary
-  .logo 
-    = image_tag "rmu_small.png"
-    RMU
+  = link_to "http://university.rubymendicant.com", :class => "logo" do
+    .logo 
+      = image_tag "rmu_small.png"
+      RMU
   - if current_user
     = link_to "Home", dashboard_path
     = link_to "Courses", courses_path
