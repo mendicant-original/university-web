@@ -1,16 +1,20 @@
 #directory
+  border-top: 1px solid #ddd
   .user
-    margin: 0.5em 0
+    padding: 0.5em 0
     border-bottom: 1px solid #ddd
     clear: both
-    background: #f1f1f1
+    
+    &:hover
+      background-color: #eee
+
     .name
-      background: #333
-      +linear-gradient(color-stops(#555, #333))
-      color: #ccc
-      +text-shadow(0, 1px, 0, #000)
-      font-size: 1.5em
-      padding: 4px
+      a
+        color: #222
+        &:hover
+          text-decoration: underline
+      font-size: 1.25em
+      padding-top: 5px
     .icon
       float: left
       padding: 5px
@@ -18,7 +22,6 @@
       img
         +box-shadow(#000, 0px, 0px, 5px)
     .since
-      display: inline-block
-      float: right
       font-size: 0.75em
-      vertical-align: bottom
+      margin-top: 0.5em
+      color:  #777
