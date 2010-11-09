@@ -49,5 +49,7 @@ module University
     config.filter_parameters += [:password]
     
     config.action_mailer.default_url_options = { :host => "university.rubymendicant.com" }
+    
+    Haml::Template.options[:ugly] = true
   end
 end
