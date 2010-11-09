@@ -26,6 +26,7 @@
 @import "partials/activity";
 @import "partials/document";
 @import "partials/directory";
+@import "partials/pagination";
 
 h1, h2, h3 {
   margin: 0.75em 0;
@@ -53,26 +54,6 @@ a {
 
 input{
 	margin: 1em 0;
-}
-
-.pagination{
-	margin: 1em 0.5em;
-	background: silver;
-	padding: 1em 2em;
-	color: #444;
-	border: 1px solid gray;
-	
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-}
-
-.pagination a{
-	color: #222;
-}
-
-.pagination em{
-	font-size: 1.3em;
-	color: #000;
 }
 
 p{
