@@ -1,0 +1,43 @@
+#directory
+  border-top: 1px solid #ddd
+  .user
+    padding: 0.5em 0
+    border-bottom: 1px solid #ddd
+    clear: both
+    
+    &:hover
+      background-color: #eee
+
+    .name
+      a
+        color: #222
+        &:hover
+          text-decoration: underline
+      font-size: 1.25em
+      padding-top: 5px
+    .icon
+      float: left
+      padding: 5px
+      margin-right: 10px
+      img
+        +box-shadow(#000, 0px, 0px, 5px)
+    .since
+      font-size: 0.75em
+      margin-top: 0.5em
+      color:  #777
+      
+#directory_search
+  position: relative
+  
+  input, select
+    padding: 2px 4px
+
+  label.infield
+    width: auto
+    float: none
+    color: #999
+    position: absolute
+    top: 15px
+    left: 10px
+    font-weight: normal
+    margin: 0
