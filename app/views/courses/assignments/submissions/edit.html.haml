@@ -45,16 +45,19 @@
           if (e.target.tagName != "A") $(e.target).trigger('edit');
         });
       
+        placeholder = 'Click here to add notes about your project or update its description';
+      
         $('.description').editable(editPath, {
-          type:      'textarea',
-          height:    '200px',
-          width:     '917px',
-          indicator: 'Saving ...',
-          cancel:    'Cancel',
-          submit:    'Save',
-          loadurl:   '#{submission_path(@submission)}.text',
-          tooltip:   'Click to edit...',
-          event:     'edit'
+          type:        'textarea',
+          height:      '200px',
+          width:       '917px',
+          indicator:   'Saving ...',
+          cancel:      'Cancel',
+          submit:      'Save',
+          loadurl:     '#{submission_path(@submission)}.text',
+          tooltip:     placeholder,
+          event:       'edit',
+          placeholder: placeholder
         });
       })
 
