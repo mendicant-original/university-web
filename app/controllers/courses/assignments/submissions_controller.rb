@@ -38,6 +38,10 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   def comment
     @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
     
+    if params[:commit][/Request Review/]
+      @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
+    end
+    
     flash[:notice] = "Comment posted."
     redirect_to :action => :edit
   end
