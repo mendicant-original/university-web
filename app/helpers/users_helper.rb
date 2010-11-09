@@ -24,4 +24,14 @@ module UsersHelper
       [Date::MONTHNAMES[user.created_at.month], user.created_at.year].join(' ')
     end
   end
+  
+  def user_type(user)
+    if user.alumnus?
+      "Alumnus: "
+    elsif user.instructed_courses.any?
+      "Instructor: "
+    else
+      "#{user.access_level.to_s.humanize}: "
+    end
+  end
 end
