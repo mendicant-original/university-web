@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_filter :change_password_if_needed
 
   def index
-    @users = User.all.sort_by {|u| u.name }
+    @users = User.all.sort_by {|u| u.name }.paginate(:page => params[:page])
   end
   
   def show
