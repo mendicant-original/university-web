@@ -1,0 +1,23 @@
+- title [@course.name, 'Directory'].join(' :: ')
+
+= render :partial => "menu"
+
+:javascript
+  $(function(){
+    jQuery("label.infield").inFieldLabels();
+  });
+
+%h1 Directory
+
+= form_tag directory_course_path(@course), :method => :get, 
+  :id => "directory_search" do
+  = label_tag :search, "Name or Email", 
+    :class => "infield"
+  = text_field_tag :search, params[:search]
+  = submit_tag "Search"
+
+#directory
+  - @users.each do |user|
+    = render :partial => '/users/user', :locals => {:user => user}
+
+= will_paginate @users

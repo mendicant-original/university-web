@@ -1,0 +1,12 @@
+- content_for :secondary_navigation do
+  .anchor= link_to "Courses", courses_path
+  = link_to @course.name, course_path(@course)
+  &bull;
+  = link_to "Directory", directory_course_path(@course)
+  - if @course.channel
+    &bull;
+    = link_to "IRC: #{@course.channel.name}",
+      chat_messages_path(:channel => @course.channel.name)
+  - if current_access_level.allows?(:manage_users)
+    &bull;
+    = link_to "Edit this course", edit_admin_course_path(@course)
