@@ -56,13 +56,24 @@ class User < ActiveRecord::Base
   has_many :exam_submissions, :dependent => :delete_all
   has_many :exams,            :through => :exam_submissions
 
-  def self.search(search, page)
+  def self.search(search, page, options={})
     sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
-                    map {|field| "#{field} LIKE :search"}.join(" OR ")
+                    map {|field| "#{field} ILIKE :search"}.join(" OR ")
 
-    paginate :per_page => 20, :page => page,
-             :conditions => [sql_condition, {:search => "%#{search}%"}], 
-             :order => 'email'
+    results = where([sql_condition, {:search => "%#{search}%"}])
+    
+    if options[:course_id] && !options[:course_id].blank?
+      results = results.includes(:course_memberships).
+        where(["course_memberships.course_id = ?", options[:course_id].to_i])
+    end
+    
+    if options[:sort]
+      results = results.sort_by(&options[:sort])
+    else
+      results = results.order('email')
+    end
+    
+    results.paginate :per_page => 20, :page => page
   end
 
   def self.random_password

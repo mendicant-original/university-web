@@ -1,4 +1,19 @@
+:javascript
+  $(function(){
+    jQuery("label.infield").inFieldLabels();
+  });
+
 %h1 Directory
+
+= form_tag users_path, :method => :get, :id => "directory_search" do
+  = label_tag :search, "Name or Email", 
+    :class => "infield"
+  = text_field_tag :search, params[:search]
+  = select_tag :course, 
+    options_for_select(Course.order("start_date").map {|c| [c.name, c.id] },
+    params[:course].to_i),
+    :include_blank => "All Courses"
+  = submit_tag "Search"
 
 #directory
   - @users.each do |user|
