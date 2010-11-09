@@ -68,7 +68,7 @@ exam = Exam.create(
 
 course = Course.create(:name => "RubyConf 101", :channel_id => channel.id,
   :start_date => Date.today, :end_date => Date.civil(2010, 11, 14), 
-  :term_id => term.id, :class_size_limit => 10, :description => "RubyConf 2010",
+  :term_id => term.id, :class_size_limit => 15, :description => "RubyConf 2010",
   :notes => "*TODO* Add more notes ...")
   
 Course.create(:name => "Advanced Ruby",
@@ -125,7 +125,7 @@ me.update_attribute(:requires_password_change, false)
 me.course_memberships.create(:course_id => course.id, :access_level => 'student')
 
 greg = User.create(:real_name => "Gregory Brown", 
-                   :email => "gregory_brown@letterboxes.org",
+                   :email => "gregory.t.brown@gmail.com",
                    :password => "temp123", :password_confirmation => "temp123",
                    :twitter_account_name => "seacreature", 
                    :github_account_name => "seacreature")
@@ -156,15 +156,30 @@ end
 #########################
 
 course.assignments.each do |assignment|
-  5.times do
-    student   = course.students[rand(8)]
-    commentor = (course.students + [greg])[rand(9)]
-    
+  9.times do
+    student   = course.students[rand(9)]
     submission = assignment.submission_for(student)
     
-    submission.create_comment(
-      :user_id      => commentor.id, 
-      :comment_text => Faker::Lorem.paragraphs.join("\n\n")
-    )
+    if rand(2) == 0
+      updater = [student, greg][rand(2)]
+      status = if updater == greg
+        SubmissionStatus.find_by_name("Approved")
+      else
+        SubmissionStatus.find_by_name("Submitted")
+      end
+      
+      submission.update_status(updater, status)
+    else
+      commentor = (course.students + [greg])[rand(10)]
+
+      submission.create_comment(
+        :user_id      => commentor.id, 
+        :comment_text => Faker::Lorem.paragraphs.join("\n\n")
+      )
+    end
   end
+end
+
+Assignment::Activity.all.each do |activity|
+  activity.update_attribute(:created_at, activity.created_at + rand(29).minutes)
 end
