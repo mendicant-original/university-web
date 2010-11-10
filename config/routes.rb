@@ -22,6 +22,7 @@ University::Application.routes.draw do
   resources :courses do
     member do
       post :notes
+      get  :directory
     end
     
     resources :assignments, :controller => "Courses::Assignments" do

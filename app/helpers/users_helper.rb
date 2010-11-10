@@ -16,4 +16,22 @@ module UsersHelper
       link_to project_url, project_url
     end
   end
+  
+  def user_since(user)
+    if user.alumnus?
+      [Date::MONTHNAMES[user.alumni_month], user.alumni_year].join(' ')
+    else
+      [Date::MONTHNAMES[user.created_at.month], user.created_at.year].join(' ')
+    end
+  end
+  
+  def user_type(user)
+    if user.alumnus?
+      "Alumnus: "
+    elsif user.instructed_courses.any?
+      "Instructor: "
+    else
+      "#{user.access_level.to_s.humanize}: "
+    end
+  end
 end

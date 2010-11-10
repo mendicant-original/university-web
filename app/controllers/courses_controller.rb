@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-  before_filter :find_course, :only => [:show, :notes]
-  before_filter :course_members_only, :only => [:show, :notes]
+  before_filter :find_course, :only => [:show, :notes, :directory]
+  before_filter :course_members_only, :only => [:show, :notes, :directory]
   
   def index
     @courses    = current_user.courses
@@ -22,6 +22,11 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.text
     end
+  end
+  
+  def directory
+    @users = User.search(params[:search], params[:page], 
+      :sort => :name, :course_id => @course.id)
   end
   
   private

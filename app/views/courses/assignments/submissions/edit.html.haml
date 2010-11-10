@@ -45,16 +45,19 @@
           if (e.target.tagName != "A") $(e.target).trigger('edit');
         });
       
+        placeholder = 'Click here to add notes about your project or update its description';
+      
         $('.description').editable(editPath, {
-          type:      'textarea',
-          height:    '200px',
-          width:     '917px',
-          indicator: 'Saving ...',
-          cancel:    'Cancel',
-          submit:    'Save',
-          loadurl:   '#{submission_path(@submission)}.text',
-          tooltip:   'Click to edit...',
-          event:     'edit'
+          type:        'textarea',
+          height:      '200px',
+          width:       '917px',
+          indicator:   'Saving ...',
+          cancel:      'Cancel',
+          submit:      'Save',
+          loadurl:     '#{submission_path(@submission)}.text',
+          tooltip:     placeholder,
+          event:       'edit',
+          placeholder: placeholder
         });
       })
 
@@ -63,12 +66,6 @@
   Submission
 
 .description= md(@submission.description)
-
-- if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
-  = form_for @submission, :url => submission_path(@submission) do |f|
-    = f.submit "Request Review", :style => "float: left;"
-    = f.hidden_field :submission_status_id, 
-      :value => SubmissionStatus.find_by_name("Submitted").try(:id)
       
 .comments
   - @submission.activities.order('created_at').each do |activity|
@@ -78,7 +75,10 @@
     :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
 
     %p= f.text_area :comment_text
-    %p= f.submit "Post comment"
+    %p
+      - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
+        = f.submit "Comment & Request Review"
+      = f.submit "Comment"
 
 .clear
 
