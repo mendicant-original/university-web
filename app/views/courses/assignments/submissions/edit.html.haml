@@ -34,6 +34,29 @@
           event:     'edit'
         });
       });
+      
+    	$(".tab_content").hide();
+    	$("ul.tabs li:first").addClass("active").show();
+    	$(".tab_content:first").show();
+
+    	$("ul.tabs li").click(function() {
+
+    		$("ul.tabs li").removeClass("active");
+    		$(this).addClass("active");
+    		$(".tab_content").hide();
+
+    		var activeTab = $(this).find("a").attr("href");
+    		$(activeTab).fadeIn();
+    		$.scrollTo('100%', { axis: 'y' });
+    		return false;
+    	});
+    	
+    	$('ul.tabs li a[href=#preview]').click(function(){
+    	  var converter = new Showdown.converter();
+        var html = converter.makeHtml($('#comment_comment_text').val());
+        $('#preview').html(html);
+    	});
+      
     });
     
   - if @submission.editable_by?(current_user)
@@ -71,14 +94,20 @@
   - @submission.activities.order('created_at').each do |activity|
     = render_activity(activity)
   
-  = form_for @submission.comments.build, 
-    :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
-
-    %p= f.text_area :comment_text
-    %p
-      - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
-        = f.submit "Comment & Request Review"
-      = f.submit "Comment"
+  %ul.tabs
+    %li= link_to "Edit", '#edit'
+    %li= link_to "Preview", '#preview'
+  
+  .tab_container
+    = form_for @submission.comments.build, 
+      :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
+      #edit.tab_content= f.text_area :comment_text
+      #preview.tab_content.description
+        Preview
+      .tab_footer
+        - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
+          = f.submit "Comment & Request Review"
+        = f.submit "Comment"
 
 .clear
 
