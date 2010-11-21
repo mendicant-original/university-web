@@ -107,11 +107,15 @@ class User < ActiveRecord::Base
   def alumni_number=(number)
     if alumni_number.nil? and not number.blank?
       alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
-      alumni_channel_membership = chat_channel_memberships.find_by_channel_id(alumni_channel.id)
+      if alumni_channel
+        alumni_channel_membership = chat_channel_memberships.find_by_channel_id(alumni_channel.id)
 
-      if alumni_channel_membership.nil?
-        chat_channel_memberships.create(:channel => alumni_channel)
+        if alumni_channel_membership.nil?
+          chat_channel_memberships.create(:channel => alumni_channel)
+        end
       end
+      
+      alumni_preferences = AlumniPreferences.create(:user_id => id)
     end    
 
     write_attribute(:alumni_number, number)
