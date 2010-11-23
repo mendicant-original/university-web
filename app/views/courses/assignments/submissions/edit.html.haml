@@ -62,6 +62,11 @@
         var html = converter.makeHtml($('#comment_comment_text').val());
         $('#preview').html(html);
     	});
+    	
+    	$('.description').click(function(e){
+        window.open(e.target.href);
+        return false;
+    	});
       
     });
     
@@ -71,7 +76,8 @@
         var editPath = '#{submission_path(@submission)}/description';
       
         $('.description').click(function(e){
-          if (e.target.tagName != "A") $(e.target).trigger('edit');
+          if (e.target.tagName != "A") 
+            $(e.target).trigger('edit');
         });
       
         placeholder = 'Click here to add notes about your project or update its description';
