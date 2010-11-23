@@ -16,7 +16,7 @@
         $(e.target).siblings('.content').slideToggle();
       });
       
-      $('.comment .content a').click(function(e){
+      $('.comment .content a').live('click', function(e){
         window.open(e.target.href);
         return false;
       });
@@ -63,7 +63,7 @@
         $('#preview').html(html);
     	});
     	
-    	$('.description a').click(function(e){
+    	$('.description a').live('click', function(e){
         window.open(e.target.href);
         return false;
     	});
