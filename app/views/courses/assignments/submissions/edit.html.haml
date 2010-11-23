@@ -16,6 +16,11 @@
         $(e.target).siblings('.content').slideToggle();
       });
       
+      $('.comment .content a').click(function(e){
+        window.open(e.target.href);
+        return false;
+      });
+      
       $('.comment[data-editable=true]').each(function(i,el){
         id = $(el).attr('data-id');
         
