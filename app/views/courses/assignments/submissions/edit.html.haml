@@ -8,6 +8,7 @@
       $('.comment a.edit').click(function(e){
         $(e.currentTarget).parents('.comment').children('.content').
         trigger('edit');
+        e.preventDefault();
       });
       
       // Toggle Status / Description update messages
