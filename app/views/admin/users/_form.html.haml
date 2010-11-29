@@ -67,11 +67,12 @@
 = form.link_to_add "Add a course", :course_memberships
 
 = form.fields_for :course_memberships,
-  @user.course_memberships.where(:access_level => 'student').all do |m|
+  @user.course_memberships.where(["access_level <> 'instructor'"]).all do |m|
   %p.no-label
     = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
       :include_blank => "Select a course"
-    = m.hidden_field :access_level, :value => 'student'
+    = m.select :access_level, 
+      AccessLevel::Course.definitions.keys.reject {|k| k == 'instructor' }
     = m.link_to_remove "Remove"
   
       
