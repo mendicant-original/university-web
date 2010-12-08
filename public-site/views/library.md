@@ -14,6 +14,9 @@ We are committed to releasing our exams, exercises and other learning materials 
 * [s2-e1](https://github.com/rmu/s2-e1): Email bot + web service mashups
 * [s2-e2](https://github.com/rmu/s2-e2): Design pattern demonstrations
 * [s2-e3](https://github.com/rmu/s2-e3): Building text based adventure games
+* [s3-e1](https://github.com/rmu/s3-e1): Building services to wrap various Ruby libraries
+* [s3-e2](https://github.com/rmu/s3-e2): Implementing a chess-like game called Pressman
+* [s3-e3](https://github.com/rmu/s3-e3): Demonstrating connascence by example
 
 ### 2011/T1
 
