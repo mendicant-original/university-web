@@ -6,6 +6,7 @@ Much of our current work is RMU-specific, but may still be of interest to folks 
 
   * [university-web](https://github.com/rmu/university-web): Course administration and student management web app
   * [mendibot](https://github.com/rmu/mendibot): IRC bot which among other things posts chat transcripts to university-web 
+  * [scheduler](https://github.com/rmu/scheduler): Utility for scheduling meetings
 
 _Unless otherwise noted, all RMU core projects are released under the [GNU Affero GPL version 3](http://www.gnu.org/licenses/agpl.html)_
 
@@ -29,13 +30,19 @@ Each student is required to work on an individual project during their core skil
 	<li><a href="http://github.com/tehviking/minivid">minivid</a> (Brandon Hays): 60 second video uploading and sharing service</li>
 	<li><a href="http://github.com/afcapel/rallot">rallot</a> (Alberto Fernández-Capel): Secure electronic voting system backend</li>
 	<li><a href="http://github.com/ericgj/rmu-alarmclock">rmu-alarmclock</a> (Eric Gjertsen): Client/server based reminder system</li>
-        <li><a href="https://github.com/morganp/unwatched">unwatched</a>(Morgan Prior): Track watched/unwatched media files</li>
-        <li><a href="http://github.com/stuartellis/proof">proof</a> (Stuart Ellis): Readability analysis report generation</li>
-        <li><a href="http://github.com/Volundr/prawn-rails">prawn-rails</a> (Walton Hoops): A plugin for using the prawn library seamlessly with Rails</li>
-        <li><a href="http://github.com/chrisdinn/playfair">playfair</a> (Chris Dinn): A ruby data visualization library</li>
-        <li><a href="http://github.com/phiggins/itunes_parser">itunes_parser</a> (Pete Higgins): iTunes XML parser</li>
-        <li><a href="https://github.com/tundal45/actron">actron</a> (Ashish Dixit): Code review application</li>
-        <li><a href="https://github.com/jamesarosen/arturo">arturo</a> (James A. Rosen): Feature sliders for Rails</li>
+  <li><a href="https://github.com/morganp/unwatched">unwatched</a>(Morgan Prior): Track watched/unwatched media files</li>
+  <li><a href="http://github.com/stuartellis/proof">proof</a> (Stuart Ellis): Readability analysis report generation</li>
+  <li><a href="http://github.com/Volundr/prawn-rails">prawn-rails</a> (Walton Hoops): A plugin for using the prawn library seamlessly with Rails</li>
+  <li><a href="http://github.com/chrisdinn/playfair">playfair</a> (Chris Dinn): A ruby data visualization library</li>
+  <li><a href="http://github.com/phiggins/itunes_parser">itunes_parser</a> (Pete Higgins): iTunes XML parser</li>
+  <li><a href="https://github.com/tundal45/actron">actron</a> (Ashish Dixit): Code review application</li>
+  <li><a href="https://github.com/jamesarosen/arturo">arturo</a> (James A. Rosen): Feature sliders for Rails</li>
+  <li><a href="https://github.com/chastell/lovely-rufus">lovely-rufus</a> (Piotr Szotkowski): Text wrapping utility</li>
+  <li><a href="https://github.com/sandropaganotti/ruby_spell_doctory">ruby_spell_doctor</a> (Sandro Paganotti): A spell checking gem based on hunspell</li>
+  <li><a href="https://github.com/vertiginous/tinted">tinted</a> (Gordon Thiesfeld): win32console replacement</li>
+  <li><a href="https://github.com/jcangas/Schedulight">Schedulight</a> (Jorge L. Cangas): Classroom scheduling tool</li>
+  <li><a href="https://github.com/trliner/doji_charts">doji_charts</a> (Tim Liner): Stock charting web app</li>
+  <li><a href="https://github.com/calstad/readable_recurrences">readable_recurrences</a> (Colin Alstad): extracts recurrence patterns from a set of dates</li>
 </ul>     
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._
