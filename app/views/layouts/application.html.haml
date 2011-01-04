@@ -15,17 +15,21 @@
     = yield(:header_bottom)
 
   %body
-    #container
-      #navigation
-        = render :partial => "/shared/menu"
-        - unless yield(:secondary_navigation).blank?
-          .secondary
-            = yield(:secondary_navigation)
-        #flash
-          - flash.each do |flashtype, message|
-            %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
-              = message
-            :javascript
-              setTimeout("$('div.flash').slideUp()", 4000);
-      #content{:class => (yield(:secondary_navigation).blank? ? '' : 'tall')}
-        = yield
+    #header
+      .container Hi!
+      
+      #nav
+       
+    #flash
+      - flash.each do |flashtype, message|
+        %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
+          = message
+        :javascript
+          setTimeout("$('div.flash').slideUp()", 4000);
+    #content
+      = yield
+        
+/ = render :partial => "/shared/menu"
+/   - unless yield(:secondary_navigation).blank?
+/     .secondary
+/       = yield(:secondary_navigation)
