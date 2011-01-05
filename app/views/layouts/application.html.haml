@@ -15,19 +15,24 @@
     = yield(:header_bottom)
 
   %body
-    #header
-      .container Hi!
+    #wrap
+      #header
+        %h1 Ruby Mendicant University
       
-      #nav
+        #nav
+          %ul
+            %li= link_to "Dashboard"
+            %li= link_to "Courses"
+            %li= link_to "Directory"
+            %li= link_to "Administration"
        
-    #flash
-      - flash.each do |flashtype, message|
-        %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
-          = message
-        :javascript
-          setTimeout("$('div.flash').slideUp()", 4000);
-    #content
-      = yield
+      #flash
+        - flash.each do |flashtype, message|
+          %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
+            = message
+          :javascript
+            setTimeout("$('div.flash').slideUp()", 4000);
+      /= yield
         
 / = render :partial => "/shared/menu"
 /   - unless yield(:secondary_navigation).blank?
