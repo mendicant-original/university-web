@@ -15,17 +15,24 @@
     = yield(:header_bottom)
 
   %body
-    #wrap
-      #header
-        %h1 Ruby Mendicant University
+    #header
+      %h1 Ruby Mendicant University
       
-        #nav
-          %ul
-            %li= link_to "Dashboard"
-            %li= link_to "Courses"
-            %li= link_to "Directory"
-            %li= link_to "Administration"
-       
+      - if current_user
+        #user
+          = link_to "#" do
+            = current_user.name
+            = image_tag "down_arrow.png", :class => "drop"
+    
+    #nav
+      %ul
+        %li= link_to "Dashboard"
+        %li= link_to "Courses".html_safe + image_tag("down_arrow.png", :class => "drop")
+        %li= link_to "Directory"
+        %li= link_to "Administration"
+      .clear
+  
+    #wrap
       #flash
         - flash.each do |flashtype, message|
           %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
