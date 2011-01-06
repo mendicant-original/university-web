@@ -16,30 +16,26 @@
 
   %body
     #header
-      %h1 Ruby Mendicant University
+      .constrained
+        %h1 Ruby Mendicant University
       
-      - if current_user
-        #user
-          = link_to "#" do
-            = current_user.name
-            = image_tag "down_arrow.png", :class => "drop"
+        - if current_user
+          #user
+            = image_tag current_user.gravatar_url(20), :class => "gravatar"
+            = link_to "#" do
+              = current_user.name
+              = image_tag "down_arrow.png", :class => "drop"
     
-    #nav
-      %ul
-        %li= link_to "Dashboard"
-        %li= link_to "Courses".html_safe + image_tag("down_arrow.png", :class => "drop")
-        %li= link_to "Directory"
-        %li= link_to "Administration"
-      .clear
+    = render :partial => "shared/nav"
   
-    #wrap
+    #wrap.constrained
       #flash
         - flash.each do |flashtype, message|
           %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
             = message
           :javascript
             setTimeout("$('div.flash').slideUp()", 4000);
-      /= yield
+      = yield
         
 / = render :partial => "/shared/menu"
 /   - unless yield(:secondary_navigation).blank?

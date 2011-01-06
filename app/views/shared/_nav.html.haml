@@ -1,0 +1,11 @@
+#nav
+  .constrained
+    %ul
+      %li= link_to "Dashboard", dashboard_path, :class => "first"
+      %li
+        = link_to "Courses".html_safe + image_tag("down_arrow.png", :class => "drop"),
+                  courses_path
+      %li= link_to "Directory", users_path
+      - if current_access_level.allows? :manage_users
+        %li= link_to "Administration", admin_users_path
+    .clear
