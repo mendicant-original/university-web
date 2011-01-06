@@ -1,0 +1,7 @@
+#user
+  = image_tag current_user.gravatar_url(20), :class => "gravatar"
+  = user_button
+  #user_dropdown.dropdown{:style => "display: none;"}
+    %ul
+      %li= link_to "Edit Profile", edit_user_path(current_user)
+      %li= link_to "Sign Out", destroy_user_session_path

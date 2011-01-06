@@ -20,21 +20,12 @@
         %h1 Ruby Mendicant University
       
         - if current_user
-          #user
-            = image_tag current_user.gravatar_url(20), :class => "gravatar"
-            = link_to "#" do
-              = current_user.name
-              = image_tag "down_arrow.png", :class => "drop"
+          = render :partial => "shared/user"
     
     = render :partial => "shared/nav"
-  
+    = render :partial => "shared/flash", :locals => {:flash => flash}
+          
     #wrap.constrained
-      #flash
-        - flash.each do |flashtype, message|
-          %div{:class => "flash #{flashtype}", :id => "flash-#{flashtype}"}
-            = message
-          :javascript
-            setTimeout("$('div.flash').slideUp()", 4000);
       = yield
         
 / = render :partial => "/shared/menu"

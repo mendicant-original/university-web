@@ -36,15 +36,45 @@ body
   #user
     color: #fff
     float: right
-    padding: 5px 10px
     +border-radius(3px)
     background-color: #8B0808
     +box-shadow(#5F0707, 0, -1px, 1px)
+    position: relative
     a
       color: #fff
+      padding: 5px 10px
+      &.active
+        background-color: #f9f9f9
+        color: #333
+        position: relative
+        z-index: 4
+        +border-top-radius(3px)
+
     img.gravatar
       vertical-align: middle
-      margin-right: 5px
+      margin: 5px 0px 5px 10px
+      
+      
+    #user_dropdown
+      position: absolute
+      top: 26px
+      right: 0
+      background-color: #f9f9f9
+      +border-bottom-radius(3px)
+      +border-top-left-radius(3px)
+      +box-shadow(#000, 0, 1px, 8px)
+      color: #333
+      z-index: 3
+      width: 150px
+      
+      ul
+        li
+          border-bottom: 1px solid #bbb
+          a
+            padding: 7px
+            display: block
+            &:hover
+              background-color: #e9e9e9
     
 #nav
   background-color: #256188
