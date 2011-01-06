@@ -33,9 +33,15 @@ module ApplicationHelper
         image_tag("down_arrow.png", :class => "drop") 
       ].join.html_safe,
       "$('#user_dropdown').toggle(); $('#user a').toggleClass('active'); " +
-      %{ if($('#user a').hasClass('active'))
+      %{ if($('#user a').hasClass('active')){
            $('#user a img').attr('src', '/images/down_arrow_dark.png');
-         else
+           $(document.body).click(function(e){
+             if(!$(e.originalTarget).hasClass('active')){
+               $(document.body).unbind('click');
+               $('#user a').click();
+             }
+           });
+         }else
            $('#user a img').attr('src', '/images/down_arrow.png');}
     )
   end
