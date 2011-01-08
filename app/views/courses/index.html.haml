@@ -17,6 +17,11 @@
     .label Teaching    
   - @instructed.each do |course|
     = render :partial => "course", :locals => { :course => course }
+    
+  - if @mentored.any?
+    .label Mentoring    
+  - @mentored.each do |course|
+    = render :partial => "course", :locals => { :course => course }
         
   - if @courses.archived.student(current_user).any?
     .label Archived    

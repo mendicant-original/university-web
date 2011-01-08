@@ -138,6 +138,13 @@ class User < ActiveRecord::Base
     Course.where(:id => ids).order("start_date")
   end
   
+  def mentored_courses
+    ids = course_memberships.where(:access_level => 'mentor').
+      map(&:course_id)
+    
+    Course.where(:id => ids).order("start_date")
+  end
+  
   def real_name_or_nick_name_required 
     if real_name.blank? and nickname.blank?
       errors.add(:base, 
