@@ -28,21 +28,11 @@ module ApplicationHelper
   # TODO Most of this logic needs to be moved into a JS file.
   #
   def user_button
-    link_to_function( 
+    link_to(
       [ current_user.name, 
         image_tag("down_arrow.png", :class => "drop") 
       ].join.html_safe,
-      "$('#user_dropdown').toggle(); $('#user a').toggleClass('active'); " +
-      %{ if($('#user a').hasClass('active')){
-           $('#user a img').attr('src', '/images/down_arrow_dark.png');
-           $(document.body).click(function(e){
-             if(!$(e.originalTarget).hasClass('active')){
-               $(document.body).unbind('click');
-               $('#user a').click();
-             }
-           });
-         }else
-           $('#user a img').attr('src', '/images/down_arrow.png');}
+      '#'
     )
   end
 end
