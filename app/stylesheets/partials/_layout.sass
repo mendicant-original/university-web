@@ -20,6 +20,14 @@ $rmu_red= #70130B
   ul
     li
       border-bottom: 1px solid #bbb
+      float: none
+      display: block
+      margin-right: 0
+      
+      &.small
+        a
+          font-size: 1em
+          padding: 7px 10px
       a
         padding: 7px
         display: block
@@ -81,14 +89,13 @@ body
       vertical-align: middle
       margin: 5px 0px 5px 10px
       
-      
     #user_dropdown
       +dropdown_menu
-    
+   
 #nav
   background-color: #256188
   color: #fff
-  padding: 0.75em 20px
+  padding: 0.5em 20px
   +box-shadow(#333, -2px, -1px, 0, 2px)
   
   ul
@@ -104,12 +111,30 @@ body
     
       a
         color: #fff
-        padding: 2px 10px
+        padding: 5px 10px
         display: inline-block
         font-size: 1.25em
         
         &.first
           padding-left: 0px
+
+#courses
+  +dropdown_container
+
+  a
+    +dropdown_link
+
+#courses_dropdown
+  +dropdown_menu
+  left: 0
+  width: 175px
+  top: 25px
+  +border-top-right-radius(3px)
+  +border-top-left-radius(0)
+  ul
+    li
+      a
+        padding: 10px
 
 a
   color: #184FA0

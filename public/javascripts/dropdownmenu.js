@@ -3,18 +3,18 @@ var DropdownMenu = {};
 DropdownMenu.register = function(name){
   $('#' + name + '_dropdown').hide();
   
-  $('#' + name + ' a').click(function(e){
+  $('#' + name + ' a:first').click(function(e){
     DropdownMenu.toggle(name)
 
     // Allow clicking both on and off the menu to close it
     if($('#' + name + ' a').hasClass('active')){
-      $(document.body).bind('click.dropdown', function(e){
+      $(document.body).bind('click.dropdown.' + name, function(e){
         if(!$(e.originalTarget).is('#' + name + ' a')){
-          $(document.body).unbind('.dropdown');
+          $(document.body).unbind('.dropdown.' + name);
           DropdownMenu.toggle(name);
         }
         else if($(e.originalTarget).is('#' + name + ' a') && !$(e.originalTarget).hasClass('active'))
-          $(document.body).unbind('.dropdown');
+          $(document.body).unbind('.dropdown.' + name);
       });
     }
       
