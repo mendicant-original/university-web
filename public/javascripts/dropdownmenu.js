@@ -8,17 +8,13 @@ DropdownMenu.register = function(name){
 
     // Allow clicking both on and off the menu to close it
     if($('#' + name + ' a').hasClass('active')){
-      
-      // TODO: Use namespaced click event
-      // http://answers.oreilly.com/topic/2353-5-things-you-might-not-know-about-jquery/
-      //
-      $(document.body).click(function(e){
+      $(document.body).bind('click.dropdown', function(e){
         if(!$(e.originalTarget).is('#' + name + ' a')){
-          $(document.body).unbind('click');
+          $(document.body).unbind('.dropdown');
           DropdownMenu.toggle(name);
         }
         else if($(e.originalTarget).is('#' + name + ' a') && !$(e.originalTarget).hasClass('active'))
-          $(document.body).unbind('click');
+          $(document.body).unbind('.dropdown');
       });
     }
       
