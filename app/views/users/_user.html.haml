@@ -2,7 +2,11 @@
   .icon= image_tag user.gravatar_url(48)
   .name= link_to user.name, user_path(user)
   .since
-    %span.type= user_type(user)
+    %span.type
+      - if defined? roles
+        = roles.map {|cm| cm.access_level.to_s.humanize }.join(', ') + ": "
+      - else
+        = user_type(user)
     = user_since(user)
   
   .clear

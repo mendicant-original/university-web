@@ -18,6 +18,7 @@
 
 #directory
   - @users.each do |user|
-    = render :partial => '/users/user', :locals => {:user => user}
+    = render :partial => '/users/user', :locals => { :user => user, 
+      :roles => user.course_memberships.where(:course_id => @course.id)}
 
 = will_paginate @users

@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   def index
     @courses    = current_user.courses
     @instructed = current_user.instructed_courses
+    @mentored   = current_user.mentored_courses
   end
   
   def show

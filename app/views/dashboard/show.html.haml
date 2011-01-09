@@ -43,6 +43,9 @@
     - current_user.courses.active.student(current_user).each do |course|
       = render :partial => "assignments", :locals => {:course => course}
           
+    - current_user.mentored_courses.each do |course|
+      = render :partial => "assignments", :locals => {:course => course}
+      
     - current_user.instructed_courses.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
   
