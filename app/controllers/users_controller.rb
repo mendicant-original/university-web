@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :change_password_if_needed
+  before_filter lambda { @selected = :directory }, :except => [:edit, :update, :change_password]
 
   def index
     @users = User.search(params[:search], params[:page], 

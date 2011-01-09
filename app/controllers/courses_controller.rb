@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_filter { @selected = :courses }
   before_filter :find_course, :only => [:show, :notes, :directory]
   before_filter :course_members_only, :only => [:show, :notes, :directory]
   

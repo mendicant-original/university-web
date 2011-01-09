@@ -95,7 +95,7 @@ body
 #nav
   background-color: #256188
   color: #fff
-  padding: 0.5em 20px
+  padding: 5px 20px 0
   +box-shadow(#333, -2px, -1px, 0, 2px)
   
   ul
@@ -108,10 +108,16 @@ body
       list-style-type: none
       margin-right: 1em
       white-space: nowrap
+      position: relative
+    
+      img.selected
+        position: absolute
+        bottom: -1px
+        left: 42%
     
       a
         color: #fff
-        padding: 5px 10px
+        padding: 5px 10px 10px
         display: inline-block
         font-size: 1.25em
         
@@ -128,7 +134,7 @@ body
   +dropdown_menu
   left: 0
   width: 175px
-  top: 24px
+  top: 25px
   +border-top-right-radius(3px)
   +border-top-left-radius(0)
   ul
