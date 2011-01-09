@@ -13,5 +13,5 @@
       - if current_access_level.allows? :manage_users
         %li= link_to "Administration", admin_users_path
     :javascript
-      DropdownMenu.register('courses');
+      $(function() { DropdownMenu.register('courses'); } );
     .clear
