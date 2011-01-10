@@ -28,6 +28,8 @@
         tooltip:   'Click to edit...',
         event:     'edit'
       });
+      
+      SidebarMenu.register('sidebar');
     });
 
 .course-two-col
@@ -35,9 +37,9 @@
     %h1= @course.name
 
   .nav
-    %ul
+    %ul#sidebar
       %li
-        %a.selected{:href => '#overview'} Overview
+        %a{:href => '#overview'} Overview
       %li
         %a{:href => '#documents'} Documents
       %li
@@ -47,27 +49,29 @@
   
   .main
     #bucket
-      #description= @course.description_html
+      #overview.bucket
+        #description= @course.description_html
+        
+        %h2.header
+          Notes
+          .controls
+            %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+        #notes= md(@course.notes)
+        
+        = render :partial => "dashboard/assignments", 
+          :locals => {:course => @course}
+      
+      #assignments.bucket
+        - @course.assignments.each do |assignment|
+          = link_to assignment.name, course_assignment_path(@course, assignment)
+          %br
     
-      - if @course.documents.any?
-    
-        %h2.header Documents
-    
-        #documents
-          - @course.documents.each do |document|
-            = link_to document.title, document_path(document)
-    
-      %h2.header
-        Notes
-        .controls
-          %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-      #notes= md(@course.notes)
-    
-      = render :partial => "dashboard/assignments", 
-        :locals => {:course => @course}
-
-      %h2.header Activity
-      #activity
+      #documents.bucket
+        - @course.documents.each do |document|
+          = link_to document.title, document_path(document)
+          %br
+  
+      #activity.bucket
         - @activities.each do |activity|
           = render :partial => "activity", 
                   :locals => {:activity => activity}
