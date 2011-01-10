@@ -127,23 +127,28 @@ body
         &.first
           padding-left: 0px
 
-#courses
+#courses, #administration
   +dropdown_container
 
   a
     +dropdown_link
 
-#courses_dropdown
+#courses_dropdown, #administration_dropdown
   +dropdown_menu
   left: 0
   width: 175px
-  top: 25px
+  top: 29px
   +border-top-right-radius(3px)
   +border-top-left-radius(0)
   ul
     li
       a
         padding: 10px
+        
+#administration_dropdown
+  a
+    font-size: 1em !important
+    padding: 5px 10px !important
 
 a
   color: #184FA0

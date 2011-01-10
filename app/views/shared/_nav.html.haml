@@ -16,9 +16,21 @@
         = link_to "Directory", users_path
         = selected_arrow(:directory)
       - if current_access_level.allows? :manage_users
-        %li
-          = link_to "Administration", admin_users_path
+        %li#administration
+          = link_to "Administration".html_safe + image_tag("down_arrow.png", :class => "drop"), '#'
           = selected_arrow(:administration)
+          #administration_dropdown
+            %ul
+              %li= link_to "Users", admin_users_path
+              %li= link_to "Courses", admin_courses_path
+              %li= link_to "Exams", admin_exams_path
+              %li= link_to "Terms", admin_terms_path
+              %li= link_to "Documents", admin_documents_path
+              %li= link_to "Submission Statuses", admin_submission_statuses_path
+              %li= link_to "Broadcast Emails", new_admin_group_mail_path
     :javascript
-      $(function() { DropdownMenu.register('courses'); } );
+      $(function() { 
+        DropdownMenu.register('courses');
+        DropdownMenu.register('administration'); 
+      } );
     .clear
