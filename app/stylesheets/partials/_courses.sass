@@ -1,26 +1,43 @@
-$blueprint_grid_columns : 13
-$blueprint-container-size : 930px
-$blueprint-grid-width : 60px
-$blueprint_grid_outer_width: 60px
-
 .course-two-col
   +container
-  div.main
-    display: inline
-    float: left
-    margin-right: 40px
-    padding-right: 5px
-    width: 660px
-  div.right
-    display: inline
-    float: left
-    margin-right: 0
-    width: 200px
-    margin-top: 2em
-    &.fixed
-      position: fixed
-      top: 85px
+  div.header
+    +column(24, true)
+    
+    border-bottom: 1px solid #ddd
+    padding: 1em 0
+    
+    h1
+      margin: 0
+  div.nav
+    +column(4)
+    
+    li
+      font-size: 1.25em
+      margin: 0.5em 0
       
+      &:first-child
+        margin-top: 0
+      
+      a
+        display: block
+        padding: 0.75em
+        
+        &:hover
+          background-color: #ddd
+          
+        &.selected
+          background-color: #ddd
+        
+  div.main
+    +column(20, true)
+    
+    #bucket
+      border-left: 1px solid #ddd
+      padding: 1em 0 1em 1em
+      
+  div.nav, #bucket
+    padding-top: 1em
+  
   td.status
     font-size: 0.8em !important
     
@@ -67,7 +84,7 @@ $blueprint_grid_outer_width: 60px
       .name
         font-size: 1em
       
-#assignments, #submissions
+#submissions
   border-left: 1px solid #eee
   border-right: 1px solid #eee
   margin-bottom: 1em

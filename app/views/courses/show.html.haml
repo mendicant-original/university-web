@@ -31,38 +31,44 @@
     });
 
 .course-two-col
-  .main
+  .header
     %h1= @course.name
+
+  .nav
+    %ul
+      %li
+        %a.selected{:href => '#overview'} Overview
+      %li
+        %a{:href => '#documents'} Documents
+      %li
+        %a{:href => '#assignments'} Assignments
+      %li
+        %a{:href => '#activity'} Activity
   
-    #description= @course.description_html
+  .main
+    #bucket
+      #description= @course.description_html
     
-    - if @course.documents.any?
+      - if @course.documents.any?
     
-      %h2.header Documents
+        %h2.header Documents
     
-      #documents
-        - @course.documents.each do |document|
-          = link_to document.title, document_path(document)
+        #documents
+          - @course.documents.each do |document|
+            = link_to document.title, document_path(document)
     
-    %h2.header
-      Notes
-      .controls
-        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #notes= md(@course.notes)
+      %h2.header
+        Notes
+        .controls
+          %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+      #notes= md(@course.notes)
     
-    = render :partial => "dashboard/assignments", 
-      :locals => {:course => @course}
+      = render :partial => "dashboard/assignments", 
+        :locals => {:course => @course}
 
-    %h2.header Activity
-    #activity
-      - @activities.each do |activity|
-        = render :partial => "activity", 
-                :locals => {:activity => activity}
-      = will_paginate @activities
-
-  .right.fixed
-    #assignments
-      .header Assignments
-      - @course.assignments.each do |assignment|
-        .assignment= link_to assignment.name, 
-                        course_assignment_path(@course, assignment)
+      %h2.header Activity
+      #activity
+        - @activities.each do |activity|
+          = render :partial => "activity", 
+                  :locals => {:activity => activity}
+        = will_paginate @activities
