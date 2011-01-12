@@ -12,15 +12,33 @@
     font-style: italic
   strong
     font-weight: bold
+  
+  pre, code
+    font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
     
   pre
-    font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
     background-color: #eee
     border: 1px solid #999
     padding: 10px
     font-size: 0.91em
     +border-radius(5px)
     color: #444
+    margin: 1.5em 0
+    
+  code
+    background-color: #eee
+    border: 1px solid #999
+    color: #444
+    padding: 0.2em 0.2em
+    font-size: 12px
+    +border-radius(2px)
+    
+  pre code
+    background-color: #eee
+    border: none
+    padding: none
+    font-size: 1em
+    line-height: 1.2em
     
 .description
   +markdown
