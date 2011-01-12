@@ -73,8 +73,8 @@
     
       #documents.bucket
         - @course.documents.each do |document|
-          = link_to document.title, document_path(document)
-          %br
+          .document
+            = link_to document.title, document_path(document)
   
       #activity.bucket
         - @activities.each do |activity|
