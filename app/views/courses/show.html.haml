@@ -20,7 +20,7 @@
       $('#notes').editable(editPath, {
         type:      'textarea',
         height:    '200px',
-        width:     '680px',
+        width:     '98%',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
@@ -35,6 +35,11 @@
 .course-two-col
   .header
     %h1= @course.name
+
+  #breadcrumbs.header
+    = link_to "Courses", courses_path
+    %span.separator &rarr;
+    = @course.name
 
   .nav
     %ul#sidebar
