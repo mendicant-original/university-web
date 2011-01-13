@@ -1,0 +1,3 @@
+= link_to "Assignments", course_path(@course, :anchor => "assignments")
+%span.separator &rarr;
+= link_to @assignment.name, course_assignment_path(@course, @assignment)

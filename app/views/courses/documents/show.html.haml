@@ -5,9 +5,7 @@
     });
 
 - content_for :breadcrumbs do
-  = link_to "Courses", courses_path
-  %span.separator &rarr;
-  = link_to @course.name, course_path(@course)
+  = render :partial => "courses/breadcrumbs"
   %span.separator &rarr;
   = link_to "Documents", course_path(@course, :anchor => "documents")
   %span.separator &rarr;

@@ -1,7 +1,5 @@
 - title "#{@submission.user.name}'s #{@assignment.name} Submission"
 
-= render :partial => "courses/assignments/menu"
-
 - content_for :header_bottom do
   :javascript
     $(document).ready(function(){
@@ -68,6 +66,8 @@
         return false;
     	});
       
+      $("#sidebar li a[data-id=submissions]").addClass('selected');
+      
     });
     
   - if @submission.editable_by?(current_user)
@@ -96,40 +96,54 @@
         });
       })
 
-%h1
-  = "#{@submission.user.name}'s " if current_user != @submission.user
-  Submission
 
-.description= md(@submission.description)
-      
-.comments
-  - @submission.activities.order('created_at').each do |activity|
-    = render_activity(activity)
-  
-  %ul.tabs
-    %li= link_to "Edit", '#edit'
-    %li= link_to "Preview", '#preview'
-  
-  .tab_container
-    = form_for @submission.comments.build, 
-      :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
-      #edit.tab_content= f.text_area :comment_text
-      #preview.tab_content.description
-        Preview
-      .tab_footer
-        - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
-          = f.submit "Comment & Request Review"
-        = f.submit "Comment"
+- content_for :breadcrumbs do
+  = render :partial => "courses/breadcrumbs"
+  %span.separator &rarr;
+  = render :partial => "courses/assignments/breadcrumbs"
+  %span.separator &rarr;
+  = link_to "Submissions", 
+    course_assignment_path(@course, @assignment, :anchor => "submissions")
+  %span.separator &rarr;
+  = @submission.user.name
 
-.clear
+- content_for :bucket do
+  #submission
+    - if current_user != @submission.user
+      %h2.header= "#{@submission.user.name}'s Submission"
 
-- if @course.instructors.include?(current_user)
-  
-  %hr
+    .description= md(@submission.description)
 
-  = form_for @submission, :url => submission_path(@submission) do |f|
-    = f.submit "Update Status"
-    = f.select :submission_status_id,
-      SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}
-        
-  .clear
+    .comments
+      - @submission.activities.order('created_at').each do |activity|
+        = render_activity(activity)
+
+      %ul.tabs
+        %li= link_to "Edit", '#edit'
+        %li= link_to "Preview", '#preview'
+
+      .tab_container
+        = form_for @submission.comments.build, 
+          :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
+          #edit.tab_content= f.text_area :comment_text
+          #preview.tab_content.description
+            Preview
+          .tab_footer
+            - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
+              = f.submit "Comment & Request Review"
+            = f.submit "Comment"
+
+    .clear
+
+    - if @course.instructors.include?(current_user)
+
+      %hr
+
+      = form_for @submission, :url => submission_path(@submission) do |f|
+        = f.submit "Update Status"
+        = f.select :submission_status_id,
+          SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}
+
+      .clear
+
+= render :partial => "courses/assignments/layout"

@@ -31,13 +31,9 @@
     });
 
 - content_for :breadcrumbs do
-  = link_to "Courses", courses_path
+  = render :partial => "courses/breadcrumbs"
   %span.separator &rarr;
-  = link_to @course.name, course_path(@course)
-  %span.separator &rarr;
-  = link_to "Assignments", course_path(@course, :anchor => "assignments")
-  %span.separator &rarr;
-  = link_to @assignment.name, course_assignment_path(@course, @assignment)
+  = render :partial => "breadcrumbs"
   %span.separator &rarr;
   %span#current_section
   
