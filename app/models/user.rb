@@ -82,7 +82,10 @@ class User < ActiveRecord::Base
       results = results.order('email')
     end
     
-    results.paginate :per_page => 20, :page => page
+    per_page = options[:per_page]
+    per_page ||= 20
+    
+    results.paginate :per_page => per_page, :page => page
   end
 
   def self.random_password

@@ -11,7 +11,10 @@ class CoursesController < ApplicationController
   
   def show
     @activities = @course.activities.paginate(:per_page => 10, 
-                                              :page     => params[:page])
+                                              :page     => params[:activity_page])
+    
+    @users = User.search(params[:search], params[:user_page], 
+      :sort => :name, :course_id => @course.id, :per_page => 7)
     
     respond_to do |format|
       format.html
@@ -28,8 +31,7 @@ class CoursesController < ApplicationController
   end
   
   def directory
-    @users = User.search(params[:search], params[:page], 
-      :sort => :name, :course_id => @course.id)
+
   end
   
   private

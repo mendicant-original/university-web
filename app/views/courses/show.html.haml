@@ -28,6 +28,8 @@
       });
       
       SidebarMenu.register('sidebar');
+      
+      jQuery("label.infield").inFieldLabels();
     });
 
 - content_for :breadcrumbs do
@@ -62,6 +64,22 @@
     - @activities.each do |activity|
       = render :partial => "activity", 
               :locals => {:activity => activity}
-    = will_paginate @activities, :params => {:anchor => "activity"}
+    = will_paginate @activities, :params => {:anchor => "activity"},
+      :param_name => "activity_page"
+    
+  #directory.bucket
+    = form_tag course_path(@course, :anchor => "directory"), :method => :get, 
+      :id => "directory_search" do
+      = label_tag :search, "Name or Email", 
+        :class => "infield"
+      = text_field_tag :search, params[:search]
+      = submit_tag "Search"
+  
+    - @users.each do |user|
+      = render :partial => '/users/user', :locals => { :user => user, 
+        :roles => user.course_memberships.where(:course_id => @course.id)}
+
+    = will_paginate @users, :params => {:anchor => "directory"}, 
+      :param_name => "user_page"
     
 = render :partial => "layout"

@@ -37,4 +37,7 @@ SidebarMenu.select = function(selected){
   
   $('#current_section').text(selectedMenu.text());
   window.location.hash = selectedMenu.attr('data-id');
+  
+  // Nasty hack to undo anchor jumping
+  window.scrollTo(0, 0);
 };
