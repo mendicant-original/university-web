@@ -4,8 +4,6 @@ SidebarMenu.register = function(sidebar){
   sidebarElement = $('#' + sidebar);
   
   sidebarElement.children('li').each(function(index, button){
-    if(index == 0) $(button).children('a:first').addClass('selected');
-       
     $(button).children('a:first').click(function(e){
       SidebarMenu.select(e.target);
       
@@ -14,7 +12,16 @@ SidebarMenu.register = function(sidebar){
   });
   
   $('#bucket').children('div.bucket').hide();
-  $('#bucket').children('div.bucket:first').show();
+  
+  url = document.location.toString();
+  
+  if(url.match('#')){
+    selected = $('a[data-id=' + url.split('#')[1] + ']');
+    SidebarMenu.select(selected);
+  }
+  else{
+    SidebarMenu.select(sidebarElement.find('li:first a:first'));
+  }
 };
 
 SidebarMenu.select = function(selected){
@@ -25,6 +32,8 @@ SidebarMenu.select = function(selected){
   
   $('#bucket').children('div.bucket').hide();
   
-  selectedBucket = $(selectedMenu.attr('href'));
+  selectedBucket = $('#' + selectedMenu.attr('data-id'));
   selectedBucket.show();
+  
+  $('#current_section').text(selectedMenu.text());
 };

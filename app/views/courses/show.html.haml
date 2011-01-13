@@ -1,6 +1,4 @@
 - title @course.name
-
-= render :partial => "menu"
       
 - content_for :header_bottom do
   :javascript
@@ -32,52 +30,40 @@
       SidebarMenu.register('sidebar');
     });
 
-.course-two-col
-  .header
-    %h1= @course.name
-
-  #breadcrumbs.header
-    = link_to "Courses", courses_path
-    %span.separator &rarr;
-    = @course.name
-
-  .nav
-    %ul#sidebar
-      %li
-        %a{:href => '#overview'} Overview
-      %li
-        %a{:href => '#documents'} Documents
-      %li
-        %a{:href => '#assignments'} Assignments
-      %li
-        %a{:href => '#activity'} Activity
+- content_for :breadcrumbs do
+  = link_to "Courses", courses_path
+  %span.separator &rarr;
+  = link_to @course.name, course_path(@course)
+  %span.separator &rarr;
+  %span#current_section
   
-  .main
-    #bucket
-      #overview.bucket
-        #description= @course.description_html
-        
-        %h2.header
-          Notes
-          .controls
-            %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-        #notes= md(@course.notes)
-        
-        = render :partial => "dashboard/assignments", 
-          :locals => {:course => @course}
-      
-      #assignments.bucket
-        - @course.assignments.each do |assignment|
-          = link_to assignment.name, course_assignment_path(@course, assignment)
-          %br
+- content_for :bucket do
+  #overview.bucket
+    #description= @course.description_html
     
-      #documents.bucket
-        - @course.documents.each do |document|
-          .document
-            = link_to document.title, document_path(document)
+    %h2.header
+      Notes
+      .controls
+        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #notes= md(@course.notes)
+    
+    = render :partial => "dashboard/assignments", 
+      :locals => {:course => @course}
   
-      #activity.bucket
-        - @activities.each do |activity|
-          = render :partial => "activity", 
-                  :locals => {:activity => activity}
-        = will_paginate @activities
+  #assignments.bucket
+    - @course.assignments.each do |assignment|
+      = link_to assignment.name, course_assignment_path(@course, assignment)
+      %br
+
+  #documents.bucket
+    - @course.documents.each do |document|
+      .document
+        = link_to document.title, course_document_path(@course, document)
+
+  #activity.bucket
+    - @activities.each do |activity|
+      = render :partial => "activity", 
+              :locals => {:activity => activity}
+    = will_paginate @activities
+    
+= render :partial => "layout"

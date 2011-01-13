@@ -1,0 +1,22 @@
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      $("#sidebar li a[data-id=documents]").addClass('selected');
+    });
+
+- content_for :breadcrumbs do
+  = link_to "Courses", courses_path
+  %span.separator &rarr;
+  = link_to @course.name, course_path(@course)
+  %span.separator &rarr;
+  = link_to "Documents", course_path(@course, :anchor => "documents")
+  %span.separator &rarr;
+  = @document.title
+  
+- content_for :bucket do
+  #document
+    %h2= @document.title
+    
+    #body= md(@document.body)
+    
+= render :partial => "courses/layout"
