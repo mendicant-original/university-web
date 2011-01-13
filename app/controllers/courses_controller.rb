@@ -10,7 +10,8 @@ class CoursesController < ApplicationController
   end
   
   def show
-    @activities = @course.activities.paginate(:page => params[:page])
+    @activities = @course.activities.paginate(:per_page => 10, 
+                                              :page     => params[:page])
     
     respond_to do |format|
       format.html

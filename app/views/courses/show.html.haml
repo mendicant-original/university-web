@@ -64,6 +64,6 @@
     - @activities.each do |activity|
       = render :partial => "activity", 
               :locals => {:activity => activity}
-    = will_paginate @activities
+    = will_paginate @activities, :params => {:anchor => "activity"}
     
 = render :partial => "layout"

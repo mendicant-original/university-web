@@ -36,4 +36,5 @@ SidebarMenu.select = function(selected){
   selectedBucket.show();
   
   $('#current_section').text(selectedMenu.text());
+  window.location.hash = selectedMenu.attr('data-id');
 };
