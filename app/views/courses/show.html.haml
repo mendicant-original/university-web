@@ -52,8 +52,8 @@
   
   #assignments.bucket
     - @course.assignments.each do |assignment|
-      = link_to assignment.name, course_assignment_path(@course, assignment)
-      %br
+      .assignment
+        = link_to assignment.name, course_assignment_path(@course, assignment)
 
   #documents.bucket
     - @course.documents.each do |document|

@@ -4,7 +4,8 @@ class Courses::AssignmentsController < Courses::Base
   def show
     @submissions = @assignment.submissions.includes(:status).
                     order("submission_statuses.sort_order").group_by(&:status)
-    @activities = @assignment.recent_activities.paginate(:page => params[:page])
+    @activities = @assignment.recent_activities.paginate(:page => params[:page],
+                                                         :per_page => 10)
                     
     respond_to do |format|
       format.html
