@@ -1,12 +1,8 @@
 class Assignment::Submission < ActiveRecord::Base
   belongs_to :status, :class_name  => "::SubmissionStatus", 
                       :foreign_key => "submission_status_id"
-                      
   belongs_to :user
   belongs_to :assignment
-  
-  # TODO Remove after server data migration
-  has_many :reviews,  :dependent => :delete_all
   
   has_many :comments,   :as => :commentable, :dependent => :delete_all
   has_many :activities, :dependent => :delete_all
