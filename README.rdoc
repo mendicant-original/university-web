@@ -46,7 +46,7 @@ You will see an error when the <tt>pg</tt> gem installs unless you have PostgreS
 
 To configure University Web:
 
-1. Create a <tt>database.yml</tt> file in <tt>db</tt>. The <tt>db</tt> directory contains an example <tt>database.yml</tt> for PostgreSQL.
+1. Create a <tt>database.yml</tt> file in <tt>config</tt>. The <tt>config</tt> directory contains an example <tt>database.yml</tt> for PostgreSQL.
 2. Run the Rails tasks to initialize a development and a test database:
 
 * <tt>rake db:migrate</tt>
