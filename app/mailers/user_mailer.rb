@@ -10,7 +10,7 @@ class UserMailer < ActionMailer::Base
     subject = "[rmu-submission] #{@submission.assignment.name}: " +
               "#{@submission.user.name}"
     
-    mail(:to      => to_from_submission(@submission, @comment.user.email), 
+    mail(:to      => to_from_submission(@submission, @comment.user.email, true), 
          :subject => subject)
   end
   
