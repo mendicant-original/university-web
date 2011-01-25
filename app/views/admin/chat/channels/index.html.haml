@@ -1,0 +1,21 @@
+%h1.form-header Chat Channels
+
+%p.prompt
+  = link_to "Create Channel", new_admin_chat_channel_path
+
+%table.admin
+  %thead
+    %tr
+      %th Name
+      %th Public?
+      %th
+  %tbody
+    - @channels.each do |channel|
+      %tr{:class => cycle('even','odd')}
+        %td= link_to channel.name, edit_admin_chat_channel_path(channel)
+        %td TODO
+        %td.action= link_to "Destroy",
+          admin_chat_channel_path(channel),
+          :confirm => "Are you sure you wish to delete this channel?",
+          :method  => 'DELETE',
+          :class   => "delete"

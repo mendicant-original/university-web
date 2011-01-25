@@ -62,6 +62,10 @@ University::Application.routes.draw do
       end
     end
     
+    namespace :chat do
+      resources :channels
+    end
+    
     resources :documents
   end
   

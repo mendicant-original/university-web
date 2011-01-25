@@ -1,0 +1,4 @@
+%h1.form-header Edit Channel
+
+= form_for @channel, :url => admin_chat_channel_path(@channel), :html => {:class => "bp"} do |f|
+  = render :partial => "form", :locals => {:f => f}
