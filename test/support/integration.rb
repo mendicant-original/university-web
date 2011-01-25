@@ -1,6 +1,6 @@
 module Support
   module Integration
-    def assert_css(css, options)
+    def assert_css(css, options={})
       assert has_css?(css, options),
         "CSS #{css.inspect} with options #{options.inspect} does not exist"
     end
@@ -17,9 +17,14 @@ module Support
       end
     end
 
-    def assert_field(label, options)
+    def assert_field(label, options={})
       assert has_field?(label, options),
         "Field #{label.inspect} with options #{options.inspect} does not exist"
+    end
+
+    def assert_no_field(label, options={})
+      assert has_no_field?(label, options),
+        "Field #{label.inspect} with options #{options.inspect} exists"
     end
 
     def assert_flash(message)
@@ -35,7 +40,7 @@ module Support
       assert has_no_link?(text), "Link #{text} exists in the page"
     end
 
-    def assert_link_to(url, options)
+    def assert_link_to(url, options={})
       assert_css "a[href='%s']" % url, options
     end
 
@@ -45,6 +50,11 @@ module Support
 
     def assert_no_content(content)
       assert has_no_content?(content), "Content #{content.inspect} exist"
+    end
+
+    def assert_title(title)
+      assert has_css?('#wrap h1', :text => title),
+        "Title #{title.inspect} does not exist"
     end
 
     def click_link_within(scope, text)

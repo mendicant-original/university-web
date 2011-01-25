@@ -4,7 +4,7 @@ module Students
   class AccessTest < ActionDispatch::IntegrationTest
     story "As a Student I want to access the application" do
       setup do
-        @user = Factory(:user, :email => "rmu@test.com",
+        @user = Factory(:user, :email => "rmu@test.com", :nickname => "Ruan RMU",
           :password => "123456", :password_confirmation => "123456")
       end
 
@@ -18,6 +18,7 @@ module Students
 
         assert_current_path root_path
         assert_flash "Signed in successfully"
+        assert_title "Ruan RMU"
         assert_link "Sign Out"
       end
 
