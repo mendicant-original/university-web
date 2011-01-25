@@ -49,7 +49,7 @@ module Support
     end
 
     def sign_out
-      click_link 'Logout'
+      click_link 'Sign Out'
     end
 
     def within(scope, prefix=nil)
