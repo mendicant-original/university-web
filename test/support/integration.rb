@@ -9,13 +9,22 @@ module Support
       assert_equal expected_path, current_path
     end
 
+    def assert_errors(*error_list)
+      within "#errorExplanation" do
+        error_list.each do |error_message|
+          assert_content error_message
+        end
+      end
+    end
+
+    def assert_field(label, options)
+      assert has_field?(label, options),
+        "Field #{label.inspect} with options #{options.inspect} does not exist"
+    end
+
     def assert_flash(message)
       assert has_css?('#flash', :text => message),
         "Flash #{message.inspect} does not exist in the page"
-    end
-
-    def assert_no_flash
-      assert has_no_css?('#flash'), "Flash exists in the page"
     end
 
     def assert_link(text)
@@ -36,6 +45,10 @@ module Support
 
     def assert_no_content(content)
       assert has_no_content?(content), "Content #{content.inspect} exist"
+    end
+
+    def click_link_within(scope, text)
+      within(scope) { click_link(text) }
     end
 
     def sign_user_in(user=Factory(:user, :email => "rmu@test.com"))
