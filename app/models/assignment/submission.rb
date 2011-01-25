@@ -1,11 +1,12 @@
 class Assignment::Submission < ActiveRecord::Base
-  belongs_to :status, :class_name  => "::SubmissionStatus", 
-                      :foreign_key => "submission_status_id"
+  belongs_to :status,     :class_name  => "::SubmissionStatus", 
+                          :foreign_key => "submission_status_id"
   belongs_to :user
   belongs_to :assignment
   
-  has_many :comments,   :as => :commentable, :dependent => :delete_all
-  has_many :activities, :dependent => :delete_all
+  has_many   :comments,   :as        => :commentable, 
+                          :dependent => :delete_all
+  has_many   :activities, :dependent => :delete_all
   
   def create_comment(comment_data)
     comment = comments.create(comment_data)

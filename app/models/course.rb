@@ -74,8 +74,8 @@ class Course < ActiveRecord::Base
   private
   
   def course_member_by_type(type)
-    ids = course_memberships.where(:access_level => type).map {|cm| cm.user_id }
-    
-    User.where(:id => ids)
+    User.includes(:course_memberships).
+      where(["course_memberships.course_id = ? AND " + 
+             "course_memberships.access_level = ?  ", id, type])
   end
 end
