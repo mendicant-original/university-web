@@ -1,27 +1,29 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  skip_before_filter :authenticate_user!, :only => [:create]
-  skip_before_filter :change_password_if_needed, :only => [:create]
-  before_filter :authenticate_service, :only => [:create]
+  before_filter      :find_channel,       :only  => [:index]
+  skip_before_filter :authenticate_user!
+  skip_before_filter :change_password_if_needed
+  before_filter      :authenticate_service, :only => [:create]
 
   def index
-    if params[:channel]
-      if current_user.chat_channels.find_by_name(params[:channel])
-        channel = params[:channel]
-      else
-        raise "No Access To This Channel or Invalid Channel!"
-      end
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
     end
     
-    if channel && params[:topic]
-      topic = Chat::Channel.find_by_name(channel).topics.
-                 find_by_name(params[:topic])
+    change_password_if_needed unless @channel.public?
+    
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
     end
+    
+    topic = @channel.topics.find_by_name(params[:topic]) if params[:topic]
 
-    @messages = Chat::Message.includes(:channel).
-                              where("chat_channels.name = ?", channel || "#rmu-general").
-                              order("recorded_at DESC")
+    @messages = @channel.messages.order("recorded_at DESC")
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
     
@@ -77,9 +79,15 @@ class Chat::MessagesController < ApplicationController
     render :json => chat_message.to_json
   end
   
+  private
+  
   def authenticate_service
     authenticate_or_request_with_http_basic do |id, password| 
       id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
     end
+  end
+  
+  def find_channel
+    @channel = Chat::Channel.find_by_name(params[:channel])
   end
 end
