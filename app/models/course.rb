@@ -24,11 +24,8 @@ class Course < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['document_id'].blank? },
     :allow_destroy => true
   
-  scope :active,   lambda { where(:archived => false).order('start_date') }
-  scope :archived, lambda { where(:archived => true ).order('start_date') }
-  scope :student, lambda { |user| includes(:course_memberships).
-    where(["course_memberships.user_id = ? AND \
-            course_memberships.access_level = ?", user.id, 'student']) }
+  scope :active,   where(:archived => false).order('start_date')
+  scope :archived, where(:archived => true ).order('start_date')
   
   def students
     course_member_by_type('student')

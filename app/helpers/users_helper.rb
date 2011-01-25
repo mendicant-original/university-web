@@ -28,7 +28,7 @@ module UsersHelper
   def user_type(user)
     if user.alumnus?
       "Alumnus: "
-    elsif user.instructed_courses.any?
+    elsif user.instructor_courses.any?
       "Instructor: "
     else
       "#{user.access_level.to_s.humanize}: "

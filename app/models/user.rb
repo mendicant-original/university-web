@@ -134,20 +134,16 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
   end
   
-  def instructed_courses
-    Course.includes(:course_memberships).
-      where(["course_memberships.user_id      = ? AND " +
-             "course_memberships.access_level = ? ",
-             id, "instructor" ]).
-      order("start_date")
+  def instructor_courses
+    course_by_membership_type("instructor")
   end
   
-  def mentored_courses
-    Course.includes(:course_memberships).
-      where(["course_memberships.user_id      = ? AND " +
-             "course_memberships.access_level = ? ",
-             id, "mentor" ]).
-      order("start_date")
+  def student_courses
+    course_by_membership_type("student")
+  end
+  
+  def mentor_courses
+    course_by_membership_type("mentor")
   end
   
   def real_name_or_nick_name_required 
@@ -174,5 +170,15 @@ class User < ActiveRecord::Base
     terms.reject do |t| 
       t.students.include?(self) || courses.where(:term_id => t.id).any?
     end
+  end
+  
+  private
+  
+  def course_by_membership_type(type)
+    Course.includes(:course_memberships).
+      where(["course_memberships.user_id      = ? AND " +
+             "course_memberships.access_level = ? ",
+             id, type ]).
+      order("start_date")
   end
 end
