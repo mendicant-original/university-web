@@ -8,6 +8,8 @@ University::Application.routes.draw do
   namespace :chat do
     resources :messages
   end
+  
+  get "transcripts/:channel" => 'Chat::Messages#transcripts'
 
   devise_for :users, :controllers => { :sessions => "user_sessions" }
 

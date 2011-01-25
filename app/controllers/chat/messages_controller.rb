@@ -27,7 +27,7 @@ class Chat::MessagesController < ApplicationController
                               
     @messages = @messages.where(:topic_id => topic.id) if topic
     
-    if params[:since]
+    if params[:since] && !params[:since].blank?
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
                     DateTime.parse(params[:since]), params[:last_id].to_i])
     else
@@ -77,6 +77,10 @@ class Chat::MessagesController < ApplicationController
                                          :topic_id    => topic_id)
                                        
     render :json => chat_message.to_json
+  end
+  
+  def transcripts
+    redirect_to chat_messages_path(:channel => '#' + params[:channel])
   end
   
   private

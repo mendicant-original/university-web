@@ -2,8 +2,8 @@
 
 - content_for :header_bottom do
   :javascript
-    var lastMessageRecordedAt = '#{@messages.last.recorded_at}';
-    var lastMessageId         = #{@messages.last.id};
+    var lastMessageRecordedAt = '#{@messages.last.try(:recorded_at) || ""}';
+    var lastMessageId         = #{@messages.last.try(:id) || -1};
   
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
