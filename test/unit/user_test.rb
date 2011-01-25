@@ -65,6 +65,60 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
 
+  context ".search" do
+    test "finds users by email" do
+      user1 = Factory(:user, :email => "foo@test.com")
+      user2 = Factory(:user, :email => "bar@test.com")
+
+      results = User.search("foo", 1)
+      assert_equal [user1], results
+    end
+
+    %w(real_name nickname twitter_account_name github_account_name).each do |attribute|
+      test "find users by #{attribute}" do
+        user1 = Factory(:user, attribute => "foo")
+        user2 = Factory(:user, attribute => "bar")
+
+        results = User.search("foo", 1)
+        assert_equal [user1], results
+      end
+    end
+
+    test "finds only users by a given course" do
+      course1 = Factory(:course, :name => "Course 1")
+      course2 = Factory(:course, :name => "Course 2")
+      course1.users << (user1 = Factory(:user, :nickname => "foo"))
+      course2.users << (user2 = Factory(:user, :nickname => "foo"))
+
+      results = User.search("foo", 1, :course_id => course1.id)
+      assert_equal [user1], results
+    end
+
+    test "sorts by email as default" do
+      user1 = Factory(:user, :email => "foo2@test.com")
+      user2 = Factory(:user, :email => "foo1@test.com")
+
+      results = User.search("foo", 1)
+      assert_equal [user2, user1], results
+    end
+
+    test "sorts by the given sort option" do
+      user1 = Factory(:user, :nickname => "foo2")
+      user2 = Factory(:user, :nickname => "foo1")
+
+      results = User.search("foo", 1, :sort => :nickname)
+      assert_equal [user2, user1], results
+    end
+
+    test "paginate results based on the given current page" do
+      user1 = Factory(:user, :email => "foo1@test.com")
+      user2 = Factory(:user, :email => "foo2@test.com")
+
+      results = User.search("foo", 2, :per_page => 1)
+      assert_equal [user2], results
+    end
+  end
+
   context "#name" do
     test "returns nickname if available" do
       user = User.new(@attrs)
@@ -79,6 +133,20 @@ class UserTest < ActiveSupport::TestCase
     test "returns email id if both nickname and real name are not available" do
       user = User.new(@attrs.merge(:nickname => "", :real_name => ""))
       assert_equal "one", user.name
+    end
+  end
+
+  context "#access_level" do
+    setup do
+      @user = User.new
+    end
+
+    test "returns access level definitions based on current user access" do
+      @user.access_level = "guest"
+      assert !@user.access_level.allows?(:do_stuff)
+
+      @user.access_level = "student"
+      assert @user.access_level.allows?(:do_stuff)
     end
   end
 end

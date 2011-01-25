@@ -66,8 +66,9 @@ class User < ActiveRecord::Base
   has_many :exams,            :through => :exam_submissions
 
   def self.search(search, page, options={})
-    sql_condition = %w(email real_name nickname twitter_account_name github_account_name).
-                    map {|field| "#{field} ILIKE :search"}.join(" OR ")
+    sql_condition = %w(
+      email real_name nickname twitter_account_name github_account_name
+    ).map { |field| "#{field} ILIKE :search" }.join(" OR ")
 
     results = where([sql_condition, {:search => "%#{search}%"}])
 
@@ -76,6 +77,8 @@ class User < ActiveRecord::Base
         where(["course_memberships.course_id = ?", options[:course_id].to_i])
     end
 
+    # TODO: sort_by will trigger the sql query, instead of using a relation.
+    # The pagination would be created over the result array. Use a relation.
     if options[:sort]
       results = results.sort_by(&options[:sort])
     else
@@ -111,7 +114,8 @@ class User < ActiveRecord::Base
     if alumni_number.nil? and not number.blank?
       alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
       if alumni_channel
-        alumni_channel_membership = chat_channel_memberships.find_by_channel_id(alumni_channel.id)
+        alumni_channel_membership = chat_channel_memberships.
+          find_by_channel_id(alumni_channel.id)
 
         if alumni_channel_membership.nil?
           chat_channel_memberships.create(:channel => alumni_channel)
@@ -146,13 +150,6 @@ class User < ActiveRecord::Base
     course_by_membership_type("mentor")
   end
 
-  def real_name_or_nick_name_required
-    if real_name.blank? and nickname.blank?
-      errors.add(:base,
-                 "You need to provide either a real name or a nick name")
-    end
-  end
-
   # Returns all terms which are:
   # * Open for registration (Term#registration_open == true)
   # * User took an exam which was approved
@@ -163,9 +160,9 @@ class User < ActiveRecord::Base
     approved = SubmissionStatus.where(:name => "Approved").first
 
     terms = exam_submissions.where(:submission_status_id => approved).
-    includes([:exam => :term]).
-    where(["terms.registration_open = ?", true]).
-    map { |e| e.exam.term }
+      includes([:exam => :term]).
+      where(["terms.registration_open = ?", true]).
+      map { |e| e.exam.term }
 
     terms.reject do |t|
       t.students.include?(self) || courses.where(:term_id => t.id).any?
@@ -180,5 +177,12 @@ class User < ActiveRecord::Base
              "course_memberships.access_level = ? ",
              id, type ]).
       order("start_date")
+  end
+
+  def real_name_or_nick_name_required
+    if real_name.blank? and nickname.blank?
+      errors.add(:base,
+                 "You need to provide either a real name or a nick name")
+    end
   end
 end
