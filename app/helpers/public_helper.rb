@@ -2,31 +2,31 @@ module PublicHelper
   def current_page(name, current)
     'current' if name == current
   end
-  
+
   def alumnus_name(alumnus)
     if alumnus.alumni_preferences.show_on_public_site
       if alumnus.alumni_preferences.show_real_name
         !alumnus.real_name.blank? ? alumnus.real_name : alumnus.nickname
-      else 
+      else
         !alumnus.nickname.blank? ? alumnus.nickname : "Anonymous"
       end
     else
       "Anonymous"
     end
   end
-  
+
   def show_twitter?(alumnus)
-    alumnus.alumni_preferences.show_on_public_site && 
-    alumnus.alumni_preferences.show_twitter && 
+    alumnus.alumni_preferences.show_on_public_site &&
+    alumnus.alumni_preferences.show_twitter &&
     !alumnus.twitter_account_name.blank?
   end
-  
+
   def show_github?(alumnus)
-    alumnus.alumni_preferences.show_on_public_site && 
-    alumnus.alumni_preferences.show_github && 
+    alumnus.alumni_preferences.show_on_public_site &&
+    alumnus.alumni_preferences.show_github &&
     !alumnus.github_account_name.blank?
   end
-  
+
   def alumnus_image(alumnus)
     if alumnus.alumni_preferences.show_on_public_site
       alumnus.gravatar_url(64)

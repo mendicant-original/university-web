@@ -1,6 +1,6 @@
 class GroupMailer < ActionMailer::Base
   default :from => "rmu.management@gmail.com"
-  
+
   def mass_email(group_mail)
     @content = group_mail.content
     to_mails = group_mail.recipients.split(", ")

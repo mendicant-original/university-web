@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class Chat::ChannelTest < ActiveSupport::TestCase
-
   context 'a Chat Channel' do
-
     setup do
       @subject = Factory(:chat_channel)
       @topic   = Factory(:chat_topic, :channel => @subject)
@@ -29,7 +27,5 @@ class Chat::ChannelTest < ActiveSupport::TestCase
         assert @subject.last_message_date > 10.minutes.ago
       end
     end
-
   end
-
 end
