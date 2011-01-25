@@ -135,17 +135,19 @@ class User < ActiveRecord::Base
   end
   
   def instructed_courses
-    ids = course_memberships.where(:access_level => 'instructor').
-      map(&:course_id)
-    
-    Course.where(:id => ids).order("start_date")
+    Course.includes(:course_memberships).
+      where(["course_memberships.user_id      = ? AND " +
+             "course_memberships.access_level = ? ",
+             id, "instructor" ]).
+      order("start_date")
   end
   
   def mentored_courses
-    ids = course_memberships.where(:access_level => 'mentor').
-      map(&:course_id)
-    
-    Course.where(:id => ids).order("start_date")
+    Course.includes(:course_memberships).
+      where(["course_memberships.user_id      = ? AND " +
+             "course_memberships.access_level = ? ",
+             id, "mentor" ]).
+      order("start_date")
   end
   
   def real_name_or_nick_name_required 
