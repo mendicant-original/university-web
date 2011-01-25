@@ -1,15 +1,20 @@
 class CoursesController < ApplicationController
+  before_filter { @selected = :courses }
   before_filter :find_course, :only => [:show, :notes, :directory]
   before_filter :course_members_only, :only => [:show, :notes, :directory]
   
   def index
-    @courses    = current_user.courses
-    @instructed = current_user.instructed_courses
-    @mentored   = current_user.mentored_courses
+    @courses    = current_user.student_courses
+    @instructed = current_user.instructor_courses
+    @mentored   = current_user.mentor_courses
   end
   
   def show
-    @activities = @course.activities.paginate(:page => params[:page])
+    @activities = @course.activities.paginate(:per_page => 10, 
+                                              :page     => params[:activity_page])
+    
+    @users = User.search(params[:search], params[:user_page], 
+      :sort => :name, :course_id => @course.id, :per_page => 7)
     
     respond_to do |format|
       format.html
@@ -26,8 +31,7 @@ class CoursesController < ApplicationController
   end
   
   def directory
-    @users = User.search(params[:search], params[:page], 
-      :sort => :name, :course_id => @course.id)
+
   end
   
   private

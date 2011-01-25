@@ -1,7 +1,5 @@
 - title @assignment.name
 
-= render :partial => "menu"
-
 - content_for :header_bottom do
   :javascript
     $(function(){
@@ -28,32 +26,40 @@
         tooltip:   'Click to edit...',
         event:     'edit'
       });
+      
+      SidebarMenu.register('sidebar');
     });
 
-.course-two-col
-  .main
-    %h1= @assignment.name
+- content_for :breadcrumbs do
+  = render :partial => "courses/breadcrumbs"
+  %span.separator &rarr;
+  = render :partial => "breadcrumbs"
+  %span.separator &rarr;
+  %span#current_section
   
+- content_for :bucket do
+  #overview.bucket
     #description= md(@assignment.description)
+
     %h2.header
       Notes
       .controls
         %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     #notes= md(@assignment.notes)
-    
-    %h2.header Activity
-    #activity
-      - @activities.each do |activity|
-        = render :partial => "/courses/activity", 
-                :locals => {:activity => activity}
-      = will_paginate @activities
-  .right
-    #submissions
-      .header Submissions
-      - @submissions.each do |status, submissions|
-        .status
-          .box{:style => "background-color: ##{status.hex_color}"}
-          = status.name
-        - submissions.each do |submission|
-          .submission{:class => (current_user == submission.user ? 'current' : nil)}    
-            = link_to submission.user.name, submission_path(submission)
+
+  #submissions.bucket
+    - @submissions.each do |status, submissions|
+      .status
+        .box{:style => "background-color: ##{status.hex_color}"}
+        = status.name
+      - submissions.each do |submission|
+        .submission{:class => (current_user == submission.user ? 'current' : nil)}    
+          = link_to submission.user.name, submission_path(submission)
+
+  #activity.bucket
+    - @activities.each do |activity|
+      = render :partial => "courses/activity", 
+              :locals => {:activity => activity}
+    = will_paginate @activities, :params => {:anchor => "activity"}
+
+= render :partial => "layout"

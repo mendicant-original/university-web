@@ -37,16 +37,16 @@
       %li Loading...
 
   .main        
-    - if current_user.courses.active.student(current_user).any?
+    - if current_user.student_courses.active.any?
       %h3 Current Progress
   
-    - current_user.courses.active.student(current_user).each do |course|
+    - current_user.student_courses.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
           
-    - current_user.mentored_courses.each do |course|
+    - current_user.mentor_courses.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
       
-    - current_user.instructed_courses.each do |course|
+    - current_user.instructor_courses.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
   
   - content_for :header_bottom do

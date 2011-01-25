@@ -82,7 +82,10 @@ class User < ActiveRecord::Base
       results = results.order('email')
     end
     
-    results.paginate :per_page => 20, :page => page
+    per_page = options[:per_page]
+    per_page ||= 20
+    
+    results.paginate :per_page => per_page, :page => page
   end
 
   def self.random_password
@@ -131,18 +134,16 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
   end
   
-  def instructed_courses
-    ids = course_memberships.where(:access_level => 'instructor').
-      map(&:course_id)
-    
-    Course.where(:id => ids).order("start_date")
+  def instructor_courses
+    course_by_membership_type("instructor")
   end
   
-  def mentored_courses
-    ids = course_memberships.where(:access_level => 'mentor').
-      map(&:course_id)
-    
-    Course.where(:id => ids).order("start_date")
+  def student_courses
+    course_by_membership_type("student")
+  end
+  
+  def mentor_courses
+    course_by_membership_type("mentor")
   end
   
   def real_name_or_nick_name_required 
@@ -169,5 +170,15 @@ class User < ActiveRecord::Base
     terms.reject do |t| 
       t.students.include?(self) || courses.where(:term_id => t.id).any?
     end
+  end
+  
+  private
+  
+  def course_by_membership_type(type)
+    Course.includes(:course_memberships).
+      where(["course_memberships.user_id      = ? AND " +
+             "course_memberships.access_level = ? ",
+             id, type ]).
+      order("start_date")
   end
 end

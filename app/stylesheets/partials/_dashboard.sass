@@ -1,17 +1,12 @@
-$blueprint_grid_columns : 12
-$blueprint-container-size : 930px
-$blueprint-grid-width : 67.5px
-$blueprint_grid_outer_width: 67.5px
-
 .two-col
   +container
   div.main
-    +column(12, true)
+    +column(24, true)
   div.left
-    +column(6)
+    +column(12)
     +append(1)
   div.right
-    +column(5, true)
+    +column(11, true)
     
   div.left, div.right
     h4

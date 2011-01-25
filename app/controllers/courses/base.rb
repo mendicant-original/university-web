@@ -1,4 +1,5 @@
 class Courses::Base < ApplicationController
+  before_filter { @selected = :courses }
   before_filter :find_course
   before_filter :course_members_only
   

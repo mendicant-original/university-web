@@ -24,4 +24,19 @@ module ApplicationHelper
       
     return html.html_safe
   end
+  
+  def user_button
+    link_to(
+      [ current_user.name, 
+        image_tag("down_arrow.png", :class => "drop") 
+      ].join.html_safe,
+      '#'
+    )
+  end
+  
+  def selected_arrow(section)
+    if defined?(@selected) && @selected == section
+      image_tag "selected_arrow.png", :class => "selected"
+    end
+  end
 end

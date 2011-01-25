@@ -1,6 +1,4 @@
 - title @course.name
-
-= render :partial => "menu"
       
 - content_for :header_bottom do
   :javascript
@@ -20,7 +18,7 @@
       $('#notes').editable(editPath, {
         type:      'textarea',
         height:    '200px',
-        width:     '680px',
+        width:     '98%',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
@@ -28,21 +26,20 @@
         tooltip:   'Click to edit...',
         event:     'edit'
       });
+      
+      SidebarMenu.register('sidebar');
+      
+      jQuery("label.infield").inFieldLabels();
     });
 
-.course-two-col
-  .main
-    %h1= @course.name
+- content_for :breadcrumbs do
+  = render :partial => "breadcrumbs"
+  %span.separator &rarr;
+  %span#current_section
   
+- content_for :bucket do
+  #overview.bucket
     #description= @course.description_html
-    
-    - if @course.documents.any?
-    
-      %h2.header Documents
-    
-      #documents
-        - @course.documents.each do |document|
-          = link_to document.title, document_path(document)
     
     %h2.header
       Notes
@@ -52,17 +49,37 @@
     
     = render :partial => "dashboard/assignments", 
       :locals => {:course => @course}
+  
+  #assignments.bucket
+    - @course.assignments.each do |assignment|
+      .assignment
+        = link_to assignment.name, course_assignment_path(@course, assignment)
 
-    %h2.header Activity
-    #activity
-      - @activities.each do |activity|
-        = render :partial => "activity", 
-                :locals => {:activity => activity}
-      = will_paginate @activities
+  #documents.bucket
+    - @course.documents.each do |document|
+      .document
+        = link_to document.title, course_document_path(@course, document)
 
-  .right.fixed
-    #assignments
-      .header Assignments
-      - @course.assignments.each do |assignment|
-        .assignment= link_to assignment.name, 
-                        course_assignment_path(@course, assignment)
+  #activity.bucket
+    - @activities.each do |activity|
+      = render :partial => "activity", 
+              :locals => {:activity => activity}
+    = will_paginate @activities, :params => {:anchor => "activity"},
+      :param_name => "activity_page"
+    
+  #directory.bucket
+    = form_tag course_path(@course, :anchor => "directory"), :method => :get, 
+      :id => "directory_search" do
+      = label_tag :search, "Name or Email", 
+        :class => "infield"
+      = text_field_tag :search, params[:search]
+      = submit_tag "Search"
+  
+    - @users.each do |user|
+      = render :partial => '/users/user', :locals => { :user => user, 
+        :roles => user.course_memberships.where(:course_id => @course.id)}
+
+    = will_paginate @users, :params => {:anchor => "directory"}, 
+      :param_name => "user_page"
+    
+= render :partial => "layout"

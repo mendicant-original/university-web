@@ -1,26 +1,52 @@
-$blueprint_grid_columns : 13
-$blueprint-container-size : 930px
-$blueprint-grid-width : 60px
-$blueprint_grid_outer_width: 60px
-
 .course-two-col
   +container
-  div.main
-    display: inline
-    float: left
-    margin-right: 40px
-    padding-right: 5px
-    width: 660px
-  div.right
-    display: inline
-    float: left
-    margin-right: 0
-    width: 200px
-    margin-top: 2em
-    &.fixed
-      position: fixed
-      top: 85px
+  
+  #course_header
+    +column(24, true)
+    
+    border-bottom: 1px solid #ddd
+    padding: 1em 0 1.5em
+    
+    h1
+      margin: 0
       
+  #breadcrumbs
+    +column(24, true)
+    padding: 0.5em 1em
+    background: #eee
+    border-bottom: 1px solid #ddd
+    
+  div.nav
+    +column(4)
+    
+    li
+      font-size: 1.25em
+      margin: 0.5em 0
+      
+      &:first-child
+        margin-top: 0
+      
+      a
+        display: block
+        padding: 0.75em
+        
+        &:hover
+          background-color: #ddd
+          
+        &.selected
+          background-color: #ddd
+        
+  div.main
+    +column(20, true)
+    
+    #bucket
+      border-left: 1px solid #ddd
+      padding: 1em 0 1em 1em
+      min-height: 250px
+      
+  div.nav, #bucket
+    padding-top: 1em
+  
   td.status
     font-size: 0.8em !important
     
@@ -44,14 +70,54 @@ $blueprint_grid_outer_width: 60px
         
   #notes
     +markdown
+    
+#documents.bucket
+  .document
+    margin-bottom: 1.25em
+    a
+      font-size: 1.25em
+      line-height: 1.5em
+      display: block
+      
+#assignments.bucket
+  .assignment
+    margin-bottom: 1.25em
+    a
+      font-size: 1.25em
+      line-height: 1.5em
+      display: block
+ 
+#directory.bucket
+  border-top: none
+  
+  .pagination
+    border-top: none
+  
+  #directory_search
+    border-bottom: 1px solid #ddd
+    
+    label.infield
+      top: 6px
+      left: 8px
+      
+    input
+      margin-top: 0
+    
+    input[type="submit"]
+      float: none
+      margin-left: 1em
+      
+#submission h2.header
+  border-top: 0
+  margin-top: 0
   
 
-#reviews, #courses
+#submissions, #courses
   .label
     margin: 1em 0
     color: #888
 
-  .review, .course
+  .submission, .course
     border-bottom: 1px solid #eee
     margin-bottom: 1em
     padding-bottom: 1em
@@ -67,7 +133,7 @@ $blueprint_grid_outer_width: 60px
       .name
         font-size: 1em
       
-#assignments, #submissions
+#submissions
   border-left: 1px solid #eee
   border-right: 1px solid #eee
   margin-bottom: 1em
