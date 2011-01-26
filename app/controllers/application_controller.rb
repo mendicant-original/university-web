@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_access_level
 
+  private
+
   def change_password_if_needed
     authenticate_user! unless user_signed_in?
 
@@ -27,8 +29,6 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource_or_scope)
     dashboard_path
   end
-
-  private
 
   def current_access_level
     return current_user.access_level if current_user && current_user.access_level
