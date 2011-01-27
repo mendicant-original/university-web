@@ -4,7 +4,7 @@ class Chat::MessagesController < ApplicationController
   before_filter      :find_channel,       :only  => [:index, :discussions]
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
-  before_filter      :authenticate_service, :only => [:create]
+  before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
 
   def index
     unless @channel
@@ -95,6 +95,15 @@ class Chat::MessagesController < ApplicationController
                                          :topic_id    => topic_id)
                                        
     render :json => chat_message.to_json
+  end
+
+  def discussion_topic_url
+    channel = Chat::Channel.find_by_name(params[:channel])
+    topic   = Chat::Topic.find_by_name(params[:topic])
+
+    url  = chat_messages_url(:channel => channel.name, :topic => topic.name)
+
+    render :text => url
   end
   
   def transcripts
