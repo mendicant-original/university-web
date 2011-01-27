@@ -1,6 +1,70 @@
 require 'test_helper'
 
 class CourseTest < ActiveSupport::TestCase
+  test "requires a valid name" do
+    course = Course.new(:name => "")
+    assert !course.valid?
+
+    course.name = "Foo"
+    assert course.valid?
+  end
+
+  test "requires an unique name" do
+    course  = Course.create!(:name => "Foo")
+    course2 = Course.new(:name => "Foo")
+    assert !course2.valid?
+
+    course2.name = "Bar"
+    assert course.valid?
+  end
+
+  context ".active" do
+    test "finds only not archived courses" do
+      archived_course     = Factory(:course, :archived => true)
+      non_archived_course = Factory(:course, :archived => false)
+
+      assert_equal [non_archived_course], Course.active
+    end
+  end
+
+  context ".archived" do
+    test "finds only already archived courses" do
+      archived_course     = Factory(:course, :archived => true)
+      non_archived_course = Factory(:course, :archived => false)
+
+      assert_equal [archived_course], Course.archived
+    end
+  end
+
+  context "membership" do
+    setup do
+      @course     = Factory(:course)
+      @student    = Factory(:course_membership,
+        :course => @course, :access_level => "student")
+      @mentor     = Factory(:course_membership,
+        :course => @course, :access_level => "mentor")
+      @instructor = Factory(:course_membership,
+        :course => @course, :access_level => "instructor")
+    end
+
+    context "#students" do
+      test "finds only student members" do
+        assert_equal [@student.user], @course.students
+      end
+    end
+
+    context "#instructors" do
+      test "finds only instructors members" do
+        assert_equal [@instructor.user], @course.instructors
+      end
+    end
+
+    context "#mentors" do
+      test "finds only mentor members" do
+        assert_equal [@mentor.user], @course.mentors
+      end
+    end
+  end
 
   context 'a Course with two slots and one student' do
     setup do

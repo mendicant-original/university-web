@@ -12,7 +12,7 @@ class Course < ActiveRecord::Base
   belongs_to :term
 
   validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :allow_blank => true
 
   accepts_nested_attributes_for :assignments
 
@@ -65,7 +65,7 @@ class Course < ActiveRecord::Base
 
   def activities
     assignments.map { |a| a.recent_activities }.flatten.
-    sort_by {|a| a.created_at }.reverse
+      sort_by { |a| a.created_at }.reverse
   end
 
   private
