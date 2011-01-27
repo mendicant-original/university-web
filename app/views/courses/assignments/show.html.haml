@@ -4,27 +4,28 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').trigger("edit");
+        $('#note_content').trigger("edit");
       });
 
-      $('#notes').click(function(e){
+      $('#note_content').click(function(e){
         if (e.target.tagName != "A") {
-          $('#notes').trigger("edit");
+          $('#note_content').trigger("edit");
         }
       });
       
       var editPath = '#{assignment_path(@assignment)}/notes';
     
-      $('#notes').editable(editPath, {
+      $('#note_content').editable(editPath, {
         type:      'textarea',
         height:    '200px',
-        width:     '680px',
+        width:     '98%',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
         loadurl:   '#{assignment_path(@assignment)}.text',
         tooltip:   'Click to edit...',
-        event:     'edit'
+        event:     'edit',
+        onblur:    'ignore'
       });
       
       SidebarMenu.register('sidebar');
@@ -40,12 +41,11 @@
 - content_for :bucket do
   #overview.bucket
     #description= md(@assignment.description)
-
-    %h2.header
-      Notes
-      .controls
-        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #notes= md(@assignment.notes)
+    
+  #notes.bucket
+    .controls
+      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #note_content= md(@assignment.notes)
 
   #submissions.bucket
     - @submissions.each do |status, submissions|
