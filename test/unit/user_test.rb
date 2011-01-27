@@ -142,11 +142,30 @@ class UserTest < ActiveSupport::TestCase
     end
 
     test "returns access level definitions based on current user access" do
-      @user.access_level = "guest"
-      assert !@user.access_level.allows?(:do_stuff)
+      swap_access_level_definitions AccessLevel::User do |klass|
+        klass.define "guest", :permissions => []
+        klass.define "student", :permissions => [:do_whatever]
 
-      @user.access_level = "student"
-      assert @user.access_level.allows?(:do_stuff)
+        @user.access_level = "guest"
+        assert !@user.access_level.allows?(:do_whatever)
+
+        @user.access_level = "student"
+        assert @user.access_level.allows?(:do_whatever)
+      end
+    end
+  end
+
+  private
+
+  def swap_access_level_definitions(klass)
+    begin
+      current_definitions = klass.definitions.dup
+      klass.definitions.clear
+
+      yield klass
+    ensure
+      klass.definitions.clear
+      klass.definitions.merge!(current_definitions)
     end
   end
 end
