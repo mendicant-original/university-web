@@ -21,11 +21,11 @@ class Chat::MessagesController < ApplicationController
       return
     end
     
-    topic = @channel.topics.find_by_name(params[:topic]) if params[:topic]
+    @topic = @channel.topics.find_by_name(params[:topic]) if params[:topic]
 
     @messages = @channel.messages.order("recorded_at DESC")
                               
-    @messages = @messages.where(:topic_id => topic.id) if topic
+    @messages = @messages.where(:topic_id => @topic.id) if @topic
     
     if params[:since] && !params[:since].blank?
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?", 
@@ -57,6 +57,10 @@ class Chat::MessagesController < ApplicationController
         render :json => json_messages.to_json
       end
     end
+  end
+
+  def discussions
+    @discussions = Channel.find_by_name(params[:channel]).topics
   end
   
   def create

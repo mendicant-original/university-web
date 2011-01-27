@@ -8,6 +8,7 @@ University::Application.routes.draw do
   namespace :chat do
     resources :messages
   end
+  get 'chat/discussions/:channel' => 'chat/messages#discussions', :as => 'chat_discussions'
   
   get "transcripts/:channel" => 'Chat::Messages#transcripts'
 

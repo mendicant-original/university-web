@@ -1,0 +1,10 @@
+- title "Discussions for #{params[:channel]}"
+
+%h1= "Discussions for #{params[:channel]}"
+
+%p= link_to("Back to #{params[:channel]}", chat_messages_path(:channel => params[:channel]))
+
+%ul.discussions
+  - @discussions.each do |topic|
+    %li= link_to topic.name, chat_messages_path(:channel => topic.channel.name, :topic => topic.name)
+
