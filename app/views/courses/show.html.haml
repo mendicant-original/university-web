@@ -4,18 +4,18 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').trigger("edit");
+        $('#note_content').trigger("edit");
       });
 
-      $('#notes').click(function(e){
+      $('#note_content').click(function(e){
         if (e.target.tagName != "A") {
-          $('#notes').trigger("edit");
+          $('#note_content').trigger("edit");
         }
       });
       
       var editPath = '#{course_path(@course)}/notes';
 
-      $('#notes').editable(editPath, {
+      $('#note_content').editable(editPath, {
         type:      'textarea',
         height:    '200px',
         width:     '98%',
@@ -24,7 +24,8 @@
         submit:    'Save',
         loadurl:   '#{course_path(@course)}.text',
         tooltip:   'Click to edit...',
-        event:     'edit'
+        event:     'edit',
+        onblur:    'ignore'
       });
       
       SidebarMenu.register('sidebar');
@@ -41,12 +42,6 @@
   #overview.bucket
     #description= @course.description_html
     
-    %h2.header
-      Notes
-      .controls
-        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #notes= md(@course.notes)
-    
     = render :partial => "dashboard/assignments", 
       :locals => {:course => @course}
   
@@ -59,6 +54,11 @@
     - @course.documents.each do |document|
       .document
         = link_to document.title, course_document_path(@course, document)
+        
+  #notes.bucket
+    .controls
+      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #note_content= md(@course.notes)
 
   #activity.bucket
     - @activities.each do |activity|
