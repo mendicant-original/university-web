@@ -1,7 +1,7 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  before_filter      :find_channel,       :only  => [:index]
+  before_filter      :find_channel,       :only  => [:index, :discussions]
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
   before_filter      :authenticate_service, :only => [:create]
@@ -60,7 +60,21 @@ class Chat::MessagesController < ApplicationController
   end
 
   def discussions
-    @discussions = Channel.find_by_name(params[:channel]).topics
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+    
+    change_password_if_needed unless @channel.public?
+    
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
+    end
+
+    @discussions = @channel.topics.order("created_at desc")
   end
   
   def create
