@@ -5,6 +5,7 @@ Factory.define :course do |u|
 end
 
 Factory.define :course_membership do |u|
-  u.association :course
-  u.association :user
+  u.association  :course
+  u.association  :user
+  u.access_level "student"
 end
