@@ -34,8 +34,9 @@
           cancel:    'Cancel',
           submit:    'Save',
           loadurl:   '#{comments_path}/' + id,
-          width:     '905px',
-          event:     'edit'
+          width:     '98%',
+          event:     'edit',
+          onblur:    'ignore'
         });
       });
       
@@ -85,14 +86,15 @@
         $('.description').editable(editPath, {
           type:        'textarea',
           height:      '200px',
-          width:       '917px',
+          width:       '98%',
           indicator:   'Saving ...',
           cancel:      'Cancel',
           submit:      'Save',
           loadurl:     '#{submission_path(@submission)}.text',
           tooltip:     placeholder,
           event:       'edit',
-          placeholder: placeholder
+          placeholder: placeholder,
+          onblur:    'ignore'
         });
       })
 
