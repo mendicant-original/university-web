@@ -81,11 +81,23 @@
       
 #assignments.bucket
   .assignment
-    margin-bottom: 1.25em
-    a
-      font-size: 1.25em
-      line-height: 1.5em
+  
+    cursor: pointer
+  
+    &:hover
+      background-color: #eee
+    
+    padding: 1em
+    
+    span.description
+      color: #000
       display: block
+      margin-top: 0.25em
+    
+    span.name
+      font-size: 1.25em
+      display: block
+      color: #184FA0
  
 #directory.bucket
   border-top: none

@@ -23,4 +23,9 @@ class Assignment < ActiveRecord::Base
     (activities + submissions.map {|s| s.activities }).flatten.
     sort_by {|a| a.created_at}.reverse
   end
+  
+  # TODO Replace with real short_description attribute
+  def short_description
+    ActivityHelper.context_snippet(description)
+  end
 end

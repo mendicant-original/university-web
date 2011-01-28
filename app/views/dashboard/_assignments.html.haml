@@ -12,7 +12,7 @@
           .status{:style => "background-color: ##{submission.status.hex_color}"}
           = link_to submission.status.name, submission_path(submission)
   - (course.students - [current_user]).each do |student|
-    %tr.student{:style => 'display:none;'}
+    %tr.student{:style => ('display:none;' unless defined?(expanded))}
       %td= student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
@@ -20,7 +20,8 @@
           .status{:style => "background-color: ##{submission.status.hex_color}"}
           = link_to submission.status.name, submission_path(submission)
         
-  %tr.toggle
-    %td{:colspan => course.assignments.count + 1}
-      = link_to_function 'Show students', 
-        %{$('table[data-id=#{course.id}] tr.student').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' students')}
+  - unless defined?(expanded)
+    %tr.toggle
+      %td{:colspan => course.assignments.count + 1}
+        = link_to_function 'Show students', 
+          %{$('table[data-id=#{course.id}] tr.student').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' students')}
