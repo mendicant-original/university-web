@@ -35,6 +35,7 @@ module ApplicationHelper
   end
   
   def selected_arrow(section)
+    return nil
     if defined?(@selected) && @selected == section
       image_tag "selected_arrow.png", :class => "selected"
     end
