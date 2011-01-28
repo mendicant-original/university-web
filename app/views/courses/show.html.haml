@@ -4,18 +4,18 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#note_content').trigger("edit");
+        $('#notes').trigger("edit");
       });
 
-      $('#note_content').click(function(e){
+      $('#notes').click(function(e){
         if (e.target.tagName != "A") {
-          $('#note_content').trigger("edit");
+          $('#notes').trigger("edit");
         }
       });
       
       var editPath = '#{course_path(@course)}/notes';
 
-      $('#note_content').editable(editPath, {
+      $('#notes').editable(editPath, {
         type:      'textarea',
         height:    '200px',
         width:     '98%',
@@ -42,6 +42,11 @@
   #overview.bucket
     #description= @course.description_html
     
+    .controls
+      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    %h2.header Notes
+    #notes= md(@course.notes)
+    
     = render :partial => "dashboard/assignments", 
       :locals => {:course => @course}
   
@@ -54,11 +59,6 @@
     - @course.documents.each do |document|
       .document
         = link_to document.title, course_document_path(@course, document)
-        
-  #notes.bucket
-    .controls
-      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #note_content= md(@course.notes)
 
   #activity.bucket
     - @activities.each do |activity|

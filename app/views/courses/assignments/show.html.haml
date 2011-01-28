@@ -4,18 +4,18 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#note_content').trigger("edit");
+        $('#notes').trigger("edit");
       });
 
-      $('#note_content').click(function(e){
+      $('#notes').click(function(e){
         if (e.target.tagName != "A") {
-          $('#note_content').trigger("edit");
+          $('#notes').trigger("edit");
         }
       });
       
       var editPath = '#{assignment_path(@assignment)}/notes';
     
-      $('#note_content').editable(editPath, {
+      $('#notes').editable(editPath, {
         type:      'textarea',
         height:    '200px',
         width:     '98%',
@@ -42,10 +42,10 @@
   #overview.bucket
     #description= md(@assignment.description)
     
-  #notes.bucket
     .controls
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #note_content= md(@assignment.notes)
+    %h2.header Notes
+    #notes= md(@assignment.notes)
 
   #submissions.bucket
     - @submissions.each do |status, submissions|
