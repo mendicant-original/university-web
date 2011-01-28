@@ -30,6 +30,7 @@
           
     #wrap.constrained
       = yield
+      .clear
         
 / = render :partial => "/shared/menu"
 /   - unless yield(:secondary_navigation).blank?
