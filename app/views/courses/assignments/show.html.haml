@@ -46,11 +46,6 @@
   #overview.bucket
     #description= md(@assignment.description)
     
-    .controls
-      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    %h2.header Notes
-    #notes= md(@assignment.notes)
-    
     %h2.header Submissions
     
     %table.submissions
@@ -67,6 +62,12 @@
             %td.status
               .box{:style => "background-color: ##{status.hex_color}"}
               = status.name
+    
+    .controls
+      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    %h2.header Notes
+    #notes= md(@assignment.notes)
+    
 
   #activity.bucket
     - @activities.each do |activity|
