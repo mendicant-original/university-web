@@ -1,11 +1,6 @@
 .course-two-col
-  #course_header
-    %h1
-      = link_to @course.name, course_path(@course)
-      \/
-      = link_to @assignment.name, course_assignment_path(@course, @assignment)
-
-  #breadcrumbs.header= yield(:breadcrumbs)
+  #breadcrumbs.header
+    .container= yield(:breadcrumbs)
 
   .nav
     %ul#sidebar

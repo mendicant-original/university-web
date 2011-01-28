@@ -1,8 +1,7 @@
 .course-two-col
-  #course_header
-    %h1= @course.name
 
-  #breadcrumbs.header= yield(:breadcrumbs)
+  #breadcrumbs.header
+    .container= yield(:breadcrumbs)
 
   .nav
     %ul#sidebar
