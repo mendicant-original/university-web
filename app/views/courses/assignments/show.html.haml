@@ -46,6 +46,24 @@
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     %h2.header Notes
     #notes= md(@assignment.notes)
+    
+    %h2.header Submissions
+    
+    %table.submissions
+      %tr
+        %th Student
+        %th Status
+      - @submissions.each do |status, submissions|
+        - submissions.each do |submission|
+          %tr{:class => (current_user == submission.user ? 'current' : nil)}
+            %td.student
+              = image_tag submission.user.gravatar_url(32)
+              = link_to submission.user.name, submission_path(submission)
+            %td.status
+              .box{:style => "background-color: ##{status.hex_color}"}
+              = status.name
+          
+      
 
   #submissions.bucket
     - @submissions.each do |status, submissions|

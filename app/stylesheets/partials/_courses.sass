@@ -150,8 +150,32 @@
   .assignment, .submission, .status
     border-bottom: 1px solid #eee
     padding: 0.5em 0.25em
+
+table.submissions
+  width: 100%
+
+  border-collapse: collapse
+
+  td, th
+    padding: 4px 5px
+    border-style: collapse
+
+  th
+    font-weight: bold
+  td
+    border-bottom: 1px solid #ccc
+
+    &.student
+      font-size: 1.25em
+      img
+        vertical-align: middle
+    &.status
+      font-size: 1em !important
+      border-color: #ccc
+  tr.current
+    background-color: #9ab6d0
     
-#submissions
+#submissions, table.submissions
   .submission
     padding-left: 1em
     &.current
