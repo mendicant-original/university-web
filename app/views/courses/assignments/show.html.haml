@@ -62,17 +62,6 @@
             %td.status
               .box{:style => "background-color: ##{status.hex_color}"}
               = status.name
-          
-      
-
-  #submissions.bucket
-    - @submissions.each do |status, submissions|
-      .status
-        .box{:style => "background-color: ##{status.hex_color}"}
-        = status.name
-      - submissions.each do |submission|
-        .submission{:class => (current_user == submission.user ? 'current' : nil)}    
-          = link_to submission.user.name, submission_path(submission)
 
   #activity.bucket
     - @activities.each do |activity|
