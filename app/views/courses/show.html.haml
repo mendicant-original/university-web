@@ -51,10 +51,10 @@
     #notes= md(@course.notes)
     
   
-  #assignments.bucket
-    - @course.assignments.each do |assignment|
-      .assignment
-        = link_to assignment.name, course_assignment_path(@course, assignment)
+  / #assignments.bucket
+  /   - @course.assignments.each do |assignment|
+  /     .assignment
+  /       = link_to assignment.name, course_assignment_path(@course, assignment)
 
   #documents.bucket
     - @course.documents.each do |document|
