@@ -42,13 +42,14 @@
   #overview.bucket
     #description= @course.description_html
     
+    = render :partial => "dashboard/assignments", 
+      :locals => {:course => @course}
+    
     .controls
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     %h2.header Notes
     #notes= md(@course.notes)
     
-    = render :partial => "dashboard/assignments", 
-      :locals => {:course => @course}
   
   #assignments.bucket
     - @course.assignments.each do |assignment|
