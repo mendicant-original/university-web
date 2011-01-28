@@ -4,18 +4,18 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').trigger("edit");
+        $('#note_content').trigger("edit");
       });
 
-      $('#notes').click(function(e){
+      $('#note_content').click(function(e){
         if (e.target.tagName != "A") {
-          $('#notes').trigger("edit");
+          $('#note_content').trigger("edit");
         }
       });
       
       var editPath = '#{assignment_path(@assignment)}/notes';
     
-      $('#notes').editable(editPath, {
+      $('#note_content').editable(editPath, {
         type:      'textarea',
         height:    '200px',
         width:     '98%',
@@ -43,11 +43,10 @@
   %span#current_section
   
 - content_for :bucket do
-  #overview.bucket
-    #description= md(@assignment.description)
-    
-    %h2.header Submissions
-    
+  #description.bucket
+    = md(@assignment.description)
+
+  #submissions.bucket    
     %table.submissions
       %tr
         %th Student
@@ -62,13 +61,12 @@
             %td.status
               .box{:style => "background-color: ##{status.hex_color}"}
               = status.name
-    
+              
+  #notes.bucket
     .controls
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    %h2.header Notes
-    #notes= md(@assignment.notes)
+    #note_content= md(@assignment.notes)
     
-
   #activity.bucket
     - @activities.each do |activity|
       = render :partial => "courses/activity", 

@@ -5,9 +5,17 @@
   .nav
     %ul#sidebar
       %li
-        = link_to "Overview", 
-          course_assignment_path(@course, @assignment, :anchor => "overview"),
-          :"data-id" => "overview"
+        = link_to "Description", 
+          course_assignment_path(@course, @assignment, :anchor => "description"),
+          :"data-id" => "description"
+      %li
+        = link_to "Submissions",
+          course_assignment_path(@course, @assignment, :anchor => "submissions"),
+          :"data-id" => "submissions"
+      %li
+        = link_to "Notes", 
+          course_assignment_path(@course, @assignment, :anchor => "notes"),
+          :"data-id" => "notes"
       %li
         = link_to "Activity", 
           course_assignment_path(@course, @assignment, :anchor => "activity"),
