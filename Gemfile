@@ -12,6 +12,7 @@ gem 'pg'
 gem "will_paginate", "~> 3.0.pre2"
 
 gem 'rdiscount'
+gem 'sanitize', '~> 2.0.0'
 
 group :test do
   gem 'webrat'

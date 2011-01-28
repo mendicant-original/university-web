@@ -1,7 +1,7 @@
 Comment from <%= @comment.user.name %>
 -----
 
-<%= @comment.comment_text %>
+<%= Sanitize.clean @comment.comment_text %>
 
 -----
 Please do not reply to this email. Instead reply from:
