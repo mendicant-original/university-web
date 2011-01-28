@@ -140,7 +140,7 @@
     padding: 0.5em 0.25em
     font-size: 1.1em
 
-  div.assignment, div.submission, div.status
+  .assignment, .submission, .status
     border-bottom: 1px solid #eee
     padding: 0.5em 0.25em
 
@@ -165,8 +165,14 @@ table.submissions
     &.status
       font-size: 1em !important
       border-color: #ccc
-  tr.current
-    background-color: #9ab6d0
+  tr
+    cursor: pointer
+    &:hover
+      background-color: #eee
+    &.current
+      background-color: #A9CAE6
+      &:hover
+        background-color: #9ab6d0
     
 #submissions, table.submissions
   .submission

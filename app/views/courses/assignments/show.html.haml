@@ -29,6 +29,10 @@
       });
       
       SidebarMenu.register('sidebar');
+      
+      $('tr.submission').click(function(e){
+        window.location = $(e.currentTarget).attr('data-url');
+      });
     });
 
 - content_for :breadcrumbs do
@@ -55,10 +59,11 @@
         %th Status
       - @submissions.each do |status, submissions|
         - submissions.each do |submission|
-          %tr{:class => (current_user == submission.user ? 'current' : nil)}
+          %tr.submission{:class => (current_user == submission.user ? 'current' : nil),
+              :"data-url" => submission_path(submission) }
             %td.student
               = image_tag submission.user.gravatar_url(32)
-              = link_to submission.user.name, submission_path(submission)
+              = submission.user.name
             %td.status
               .box{:style => "background-color: ##{status.hex_color}"}
               = status.name
