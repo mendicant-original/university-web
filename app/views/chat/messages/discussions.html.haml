@@ -2,6 +2,12 @@
 
 %h1= "Discussions for #{params[:channel]}"
 
+%p
+  Sort by
+  - @discussion_orders.each do |key, order|
+    = link_to_if params[:sort] != key, order[:name], chat_discussions_path(params[:channel], :sort => key)
+    = ',' unless @discussion_orders.keys.last == key
+
 %p= link_to("Back to #{params[:channel]}", chat_messages_path(:channel => params[:channel]))
 
 %ul.discussions

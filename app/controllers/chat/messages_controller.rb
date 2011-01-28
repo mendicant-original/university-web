@@ -74,7 +74,9 @@ class Chat::MessagesController < ApplicationController
       return
     end
 
-    @discussions = @channel.topics.order("created_at desc")
+    params[:sort] ||= 'created_at'
+    @discussion_orders = Chat::Topic::SORT_ORDERS
+    @discussions = @channel.topics.sort_order_by(params[:sort])
   end
   
   def create
