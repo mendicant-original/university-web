@@ -2,8 +2,6 @@ $rmu_blue= #00316a
 $rmu_yellow= #fbe482
 $rmu_red= #70130B
 
-$blueprint-liquid-container-width = 100%
-
 =dropdown_container
   position: relative
 
@@ -56,17 +54,24 @@ body
   font-family: "lucida grande", "Lucida Sans", "Helvetica", sans-serif
   font-size: 12px
   line-height: 1.24em
-  background-color: #f9f9f9
+  background-color: #eee
   color: #292929
 
 #wrap
-  margin-top: 1em
-  padding: 0 20px 20px
+  margin-top: 1px
+  padding: 1em 20px 20px
+  +box-shadow(#444, 0, 5px, 15px)
+  height: 100%
 
 .constrained
-  max-width: 1500px
-  min-width: 950px
   margin: 0 auto
+  background-color: #f9f9f9
+  width: 960px
+
+#header, #nav
+  div.centered
+    margin: 0 auto
+    width: 960px
 
 #header
   background-color: #710F0A
