@@ -35,7 +35,7 @@
     #bucket
       border-left: 1px solid #ddd
       padding: 1em 0 1em 1em
-      min-height: 250px
+      min-height: 300px
       
       div.bucket
         p:first-of-type
@@ -70,17 +70,9 @@
         
   #notes
     +markdown
-    
-#documents.bucket
-  .document
-    margin-bottom: 1.25em
-    a
-      font-size: 1.25em
-      line-height: 1.5em
-      display: block
       
-#assignments.bucket
-  .assignment
+#assignments.bucket, #documents.bucket
+  div.assignment, div.document
   
     cursor: pointer
   

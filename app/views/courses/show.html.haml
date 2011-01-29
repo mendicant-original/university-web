@@ -61,7 +61,9 @@
   #documents.bucket
     - @course.documents.each do |document|
       .document
-        = link_to document.title, course_document_path(@course, document)
+        = link_to course_document_path(@course, document) do
+          %span.name= document.title
+          %span.description= document.description
 
   #activity.bucket
     - @activities.each do |activity|
