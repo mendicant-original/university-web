@@ -7,4 +7,8 @@ module UserMailerHelper
     
     to.uniq - [exclude_emails]
   end
+  
+  def escape_and_sanitize(text)
+    CGI.unescapeHTML(Sanitize.clean(text))
+  end
 end
