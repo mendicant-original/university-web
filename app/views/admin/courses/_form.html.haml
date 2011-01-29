@@ -23,7 +23,7 @@
   = form.check_box :archived
 
 %p
-  = form.label :channel_id, "Course IRC Channel"
+  = form.label :channel_id, "IRC Channel"
   = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
     :include_blank => "None"
 

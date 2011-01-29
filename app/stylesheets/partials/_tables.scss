@@ -1,12 +1,10 @@
 table.admin
 {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-	font-size: 0.8em;
-	width: 650px;
+	width: 100%;
 	
 	th
   {
-  	font-size: 0.9em;
   	font-weight: normal;
   	padding: 8px;
   	border: 2px solid #00316a;
@@ -17,7 +15,6 @@ table.admin
   td
   {
   	padding: 8px;
-  	font-size: 0.9em; 
   	border-bottom: 1px solid #ddd;
   	border-top: 1px solid transparent;
   }

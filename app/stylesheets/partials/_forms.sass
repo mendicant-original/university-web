@@ -1,16 +1,17 @@
 h1.form-header
   color: #00316a
   margin: 0.75em 0 1.2em
-  font: bold 1em "Helvetica Neue", Helvetica, Arial, sans-serif
+  font: bold 1.25em "Helvetica Neue", Helvetica, Arial, sans-serif
 
 form.bp
   +blueprint-form
   
-  width: 450px
+  input
+    font-size: 100%
   
   label
     font-weight: normal
-    font-size: 0.9em
+    
     color: #333
     display: inline-block
     text-align: right
@@ -72,25 +73,21 @@ form.bp
   p.info
     margin: 0 0 0.5em 135px
     color: #666
-    font-size: 0.8em
+    font-size: 0.9em
   
   p.no-label, .no-label 
     margin: 0 0 0 129px
       
   input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
-    font-size: 0.9em
+    
     color: #555
   
   select
-    font-size: 0.8em
     color: #555
     
   textarea
     width: 300px
     height: 1%
-    //overflow: auto
-    
-  // overrides for tables in forms
     
   table label
     font-size: 1em
@@ -142,7 +139,7 @@ form.mailer
 
 body.admin
   form.bp, h1.form-header
-    width: 650px
+    // width: 650px
   label
     width: 210px
   p.no-label, .no-label, p.info 
