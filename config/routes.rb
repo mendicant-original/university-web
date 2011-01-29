@@ -1,7 +1,8 @@
 University::Application.routes.draw do
   root :to => "dashboard#show"
   
-  get "alumni" => 'public#alumni'
+  get "alumni"    => 'public#alumni'
+  get "changelog" => 'public#changelog'
   
   resource :dashboard, :controller => "dashboard"
   
