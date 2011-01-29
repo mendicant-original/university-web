@@ -6,7 +6,7 @@ class Course < ActiveRecord::Base
   has_many :documents,          :through    => :course_documents
                                             
   has_many :assignments,        :dependent  => :destroy, 
-                                :order      => "created_at"
+                                :order      => "sort_order"
 
   belongs_to :channel,          :class_name => "Chat::Channel"
   belongs_to :term
