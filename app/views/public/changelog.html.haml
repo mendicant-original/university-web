@@ -1,4 +1,10 @@
-- @announcements.each do |announcement|
-  %p= announcement.title
+#announcements
+  - @announcements.each do |announcement|
+    .announcement
+      .title= announcement.title
+      .body= md(announcement.body)
+      .info
+        .author= announcement.author.name
+        .posted_date= announcement.created_at.to_date
   
 = will_paginate @announcements
