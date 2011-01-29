@@ -1,6 +1,6 @@
 module PublicHelper
   def current_page(name, current)
-    'current' if name == 'alumni'
+    'current' if name == current
   end
   
   def alumnus_name(alumnus)

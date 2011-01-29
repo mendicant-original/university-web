@@ -9,9 +9,9 @@
       #logo
         %img.logo{:src=>"/images/rmu_logo.png"}
         %h1 Ruby Mendicant University
-        
-        - # HACK for Rails layout
-        - current = nil if !defined?(current)
+      
+      - # HACK for Rails layout
+      - current = @current if @current
       
       #menu_bar
         .center
