@@ -2,7 +2,7 @@ class Admin::ExamsController < Admin::Base
   before_filter :find_exam, :only => [:show, :update, :edit, :destroy]
   
   def index
-    @exams = Exam.all
+    @exams = Exam.order("start_time")
   end
   
   def new
