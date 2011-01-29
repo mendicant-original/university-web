@@ -53,7 +53,8 @@ University::Application.routes.draw do
     resources :courses do
       resources :assignments
     end
-
+    resources :documents
+    resources :announcements
     resources :exams
     resources :terms
     resources :submission_statuses
@@ -67,8 +68,6 @@ University::Application.routes.draw do
     namespace :chat do
       resources :channels
     end
-    
-    resources :documents
   end
   
   resources :comments
