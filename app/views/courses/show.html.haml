@@ -71,6 +71,12 @@
               :locals => {:activity => activity}
     = will_paginate @activities, :params => {:anchor => "activity"},
       :param_name => "activity_page"
+      
+  #irc_log.bucket
+    = render :partial => "/chat/recent", 
+      :locals => { :channel            => @course.channel, 
+                   :full_body          => true,
+                   :number_of_messages => 10 }
     
   #participants.bucket
     #directory
