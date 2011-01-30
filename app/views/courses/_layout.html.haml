@@ -23,9 +23,10 @@
       %li
         = link_to "Documents", course_path(@course, :anchor => "documents"),
           :"data-id" => "documents"
-      %li
-        = link_to "IRC Log", course_path(@course, :anchor => "irc_log"),
-          :"data-id" => "irc_log"
+      - if @course.channel
+        %li
+          = link_to "IRC Log", course_path(@course, :anchor => "irc_log"),
+            :"data-id" => "irc_log"
       %li
         = link_to "Participants", course_path(@course, :anchor => "participants"),
           :"data-id" => "participants"
