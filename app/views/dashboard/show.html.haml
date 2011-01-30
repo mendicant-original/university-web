@@ -1,40 +1,7 @@
 .two-col
-  .main
-    .profile
-      %h1
-        = image_tag current_user.gravatar_url(50), :alt => ""
-        = current_user.name
-      
-      #clean-gray.block
-        = button_to "Edit your profile", edit_user_path(current_user), :method => :get
-
   .main  
     - current_user.open_registrations.each do |term|
       = render :partial => "registration", :locals => {:term => term}
-
-  .left
-    %h3 IRC Channels
-
-    - current_user.chat_channels.each do |channel|
-      = render :partial => "/chat/recent", :locals => {:channel => channel}
-  .right
-    = render :partial => "exams"
-
-  #majestic_blog.right.blog.last
-    %h4= link_to "RMU Blog",
-          "http://blog.majesticseacreature.com/tag/rubymendicant",
-          :target => "_blank"
-
-    %ul
-      %li Loading...
-  
-  #learning_blog.right.blog.last
-    %h4= link_to "Education Reimagined Blog",
-          "http://educationreimagined.com/",
-          :target => "_blank"
-
-    %ul
-      %li Loading...
 
   .main
     - if current_user.student_courses.active.any?
@@ -51,3 +18,27 @@
   
   - content_for :header_bottom do
     = javascript_include_tag "jquery.jgfeed-min", "blog_feed"
+
+  .left
+    %h3 IRC Channels
+
+    - current_user.chat_channels.each do |channel|
+      = render :partial => "/chat/recent", :locals => {:channel => channel}
+  .right
+    = render :partial => "exams"
+
+  #majestic_blog.right.blog.last
+    %h4= link_to "RMU Blog",
+          "http://blog.majesticseacreature.com/tag/rubymendicant",
+          :target => "_blank"
+
+    %ul
+      %li Loading...
+
+  #learning_blog.right.blog.last
+    %h4= link_to "Education Reimagined Blog",
+          "http://educationreimagined.com/",
+          :target => "_blank"
+
+    %ul
+      %li Loading...
