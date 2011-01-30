@@ -41,9 +41,30 @@ namespace :"public-site" do
     
     File.open(css_file, 'w') { |f| f.puts(css) }
     
-    # Copy the latest layout for the alumni listing
+    # Copy the latest layout into rails for the public controller
     #
-    `cp #{File.join(public_site_root, 'views', 'layout.haml')} \
-        #{File.join(Rails.root, 'app', 'views', 'layouts', 'static.html.haml')}`
+    FileUtils.cp(File.join(public_site_root, 'views', 'layout.haml'),
+      File.join(Rails.root, 'app', 'views', 'layouts', 'static.html.haml'))
+  end
+  
+  desc 'Removes all public site generated files'
+  task :destroy => :environment do
+    public_site_root = File.join(Rails.root, 'public-site')
+    output_path      = File.join(Rails.root, 'public')
+    
+    views  = Pathname.glob(File.join(public_site_root, 'views', '*.haml')).
+      reject {|v| v.to_s[/layout.haml/] }
+      
+    views.each do |view|
+      file = File.join(output_path, view.basename.to_s.gsub(/haml/,'html'))
+
+      FileUtils.rm(file)
+    end
+    
+    css_file = File.join(output_path, 'stylesheets', 'public.css')
+    layout   = File.join(Rails.root, 'app', 'views', 'layouts', 'static.html.haml')
+   
+    FileUtils.rm(css_file)
+    FileUtils.rm(layout)
   end
 end
