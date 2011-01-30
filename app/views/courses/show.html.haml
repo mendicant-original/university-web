@@ -92,7 +92,7 @@
         = render :partial => '/users/user', :locals => { :user => user, 
           :roles => user.course_memberships.where(:course_id => @course.id)}
 
-      = will_paginate @users, :params => {:anchor => "directory"}, 
+      = will_paginate @users, :params => {:anchor => "participants"}, 
         :param_name => "user_page"
     
 = render :partial => "layout"
