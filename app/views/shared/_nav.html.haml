@@ -37,8 +37,6 @@
         %li
           = link_to "Sign in", new_user_session_path
     :javascript
-      $(function() { 
-        DropdownMenu.register('courses');
-        DropdownMenu.register('administration'); 
-      } );
+      DropdownMenu.register('courses');
+      DropdownMenu.register('administration'); 
     .clear
