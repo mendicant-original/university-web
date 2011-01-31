@@ -4,8 +4,7 @@ module Students
   class AccessPasswordChangeTest < ActionDispatch::IntegrationTest
     story "As a Student accessing the application for the first time" do
       setup do
-        @user = Factory(:user, :nickname => "Ruan RMU",
-                        :requires_password_change => true)
+        @user = Factory(:user, :requires_password_change => true)
         sign_user_in @user
       end
 
@@ -19,7 +18,7 @@ module Students
 
         assert_current_path dashboard_path
         assert_no_field "New Password"
-        assert_title "Ruan RMU"
+        assert_content "IRC Channels"
       end
 
       scenario "attempt to use invalid password combination when required" do
