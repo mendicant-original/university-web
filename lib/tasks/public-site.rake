@@ -1,3 +1,8 @@
+# NOTE: This file is a big mess and needs some serious love. 
+#       Please don't judge me :)
+#       <3 Jordan
+#
+
 require 'haml'
 require 'pathname'
 
@@ -24,7 +29,8 @@ namespace :"public-site" do
       reject {|v| v.to_s[/layout.haml/] }
     
     views.each do |view|
-      current = view.basename.to_s.gsub('.haml','').downcase
+      current = current_section(view, public_site_root)
+      
       static_html = Haml::Engine.new(layout).to_html(Object.new, :current => current) do
         Haml::Engine.new(File.read(view)).to_html
       end
@@ -66,5 +72,15 @@ namespace :"public-site" do
    
     FileUtils.rm(css_file)
     FileUtils.rm(layout)
+  end
+  
+  def current_section(view, public_site_root)
+    root = Pathname.new(File.join(public_site_root, 'views'))
+    
+    if view.relative_path_from(root).to_s.gsub(view.basename.to_s, '')[/\//]
+      view.relative_path_from(root).to_s.gsub(view.basename.to_s, '').gsub('/', '')
+    else
+      view.basename.to_s.gsub('.haml','').downcase
+    end
   end
 end
