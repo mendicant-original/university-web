@@ -1,4 +1,4 @@
-Ruby Mendicant University is a free online training program aimed at helping intermediate Ruby developers improve their software development skills.  We aim to create a welcoming environment for passionate students to learn, grow, and share in.  Our courses are designed from the ground up to support these goals, and small class sizes combined with active personalized guidance from our instructors make for a unique experience not usually found in online training programs.
+Our courses are designed from the ground up to support these goals, and small class sizes combined with active personalized guidance from our instructors make for a unique experience not usually found in online training programs.
 
 ### Core Skills Course
 

@@ -1,5 +1,12 @@
 %p
-  Announcement introduction text!
+  Bookmark this page and visit it often to keep track of news about RMU,
+  including new calls for participation, events with guest speakers, or
+  study sessions with our alumni and staff.  You can also keep track of
+  what's going on at RMU by following the #RbMU hash tag on twitter,
+  subscribing to the rmu-talk mailing list, or to the 
+  = link_to "RSS feed", 
+    :controller => "public", :action => "changelog", :format => "rss"
+  for this page.
 
 #announcements
   - @announcements.each do |announcement|

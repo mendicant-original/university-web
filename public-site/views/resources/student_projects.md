@@ -1,8 +1,6 @@
-We are committed to producing free and open source software.  Here you'll find many interesting student projects.
+Each student is required to work on an individual project during their core skills course at RMU.  Below you'll find the projects that have been made available publicly on github by our alumni.
 
 ### Student Projects
-
-Each student is required to work on an individual project during their core skills course at RMU.  Below you'll find the projects that have been made available publicly on github by our alumni.
 
 <ul>
 	<li><a href="http://github.com/RubyMoney/google_currency">google_currency</a> (Shane Emmons): Ruby Money::Bank interface for the Google Currency exchange data</li>
