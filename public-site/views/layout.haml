@@ -4,6 +4,10 @@
     %title Ruby Mendicant University
     %meta{:"http-equiv"=>"Content-Type",:content=>"text/html;charset=utf-8"}
     %link{:href=>"/stylesheets/public.css",:type=>"text/css",:rel=>"stylesheet"}
+    :plain
+      <script src="/javascripts/jquery-1.4.2.js" type="text/javascript"></script> 
+      <script src="/javascripts/dropdownmenu.js" type="text/javascript"></script> 
+      
   %body
     #header
       #logo
@@ -16,21 +20,51 @@
       #menu_bar
         .center
           %ul.menu
-            %li.first
+            %li.main.first
               %a{:href=>"/", :class => current_page('index', current)} Home
-            %li
-              %a{:href=>"/about.html", 
-                :class => current_page('about', current)} About RMU
-            %li 
-              %a{:href=>"/library.html", 
-                :class => current_page('library', current)} Learning Resources
-            %li 
-              %a{:href=>"/projects.html", 
-                :class => current_page('projects', current)} Code
-            %li
+            %li.main
+              %a{:href=>"/changelog.html", 
+                :class => current_page('changelog', current)} News
+            %li.main#about
+              %a.dropdown{:href=>"#", 
+                :class => current_page('about', current)} 
+                About RMU
+                %span.arrow
+              #about_dropdown
+                %ul
+                  %li
+                    %a{:href => "/about/courses.html"} Courses
+                  %li
+                    %a{:href => "/about/admissions.html"} Admissions
+                  %li
+                    %a{:href => "/about/staff.html"} Staff
+                  %li
+                    %a{:href => "/about/contact.html"} Contact
+                    
+              :javascript
+                DropdownMenu.register('about');
+                    
+            %li.main#resources
+              %a.dropdown{:href=>"/projects.html", 
+                :class => current_page('resources', current)} 
+                Resources
+                %span.arrow
+              #resources_dropdown
+                %ul
+                  %li
+                    %a{:href => "/resources/learning_materials.html"} Learning Materials
+                  %li
+                    %a{:href => "/resources/core_projects.html"} Core Projects
+                  %li
+                    %a{:href => "/resources/student_projects.html"} Student Projects
+                    
+              :javascript
+                DropdownMenu.register('resources');
+                               
+            %li.main
               %a{:href=>"/alumni.html", 
                 :class => current_page('alumni', current)} Alumni List
-            %li.last
+            %li.main.last
               %a{:href=>"/users/sign_in"} University Web
     #container 
       #content
