@@ -1,17 +1,23 @@
 #announcements
+  margin-top: 2em
+  
   .announcement
-    border-bottom: 1px solid #eee
     margin-bottom: 1em
     
     .title
-      font-size: 1.25em
+      font-size: 1.1em
+      border-bottom: 1px solid #eee
+      padding: 0.25em 0.5em
+      background: #eee
+      +border-radius(5px)
       
     .body
       color: #333
+      padding-left: 1em
       
     .info
-      text-align: right
-      font-size: 0.75em
+      float: right
+      font-size: 0.6em
       color: #555
       padding: 0.5em 0
       
@@ -37,3 +43,4 @@
 .pagination em
   font-size: 1.3em
   color: #000
+  font-style: normal

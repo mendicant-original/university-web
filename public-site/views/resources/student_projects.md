@@ -33,6 +33,11 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/jcangas/Schedulight">Schedulight</a> (Jorge L. Cangas): Classroom scheduling tool</li>
   <li><a href="https://github.com/trliner/doji_charts">doji_charts</a> (Tim Liner): Stock charting web app</li>
   <li><a href="https://github.com/calstad/readable_recurrences">readable_recurrences</a> (Colin Alstad): extracts recurrence patterns from a set of dates</li>
+  <li><a href="https://github.com/coxandrew/uxlab">uxlab</a> (Andrew Cox): A resource manager for storing sketches and mockups for workflows</li>
+  <li><a href="https://github.com/carlosantoniodasilva/i18n_alchemy">i18n_alchemy</a> (Carlos Antonio): Date, Time, and Numeric localization for ActiveRecord</li>
+  <li><a href="https://github.com/vinibaggio/outpost">outpost</a> (Vinicius Baggio Fuentes): Simple service monitoring with a clean DSL for configuration</li>
+  <li><a href="https://github.com/etrepat/pentago">pentago</a> (Estanislau Trepat): Pentago Game and AI Bot</li>
+  <li><a href="https://github.com/rfelix/iwannareadit">iwannareadit</a> (Raoul Felix): Web app to manage book suggestions, voting, and lending</li>
 </ul>     
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._

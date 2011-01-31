@@ -1,10 +1,15 @@
+%p
+  Announcement introduction text!
+
 #announcements
   - @announcements.each do |announcement|
     .announcement
-      %h3= announcement.title
+      .title
+        = announcement.title
+        .info
+          .author= announcement.author.name
+          .posted_date= announcement.created_at.to_date
       .body= md(announcement.body)
-      .info
-        .author= announcement.author.name
-        .posted_date= announcement.created_at.to_date
+
   
 = will_paginate @announcements

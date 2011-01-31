@@ -12,7 +12,7 @@ class PublicController < ApplicationController
   def changelog
     @announcements = Announcement.where(:public => true).order("created_at DESC")
     
-    @announcements = @announcements.paginate(:page => params[:page])
+    @announcements = @announcements.paginate(:page => params[:page], :per_page => 10)
   end
   
   def set_current_section
