@@ -12,6 +12,7 @@ xml.rss :version => "2.0" do
         xml.author announcement.author.name
         xml.pubDate announcement.created_at.to_s(:rfc822)
         xml.link "http://university.rubymendicant.com/changelog"
+        xml.guid announcement.id
       end
     end
   end
