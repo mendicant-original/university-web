@@ -38,5 +38,7 @@
           = link_to "Sign in", new_user_session_path
     :javascript
       DropdownMenu.register('courses');
-      DropdownMenu.register('administration'); 
+      DropdownMenu.register('administration');
+      
+    = link_to "Public site", "/", :id => "public_link"
     .clear
