@@ -1,7 +1,7 @@
 #announcements
   - @announcements.each do |announcement|
     .announcement
-      .title= announcement.title
+      %h3= announcement.title
       .body= md(announcement.body)
       .info
         .author= announcement.author.name
