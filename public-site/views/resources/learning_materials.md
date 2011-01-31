@@ -21,6 +21,8 @@ We are committed to releasing our exams, exercises and other learning materials 
 ### 2011/T1
 
 * [Entrance Exam](https://github.com/rmu/rmu-entrance-exam-2011-t1): Meeting scheduling optimization problem
-
+* [s4-e1](https://github.com/rmu/s4-e1): Building command line interfaces to web services
+* [s4-e2](https://github.com/rmu/s4-e2): Challenge problem: Space travel simulator
+* [s4-e3](https://github.com/rmu/s4-e3): Learning SOLID principles by example
 
 _All materials, unless otherwise noted may be used under the terms of the [GNU Free Documentation License](http://www.gnu.org/licenses/fdl.html)._
