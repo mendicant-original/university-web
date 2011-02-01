@@ -1,0 +1,1 @@
+rake public-site:generate RAILS_ENV=production
