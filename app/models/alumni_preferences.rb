@@ -1,8 +1,8 @@
 class AlumniPreferences < ActiveRecord::Base
   before_create :set_defaults
-  
+
   private
-  
+
   def set_defaults
     self.show_on_public_site = false if show_on_public_site.nil?
     self.show_twitter        = true  if show_twitter.nil?

@@ -1,5 +1,5 @@
 #nav
-  .constrained
+  .centered
     %ul
       - if current_user
         %li
@@ -27,6 +27,7 @@
                 %li= link_to "Exams", admin_exams_path
                 %li= link_to "Terms", admin_terms_path
                 %li= link_to "Documents", admin_documents_path
+                %li= link_to "Announcements", admin_announcements_path
                 %li= link_to "Chat Channels", admin_chat_channels_path
                 %li= link_to "Submission Statuses", admin_submission_statuses_path
                 %li= link_to "Broadcast Emails", new_admin_group_mail_path
@@ -36,8 +37,8 @@
         %li
           = link_to "Sign in", new_user_session_path
     :javascript
-      $(function() { 
-        DropdownMenu.register('courses');
-        DropdownMenu.register('administration'); 
-      } );
+      DropdownMenu.register('courses');
+      DropdownMenu.register('administration');
+      
+    = link_to "Public site", "/", :id => "public_link"
     .clear

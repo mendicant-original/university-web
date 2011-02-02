@@ -1,3 +1,39 @@
+=dropdown_menu
+  position: absolute
+  top: 23px
+  left: 0
+  background-color: #f9f9f9
+  +border-bottom-radius(3px)
+  +border-top-right-radius(3px)
+  +box-shadow(#000, 0, 1px, 8px)
+  color: #333
+  z-index: 3
+  width: 150px
+  
+  ul
+    -webkit-padding-start: 0px
+    padding: 0px
+    li
+      border-bottom: 1px solid #bbb
+      float: none
+      display: block
+      margin-right: 0
+      background: transparent
+      
+      &:first-of-type
+        a
+          +border-top-right-radius(3px)
+      &:last-of-type
+        a
+          +border-bottom-radius(3px)
+      
+      a
+        padding: 7px
+        display: block
+        &:hover
+          background-color: #e9e9e9
+      
+
 html, body
   height: 100%
 
@@ -58,32 +94,59 @@ body
     position: relative
     top: -5px
     
-    li
+    li.main
       float: left
       background-color: #cccccc
       background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #f0f0f0), color-stop(100%, #cccccc))
       background-image: -moz-linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
       background-image: linear-gradient(top, #f0f0f0 0%, #cccccc 100%)
-      padding: 4px 10px
       text-shadow: 0 1px 0 white
       font-size: 14px
       letter-spacing: 1px
+      position: relative
       
       &.first
         +border_radius_left(5px)
       &.last
         +border_radius_right(5px)
+      
+      &.active
+        +box-shadow(#000, 2px, 2px, 8px)
         
       a
+        padding: 4px 10px
         text-decoration: none
         text-shadow: 0 1px 0 white
         color: #666
+        display: block
         
         &.current
           color: #000
+        &.active
+          background-color: #f9f9f9
+          color: #333
+          position: relative
+          z-index: 4
+          +border-top-radius(5px)
           
         &:hover
           color: #222
+          
+          span.arrow
+            background-position: 0 0
+        
+        span.arrow
+          display: inline-block
+          height: 6px
+          width: 7px
+          background: transparent url(/images/arrows_small.png) 0 -6px  no-repeat
+          margin-bottom: 2px
+          
+          &.active
+            background-position: 0 0
+
+#about_dropdown, #resources_dropdown
+  +dropdown_menu
 
 #container
   width: 970px
@@ -122,3 +185,9 @@ p.info
   padding-top: 2em
   text-align: center
   border-top: 1px solid #ccc
+  
+.header
+  font-style: italic
+  line-height: 1.5em
+  margin: 0 1em 1em
+  padding: 1.5em

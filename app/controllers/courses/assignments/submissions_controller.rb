@@ -4,29 +4,29 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   def index
     @submissions = @assignment.submissions.sort_by {|s| s.last_active_on }.reverse
   end
-  
+
   def show
     respond_to do |format|
       format.html { redirect_to :action => :edit }
       format.text { render :text => @submission.description }
-    end    
+    end
   end
-  
+
   def edit
-    
+
   end
-  
+
   def description
     @submission.update_description(current_user, params[:value])
-    
+
     respond_to do |format|
       format.text
     end
   end
-  
-  def update    
+
+  def update
     new_status = SubmissionStatus.find(params[:assignment_submission]['submission_status_id'])
-    
+
     if @submission.update_status(current_user, new_status)
       flash[:notice] = "Assignment submission sucessfully updated."
       redirect_to :action => :edit
@@ -34,24 +34,24 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
       render :action => :edit
     end
   end
-  
+
   def comment
     @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
-    
+
     if params[:commit][/Request Review/]
       @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
     end
-    
+
     flash[:notice] = "Comment posted."
     redirect_to :action => :edit
   end
-  
+
   private
-  
+
   def find_submission
     @submission = Assignment::Submission.find(params[:id])
   end
-  
+
   def student_and_instructor_only
     unless @submission.editable_by?(current_user)
       flash[:error] = "Only course instructors can update submissions"

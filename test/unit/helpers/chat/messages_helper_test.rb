@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class Chat::MessagesHelperTest < ActionView::TestCase
-
   include Chat::MessagesHelper
 
   context '#last_message_timestamp_for_channel' do
@@ -34,7 +33,5 @@ class Chat::MessagesHelperTest < ActionView::TestCase
                      last_message_timestamp_for_channel(@channel)
       end
     end
-
   end
-
 end

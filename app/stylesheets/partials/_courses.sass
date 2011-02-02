@@ -1,20 +1,13 @@
 .course-two-col
   +container
-  
-  #course_header
-    +column(24, true)
-    
-    border-bottom: 1px solid #ddd
-    padding: 1em 0 1.5em
-    
-    h1
-      margin: 0
       
   #breadcrumbs
     +column(24, true)
-    padding: 0.5em 1em
-    background: #eee
-    border-bottom: 1px solid #ddd
+    .container
+      padding: 0.5em 1em
+      background: #eee
+      border: 1px solid #ddd
+      margin-top: 1em
     
   div.nav
     +column(4)
@@ -42,7 +35,20 @@
     #bucket
       border-left: 1px solid #ddd
       padding: 1em 0 1em 1em
-      min-height: 250px
+      min-height: 350px
+      
+      div.bucket
+        p:first-of-type
+          margin-top: 0
+          
+        div.controls
+          float: right
+          
+      #progress
+        padding: 0 0 0 1em
+        
+      #notes, #activity, #participants, #irc_log
+        padding: 1em 0 1em 1em
       
   div.nav, #bucket
     padding-top: 1em
@@ -52,6 +58,9 @@
     
   #description
     +markdown
+    
+    padding: 1em 0 1em 1em
+    
     p
       margin-top: 0
       
@@ -70,22 +79,26 @@
         
   #notes
     +markdown
-    
-#documents.bucket
-  .document
-    margin-bottom: 1.25em
-    a
-      font-size: 1.25em
-      line-height: 1.5em
-      display: block
       
-#assignments.bucket
-  .assignment
-    margin-bottom: 1.25em
-    a
-      font-size: 1.25em
-      line-height: 1.5em
+#assignments.bucket, #documents.bucket
+  div.assignment, div.document
+  
+    cursor: pointer
+  
+    &:hover
+      background-color: #eee
+    
+    padding: 1em
+    
+    span.description
+      color: #000
       display: block
+      margin-top: 0.25em
+    
+    span.name
+      font-size: 1.25em
+      display: block
+      color: #184FA0
  
 #directory.bucket
   border-top: none
@@ -117,7 +130,7 @@
     margin: 1em 0
     color: #888
 
-  .submission, .course
+  div.submission, .course
     border-bottom: 1px solid #eee
     margin-bottom: 1em
     padding-bottom: 1em
@@ -134,20 +147,48 @@
         font-size: 1em
       
 #submissions
-  border-left: 1px solid #eee
-  border-right: 1px solid #eee
-  margin-bottom: 1em
   
   .header
     background-color: #eee
     padding: 0.5em 0.25em
     font-size: 1.1em
 
-  .assignment, .submission, .status
+  div.assignment, div.submission, div.status
     border-bottom: 1px solid #eee
     padding: 0.5em 0.25em
+
+table.submissions
+  width: 100%
+
+  border-collapse: collapse
+
+  td, th
+    padding: 4px 5px
+    border-style: collapse
+
+  th
+    font-weight: bold
+  td
+    border-bottom: 1px solid #ccc
+
+    &.student
+      font-size: 1.25em
+      img
+        vertical-align: middle
+    &.status
+      font-size: 1em !important
+      border-color: #ccc !important
+
+  tr.submission
+    cursor: pointer
+    &:hover
+      background-color: #eee
+    &.current
+      background-color: #A9CAE6
+      &:hover
+        background-color: #9ab6d0
     
-#submissions
+#submissions, table.submissions
   .submission
     padding-left: 1em
     &.current

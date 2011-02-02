@@ -2,8 +2,6 @@ $rmu_blue= #00316a
 $rmu_yellow= #fbe482
 $rmu_red= #70130B
 
-$blueprint-liquid-container-width = 100%
-
 =dropdown_container
   position: relative
 
@@ -33,6 +31,7 @@ $blueprint-liquid-container-width = 100%
       a
         padding: 7px
         display: block
+        color: #333
         &:hover
           background-color: #e9e9e9
           
@@ -52,21 +51,32 @@ $blueprint-liquid-container-width = 100%
   font-weight: normal
   font-style: normal
 
+html, body
+  height: 100%
+
 body
   font-family: "lucida grande", "Lucida Sans", "Helvetica", sans-serif
   font-size: 12px
   line-height: 1.24em
-  background-color: #f9f9f9
+  background-color: #eee
   color: #292929
 
 #wrap
-  margin-top: 1em
-  padding: 0 20px 20px
-
-.constrained
-  max-width: 1500px
-  min-width: 950px
+  +box-shadow(#444, 0, 5px, 15px)
   margin: 0 auto
+  background-color: #f9f9f9
+  width: 990px
+  
+#content
+  margin-top: 1px
+  margin-bottom: 1em
+  padding: 1em 20px 20px
+  min-height: 725px
+
+
+#header, #nav
+  div.centered
+    margin: 0 auto
 
 #header
   background-color: #710F0A
@@ -104,7 +114,6 @@ body
   background-color: #256188
   color: #fff
   padding: 5px 20px 0
-  +box-shadow(#333, -2px, -1px, 0, 2px)
   
   ul
     list-style: none outside none
@@ -132,6 +141,13 @@ body
         
         &.first
           padding-left: 0px
+
+  #public_link
+    float: right
+    color: #fff
+    margin-top: 5px
+    &:hover
+      color: #7F92B1
 
 #courses, #administration
   +dropdown_container

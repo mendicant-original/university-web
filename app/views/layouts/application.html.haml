@@ -17,19 +17,19 @@
     
     = yield(:header_bottom)
 
-  %body
-    #header
-      .constrained
-        %h1 Ruby Mendicant University
-      
-        - if current_user
-          = render :partial => "shared/user"
-    
-    = render :partial => "shared/nav"
-    = render :partial => "shared/flash", :locals => {:flash => flash}
-          
-    #wrap.constrained
-      = yield
+  %body          
+    #wrap
+      #header
+        .centered
+          %h1 Ruby Mendicant University
+
+          - if current_user
+            = render :partial => "shared/user"
+
+      = render :partial => "shared/nav"
+      = render :partial => "shared/flash", :locals => {:flash => flash}
+      #content= yield
+      .clear
         
 / = render :partial => "/shared/menu"
 /   - unless yield(:secondary_navigation).blank?

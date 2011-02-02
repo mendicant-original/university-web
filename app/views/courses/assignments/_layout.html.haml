@@ -1,24 +1,23 @@
 .course-two-col
-  #course_header
-    %h1
-      = link_to @course.name, course_path(@course)
-      \/
-      = link_to @assignment.name, course_assignment_path(@course, @assignment)
-
-  #breadcrumbs.header= yield(:breadcrumbs)
+  #breadcrumbs.header
+    .container= yield(:breadcrumbs)
 
   .nav
     %ul#sidebar
       %li
-        = link_to "Overview", 
-          course_assignment_path(@course, @assignment, :anchor => "overview"),
-          :"data-id" => "overview"
+        = link_to "Description", 
+          course_assignment_path(@course, @assignment, :anchor => "description"),
+          :"data-id" => "description"
       %li
-        = link_to "Submissions", 
+        = link_to "Submissions",
           course_assignment_path(@course, @assignment, :anchor => "submissions"),
           :"data-id" => "submissions"
       %li
-        = link_to "Activity", 
+        = link_to "Student Notes", 
+          course_assignment_path(@course, @assignment, :anchor => "notes"),
+          :"data-id" => "notes"
+      %li
+        = link_to "Activity Log", 
           course_assignment_path(@course, @assignment, :anchor => "activity"),
           :"data-id" => "activity"
   

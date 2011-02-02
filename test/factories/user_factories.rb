@@ -6,4 +6,5 @@ Factory.define :user do |u|
   u.nickname              'suuz'
   u.password              'my password'
   u.password_confirmation 'my password'
+  u.requires_password_change false
 end

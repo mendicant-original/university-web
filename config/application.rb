@@ -36,7 +36,7 @@ module University
     #   g.template_engine :erb
     #   g.test_framework  :test_unit, :fixture => true
     # end
-    
+
     config.after_initialize do
         require "#{Rails.root}/app/models/access_level"
         require "#{Rails.root}/config/access_level_definitions"
@@ -47,9 +47,9 @@ module University
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
+
     config.action_mailer.default_url_options = { :host => "university.rubymendicant.com" }
-    
+
     Haml::Template.options[:ugly] = true
   end
 end

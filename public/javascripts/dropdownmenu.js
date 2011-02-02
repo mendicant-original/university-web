@@ -24,11 +24,14 @@ DropdownMenu.register = function(name){
 
 DropdownMenu.toggle = function(name){
   $('#' + name + '_dropdown').toggle(); 
-  $('#' + name + ' a').toggleClass('active');
+  $('#' + name + ' a:first').toggleClass('active');
+  $('#' + name).toggleClass('active');
   
   // This should use a sprite
   if($('#' + name + ' a').hasClass('active'))
     $('#' + name + ' a img').attr('src', '/images/down_arrow_dark.png');
   else
     $('#' + name + ' a img').attr('src', '/images/down_arrow.png');
+    
+  if($('#' + name + ' a span.arrow')) $('#' + name + ' a span.arrow').toggleClass('active');
 }

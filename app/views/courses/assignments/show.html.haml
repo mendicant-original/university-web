@@ -4,30 +4,35 @@
   :javascript
     $(function(){
       $('#edit_notes').click(function(){
-        $('#notes').trigger("edit");
+        $('#note_content').trigger("edit");
       });
 
-      $('#notes').click(function(e){
+      $('#note_content').click(function(e){
         if (e.target.tagName != "A") {
-          $('#notes').trigger("edit");
+          $('#note_content').trigger("edit");
         }
       });
       
       var editPath = '#{assignment_path(@assignment)}/notes';
     
-      $('#notes').editable(editPath, {
+      $('#note_content').editable(editPath, {
         type:      'textarea',
         height:    '200px',
-        width:     '680px',
+        width:     '98%',
         indicator: 'Saving ...',
         cancel:    'Cancel',
         submit:    'Save',
         loadurl:   '#{assignment_path(@assignment)}.text',
         tooltip:   'Click to edit...',
-        event:     'edit'
+        event:     'edit',
+        onblur:    'ignore'
       });
       
       SidebarMenu.register('sidebar');
+      
+      $('tr.submission').click(function(e){
+        window.location = $(e.currentTarget).attr('data-url');
+      });
     });
 
 - content_for :breadcrumbs do
@@ -38,24 +43,30 @@
   %span#current_section
   
 - content_for :bucket do
-  #overview.bucket
-    #description= md(@assignment.description)
+  #description.bucket
+    = md(@assignment.description)
 
-    %h2.header
-      Notes
-      .controls
-        %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
-    #notes= md(@assignment.notes)
-
-  #submissions.bucket
-    - @submissions.each do |status, submissions|
-      .status
-        .box{:style => "background-color: ##{status.hex_color}"}
-        = status.name
-      - submissions.each do |submission|
-        .submission{:class => (current_user == submission.user ? 'current' : nil)}    
-          = link_to submission.user.name, submission_path(submission)
-
+  #submissions.bucket    
+    %table.submissions
+      %tr
+        %th Student
+        %th Status
+      - @submissions.each do |status, submissions|
+        - submissions.each do |submission|
+          %tr.submission{:class => (current_user == submission.user ? 'current' : nil),
+              :"data-url" => submission_path(submission) }
+            %td.student
+              = image_tag submission.user.gravatar_url(32)
+              = submission.user.name
+            %td.status
+              .box{:style => "background-color: ##{status.hex_color}"}
+              = status.name
+              
+  #notes.bucket
+    .controls
+      %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
+    #note_content= md(@assignment.notes)
+    
   #activity.bucket
     - @activities.each do |activity|
       = render :partial => "courses/activity", 

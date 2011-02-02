@@ -1,7 +1,8 @@
 University::Application.routes.draw do
   root :to => "dashboard#show"
   
-  get "alumni" => 'public#alumni'
+  get "alumni"    => 'public#alumni'
+  get "changelog" => 'public#changelog'
   
   resource :dashboard, :controller => "dashboard"
   
@@ -55,7 +56,8 @@ University::Application.routes.draw do
     resources :courses do
       resources :assignments
     end
-
+    resources :documents
+    resources :announcements
     resources :exams
     resources :terms
     resources :submission_statuses
@@ -69,8 +71,6 @@ University::Application.routes.draw do
     namespace :chat do
       resources :channels
     end
-    
-    resources :documents
   end
   
   resources :comments

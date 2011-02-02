@@ -34,37 +34,13 @@
           cancel:    'Cancel',
           submit:    'Save',
           loadurl:   '#{comments_path}/' + id,
-          width:     '905px',
-          event:     'edit'
+          width:     '98%',
+          event:     'edit',
+          onblur:    'ignore'
         });
       });
       
-    	$(".tab_content").hide();
-    	$("ul.tabs li:first").addClass("active").show();
-    	$(".tab_content:first").show();
-
-    	$("ul.tabs li").click(function() {
-
-    		$("ul.tabs li").removeClass("active");
-    		$(this).addClass("active");
-    		$(".tab_content").hide();
-
-    		var activeTab = $(this).find("a").attr("href");
-    		$(activeTab).fadeIn();
-    		$.scrollTo('100%', { axis: 'y' });
-    		return false;
-    	});
-    	
-    	$('ul.tabs li a[href=#preview]').click(function(){
-    	  var converter = new Showdown.converter();
-        var html = converter.makeHtml($('#comment_comment_text').val());
-        $('#preview').html(html);
-    	});
-    	
-    	$('.description a').live('click', function(e){
-        window.open(e.target.href);
-        return false;
-    	});
+      enableTabs();
       
       $("#sidebar li a[data-id=submissions]").addClass('selected');
       
@@ -85,14 +61,15 @@
         $('.description').editable(editPath, {
           type:        'textarea',
           height:      '200px',
-          width:       '917px',
+          width:       '98%',
           indicator:   'Saving ...',
           cancel:      'Cancel',
           submit:      'Save',
           loadurl:     '#{submission_path(@submission)}.text',
           tooltip:     placeholder,
           event:       'edit',
-          placeholder: placeholder
+          placeholder: placeholder,
+          onblur:    'ignore'
         });
       })
 
@@ -101,9 +78,6 @@
   = render :partial => "courses/breadcrumbs"
   %span.separator &rarr;
   = render :partial => "courses/assignments/breadcrumbs"
-  %span.separator &rarr;
-  = link_to "Submissions", 
-    course_assignment_path(@course, @assignment, :anchor => "submissions")
   %span.separator &rarr;
   = @submission.user.name
 

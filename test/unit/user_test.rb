@@ -1,74 +1,171 @@
-require File.expand_path(File.join('test', 'test_helper'))
+require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   setup do
-    @attrs = {:email => "one@example.com", :password => "secret", 
-    :real_name => "Tom Ward", :nickname => "nick", :twitter_account_name => "kwiz7", 
-    :github_account_name => "amaze-1"}
+    @attrs = {
+      :email => "one@example.com",
+      :password => "secret",
+      :real_name => "Tom Ward",
+      :nickname => "nick",
+      :twitter_account_name => "kwiz7",
+      :github_account_name => "amaze-1"
+    }
   end
-  
+
   test "should save user with valid attributes" do
     user = User.new(@attrs)
     assert user.valid?
     assert user.save
   end
-  
+
   test "should require a real name or nickname" do
-    no_name_user = User.new(@attrs.merge({:real_name => "", :nickname => ""}))
+    no_name_user = User.new(@attrs.merge(:real_name => "", :nickname => ""))
     assert !no_name_user.valid?
-    assert no_name_user.errors[:base].include?("You need to provide either a real name or a nick name")
+    assert no_name_user.errors[:base].include?(
+      "You need to provide either a real name or a nick name")
   end
-  
+
   test "should allow nickname without a real name" do
-    user = User.new(@attrs.merge({:nickname => ""}))
-    assert user.valid?  
+    user = User.new(@attrs.merge(:nickname => ""))
+    assert user.valid?
   end
-  
+
   test "should not allow github username with invalid format" do
-    user = User.new(@attrs.merge({:github_account_name => "-amaze-1"}))
+    user = User.new(@attrs.merge(:github_account_name => "-amaze-1"))
     assert !user.valid?
     assert_not_nil user.errors[:github_account_name]
   end
-  
+
   test "should not allow twitter username with invalid format" do
-    user = User.new(@attrs.merge({:twitter_account_name => "kwiz-7"}))
+    user = User.new(@attrs.merge(:twitter_account_name => "kwiz-7"))
     assert !user.valid?
     assert_not_nil user.errors[:twitter_account_name]
   end
-  
+
   test "should not allow github username that is too long" do
     long_github_name = "a" * 41
-    user = User.new(@attrs.merge({:github_account_name => long_github_name}))
+    user = User.new(@attrs.merge(:github_account_name => long_github_name))
     assert !user.valid?
-    assert user.errors[:github_account_name].include?("is too long (maximum is 40 characters)")
+    assert user.errors[:github_account_name].include?(
+      "is too long (maximum is 40 characters)")
   end
-  
+
   test "should not allow twitter username that is too long" do
-    long_github_name = "a" * 16
-    user = User.new(@attrs.merge({:twitter_account_name => long_github_name}))
+    long_twitter_name = "a" * 16
+    user = User.new(@attrs.merge(:twitter_account_name => long_twitter_name))
     assert !user.valid?
-    assert user.errors[:twitter_account_name].include?("is too long (maximum is 15 characters)")
+    assert user.errors[:twitter_account_name].include?(
+      "is too long (maximum is 15 characters)")
   end
-  
+
   test "should allow blank twitter and github usernames" do
-    user = User.new(@attrs.merge({:twitter_account_name => "", :github_account_name => ""}))
+    user = User.new(@attrs.merge(
+      :twitter_account_name => "", :github_account_name => ""))
     assert user.valid?
     assert user.save
   end
-  
-  test "name should return nickname if available" do
-    user = User.new(@attrs)
-    assert_equal @attrs[:nickname], user.name
+
+  context ".search" do
+    test "finds users by email" do
+      user1 = Factory(:user, :email => "foo@test.com")
+      user2 = Factory(:user, :email => "bar@test.com")
+
+      results = User.search("foo", 1)
+      assert_equal [user1], results
+    end
+
+    %w(real_name nickname twitter_account_name github_account_name).each do |attribute|
+      test "find users by #{attribute}" do
+        user1 = Factory(:user, attribute => "foo")
+        user2 = Factory(:user, attribute => "bar")
+
+        results = User.search("foo", 1)
+        assert_equal [user1], results
+      end
+    end
+
+    test "finds only users by a given course" do
+      course1 = Factory(:course, :name => "Course 1")
+      course2 = Factory(:course, :name => "Course 2")
+      course1.users << (user1 = Factory(:user, :nickname => "foo"))
+      course2.users << (user2 = Factory(:user, :nickname => "foo"))
+
+      results = User.search("foo", 1, :course_id => course1.id)
+      assert_equal [user1], results
+    end
+
+    test "sorts by email as default" do
+      user1 = Factory(:user, :email => "foo2@test.com")
+      user2 = Factory(:user, :email => "foo1@test.com")
+
+      results = User.search("foo", 1)
+      assert_equal [user2, user1], results
+    end
+
+    test "sorts by the given sort option" do
+      user1 = Factory(:user, :nickname => "foo2")
+      user2 = Factory(:user, :nickname => "foo1")
+
+      results = User.search("foo", 1, :sort => :nickname)
+      assert_equal [user2, user1], results
+    end
+
+    test "paginate results based on the given current page" do
+      user1 = Factory(:user, :email => "foo1@test.com")
+      user2 = Factory(:user, :email => "foo2@test.com")
+
+      results = User.search("foo", 2, :per_page => 1)
+      assert_equal [user2], results
+    end
   end
-  
-  test "name should return real name if nickname is not available" do
-    user = User.new(@attrs.merge(:nickname => ""))
-    assert_equal @attrs[:real_name], user.name
+
+  context "#name" do
+    test "returns nickname if available" do
+      user = User.new(@attrs)
+      assert_equal @attrs[:nickname], user.name
+    end
+
+    test "returns real name if nickname is not available" do
+      user = User.new(@attrs.merge(:nickname => ""))
+      assert_equal @attrs[:real_name], user.name
+    end
+
+    test "returns email id if both nickname and real name are not available" do
+      user = User.new(@attrs.merge(:nickname => "", :real_name => ""))
+      assert_equal "one", user.name
+    end
   end
-  
-  test "name should return email id if both nickname and real name are not available" do
-    user = User.new(@attrs.merge(:nickname => "", :real_name => ""))
-    assert_equal "one", user.name
+
+  context "#access_level" do
+    setup do
+      @user = User.new
+    end
+
+    test "returns access level definitions based on current user access" do
+      swap_access_level_definitions AccessLevel::User do |klass|
+        klass.define "guest", :permissions => []
+        klass.define "student", :permissions => [:do_whatever]
+
+        @user.access_level = "guest"
+        assert !@user.access_level.allows?(:do_whatever)
+
+        @user.access_level = "student"
+        assert @user.access_level.allows?(:do_whatever)
+      end
+    end
   end
-  
+
+  private
+
+  def swap_access_level_definitions(klass)
+    begin
+      current_definitions = klass.definitions.dup
+      klass.definitions.clear
+
+      yield klass
+    ensure
+      klass.definitions.clear
+      klass.definitions.merge!(current_definitions)
+    end
+  end
 end

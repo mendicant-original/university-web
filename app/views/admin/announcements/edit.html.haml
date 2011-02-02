@@ -1,0 +1,4 @@
+%h1.form-header Edit Announcement
+
+= form_for @announcement, :url => admin_announcement_path(@announcement), :html => {:class => "bp"} do |f|
+  = render :partial => "form", :locals => {:f => f}

@@ -3,12 +3,12 @@ require "set"
 class AccessLevel
   User   = Class.new(self)
   Course = Class.new(self)
-  
+
   def self.definitions
     @definitions ||= Hash.new
   end
 
-  def self.define(level, options={})  
+  def self.define(level, options={})
     definitions[level] = new(level, options)
   end
 
@@ -30,14 +30,14 @@ class AccessLevel
 
   def permissions
     return @permissions unless parent
-    
+
     @permissions + self.class[parent].permissions
   end
 
   def allows?(permission)
     permissions.include?(permission)
   end
-  
+
   def to_s
     @name
   end

@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class CoursesHelperTest < ActionView::TestCase
-
   include CoursesHelper
 
   context '#course_dates' do
@@ -28,5 +27,4 @@ class CoursesHelperTest < ActionView::TestCase
       end
     end
   end
-
 end
