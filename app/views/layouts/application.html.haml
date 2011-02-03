@@ -30,8 +30,3 @@
       = render :partial => "shared/flash", :locals => {:flash => flash}
       #content= yield
       .clear
-        
-/ = render :partial => "/shared/menu"
-/   - unless yield(:secondary_navigation).blank?
-/     .secondary
-/       = yield(:secondary_navigation)

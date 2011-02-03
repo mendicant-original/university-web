@@ -38,10 +38,12 @@
 
 %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
 
-- if @more_messages
-  %p= link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
+%p
+  - if @more_messages
+    = link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
+    \|
 
-%p= link_to "Discussions", chat_discussions_path(params[:channel])
+  = link_to "Discussions", chat_discussions_path(params[:channel])
 
 %table.messages
   - @messages.each do |message|
