@@ -10,10 +10,10 @@
     - current_user.student_courses.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
           
-    - current_user.mentor_courses.each do |course|
+    - current_user.mentor_courses.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
       
-    - current_user.instructor_courses.each do |course|
+    - current_user.instructor_courses.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
   
   - content_for :header_bottom do

@@ -12,7 +12,8 @@
             %ul
               - current_user.courses.active.each do |course|
                 %li= link_to course.name, course_path(course)
-              %li.small= link_to "Archived Courses", courses_path
+              - if current_user.courses.archived.any?  
+                %li.small= link_to "Archived Courses", courses_path
         %li
           = link_to "Directory", users_path
           = selected_arrow(:directory)

@@ -4,9 +4,9 @@ class CoursesController < ApplicationController
   before_filter :course_members_only, :only => [:show, :notes, :directory]
 
   def index
-    @courses    = current_user.student_courses
-    @instructed = current_user.instructor_courses
-    @mentored   = current_user.mentor_courses
+    @courses    = current_user.student_courses.archived
+    @instructed = current_user.instructor_courses.archived
+    @mentored   = current_user.mentor_courses.archived
   end
 
   def show
