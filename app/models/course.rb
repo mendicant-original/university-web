@@ -12,6 +12,7 @@ class Course < ActiveRecord::Base
   belongs_to :term
 
   validates_presence_of   :name
+  validates_presence_of   :term_id
   validates_uniqueness_of :name, :allow_blank => true
 
   accepts_nested_attributes_for :assignments

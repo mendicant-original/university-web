@@ -10,8 +10,11 @@
           = selected_arrow(:courses)
           #courses_dropdown
             %ul
-              - current_user.courses.active.each do |course|
-                %li= link_to course.name, course_path(course)
+              - current_user.courses.active.group_by(&:term).each do |term, courses|
+                - if term
+                  %li.term= term.name
+                - courses.each do |course|
+                  %li= link_to course.name, course_path(course)
               - if current_user.courses.archived.any?  
                 %li.small= link_to "Archived Courses", courses_path
         %li
