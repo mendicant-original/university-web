@@ -78,6 +78,8 @@
         :locals => { :channel            => @course.channel, 
                      :full_body          => true,
                      :number_of_messages => 20 }
+      = link_to "View full logs", 
+        chat_messages_path(:channel => @course.channel.name)
     
   #participants.bucket
     #directory
