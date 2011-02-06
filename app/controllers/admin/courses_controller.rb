@@ -22,7 +22,7 @@ class Admin::CoursesController < Admin::Base
 
   def update
     if @course.update_attributes(params[:course])
-      redirect_to request.referer
+      redirect_back admin_courses_path
     else
       render :action => :edit
     end

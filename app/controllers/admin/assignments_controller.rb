@@ -23,7 +23,7 @@ class Admin::AssignmentsController < Admin::Base
 
   def update
     if @assignment.update_attributes(params[:assignment])
-      redirect_to admin_course_assignments_path(@course)
+      redirect_back admin_course_assignments_path(@course)
     else
       render :action => :edit
     end

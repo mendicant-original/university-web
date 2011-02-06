@@ -4,8 +4,7 @@
     .container
       - if current_access_level.allows?(:manage_users)
         .admin_controls
-          = button_to 'Edit Course', edit_admin_course_path(@course), 
-            :method => :get
+          = button_away 'Edit Course', edit_admin_course_path(@course)
       = yield(:breadcrumbs)
 
   .nav

@@ -3,12 +3,10 @@
     .container
       - if current_access_level.allows?(:manage_users)
         .admin_controls
-          = button_to 'Edit Course',
-            edit_admin_course_path(@course), 
-            :method => :get
-          = button_to 'Edit Assignment',
-            edit_admin_course_assignment_path(@course, @assignment), 
-            :method => :get
+          = button_away 'Edit Course',
+            edit_admin_course_path(@course)
+          = button_away 'Edit Assignment',
+            edit_admin_course_assignment_path(@course, @assignment)
       = yield(:breadcrumbs)
 
   .nav

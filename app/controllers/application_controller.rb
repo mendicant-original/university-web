@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :change_password_if_needed
   before_filter :set_timezone
+  before_filter :link_return
 
   helper_method :current_access_level
 
@@ -33,5 +34,21 @@ class ApplicationController < ActionController::Base
   def current_access_level
     return current_user.access_level if current_user && current_user.access_level
     AccessLevel::User["guest"]
+  end
+  
+  # returns the person to either the original url from a redirect_away or to a default url
+  def redirect_back(*params)
+    uri = session.delete(:original_uri)
+    
+    if uri
+      redirect_to uri
+    else
+      redirect_to(*params)
+    end
+  end
+
+  # handles storing return links in the session
+  def link_return
+    session[:original_uri] = params[:return_uri] if params[:return_uri]
   end
 end

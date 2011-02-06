@@ -40,4 +40,13 @@ module ApplicationHelper
       image_tag "selected_arrow.png", :class => "selected"
     end
   end
+  
+  def button_away(name, url, options = {})
+    form_tag(url, :method => :get) do
+      [
+        hidden_field_tag('return_uri', url_for(:only_path => true)),
+        submit_tag(name)
+      ].join("\n").html_safe
+    end
+  end
 end
