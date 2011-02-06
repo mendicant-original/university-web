@@ -1,7 +1,12 @@
 .course-two-col
 
   #breadcrumbs.header
-    .container= yield(:breadcrumbs)
+    .container
+      - if current_access_level.allows?(:manage_users)
+        .admin_controls
+          = button_to 'Edit Course', edit_admin_course_path(@course), 
+            :method => :get
+      = yield(:breadcrumbs)
 
   .nav
     %ul#sidebar
