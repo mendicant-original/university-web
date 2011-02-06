@@ -1,4 +1,8 @@
+- date = message_date(message)
+- if date
+  %tr.date
+    %td{:colspan=>3}= date
 %tr.message
   %td.handle= "#{message.handle.name}:"
   %td.body= auto_link(message.body, :html => { :target => '_blank' })
-  %td.recorded_at= message.recorded_at.strftime("%m/%d/%Y %I:%M%p")
+  %td.recorded_at= message_time message
