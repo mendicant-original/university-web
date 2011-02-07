@@ -27,8 +27,9 @@ class Chat::MessagesController < ApplicationController
     @messages = @messages.where(:topic_id => topic.id) if topic
 
     if params[:since] && !params[:since].blank?
+      @since    = DateTime.parse(params[:since])
       @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?",
-                    DateTime.parse(params[:since]), params[:last_id].to_i])
+                    @since, params[:last_id].to_i])
     else
       total_messages = @messages.count
 

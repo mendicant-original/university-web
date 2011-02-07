@@ -9,8 +9,8 @@ module Chat::MessagesHelper
     end
   end
   
-  def message_date(message)
-    return if params[:format] == "json"
+  def message_date(message)    
+    params[:last_date] = @since.to_date if @since && params[:last_date].nil?
     
     if params[:last_date].nil? || params[:last_date] != message.recorded_at.to_date
       params[:last_date] = message.recorded_at.to_date
