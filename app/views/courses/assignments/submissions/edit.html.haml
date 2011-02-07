@@ -51,12 +51,17 @@
       $(function(){
         var editPath = '#{submission_path(@submission)}/description';
       
+        $('#edit_description').click(function(){
+          $('.description').trigger("edit");
+        });
+      
         $('.description').click(function(e){
           if (e.target.tagName != "A") 
             $(e.target).trigger('edit');
         });
       
-        placeholder = 'Click here to add notes about your project or update its description';
+        placeholder = '<div id=\'placeholder\'>Click here to update your ' +
+        'submission\'s description.</div>Comments on your submission go below.';
       
         $('.description').editable(editPath, {
           type:        'textarea',
@@ -66,11 +71,12 @@
           cancel:      'Cancel',
           submit:      'Save',
           loadurl:     '#{submission_path(@submission)}.text',
-          tooltip:     placeholder,
+          tooltip:     'Click here to edit',
           event:       'edit',
           placeholder: placeholder,
-          onblur:    'ignore'
-        });
+          onblur:      'ignore',
+          callback:    function(){ $('#description_controls').show(); }
+        }).bind('edit', function(){ $('#description_controls').hide(); });
       })
 
 
@@ -84,8 +90,13 @@
 - content_for :bucket do
   #submission
     - if current_user != @submission.user
-      %h2.header= "#{@submission.user.name}'s Submission"
+      #submission_header
+        = image_tag @submission.user.gravatar_url(48)
+        = "#{@submission.user.name}'s Submission"
 
+    - if current_user == @submission.user
+      #description_controls.controls
+        %input.clean-gray.small#edit_description{:type => "button", :value => "Edit"}
     .description= md(@submission.description)
 
     .comments
