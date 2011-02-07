@@ -122,9 +122,7 @@
     .clear
 
     - if @course.instructors.include?(current_user)
-
-      %hr
-
+    
       = form_for @submission, :url => submission_path(@submission) do |f|
         = f.submit "Update Status"
         = f.select :submission_status_id,
