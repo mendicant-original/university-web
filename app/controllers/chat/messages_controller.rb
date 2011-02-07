@@ -102,9 +102,14 @@ class Chat::MessagesController < ApplicationController
     channel = Chat::Channel.find_by_name(params[:channel])
     topic   = Chat::Topic.find_by_name(params[:topic])
 
-    url  = chat_messages_url(:channel => channel.name, :topic => topic.name)
-
-    render :text => url
+    if channel.blank?
+      render :text => "Channel doesn't exist", :status => 404
+    elsif topic.blank?
+      render :text => "Nothing has been recorded for topic yet", :status => 404
+    else
+      url  = chat_messages_url(:channel => channel.name, :topic => topic.name)
+      render :text => url
+    end
   end
 
   def transcripts
