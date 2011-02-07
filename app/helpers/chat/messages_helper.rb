@@ -10,6 +10,8 @@ module Chat::MessagesHelper
   end
   
   def message_date(message)
+    return if params[:format] == "json"
+    
     if params[:last_date].nil? || params[:last_date] != message.recorded_at.to_date
       params[:last_date] = message.recorded_at.to_date
       message.recorded_at.strftime("%A, %B %d, %Y")
