@@ -69,7 +69,7 @@
 = form.fields_for :course_memberships,
   @user.course_memberships.where(["access_level <> 'instructor'"]).all do |m|
   %p.no-label
-    = m.select :course_id, Course.all.map {|c| [c.name, c.id]},
+    = m.select :course_id, Course.all.map {|c| [c.full_name, c.id]},
       :include_blank => "Select a course"
     = m.select :access_level, 
       AccessLevel::Course.definitions.keys.reject {|k| k == 'instructor' }

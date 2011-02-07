@@ -23,7 +23,7 @@ class GroupMail
         ""
       when "Course"
         Course.all.map do |course|
-          { :caption => course.name, :value => course.id }
+          { :caption => course.full_name, :value => course.id }
         end.unshift({:caption => "Pick a course", :value => ""})
       when "Term"
         Term.all.map do |term|

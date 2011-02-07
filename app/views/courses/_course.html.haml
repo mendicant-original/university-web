@@ -1,4 +1,4 @@
 = link_to course_path(course) do
   .course{:class => (defined?(archived) ? 'archived' : '')}
-    .name= course.name
+    .name= course.full_name
     .start_end= course_dates(course)
