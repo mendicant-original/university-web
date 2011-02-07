@@ -4,7 +4,7 @@ class Chat::MessagesController < ApplicationController
   before_filter      :find_channel,       :only  => [:index, :discussions]
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
-  before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
+  before_filter      :authenticate_service, :only => [:create, :discussion_topic_url]
 
   def index
     unless @channel
