@@ -89,7 +89,7 @@
 
 - content_for :bucket do
   #submission
-    - if current_user != @submission.user
+    - if @submission.editable_by?(current_user)
       #submission_header
         = image_tag @submission.user.gravatar_url(48)
         = "#{@submission.user.name}'s Submission"
