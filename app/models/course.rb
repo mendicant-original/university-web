@@ -13,7 +13,7 @@ class Course < ActiveRecord::Base
 
   validates_presence_of   :name
   validates_presence_of   :term_id
-  validates_uniqueness_of :name, :allow_blank => true
+  validates_uniqueness_of :name, :scope => :term_id
 
   accepts_nested_attributes_for :assignments
 
@@ -60,8 +60,8 @@ class Course < ActiveRecord::Base
     available_slots <= 0
   end
 
-  def description_html
-    RDiscount.new(description || "").to_html.html_safe
+  def full_name
+    [term.try(:name) || "", name].join(" ")
   end
 
   def activities
