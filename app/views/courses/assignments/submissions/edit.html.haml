@@ -102,8 +102,14 @@
     .description= md(@submission.description)
 
     .comments
-      - @submission.activities.order('created_at').each do |activity|
+      - group_by_description(@submission.activities.order('created_at')).each do |activity, more|
         = render_activity(activity)
+        - if more.any?
+          %div{:id => "hidden_#{activity.id}", :style => "display: none;"}
+            - more.each do |hidden_activity|
+              = render_activity(hidden_activity)
+          = link_to_function "Display #{more.length} more like this.",
+            %{$('#hidden_#{activity.id}').show(); $(this).remove()}
 
       %ul.tabs
         %li= link_to "Edit", '#edit'
