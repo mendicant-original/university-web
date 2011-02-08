@@ -61,7 +61,7 @@ class Course < ActiveRecord::Base
   end
 
   def full_name
-    [term.try(:name) || "", name].join(" ")
+    [term.try(:name), name].compact.join(" ")
   end
 
   def activities
