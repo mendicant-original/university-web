@@ -39,5 +39,9 @@ SidebarMenu.select = function(selected){
   window.location.hash = selectedMenu.attr('data-id');
   
   // Nasty hack to undo anchor jumping
-  window.scrollTo(0, 0);
+  setTimeout(function() {
+    if (location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, 1);
 };
