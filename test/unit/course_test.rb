@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CourseTest < ActiveSupport::TestCase
   test "requires a valid name" do
-    course = Course.new(:name => "")
+    course = Course.new(:name => "", :term => Factory(:term))
     assert !course.valid?
 
     course.name = "Foo"
@@ -10,9 +10,10 @@ class CourseTest < ActiveSupport::TestCase
   end
 
   test "requires an unique name" do
-    course  = Course.create!(:name => "Foo")
-    course2 = Course.new(:name => "Foo")
-    assert !course2.valid?
+    term    = Factory(:term)
+    course  = Course.create!(:name => "Foo", :term => term)
+    course2 = Course.new(    :name => "Foo", :term => term)
+    assert !course2.valid?, "Course name is not unique"
 
     course2.name = "Bar"
     assert course.valid?
