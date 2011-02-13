@@ -59,6 +59,15 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
         mail = ActionMailer::Base.deliveries.last
         assert_equal [instructor.user.email, @submission.user.email], mail.to
       end
+      
+      test "escapes HTML elements" do
+        @submission.create_comment(:comment_text => "This &amp; that <p>Go</p>",
+                                   :user => Factory(:user))
+
+        mail = ActionMailer::Base.deliveries.last
+        
+        assert !mail.body.to_s[/\&amp;/], "Body contains &amp;"
+      end
     end
   end
 end
