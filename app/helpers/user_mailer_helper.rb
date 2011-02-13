@@ -9,6 +9,6 @@ module UserMailerHelper
   end
 
   def escape_and_sanitize(text)
-    CGI.unescapeHTML(Sanitize.clean(text.html_safe).html_safe).html_safe
+    CGI.unescapeHTML(Sanitize.clean(text)).html_safe
   end
 end
