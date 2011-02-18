@@ -17,11 +17,7 @@ class CoursesController < ApplicationController
       :sort => :name, :course_id => @course.id, :per_page => 7)
       
     all_course_users = User.includes(:course_memberships).where(["course_memberships.course_id = ?", @course.id])
-    @timezones = {}
-    all_course_users.each do |user|
-      @timezones[user.time_zone] ||= []
-      @timezones[user.time_zone] << user
-    end
+    @timezones = all_course_users.group_by { |user| user.time_zone }
     
     respond_to do |format|
       format.html
