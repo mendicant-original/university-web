@@ -34,9 +34,6 @@
       %li
         = link_to "Participants", course_path(@course, :anchor => "participants"),
           :"data-id" => "participants"
-      %li
-        = link_to "Timezones", course_path(@course, :anchor => "timezones"),
-          :"data-id" => "timezones"
   
   .main
     #bucket= yield(:bucket)

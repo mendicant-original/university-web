@@ -99,12 +99,4 @@
       = will_paginate @users, :params => {:anchor => "participants"}, 
         :param_name => "user_page"
     
-  #timezones.bucket
-    - @timezones.each do |time_zone, users|
-      .timezone{ 'data-utc-offset' => ActiveSupport::TimeZone.new(time_zone).utc_offset }
-        = time_zone
-      - users.each do |user|
-        = render :partial => '/users/user', :locals => { :user => user, 
-          :roles => user.course_memberships.where(:course_id => @course.id)}
-  
 = render :partial => "layout"
