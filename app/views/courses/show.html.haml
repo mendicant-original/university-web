@@ -2,31 +2,6 @@
       
 - content_for :header_bottom do
   :javascript
-    
-    $(document).ready(function(){
-      updateTimes();
-      setInterval('updateTimes()', 1000);
-    });
-
-    function zeropad(num) {
-      return num < 10 ? '0'+num : num;
-    }
-    
-    function formatDate(d) {
-      return d.toDateString() + ' ' + zeropad(d.getHours()) + ':' + 
-        zeropad(d.getMinutes()) + ":" + zeropad(d.getSeconds());
-    }
-    
-    function updateTimes() {
-      var d = new Date();
-      var utc_time = d.getTime()+(d.getTimezoneOffset()*60000);
-      $('.timezone').each(function(i) {
-        var offset = parseInt($(this).attr('data-utc-offset'));
-        var zonetime = new Date(utc_time + (offset*1000));
-        $(this).children('.time-display').html(formatDate(zonetime));
-      });
-    }
-  
     $(function(){
       $('#edit_notes').click(function(){
         $('#note_content').trigger("edit");
@@ -56,6 +31,8 @@
       SidebarMenu.register('sidebar');
       
       jQuery("label.infield").inFieldLabels();
+      
+      UW.Timezones.init();
     });
 
 - content_for :breadcrumbs do
@@ -125,7 +102,7 @@
   #timezones.bucket
     - @timezones.each do |time_zone, users|
       .timezone{ 'data-utc-offset' => ActiveSupport::TimeZone.new(time_zone).utc_offset }
-        .time-display
+        /.time-display
         = time_zone
       - users.each do |user|
         = render :partial => '/users/user', :locals => { :user => user, 

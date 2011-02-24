@@ -9,5 +9,7 @@
         - else
           = user_type(user)
       = user_since(user)
-  
+    - unless user.time_zone.empty?
+      .timezone{ 'data-utc-offset' => ActiveSupport::TimeZone.new(user.time_zone).utc_offset }
+        %span.time-display
     .clear

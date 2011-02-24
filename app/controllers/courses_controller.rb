@@ -16,8 +16,8 @@ class CoursesController < ApplicationController
     @users = User.search(params[:search], params[:user_page],
       :sort => :name, :course_id => @course.id, :per_page => 7)
       
-    all_course_users = User.includes(:course_memberships).where(["course_memberships.course_id = ?", @course.id])
-    @timezones = all_course_users.group_by { |user| user.time_zone }
+    all_course_users = @course.users
+    @timezones = all_course_users.group_by { |user| user.time_zone.blank? ? "UTC" : user.time_zone }
     
     respond_to do |format|
       format.html
