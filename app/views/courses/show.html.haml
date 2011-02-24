@@ -102,7 +102,6 @@
   #timezones.bucket
     - @timezones.each do |time_zone, users|
       .timezone{ 'data-utc-offset' => ActiveSupport::TimeZone.new(time_zone).utc_offset }
-        /.time-display
         = time_zone
       - users.each do |user|
         = render :partial => '/users/user', :locals => { :user => user, 
