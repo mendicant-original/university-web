@@ -1,3 +1,5 @@
+// UW.Timezones
+
 if (typeof UW == 'undefined') {
   UW = {};
 }
@@ -7,7 +9,7 @@ if (typeof UW.Timezones == 'undefined') {
 
 UW.Timezones.init = function() {
 	UW.Timezones.updateTimes();
-    setInterval(UW.Timezones.updateTimes, 1000);
+    setInterval(UW.Timezones.updateTimes, 60000);
 }
 
 UW.Timezones.zeropad = function(num) {
@@ -15,8 +17,16 @@ UW.Timezones.zeropad = function(num) {
 }
 
 UW.Timezones.formatDate = function(d) {
-  return d.toDateString() + ' ' + UW.Timezones.zeropad(d.getHours()) + ':' + 
-    UW.Timezones.zeropad(d.getMinutes()) + ":" + UW.Timezones.zeropad(d.getSeconds());
+  var localDate = new Date();
+  var dateOutput = "- ";
+  
+  if(localDate.toDateString() != d.toDateString())
+    dateOutput += d.toDateString() + ', ';
+  
+  dateOutput += UW.Timezones.zeropad(d.getHours()) + ':' + 
+    UW.Timezones.zeropad(d.getMinutes());
+    
+  return dateOutput;
 }
 
 UW.Timezones.updateTimes = function() {
