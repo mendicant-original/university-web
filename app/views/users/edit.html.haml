@@ -32,6 +32,9 @@
     = form.label :time_zone
     = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort,
                             :include_blank => true, :default => ""
+
+  %p
+    = render :partial => "irc_channels", :locals => {:form => form}
   
   - if @user.alumnus?
     

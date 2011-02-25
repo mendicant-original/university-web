@@ -1,0 +1,5 @@
+= form.label "Visible on dashboard"
+%span.irc_channels
+  = form.fields_for :chat_channel_memberships do |f|
+    = f.check_box :visible_on_dashboard
+    = f.label :visible_on_dashboard, f.object.channel.name

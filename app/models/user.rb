@@ -23,9 +23,11 @@ class User < ActiveRecord::Base
   validate :real_name_or_nick_name_required
 
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
+
   has_many :chat_channels,            :through    => :chat_channel_memberships,
                                       :source     => :channel,
-                                      :class_name => "Chat::Channel"
+                                      :class_name => "Chat::Channel",
+                                      :conditions => "chat_channel_memberships.visible_on_dashboard = true"
 
   has_many :course_memberships,       :dependent  => :destroy
   has_many :courses,                  :through    => :course_memberships
