@@ -26,8 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :chat_channels,            :through    => :chat_channel_memberships,
                                       :source     => :channel,
-                                      :class_name => "Chat::Channel",
-                                      :conditions => "chat_channel_memberships.visible_on_dashboard = true"
+                                      :class_name => "Chat::Channel"
 
   has_many :course_memberships,       :dependent  => :destroy
   has_many :courses,                  :through    => :course_memberships

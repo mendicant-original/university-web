@@ -22,7 +22,7 @@
   .left
     %h3 IRC Channels
 
-    - current_user.chat_channels.each do |channel|
+    - current_user.chat_channels.visible_on_dashboard.each do |channel|
       = render :partial => "/chat/recent", :locals => {:channel => channel}
   .right
     = render :partial => "exams"
