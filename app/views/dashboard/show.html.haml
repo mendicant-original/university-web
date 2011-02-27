@@ -20,7 +20,9 @@
     = javascript_include_tag "jquery.jgfeed-min", "blog_feed"
 
   .left
-    %h3 IRC Channels
+    %h3
+      IRC Channels
+      %span.right= link_to "Show/Hide Channels", edit_user_path(current_user)
 
     - current_user.chat_channels.visible_on_dashboard.each do |channel|
       = render :partial => "/chat/recent", :locals => {:channel => channel}
