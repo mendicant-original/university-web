@@ -24,5 +24,9 @@ We are committed to releasing our exams, exercises and other learning materials 
 * [s4-e1](https://github.com/rmu/s4-e1): Building command line interfaces to web services
 * [s4-e2](https://github.com/rmu/s4-e2): Challenge problem: Space travel simulator
 * [s4-e3](https://github.com/rmu/s4-e3): Learning SOLID principles by example
+* [s5-e1](https://github.com/rmu/s5-e1): Service-backed services
+* [s5-e2](https://github.com/rmu/s5-e2): Challenge Project: Elevator Simulator
+* [s5-e3](https://github.com/rmu/s5-e3): Building Classical Data structures
+* [Ups and Downs](https://github.com/rmu/ups_and_downs): s5-e2 Reference Implementation
 
 _All materials, unless otherwise noted may be used under the terms of the [GNU Free Documentation License](http://www.gnu.org/licenses/fdl.html)._
