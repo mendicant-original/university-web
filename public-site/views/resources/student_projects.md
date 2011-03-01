@@ -36,6 +36,11 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/vinibaggio/outpost">outpost</a> (Vinicius Baggio Fuentes): Simple service monitoring with a clean DSL for configuration</li>
   <li><a href="https://github.com/etrepat/pentago">pentago</a> (Estanislau Trepat): Pentago Game and AI Bot</li>
   <li><a href="https://github.com/rfelix/iwannareadit">iwannareadit</a> (Raoul Felix): Web app to manage book suggestions, voting, and lending</li>
+  <li><p><a href="https://github.com/samnang/pair-with-me" rel="nofollow">pair-with-me</a> (Samnag Chhun): Pair programming session scheduling</p></li>
+  <li><a href="https://github.com/clnclarinet/twitter_digest" rel="nofollow">twitter-digest</a> (Carol Nichols): A Twitter reader optimized for occasional checking of twitter.</li>
+  <li><a href="https://github.com/gstark/munin-graph" rel="nofollow">munin-graph</a> (Gavin Stark): Sinatra app for a more dynamic viewing of munin graph data</li>
+  <li><a href="https://github.com/carlism/UnScheduler" rel="nofollow">UnScheduler</a> (Carl Leiby): An Unconference / BarCamp Scheduler</li>
+  <li><a href="https://github.com/jbarreneche/test_parser" rel="nofollow">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
 </ul>     
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._
