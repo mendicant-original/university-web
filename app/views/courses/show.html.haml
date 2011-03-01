@@ -15,17 +15,21 @@
       
       var editPath = '#{course_path(@course)}/notes';
 
+      var placeholder = "Click to edit this page. It's like a wiki page that is" +
+      " shared with all students in the course.";
+
       $('#note_content').editable(editPath, {
-        type:      'textarea',
-        height:    '200px',
-        width:     '98%',
-        indicator: 'Saving ...',
-        cancel:    'Cancel',
-        submit:    'Save',
-        loadurl:   '#{course_path(@course)}.text',
-        tooltip:   'Click to edit...',
-        event:     'edit',
-        onblur:    'ignore'
+        type:        'textarea',
+        height:      '200px',
+        width:       '98%',
+        indicator:   'Saving ...',
+        cancel:      'Cancel',
+        submit:      'Save',
+        loadurl:     '#{course_path(@course)}.text',
+        tooltip:     'Click to edit',
+        event:       'edit',
+        onblur:      'ignore',
+        placeholder: placeholder
       });
       
       SidebarMenu.register('sidebar');
