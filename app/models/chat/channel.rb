@@ -1,6 +1,8 @@
 class Chat::Channel < ActiveRecord::Base
-  has_many :messages
-  has_many :topics
+  has_many :messages,                 :dependent  => :destroy
+  has_many :topics,                   :dependent  => :destroy
+  has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership",
+                                      :dependent  => :destroy
 
   validates_uniqueness_of :name
   validates_presence_of   :name
