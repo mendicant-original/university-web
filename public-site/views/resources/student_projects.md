@@ -36,7 +36,7 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/vinibaggio/outpost">outpost</a> (Vinicius Baggio Fuentes): Simple service monitoring with a clean DSL for configuration</li>
   <li><a href="https://github.com/etrepat/pentago">pentago</a> (Estanislau Trepat): Pentago Game and AI Bot</li>
   <li><a href="https://github.com/rfelix/iwannareadit">iwannareadit</a> (Raoul Felix): Web app to manage book suggestions, voting, and lending</li>
-  <li><a href="https://github.com/samnang/pair-with-me" rel="nofollow">pair-with-me</a> (Samnag Chhun): Pair programming session scheduling</li>
+  <li><a href="https://github.com/samnang/pair-with-me" rel="nofollow">pair-with-me</a> (Samnang Chhun): Pair programming session scheduling</li>
   <li><a href="https://github.com/clnclarinet/twitter_digest" rel="nofollow">twitter-digest</a> (Carol Nichols): A Twitter reader optimized for occasional checking of twitter.</li>
   <li><a href="https://github.com/gstark/munin-graph" rel="nofollow">munin-graph</a> (Gavin Stark): Sinatra app for a more dynamic viewing of munin graph data</li>
   <li><a href="https://github.com/carlism/UnScheduler" rel="nofollow">UnScheduler</a> (Carl Leiby): An Unconference / BarCamp Scheduler</li>
