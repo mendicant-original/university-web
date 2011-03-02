@@ -4,16 +4,16 @@
       = render :partial => "registration", :locals => {:term => term}
 
   .main
-    - if current_user.student_courses.active.any?
+    - if current_user.student_courses.active.current.any?
       %h3 Current Progress
   
-    - current_user.student_courses.active.each do |course|
+    - current_user.student_courses.active.current.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
           
-    - current_user.mentor_courses.active.each do |course|
+    - current_user.mentor_courses.active.current.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
       
-    - current_user.instructor_courses.active.each do |course|
+    - current_user.instructor_courses.current.active.each do |course|
       = render :partial => "assignments", :locals => {:course => course}
   
   - content_for :header_bottom do

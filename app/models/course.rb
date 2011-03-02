@@ -27,6 +27,7 @@ class Course < ActiveRecord::Base
 
   scope :active,   where(:archived => false).order('start_date')
   scope :archived, where(:archived => true ).order('start_date')
+  scope :current,  where(["start_date < ?", Date.today + 15.days])
 
   def students
     course_member_by_type('student')
