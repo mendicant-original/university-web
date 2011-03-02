@@ -22,4 +22,11 @@ module Courses::Assignments::SubmissionsHelper
               :locals => { :activity => activity })
     end
   end
+  
+  def comment_and_update_status
+    button_to_function "Comment & Update Status",
+    %{ $('form.new_comment #status').val($('#assignment_submission_submission_status_id').val());
+       $('form.new_comment').submit()},
+      :class => "gray"
+  end
 end

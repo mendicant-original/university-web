@@ -38,8 +38,12 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   def comment
     @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
 
-    if params[:commit][/Request Review/]
+    if params[:commit] && params[:commit][/Request Review/]
       @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
+    end
+    
+    if @course.instructors.include?(current_user) && !params[:status].blank?
+      @submission.update_status(current_user, SubmissionStatus.find(params[:status]))
     end
 
     flash[:notice] = "Comment posted."

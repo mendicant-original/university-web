@@ -118,12 +118,15 @@
       .tab_container
         = form_for @submission.comments.build, 
           :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
+          = hidden_field_tag "status"
           #edit.tab_content= f.text_area :comment_text
           #preview.tab_content.description
             Preview
           .tab_footer
             - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
               = f.submit "Comment & Request Review"
+            - if @course.instructors.include?(current_user)
+              = comment_and_update_status
             = f.submit "Comment"
             .clear
 
