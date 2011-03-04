@@ -31,4 +31,14 @@ class Admissions::Submission < ActiveRecord::Base
   def delete_attachment
     FileUtils.rm(attachment)
   end
+  
+  def validate
+    if new_record?
+      if @tempfile.blank?
+        errors.add_to_base("Puzzlenode file is required!")
+      elsif !File.basename(@tempfile.original_filename)[/.zip/]
+        errors.add_to_base("Puzzlenode file should be a zip file!")
+      end
+    end
+  end
 end
