@@ -1,0 +1,20 @@
+#admissions
+  +container
+  
+  #application
+    +column(10)
+    
+    form
+      display: block
+      padding: 1em
+      background-color: #eee
+      width: 320px
+      +border-radius(3px)
+      +box-shadow(#aaa, 0px, 1px, 1px, inset)
+      
+      hr.ruler
+        width: 310px
+  #instructions
+    +column(14, true)
+    &:first-child, h3
+      margin-top: 0
