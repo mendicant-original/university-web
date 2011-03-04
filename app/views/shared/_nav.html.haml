@@ -39,9 +39,7 @@
                 %li= link_to "Broadcast Emails", new_admin_group_mail_path
       - else
         %li
-          %a.first{:href => "/"} Home
-        %li
-          = link_to "Sign in", new_user_session_path
+          = link_to "Sign in", new_user_session_path, :class => "first"
     :javascript
       DropdownMenu.register('courses');
       DropdownMenu.register('administration');
