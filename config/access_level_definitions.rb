@@ -3,7 +3,7 @@ AccessLevel::User.instance_eval do
     :permissions => []
   
   define "student",  
-    :permissions => [:do_stuff]
+    :permissions => [:view_directory, :view_courses]
 
   define "admin", 
     :permissions => [:manage_users, :manage_documents]

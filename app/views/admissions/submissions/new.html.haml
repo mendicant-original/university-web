@@ -7,7 +7,7 @@
 %h1 Admission Submission
 
 = form_for @user, :url => admissions_submissions_path,
-  :html => {:class => 'bp inline'} do |f|
+  :html => {:class => 'bp inline', :multipart => true} do |f|
   = error_messages_for(@user)
 
   %p
@@ -40,13 +40,15 @@
     = f.label :twitter_account_name, "Twitter name", :class => "infield"
     = f.text_field :twitter_account_name
 
-  = f.fields_for @submission do |s|
+  = f.fields_for :admissions_submission do |s|
     %p
       = s.label :attachment, "Puzzlenode zip"
       = s.file_field :attachment
-    
+  
+  %hr.ruler
+  
   %p
-    = f.submit "Submit Entrance Exam"
+    = f.submit "Submit Application"
     
   .clear
   

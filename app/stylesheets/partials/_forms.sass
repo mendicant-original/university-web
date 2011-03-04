@@ -79,7 +79,6 @@ form.bp
     margin: 0 0 0 129px
       
   input.text, input.title, input[type="email"], input[type="text"], input[type="password"]
-    
     color: #555
   
   select
@@ -123,8 +122,11 @@ form.bp
       content: ""  
       
   &.inline
-    p
+    p, div.field_with_errors
       position: relative
+      
+    input[type="submit"]
+      float: none
   
     label
       text-align: left

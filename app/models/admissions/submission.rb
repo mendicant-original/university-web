@@ -1,4 +1,7 @@
 class Admissions::Submission < ActiveRecord::Base
+  after_create   :save_attachment
+  before_destroy :delete_attachment
+  
   belongs_to :status, :class_name => "Admissions::Status"
   belongs_to :user
   belongs_to :course
@@ -6,13 +9,26 @@ class Admissions::Submission < ActiveRecord::Base
   has_many   :comments,   :as        => :commentable,
                           :dependent => :delete_all
   
-  validates_presence_of :user_id
-  
-  def attachment=(file)
-    
+  def attachment=(tempfile)
+    @tempfile = tempfile
   end
   
   def attachment
-    
+    File.join(attachment_dir, self.id.to_s + '.zip')
+  end
+  
+  def attachment_dir
+    File.join(Rails.root, 'public', 'admissions', 'submissions')
+  end
+  
+  private
+  
+  def save_attachment
+    FileUtils.mkdir_p(attachment_dir)
+    File.open(attachment, "wb") { |f| f.write(@tempfile.read) }
+  end
+  
+  def delete_attachment
+    FileUtils.rm(attachment)
   end
 end

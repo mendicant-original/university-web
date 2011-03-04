@@ -36,7 +36,9 @@ class User < ActiveRecord::Base
   has_many :course_instructor_associations, :foreign_key => "instructor_id"
   has_many :comments,                       :as          => :commentable
 
-  has_many :admissions_submissions,   :class_name => "Admissions::Submission"
+  has_one :admissions_submission,   :class_name => "Admissions::Submission",
+                                    :dependent  => :destroy
+  accepts_nested_attributes_for :admissions_submission
 
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
 
