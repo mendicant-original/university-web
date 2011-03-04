@@ -35,9 +35,9 @@ class Admissions::Submission < ActiveRecord::Base
   def validate
     if new_record?
       if @tempfile.blank?
-        errors.add_to_base("Puzzlenode file is required!")
+        errors.add("attachment", "must be present")
       elsif !File.basename(@tempfile.original_filename)[/.zip/]
-        errors.add_to_base("Puzzlenode file should be a zip file!")
+        errors.add("attachment", "should be a zip file")
       end
     end
   end
