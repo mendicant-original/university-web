@@ -4,7 +4,7 @@
       jQuery("label.infield").inFieldLabels();
     });
 
-%h1 Admission Submission
+%h1 Application for Admission
 
 = form_for @user, :url => admissions_submissions_path,
   :html => {:class => 'bp inline', :multipart => true} do |f|
@@ -39,6 +39,8 @@
   %p
     = f.label :twitter_account_name, "Twitter name", :class => "infield"
     = f.text_field :twitter_account_name
+
+  %hr.ruler
 
   = f.fields_for :admissions_submission do |s|
     %p
