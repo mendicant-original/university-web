@@ -5,21 +5,23 @@
         %li
           = link_to "Dashboard", dashboard_path, :class => "first"
           = selected_arrow(:dashboard)
-        %li#courses
-          = link_to "Courses".html_safe + image_tag("down_arrow.png", :class => "drop"), '#'
-          = selected_arrow(:courses)
-          #courses_dropdown
-            %ul
-              - current_user.courses.active.group_by(&:term).each do |term, courses|
-                - if term
-                  %li.term= term.name
-                - courses.each do |course|
-                  %li= link_to course.name, course_path(course)
-              - if current_user.courses.archived.any?  
-                %li.small= link_to "Archived Courses", courses_path
-        %li
-          = link_to "Directory", users_path
-          = selected_arrow(:directory)
+        - if current_access_level.allows? :view_courses
+          %li#courses
+            = link_to "Courses".html_safe + image_tag("down_arrow.png", :class => "drop"), '#'
+            = selected_arrow(:courses)
+            #courses_dropdown
+              %ul
+                - current_user.courses.active.group_by(&:term).each do |term, courses|
+                  - if term
+                    %li.term= term.name
+                  - courses.each do |course|
+                    %li= link_to course.name, course_path(course)
+                - if current_user.courses.archived.any?  
+                  %li.small= link_to "Archived Courses", courses_path
+        - if current_access_level.allows? :view_directory
+          %li
+            = link_to "Directory", users_path
+            = selected_arrow(:directory)
         - if current_access_level.allows? :manage_users
           %li#administration
             = link_to "Administration".html_safe + image_tag("down_arrow.png", :class => "drop"), '#'

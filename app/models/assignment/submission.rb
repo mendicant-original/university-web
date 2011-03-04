@@ -6,6 +6,7 @@ class Assignment::Submission < ActiveRecord::Base
 
   has_many   :comments,   :as        => :commentable,
                           :dependent => :delete_all
+
   has_many   :activities, :dependent => :delete_all
 
   def create_comment(comment_data)
