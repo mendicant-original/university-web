@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
   has_many :course_instructor_associations, :foreign_key => "instructor_id"
   has_many :comments,                       :as          => :commentable
 
+  has_many :admissions_submissions,   :class_name => "Admissions::Submission"
+
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
 
   has_one :alumni_preferences

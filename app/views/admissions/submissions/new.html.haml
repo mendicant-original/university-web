@@ -1,0 +1,52 @@
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      jQuery("label.infield").inFieldLabels();
+    });
+
+%h1 Admission Submission
+
+= form_for @user, :url => admissions_submissions_path,
+  :html => {:class => 'bp inline'} do |f|
+  = error_messages_for(@user)
+
+  %p
+    = f.label :email, :class => "infield"
+    = f.text_field :email
+
+  %p
+    = f.label :real_name, :class => "infield"
+    = f.text_field :real_name
+
+  %p
+    = f.label :nickname, :class => "infield"
+    = f.text_field :nickname
+
+  %p
+    = f.label :password, :class => "infield"
+    = f.password_field :password
+
+  %p
+    = f.label :password_confirmation, :class => "infield"
+    = f.password_field :password_confirmation
+
+  %hr.ruler
+
+  %p
+    = f.label :github_account_name, "Github name", :class => "infield"
+    = f.text_field :github_account_name
+
+  %p
+    = f.label :twitter_account_name, "Twitter name", :class => "infield"
+    = f.text_field :twitter_account_name
+
+  = f.fields_for @submission do |s|
+    %p
+      = s.label :attachment, "Puzzlenode zip"
+      = s.file_field :attachment
+    
+  %p
+    = f.submit "Submit Entrance Exam"
+    
+  .clear
+  

@@ -7,4 +7,12 @@ class Admissions::Submission < ActiveRecord::Base
                           :dependent => :delete_all
   
   validates_presence_of :user_id
+  
+  def attachment=(file)
+    
+  end
+  
+  def attachment
+    
+  end
 end

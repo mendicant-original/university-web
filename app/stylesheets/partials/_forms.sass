@@ -121,6 +121,22 @@ form.bp
     width: auto
     &:after
       content: ""  
+      
+  &.inline
+    p
+      position: relative
+  
+    label
+      text-align: left
+      &.infield
+        position: absolute
+        top: 1em
+        left: 4px
+        color: #777
+        display: inline-block
+        width: auto
+        &:after
+          content: none
 
 form.search
   p
