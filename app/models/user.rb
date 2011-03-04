@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
                                    :format => GITHUB_FORMAT
 
   validate :real_name_or_nick_name_required
+  
+  validates_presence_of :github_account_name
 
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
 
