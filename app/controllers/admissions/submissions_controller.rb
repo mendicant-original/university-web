@@ -10,6 +10,13 @@ class Admissions::SubmissionsController < ApplicationController
   def create
     @user = User.new(params[:user])
     
+    unless params[:user].has_key?(:admissions_submission_attributes)
+      @user.errors.add_to_base("Puzzlenode file is required!")
+      @user.admissions_submission = Admissions::Submission.new
+      render :action => :new
+      return
+    end
+    
     if @user.save
       @user.update_attribute(:requires_password_change, false)
       @user.update_attribute(:access_level, "applicant")
