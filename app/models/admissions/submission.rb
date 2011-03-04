@@ -3,5 +3,8 @@ class Admissions::Submission < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
   
+  has_many   :comments,   :as        => :commentable,
+                          :dependent => :delete_all
+  
   validates_presence_of :user_id
 end
