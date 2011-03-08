@@ -1,0 +1,10 @@
+%p= link_to "&laquo; View all news".html_safe, "/changelog"
+
+#announcements
+  .announcement
+    .title
+      = @announcement.title
+      .info
+        .author= @announcement.author.name
+        .posted_date= @announcement.created_at.to_date
+    .body= md(@announcement.body)

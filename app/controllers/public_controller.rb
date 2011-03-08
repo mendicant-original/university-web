@@ -20,6 +20,15 @@ class PublicController < ApplicationController
     end
   end
   
+  def announcement
+    @announcement = Announcement.find(params[:id])
+    
+    if @announcement.nil? || !@announcement.public?
+      render(:text => "This announcement doesn't exist")
+      return
+    end
+  end
+  
   def set_current_section
     @current = params[:action]
   end
