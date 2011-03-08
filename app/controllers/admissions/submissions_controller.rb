@@ -2,6 +2,12 @@ class Admissions::SubmissionsController < ApplicationController
   skip_before_filter :authenticate_user!, :only => [:new, :create]
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
+  def index
+    @submissions = Admissions::Submission.order("created_at")
+    
+    render :text => "todo"
+  end
+  
   def new
     @user = User.new
     @user.admissions_submission = Admissions::Submission.new
