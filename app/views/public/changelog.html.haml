@@ -14,7 +14,7 @@
   - @announcements.each do |announcement|
     .announcement
       .title
-        = link_to announcement.title, "/changelog/#{announcement.id}"
+        = link_to announcement.title, "/changelog/#{announcement.slug}"
         .info
           .author= announcement.author.name
           .posted_date= announcement.created_at.to_date

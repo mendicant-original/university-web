@@ -11,8 +11,8 @@ xml.rss :version => "2.0",  'xmlns:atom' => "http://www.w3.org/2005/Atom" do
         xml.description md(announcement.body)
         xml.author "#{announcement.author.email} (#{announcement.author.name})"
         xml.pubDate announcement.created_at.to_s(:rfc822)
-        xml.link "http://university.rubymendicant.com/changelog/#{announcement.id}"
-        xml.guid "http://university.rubymendicant.com/changelog/#{announcement.id}"
+        xml.link "http://university.rubymendicant.com/changelog/#{announcement.slug}"
+        xml.guid "http://university.rubymendicant.com/changelog/#{announcement.slug}"
       end
     end
   end

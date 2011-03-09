@@ -3,7 +3,7 @@ University::Application.routes.draw do
   
   get "alumni"    => 'public#alumni'
   get "changelog" => 'public#changelog'
-  get "changelog/:id" => 'public#announcement'
+  get "changelog/:slug" => 'public#announcement'
   
   resource :dashboard, :controller => "dashboard"
   

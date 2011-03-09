@@ -21,7 +21,7 @@ class PublicController < ApplicationController
   end
   
   def announcement
-    @announcement = Announcement.find(params[:id])
+    @announcement = Announcement.find_by_slug(params[:slug])
     
     if @announcement.nil? || !@announcement.public?
       render(:text => "This announcement doesn't exist")
