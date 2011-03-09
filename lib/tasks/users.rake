@@ -6,9 +6,9 @@ namespace :users do
       email = f.chomp
       puts email
       unless User.find_by_email(email)
-        User.create(:email => email,
-                    :nickname => email.split('@')[0],
-                    :password => "rmu1337",
+        User.create(:email                 => email,
+                    :nickname              => email.split('@')[0],
+                    :password              => "rmu1337",
                     :password_confirmation => "rmu1337")
       end
     end
@@ -22,13 +22,6 @@ namespace :users do
       missing_info_user.nickname = nickname
       missing_info_user.save!
       puts [missing_info_user.email, nickname].join(': ')
-    end
-  end
-  
-  desc 'generates preferences for alumni users'
-  task :generate_alumni_preferences => :environment do
-    User.all.select {|u| u.alumnus? }.each do |user|
-      AlumniPreferences.create(:user_id => user.id) unless user.alumni_preferences
     end
   end
 end
