@@ -19,6 +19,8 @@ University::Application.routes.draw do
 
   resource :home, :controller => "home"
   
+  get "slugger" => "slugger#index", :as => "slugger"
+  
   resources :users do
     member do
       post :change_password

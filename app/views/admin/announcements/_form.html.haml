@@ -2,13 +2,18 @@
   :javascript
     $(function(){
       enableTabs();
+      UW.Slugger.watch('announcement_title', 'announcement_slug');
     })
 
 = error_messages_for(@announcement)
 
 %p
   = f.label :title
-  = f.text_field :title  
+  = f.text_field :title
+
+%p
+  = f.label :slug
+  = f.text_field :slug
 
 %p
   = f.label :public
@@ -16,9 +21,9 @@
 
 %p
   = f.label :author_id
-  = f.select :author_id, 
+  = f.select :author_id,
     User.where(:access_level => 'admin').map {|c| [c.name, c.id]}
-  
+
 %ul.tabs
   %li= link_to "Edit", '#edit'
   %li= link_to "Preview", '#preview'
