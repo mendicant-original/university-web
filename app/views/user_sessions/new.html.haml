@@ -17,7 +17,7 @@
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'bp'}) do |f|
   %p
     = f.label :email, :class => 'infield'
-    = f.text_field :email
+    = f.email_field :email
 
   %p
     = f.label :password, :class => 'infield'
