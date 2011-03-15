@@ -78,10 +78,8 @@ University::Application.routes.draw do
   
   resources :comments
   
-  # TODO Remove these routes and replace with Exam#hash_url
-  #get "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#entrance',
-  #     :as => 'entrance_exam'
-  #post "exams/#{ENTRANCE_EXAM_HASH}" => 'exams#submit_exam',
-  #     :as => 'submit_entrance_exam'
+  namespace :admissions do
+    resources :submissions
+  end
   
 end

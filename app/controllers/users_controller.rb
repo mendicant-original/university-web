@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_filter :change_password_if_needed
-  before_filter lambda { @selected = :directory }, :except => [:edit, :update, :change_password]
+  before_filter :check_permissions, :except => [:edit, :update, :change_password]
 
   def index
     @users = User.search(params[:search], params[:page],
@@ -36,6 +36,17 @@ class UsersController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:alert] = current_user.errors.full_messages.to_sentence
+    end
+  end
+  
+  private
+  
+  def check_permissions
+    return if params[:id] && User.find(params[:id]) == current_user
+    
+    unless current_access_level.allows? :view_directory
+      flash[:error] = "Your account does not have access to this area"
+      redirect_to dashboard_path
     end
   end
 end
