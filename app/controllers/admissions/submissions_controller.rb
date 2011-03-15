@@ -11,6 +11,8 @@ class Admissions::SubmissionsController < ApplicationController
   def new
     @user = User.new
     @user.admissions_submission = Admissions::Submission.new
+    
+    @open = Course.find_by_id(11).try(:available_slots) || 0
   end
   
   def create

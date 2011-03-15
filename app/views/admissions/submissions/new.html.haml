@@ -5,12 +5,34 @@
     });
 
 #admissions
+  
+  #instructions
+    %h1 May 2011 Core Skills Course Application
+    
+    :plain
+      <p>We are now accepting student applications for the May 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how complete your application.</p>
 
-  %h1 Application for Admission
+      <h3>Submission Guidelines</h3>
 
+      <ul>
+      <li>Start by using Ruby to solve at least two <a href="http://puzzlenode.com">PuzzleNode</a> problems, choosing from puzzles #1 through #4. For each problem, submit your program's output through <a href="http://puzzlenode.com">PuzzleNode</a> to verify that your code works as expected. Make sure you have at least two accepted submissions in <a href="http://puzzlenode.com">PuzzleNode</a> before continuing on with the RMU application process.</li>
+
+      <li>Choose the two best programs you wrote for solving the problems listed above. Refactor and improve your code so that it looks as close as possible to what you'd consider clean, idiomatic Ruby code.</li>
+
+      <li>Create a single zip file with the source code for the two problems you've chosen to share with us. Put each program in its own folder, and include with each the inputs from the problem, as well as the output your program generates. Include a README in each folder with a brief explanation of how to run your code, and any notes about your submission that you might want to share with reviewers.</li>
+
+      <li>Fill out the form on this page and upload your zip file. Make sure the github login you provide here matches the one you used on <a href="http://puzzlenode.com">PuzzleNode</a> to submit your problems there.</li>
+      </ul>
+
+      <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session. Good luck!</p>
+      
+      <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently #{@open} positions remain open.</b></p>
   #application
     = form_for @user, :url => admissions_submissions_path,
       :html => {:class => 'bp inline', :multipart => true} do |f|
+      
+      %h3 Your Application Information
+      
       = error_messages_for(@user)
 
       %p
@@ -49,13 +71,10 @@
         %p
           %span.label Puzzlenode zip file
           = s.file_field :attachment
-  
+
       %hr.ruler
-  
+
       %p
         = f.submit "Submit Application", :class => "clean"
-    
+
       .clear
-  
-  #instructions
-    %h3 These are the instructions for the zip file

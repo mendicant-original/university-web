@@ -2,15 +2,20 @@
   +container
   
   #application
-    +column(10)
+    +column(10, true)
     
     form
+      float: right
+      margin-top: 1.5em
       display: block
       padding: 1em
       background-color: #eee
       width: 315px
       +border-radius(3px)
       +box-shadow(#aaa, 0px, 1px, 1px, inset)
+      
+      h3
+        margin-top: 0.5em
       
       hr.ruler
         width: 310px
@@ -19,6 +24,13 @@
         display: block
         color: #777
   #instructions
-    +column(14, true)
+    +column(14)
     &:first-child, h3
       margin-top: 0
+    line-height: 1.4em
+    ul, ol
+      margin: 1em 0 1em 2em
+      list-style-position: outside
+      list-style-type: disc
+      li
+        margin: 0.5em 0
