@@ -82,4 +82,6 @@ University::Application.routes.draw do
     resources :submissions
   end
   
+  get "/admissions" => 'Admissions::Submissions#new'
+  
 end
