@@ -24,9 +24,9 @@
       <li>Fill out the form on this page and upload your zip file. Make sure the github login you provide here matches the one you used on <a href="http://puzzlenode.com">PuzzleNode</a> to submit your problems there.</li>
       </ul>
 
-      <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session. Good luck!</p>
+      <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session.</p>
       
-      <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently #{@open} positions remain open.</b></p>
+      <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open, so act fast!</b></p>
   #application
     = form_for @user, :url => admissions_submissions_path,
       :html => {:class => 'bp inline', :multipart => true} do |f|
