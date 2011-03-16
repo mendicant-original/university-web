@@ -58,11 +58,16 @@ class UserTest < ActiveSupport::TestCase
       "is too long (maximum is 15 characters)")
   end
 
-  test "should allow blank twitter and github usernames" do
-    user = User.new(@attrs.merge(
-      :twitter_account_name => "", :github_account_name => ""))
+  test "should allow blank twitter username" do
+    user = User.new(@attrs.merge(:twitter_account_name => ""))
     assert user.valid?
     assert user.save
+  end
+
+  test "should not allow blank github username" do
+    user = User.new(@attrs.merge(:github_account_name => ""))
+    assert !user.valid?
+    assert !user.save
   end
 
   context ".search" do
