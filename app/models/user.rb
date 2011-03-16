@@ -2,8 +2,7 @@ class User < ActiveRecord::Base
   GITHUB_FORMAT = {
     :with        => /^(?!-)[a-z\d-]+/i,
     :message     => "can only contain alphanumeric characters and dashes.
-                     Cannot start with a dash",
-    :allow_blank => true
+                     Cannot start with a dash"
   }
 
   TWITTER_FORMAT = {
@@ -21,7 +20,7 @@ class User < ActiveRecord::Base
                                    :format => GITHUB_FORMAT
 
   validate :real_name_or_nick_name_required
-  
+
   validates_presence_of :github_account_name
 
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
