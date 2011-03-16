@@ -20,7 +20,7 @@ University Web is very young but it is constantly improving. The following key f
 
 * Administration of course admissions
 * Course management
-* Assignment tracking 
+* Assignment tracking
 * A clean and user-friendly interface for students
 * IRC channel integration
 
@@ -28,7 +28,7 @@ University Web is very young but it is constantly improving. The following key f
 
 University Web is a standard Ruby on Rails 3 application. It does require a number of additional gems, so if you use RVM, we recommend that you create a separate gemset specifically for this application.
 
-University Web runs on {PostgreSQL}[http://www.postgresql.org] databases. Though it does not currently rely on any PostgreSQL-specific features, it likely will in the future. Other databases (e.g. SQLite3) may work, but they have not been tested and are not supported.
+University Web runs on {PostgreSQL}[http://www.postgresql.org] databases. Other databases like MySQL or SQLite are not supported.
 
 <b>Always use the latest source code:</b> We are constantly working on this application, with bug fixes and new features added daily, so please use the very latest source code.
 
@@ -42,7 +42,7 @@ To install a development version of University Web, follow these steps:
 4. If you use RVM, switch to the new gemset: <tt>rvm gemset use uni-web</tt>
 5. Run <tt>bundle install</tt> to get all of the dependencies
 
-You will see an error when the <tt>pg</tt> gem installs unless you have PostgreSQL installed on your system. Ignore this if you intend to use another database, such as SQLite.
+You will see an error when the <tt>pg</tt> gem installs unless you have PostgreSQL installed on your system.
 
 To configure University Web:
 
@@ -63,7 +63,7 @@ Finally, run the test suite to make sure everything is working correctly:
 * University Web user accounts may be either admins, students, or guests.
 * Every account is identified by email address.
 * The admin users may access all of the management features of University Web by choosing <b>Administration</b> from the navigation menu at the top of page.
-* The management features of University Web enable admin users to perform the standard task for running courses, such as creating other user accounts for students and guests, defining the courses and managing assignment submissions.
+* The management features of University Web enable admin users to perform the standard tasks for running courses, such as creating other user accounts for students and guests, defining the courses and managing assignment submissions.
 
 === Terms and Exams
 
