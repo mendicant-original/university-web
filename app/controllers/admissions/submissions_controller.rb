@@ -10,14 +10,11 @@ class Admissions::SubmissionsController < ApplicationController
   end
   
   def show
-    respond_to do |format|
-      format.html
-      format.zip { send_data(File.binread(@submission.attachment)) }
-    end
+    
   end
   
-  def attachment  
-    
+  def attachment 
+    send_data(File.binread(@submission.attachment))
   end
   
   def new
