@@ -16,7 +16,7 @@ class Admissions::Submission < ActiveRecord::Base
   end
   
   def attachment
-    File.join(attachment_dir, [self.id, '.zip'].join('.'))
+    File.join(attachment_dir, [self.id, 'zip'].join('.'))
   end
   
   def attachment_dir
