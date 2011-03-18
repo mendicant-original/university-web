@@ -2,10 +2,22 @@ class Admissions::SubmissionsController < ApplicationController
   skip_before_filter :authenticate_user!, :only => [:new, :create]
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
+  before_filter :find_submission, :only => [:show, :attachment]
+  before_filter :admin_required, :except => [:new, :create]
+  
   def index
     @submissions = Admissions::Submission.order("created_at")
+  end
+  
+  def show
+    respond_to do |format|
+      format.html
+      format.zip { send_data(File.binread(@submission.attachment)) }
+    end
+  end
+  
+  def attachment  
     
-    render :text => "todo"
   end
   
   def new
@@ -31,5 +43,11 @@ class Admissions::SubmissionsController < ApplicationController
     else
       render :action => :new
     end
+  end
+  
+  private
+  
+  def find_submission
+    @submission = Admissions::Submission.find(params[:id])
   end
 end

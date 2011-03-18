@@ -1,0 +1,14 @@
+%h1 Admissions
+
+%table.admin
+  %tr
+    %th Applicant
+    %th Email
+    %th Github
+    %th Attachment
+  - @submissions.each do |submission|
+    %tr
+      %td= submission.user.name
+      %td= submission.user.email
+      %td= github_account_link submission.user.github_account_name
+      %td= link_to "Download", admissions_submission_path(submission, :format => "zip")

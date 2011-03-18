@@ -51,4 +51,11 @@ class ApplicationController < ActionController::Base
   def link_return
     session[:original_uri] = params[:return_uri] if params[:return_uri]
   end
+  
+  def admin_required
+    unless current_access_level.allows?(:manage_users)
+      flash[:error] = "Your account does not have access to this area"
+      redirect_to dashboard_path
+    end
+  end
 end
