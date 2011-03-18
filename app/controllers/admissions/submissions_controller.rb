@@ -3,7 +3,7 @@ class Admissions::SubmissionsController < ApplicationController
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
   before_filter :find_submission, :only => [:show, :attachment]
-  before_filter :admin_required, :except => [:new, :create]
+  before_filter :admin_required, :except => [:new, :create, :thanks]
   
   def index
     @submissions = Admissions::Submission.order("created_at")
@@ -36,7 +36,7 @@ class Admissions::SubmissionsController < ApplicationController
 
       sign_in(@user)
 
-      redirect_to dashboard_path
+      redirect_to thanks_admissions_submission_path(@user.admissions_submission)
     else
       render :action => :new
     end

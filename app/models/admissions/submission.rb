@@ -1,5 +1,6 @@
 class Admissions::Submission < ActiveRecord::Base
   after_create   :save_attachment
+  before_create  :set_status
   before_destroy :delete_attachment
   
   belongs_to :status, :class_name => "Admissions::Status"
@@ -14,14 +15,22 @@ class Admissions::Submission < ActiveRecord::Base
   end
   
   def attachment
-    File.join(attachment_dir, self.id.to_s + '.zip')
+    File.join(attachment_dir, [self.id, '.zip'].join('.'))
   end
   
   def attachment_dir
     File.join(Rails.root, 'admissions', 'submissions')
   end
   
+  def thanks
+    
+  end
+  
   private
+  
+  def set_status
+    self.status_id ||= Admissions::Status.default.id
+  end
   
   def save_attachment
     FileUtils.mkdir_p(attachment_dir)
