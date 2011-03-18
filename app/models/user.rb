@@ -70,6 +70,8 @@ class User < ActiveRecord::Base
     end
   end
   has_many :exams,            :through => :exam_submissions
+  
+  scope :staff, lambda { where(:access_level => "admin") }
 
   def self.search(search, page, options={})
     sql_condition = %w(

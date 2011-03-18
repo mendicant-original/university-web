@@ -13,6 +13,10 @@ class Admissions::SubmissionsController < ApplicationController
     
   end
   
+  def thanks
+    
+  end
+  
   def attachment 
     send_data(File.binread(@submission.attachment))
   end

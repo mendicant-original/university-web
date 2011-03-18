@@ -1,5 +1,6 @@
 class Admissions::Submission < ActiveRecord::Base
   after_create   :save_attachment
+  after_create   :notify_staff
   before_create  :set_status
   before_destroy :delete_attachment
   
@@ -22,8 +23,8 @@ class Admissions::Submission < ActiveRecord::Base
     File.join(Rails.root, 'admissions', 'submissions')
   end
   
-  def thanks
-    
+  def notify_staff
+    UserMailer.application_created(self).deliver
   end
   
   private
