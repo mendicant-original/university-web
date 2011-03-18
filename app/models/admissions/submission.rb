@@ -18,7 +18,7 @@ class Admissions::Submission < ActiveRecord::Base
   end
   
   def attachment_dir
-    File.join(Rails.root, 'public', 'admissions', 'submissions')
+    File.join(Rails.root, 'admissions', 'submissions')
   end
   
   private
