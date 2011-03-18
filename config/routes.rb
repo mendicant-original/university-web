@@ -81,7 +81,7 @@ University::Application.routes.draw do
   namespace :admissions do
     resources :submissions do
       member do
-        match '/:file' => 'Submissions#attachment', :as => "attachment"
+        match '/:file' => 'submissions#attachment', :as => "attachment"
       end
     end
   end

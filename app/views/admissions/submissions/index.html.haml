@@ -11,4 +11,7 @@
       %td= submission.user.name
       %td= submission.user.email
       %td= github_account_link submission.user.github_account_name
-      %td= link_to "Download", "/admissions/submissions/#{submission.id}/#{submission.user.name.underscore}_#{submission.id}.zip"
+      %td= link_to "Download", 
+        attachment_admissions_submission_path(submission.id, 
+          "#{submission.user.name.underscore}_#{submission.id}", 
+          :format => "zip")
