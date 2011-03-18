@@ -19,7 +19,8 @@
 
 - if form.object.new_record?
   %p.info
-    To manually set the users password enter it below. Otherwise leave the fields blank and a password will be generated and emailed to the user.
+    To manually set the users password enter it below. 
+    // Otherwise leave the fields blank and a password will be generated and emailed to the user.
     
 %p
   = form.label :password, form.object.new_record? ? nil : "Change password"
