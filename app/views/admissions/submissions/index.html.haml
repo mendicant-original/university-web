@@ -6,6 +6,7 @@
     %th Email
     %th Github
     %th Attachment
+    %th Status
   - @submissions.each do |submission|
     %tr
       %td= submission.user.name
@@ -15,3 +16,4 @@
         attachment_admissions_submission_path(submission.id, 
           "#{submission.user.name.underscore}_#{submission.id}", 
           :format => "zip")
+      %td= submission.status.try(:name)
