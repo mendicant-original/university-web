@@ -12,13 +12,3 @@
   
   = render :partial => "/admin/courses/students", 
             :locals => { :students => course.students }
-
-%h3 Wait list
-
-= render :partial => "admin/courses/students",
-          :locals => { :students => @term.students }
-
-%h3 Not Registered
-
-= render :partial => "admin/courses/students",
-          :locals => { :students => @unregistered}
