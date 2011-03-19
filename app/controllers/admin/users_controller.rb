@@ -11,22 +11,24 @@ class Admin::UsersController < Admin::Base
 
   def new
     @user = User.new
-
-    build_nested_attributes
   end
 
   def create
     @user = User.new(params[:user])
 
-    if @user.password.blank? and @user.password_confirmation.blank?
-      password = User.random_password
-      @user.password              = password
-      @user.password_confirmation = password
-    end
+    # Disable until user password email is in place
+    #
+    # if @user.password.blank? and @user.password_confirmation.blank?
+    #   password = User.random_password
+    #   @user.password              = password
+    #   @user.password_confirmation = password
+    # end
 
     if @user.save
       update_access_level
       update_alumni_attributes
+      
+      flash[:notice] = "User sucessfully created"
 
       redirect_to admin_users_path
     else
@@ -35,7 +37,7 @@ class Admin::UsersController < Admin::Base
   end
 
   def edit
-    build_nested_attributes
+    
   end
 
   def update
@@ -48,6 +50,8 @@ class Admin::UsersController < Admin::Base
     end
 
     if @user.update_attributes(params[:user])
+      flash[:notice] = "User sucessfully updated"
+      
       redirect_to admin_users_path
     else
       #raise @user.errors.inspect
@@ -58,7 +62,7 @@ class Admin::UsersController < Admin::Base
   def destroy
     @user.destroy
 
-    flash[:notice] = @user.errors.full_messages.join(",")
+    flash[:notice] = "User sucessfully deleted"
 
     redirect_to admin_users_path
   end
@@ -67,7 +71,6 @@ class Admin::UsersController < Admin::Base
 
   def find_user
     @user = User.find(params[:id])
-
   end
 
   def update_access_level
@@ -82,10 +85,5 @@ class Admin::UsersController < Admin::Base
 
       @user.update_attribute(attribute, value)
     end
-  end
-
-  def build_nested_attributes
-    @user.course_memberships.build if @user.course_memberships.empty?
-    @user.chat_channel_memberships.build if @user.chat_channel_memberships.empty?
   end
 end
