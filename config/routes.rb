@@ -61,7 +61,6 @@ University::Application.routes.draw do
     end
     resources :documents
     resources :announcements
-    resources :exams
     resources :terms
     resources :submission_statuses
     resources :group_mails, :only => [:new, :create] do

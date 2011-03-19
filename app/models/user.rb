@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   has_many :assignment_submissions,   :class_name => "Assignment::Submission"
   has_many :comments,                 :as          => :commentable
 
-  has_one :admissions_submission,     :class_name => "Admissions::Submission",
+  has_one  :admissions_submission,    :class_name => "Admissions::Submission",
                                       :dependent  => :destroy
                                       
   accepts_nested_attributes_for       :admissions_submission
@@ -55,18 +55,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :comments,
     :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
-
-  has_many :exam_submissions, :dependent => :delete_all do
-    def open
-      all.reject do |e|
-        term = e.exam.term
-
-        term.students.include?(e.user) ||
-        e.user.courses.where(:term_id => term.id).any?
-      end
-    end
-  end
-  has_many :exams,            :through => :exam_submissions
   
   scope :staff, lambda { where(:access_level => "admin") }
 
@@ -153,25 +141,6 @@ class User < ActiveRecord::Base
 
   def mentor_courses
     course_by_membership_type("mentor")
-  end
-
-  # Returns all terms which are:
-  # * Open for registration (Term#registration_open == true)
-  # * User took an exam which was approved
-  # * User isn't on the waitlist
-  # * User isn't registered for a course
-  #
-  def open_registrations
-    approved = SubmissionStatus.where(:name => "Approved").first
-
-    terms = exam_submissions.where(:submission_status_id => approved).
-      includes([:exam => :term]).
-      where(["terms.registration_open = ?", true]).
-      map { |e| e.exam.term }
-
-    terms.reject do |t|
-      t.students.include?(self) || courses.where(:term_id => t.id).any?
-    end
   end
 
   private
