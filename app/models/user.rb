@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  
+  after_create :add_public_channels_to_dashboard
+  
   GITHUB_FORMAT = {
     :with        => /^(?!-)[a-z\d-]+/i,
     :message     => "can only contain alphanumeric characters and dashes.
@@ -23,7 +26,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :github_account_name
 
-  has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership"
+  has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership",
+                                      :dependent  => :destroy
 
   has_many :chat_channels,            :through    => :chat_channel_memberships,
                                       :source     => :channel,
@@ -192,5 +196,13 @@ class User < ActiveRecord::Base
       errors.add(:base,
                  "You need to provide either a real name or a nick name")
     end
+  end
+  
+  def add_public_channels_to_dashboard
+    Chat::Channel.where(:public => true).each do |channel|
+      chat_channel_memberships.find_or_create_by_channel_id(channel.id)
+    end
+    
+    return true
   end
 end
