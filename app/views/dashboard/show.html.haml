@@ -1,7 +1,4 @@
 .two-col
-  .main  
-    - current_user.open_registrations.each do |term|
-      = render :partial => "registration", :locals => {:term => term}
 
   .main
     - if current_user.student_courses.active.current.any?
@@ -26,8 +23,6 @@
 
     - current_user.chat_channels.visible_on_dashboard.each do |channel|
       = render :partial => "/chat/recent", :locals => {:channel => channel}
-  .right
-    = render :partial => "exams"
 
   #majestic_blog.right.blog.last
     %h4= link_to "RMU Blog",
