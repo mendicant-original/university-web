@@ -45,7 +45,7 @@ $(function() {
         };
         
         $("#learning_blog ul").append('<li><a target="_blank" href="'
-                        + post.url_with_slug + '">' + title + '</a></li>');
+                        + post['url-with-slug'] + '">' + title + '</a></li>');
       });
   });
   
