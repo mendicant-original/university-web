@@ -49,14 +49,6 @@ class GroupMail
         	student_emails <<	course.users.
         	                  map { |student| student.email }
         end
-        # waitlisted students
-        student_emails << term.students.map { |student| student.email }
-        # students with an approved exam in this term
-        approved = SubmissionStatus.where(:name => "Approved").first
-        student_emails << term.exams.select("users.email").
-                          joins([:exam_submissions => :user]).
-                          where(["exam_submissions.submission_status_id = ?", approved.id]).
-                          map {|e| e.email}
 
         # only unique emails
         student_emails.flatten.uniq.join(", ")
