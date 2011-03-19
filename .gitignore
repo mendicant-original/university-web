@@ -11,3 +11,4 @@ config/initializers/api_access.rb
 config/initializers/entrance_exam.rb
 config/initializers/setup_mail.rb
 .sass-cache
+admissions/submissions/*.zip
