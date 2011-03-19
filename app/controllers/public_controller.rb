@@ -3,8 +3,6 @@ class PublicController < ApplicationController
   skip_before_filter :change_password_if_needed
   before_filter      :set_current_section
   
-  layout 'static'
-  
   def alumni
     @alumni  = User.order("alumni_number").select {|u| u.alumnus? }
   end
