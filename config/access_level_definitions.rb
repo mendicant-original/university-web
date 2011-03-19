@@ -1,6 +1,9 @@
 AccessLevel::User.instance_eval do
   define "guest",
     :permissions => []
+    
+  define "applicant",
+    :permissions => []
   
   define "student",
     :permissions => [:view_directory, :view_courses]
