@@ -70,8 +70,9 @@ class User < ActiveRecord::Base
     end
   end
   has_many :exams,            :through => :exam_submissions
-  
+
   scope :staff, lambda { where(:access_level => "admin") }
+  scope :alumni, where("alumni_number IS NOT NULL").order('alumni_number')
 
   def self.search(search, page, options={})
     sql_condition = %w(

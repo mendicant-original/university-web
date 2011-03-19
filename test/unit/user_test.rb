@@ -160,6 +160,20 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  context "scopes" do
+    setup do
+      @alumnus1 = Factory(:user, :alumni_number => 1)
+      @alumnus2 = Factory(:user, :alumni_number => 2)
+      @student  = Factory(:user)
+    end
+
+    test "has alumni scope that returns all alumni" do
+      assert User.alumni.include?(@alumnus1)
+      assert User.alumni.include?(@alumnus2)
+      assert !User.alumni.include?(@student)
+    end
+  end
+
   private
 
   def swap_access_level_definitions(klass)

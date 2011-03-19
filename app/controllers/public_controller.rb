@@ -6,7 +6,7 @@ class PublicController < ApplicationController
   layout 'static'
 
   def alumni
-    @alumni  = User.order("alumni_number").select {|u| u.alumnus? }
+    @alumni  = User.alumni
   end
 
   def changelog
