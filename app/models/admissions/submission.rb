@@ -25,21 +25,29 @@ class Admissions::Submission < ActiveRecord::Base
   
   def notify_staff
     UserMailer.application_created(self).deliver
+    
+    return true
   end
   
   private
   
   def set_status
     self.status_id ||= Admissions::Status.default.id
+    
+    return true
   end
   
   def save_attachment
     FileUtils.mkdir_p(attachment_dir)
     File.open(attachment, "wb") { |f| f.write(@tempfile.read) }
+    
+    return true
   end
   
   def delete_attachment
-    FileUtils.rm(attachment)
+    FileUtils.rm(attachment) if File.exists?(attachment)
+    
+    return true
   end
   
   def validate
