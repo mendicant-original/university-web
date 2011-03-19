@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  
   after_create :add_public_channels_to_dashboard
   
   GITHUB_FORMAT = {
@@ -22,33 +21,27 @@ class User < ActiveRecord::Base
   validates :github_account_name,  :length => { :maximum => 40 },
                                    :format => GITHUB_FORMAT
 
-  validate :real_name_or_nick_name_required
-
+  validate              :real_name_or_nick_name_required
   validates_presence_of :github_account_name
 
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership",
                                       :dependent  => :destroy
-
   has_many :chat_channels,            :through    => :chat_channel_memberships,
                                       :source     => :channel,
                                       :class_name => "Chat::Channel"
-
   has_many :course_memberships,       :dependent  => :destroy
   has_many :courses,                  :through    => :course_memberships
-
   has_many :assignment_submissions,   :class_name => "Assignment::Submission"
+  has_many :comments,                 :as          => :commentable
 
-  has_many :course_instructor_associations, :foreign_key => "instructor_id"
-  has_many :comments,                       :as          => :commentable
-
-  has_one :admissions_submission,   :class_name => "Admissions::Submission",
-                                    :dependent  => :destroy
-  accepts_nested_attributes_for :admissions_submission
+  has_one :admissions_submission,     :class_name => "Admissions::Submission",
+                                      :dependent  => :destroy
+                                      
+  accepts_nested_attributes_for       :admissions_submission
 
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
 
-  has_one :alumni_preferences
-
+  has_one                       :alumni_preferences
   accepts_nested_attributes_for :alumni_preferences
 
   accepts_nested_attributes_for :course_memberships,
