@@ -1,7 +1,9 @@
 University::Application.routes.draw do
   root :to => "dashboard#show"
   
-  get "alumni(/:year(/:term))"    => 'public#alumni'
+  get "alumni(/:year(/:term))"    => 'public#alumni', :constraints => { :year => /\d{4}/ }
+  get "alumni/recent" => 'public#recent_alumni'
+
   get "changelog" => 'public#changelog'
   get "changelog/:slug" => 'public#announcement'
   

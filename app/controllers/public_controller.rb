@@ -19,6 +19,15 @@ class PublicController < ApplicationController
     end
   end
 
+  # List the alumni of the most recent Term that has alumni
+  def recent_alumni
+    @term = Term.order("start_date DESC").select {|t| !t.alumni.blank?}.first
+    redirect_to("/alumni") && return if !@term
+    @alumni = @term.alumni
+
+    render 'alumni'
+  end
+
   def changelog
     @announcements = Announcement.where(:public => true).order("created_at DESC")
 
