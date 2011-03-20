@@ -160,7 +160,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
-  context "scopes" do
+  context "alumnus dates" do
     setup do
       @alumnus1 = Factory(:user,
                           :alumni_number => 1,
@@ -227,6 +227,13 @@ class UserTest < ActiveSupport::TestCase
       assert User.alumni.per_year(2010).per_trimester(1).include?(@alumnus2)
       assert User.alumni.per_year(2010).per_trimester(2).include?(@alumnus3)
       assert User.alumni.per_year(2011).per_trimester(4).include?(@alumnus4)
+    end
+
+    test "should get alumni_date from year and month" do
+      assert_equal @alumnus1.alumni_date, "2010-1-1".to_date
+      assert_equal @alumnus2.alumni_date, "2010-2-1".to_date
+      assert_equal @alumnus3.alumni_date, "2010-4-1".to_date
+      assert_equal @alumnus4.alumni_date, "2011-12-1".to_date
     end
   end
 

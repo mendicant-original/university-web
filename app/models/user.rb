@@ -145,6 +145,12 @@ class User < ActiveRecord::Base
     !alumni_number.nil?
   end
 
+  # Returns a date object based on the alumni year and month
+  # to be used for comparing with terms start and end dates
+  def alumni_date
+    alumnus? ? "#{alumni_year}-#{alumni_month}-1".to_date : nil
+  end
+
   def gravatar_url(size=40)
     hash = Digest::MD5.hexdigest(email.downcase)
 

@@ -8,6 +8,17 @@ class Term < ActiveRecord::Base
   validates_presence_of :name, :start_date, :end_date
   validate :end_date_must_be_greater_than_or_equal_to_start_date
 
+  scope :per_year, lambda {|year|
+                            where(["start_date BETWEEN ? AND ?",
+                            "#{year}/1/1".to_date, "#{year}/12/31".to_date])}
+
+  # Returns all alumni users (the ones having an alumni_number)
+  # whose alumni_year and alumni_month falls between this term's
+  # start and end dates
+  def alumni
+    User.alumni.select {|u| (start_date..end_date).include?(u.alumni_date) }
+  end
+
   private
 
   def end_date_must_be_greater_than_or_equal_to_start_date

@@ -5,10 +5,18 @@ class PublicController < ApplicationController
 
   layout 'static'
 
+  # Find the list of alumni, which can be all of them,
+  # filtered by year or by year and term name.
   def alumni
-    @alumni = User.alumni
-    @alumni = @alumni.per_year(params[:year]) if params[:year]
-    @alumni = @alumni.per_trimester(params[:trimester]) if params[:trimester]
+    if params[:term]
+      redirect_to("/alumni") && return if !params[:year]
+
+      @term = Term.per_year(params[:year]).where(:name => params[:term]).first
+      @alumni = @term.alumni
+    else
+      @alumni = User.alumni
+      @alumni = @alumni.per_year(params[:year]) if params[:year]
+    end
   end
 
   def changelog
