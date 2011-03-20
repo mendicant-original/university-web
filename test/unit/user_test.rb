@@ -162,15 +162,71 @@ class UserTest < ActiveSupport::TestCase
 
   context "scopes" do
     setup do
-      @alumnus1 = Factory(:user, :alumni_number => 1)
-      @alumnus2 = Factory(:user, :alumni_number => 2)
+      @alumnus1 = Factory(:user,
+                          :alumni_number => 1,
+                          :alumni_year => 2010,
+                          :alumni_month => 1)
+
+      @alumnus2 = Factory(:user,
+                          :alumni_number => 2,
+                          :alumni_year => 2010,
+                          :alumni_month => 2)
+
+      @alumnus3 = Factory(:user,
+                          :alumni_number => 3,
+                          :alumni_year => 2010,
+                          :alumni_month => 4)
+
+      @alumnus4 = Factory(:user,
+                          :alumni_number => 4,
+                          :alumni_year => 2011,
+                          :alumni_month => 12)
+
       @student  = Factory(:user)
     end
 
     test "has alumni scope that returns all alumni" do
       assert User.alumni.include?(@alumnus1)
       assert User.alumni.include?(@alumnus2)
+      assert User.alumni.include?(@alumnus3)
+      assert User.alumni.include?(@alumnus4)
+
       assert !User.alumni.include?(@student)
+    end
+
+    test "has per_year scope" do
+      assert User.per_year(2010).include?(@alumnus1)
+      assert User.per_year(2010).include?(@alumnus2)
+      assert User.per_year(2010).include?(@alumnus3)
+
+      assert !User.per_year(2010).include?(@alumnus4)
+      assert User.per_year(2011).include?(@alumnus4)
+    end
+
+    test "has per_trimester scope" do
+      assert User.per_trimester(1).include?(@alumnus1)
+      assert User.per_trimester(1).include?(@alumnus2)
+
+      assert User.per_trimester(2).include?(@alumnus3)
+
+      assert User.per_trimester(3).empty?
+
+      assert User.per_trimester(4).include?(@alumnus4)
+
+      [@alumnus1, @alumnus2, @alumnus3].each do |alumni|
+        assert !User.per_trimester(4).include?(alumni)
+      end
+    end
+
+    test "per_trimester scope works with a string param as well" do
+      assert User.per_trimester('1').include?(@alumnus1)
+    end
+
+    test "concatenated per_year and per_trimester scopes" do
+      assert User.alumni.per_year(2010).per_trimester(1).include?(@alumnus1)
+      assert User.alumni.per_year(2010).per_trimester(1).include?(@alumnus2)
+      assert User.alumni.per_year(2010).per_trimester(2).include?(@alumnus3)
+      assert User.alumni.per_year(2011).per_trimester(4).include?(@alumnus4)
     end
   end
 

@@ -73,6 +73,10 @@ class User < ActiveRecord::Base
 
   scope :staff, lambda { where(:access_level => "admin") }
   scope :alumni, where("alumni_number IS NOT NULL").order('alumni_number')
+  scope :per_year, lambda { |year| where(:alumni_year => year) }
+  scope :per_trimester,
+        lambda {|trimester|
+                where(["alumni_month in (?)", months_for_trimester(trimester)])}
 
   def self.search(search, page, options={})
     sql_condition = %w(
@@ -194,4 +198,16 @@ class User < ActiveRecord::Base
                  "You need to provide either a real name or a nick name")
     end
   end
+
+  # Returns the month range for a trimester,
+  # to be used on the per_trimester scope
+  def self.months_for_trimester(trimester)
+    case trimester.to_i
+      when 1 then (1..3)
+      when 2 then (4..6)
+      when 3 then (7..9)
+      when 4 then (10..12)
+    end
+  end
+
 end

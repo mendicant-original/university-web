@@ -6,7 +6,9 @@ class PublicController < ApplicationController
   layout 'static'
 
   def alumni
-    @alumni  = User.alumni
+    @alumni = User.alumni
+    @alumni = @alumni.per_year(params[:year]) if params[:year]
+    @alumni = @alumni.per_trimester(params[:trimester]) if params[:trimester]
   end
 
   def changelog
