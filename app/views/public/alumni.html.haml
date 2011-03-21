@@ -5,12 +5,12 @@
   %ul#alumni_links
     - @terms_by_year.each_pair do |year, terms|
       %li.term_year
-        = link_to year, "/alumni/#{year}"
+        = link_to year, alumni_path(year)
       %li
         %ul
           - terms.each do |term|
             %li.term_slug
-              = link_to term.name, "/alumni/#{year}/#{term.slug}"
+              = link_to term.name, alumni_path(year, term.slug)
     %li.last
       = link_to "All".html_safe, "/alumni"
 
