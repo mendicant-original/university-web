@@ -99,6 +99,7 @@ class TermTest < ActiveSupport::TestCase
 
   def valid_term_attributes
     { :name => "T1",
+      :slug => "t1",
       :start_date => "2010-1-1".to_date,
       :end_date => "2010-3-31".to_date }
   end

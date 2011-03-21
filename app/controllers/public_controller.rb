@@ -7,12 +7,12 @@ class PublicController < ApplicationController
   layout 'static'
 
   # Find the list of alumni, which can be all of them,
-  # filtered by year or by year and term name.
+  # filtered by year or by year and term slug.
   def alumni
     if params[:term]
       redirect_to("/alumni") && return if !params[:year]
 
-      @term = Term.per_year(params[:year]).where(:name => params[:term]).first
+      @term = Term.per_year(params[:year]).where(:slug => params[:term]).first
       @alumni = @term.alumni
     else
       @alumni = User.alumni
@@ -55,19 +55,18 @@ class PublicController < ApplicationController
     @current = params[:action]
   end
 
-  # Prepares a hash with all the years and term names for the terms
+  # Prepares a hash with all the years and term names/slugs for the terms
   # that have alumni, to be used for the links bar on '/alumni'
   # In this format:
   #
   # {
-  #   :2010 => ['intersession'],
-  #   :2011 => ['T1', 'T2']
+  #   :2010 => [['First Session', 'first-session']],
+  #   :2011 => [['T1', 't1'], ['T2', 't2']]
   # }
   def set_alumni_links
     @alumni_links = {}
     terms = Term.order('start_date').all.select {|t| t.alumni.count > 0}
-    terms_years_and_names = terms.map {|t| [t.start_date.year, t.name]}
-    terms_years_and_names.each do |term|
+    terms.map {|t| [t.start_date.year, [t.name, t.slug]]}.each do |term|
       @alumni_links[term[0]] = [] if !@alumni_links[term[0]]
       @alumni_links[term[0]] << term[1]
     end
