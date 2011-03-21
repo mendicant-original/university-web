@@ -3,14 +3,14 @@
 
 #alumni_links_container
   %ul#alumni_links
-    - @alumni_links.each_pair do |year, terms|
+    - @terms_by_year.each_pair do |year, terms|
       %li.term_year
         = link_to year, "/alumni/#{year}"
       %li
         %ul
           - terms.each do |term|
             %li.term_slug
-              = link_to term[0], "/alumni/#{year}/#{term[1]}"
+              = link_to term.name, "/alumni/#{year}/#{term.slug}"
     %li.last
       = link_to "All".html_safe, "/alumni"
 

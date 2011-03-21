@@ -2,7 +2,7 @@ class PublicController < ApplicationController
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
   before_filter      :set_current_section
-  before_filter      :set_alumni_links, :only => [:alumni, :recent_alumni]
+  before_filter      :set_terms_by_year, :only => [:alumni, :recent_alumni]
 
   layout 'static'
 
@@ -55,21 +55,8 @@ class PublicController < ApplicationController
     @current = params[:action]
   end
 
-  # Prepares a hash with all the years and term names/slugs for the terms
-  # that have alumni, to be used for the links bar on '/alumni'
-  # In this format:
-  #
-  # {
-  #   :2010 => [['First Session', 'first-session']],
-  #   :2011 => [['T1', 't1'], ['T2', 't2']]
-  # }
-  def set_alumni_links
-    @alumni_links = {}
-    terms = Term.order('start_date').all.select {|t| t.alumni.count > 0}
-    terms.map {|t| [t.start_date.year, [t.name, t.slug]]}.each do |term|
-      @alumni_links[term[0]] = [] if !@alumni_links[term[0]]
-      @alumni_links[term[0]] << term[1]
-    end
+  def set_terms_by_year
+    @terms_by_year = Term.order('start_date').select {|t| t.alumni.count > 0}.group_by {|t| t.start_date.year }
   end
 end
 
