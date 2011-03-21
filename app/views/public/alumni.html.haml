@@ -1,15 +1,18 @@
 .alumni_header
   Our alumni have all successfully completed the Ruby Mendicant University core skills course, an intense three week session that covers a number of important topics that any practicing Ruby developer should be familiar with. The students on this list have all shown they can ship clean code under tight deadlines while maintaining a balance between learning new things and getting things done. These are the folks to watch if you want to know who's up and coming in the Ruby world.
 
-%ul#alumni_links
-  - @alumni_links.each_pair do |term_year, term_names|
-    %li.term_year
-      = link_to term_year, "/alumni/#{term_year}"
-    - term_names.each do |term_name|
-      %li.term_name
-        = link_to term_name, "/alumni/#{term_year}/#{term_name}"
-  %li.last
-    = link_to "All".html_safe, "/alumni"
+#alumni_links_container
+  %ul#alumni_links
+    - @alumni_links.each_pair do |term_year, term_names|
+      %li.term_year
+        = link_to term_year, "/alumni/#{term_year}"
+      %li
+        %ul
+          - term_names.each do |term_name|
+            %li.term_name
+              = link_to term_name, "/alumni/#{term_year}/#{term_name}"
+    %li.last
+      = link_to "All".html_safe, "/alumni"
 
 #alumni
   - @alumni.each do |alumnus|
