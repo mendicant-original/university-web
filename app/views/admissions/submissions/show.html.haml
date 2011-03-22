@@ -40,7 +40,7 @@
             .tab_footer
               - if current_access_level.allows? :update_admissions_status
                 = select_tag :status_id, options_for_select(@statuses, @submission.status_id)
-              = f.submit "Comment"
+              = f.submit "Update Submission"
               .clear
 
       .clear
