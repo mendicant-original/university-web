@@ -56,7 +56,8 @@ class PublicController < ApplicationController
   end
 
   def set_terms_by_year
-    @terms_by_year = Term.order('start_date').select {|t| t.alumni.count > 0}.group_by {|t| t.start_date.year }
+    @terms_by_year = Term.order('start_date').select {|t| t.alumni.count > 0}.
+                      group_by {|t| t.start_date.year }
   end
 end
 
