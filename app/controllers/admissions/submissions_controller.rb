@@ -2,7 +2,8 @@ class Admissions::SubmissionsController < ApplicationController
   skip_before_filter :authenticate_user!,        :only => [:new, :create]
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
-  before_filter :find_submission, :only   => [:show, :attachment, :update]
+  before_filter :find_submission, :only   => [:show, :attachment, :update,
+                                              :comment ]
   before_filter :admin_required,  :except => [:new, :create, :thanks]
   
   def index
@@ -15,6 +16,14 @@ class Admissions::SubmissionsController < ApplicationController
   
   def thanks
     
+  end
+  
+  def comment
+    @submission.comments.create(params[:comment].merge(:user_id => current_user.id))
+
+    flash[:notice] = "Comment posted."
+    
+    redirect_to :action => :show
   end
   
   def attachment 

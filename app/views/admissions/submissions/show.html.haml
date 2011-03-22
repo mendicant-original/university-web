@@ -1,0 +1,52 @@
+- content_for :header_bottom do
+  :javascript
+    $(function(){
+      UW.Comments.init('#{comments_path}/');
+    
+      enableTabs();
+    });
+
+.course-two-col.admissions-two-col
+
+  #breadcrumbs.header
+    .container
+      = link_to "Admissions", admissions_submissions_path
+      %span.separator &rarr;
+      = @submission.user.name
+
+  #main
+    #submission
+      #submission_header
+        = button_to 'Download Zip', submission_zip_path(@submission),
+                    :method => :get
+        = image_tag @submission.user.gravatar_url(48)
+        = "#{@submission.user.name}'s Submission"
+    
+      .comments
+        - @submission.comments.each do |comment|
+          = render :partial => "/comments/show", 
+                                :locals => { :comment => comment }
+
+        %ul.tabs
+          %li= link_to "Edit", '#edit'
+          %li= link_to "Preview", '#preview'
+
+        .tab_container
+          = form_for @submission.comments.build, 
+            :url => comment_admissions_submission_path(@submission) do |f|
+            = hidden_field_tag "status"
+            #edit.tab_content= f.text_area :comment_text
+            #preview.tab_content.description
+              Preview
+            .tab_footer
+              = f.submit "Comment"
+              .clear
+
+      .clear
+      / 
+      / - if @course.instructors.include?(current_user)
+      / 
+      /   = form_for @submission, :url => submission_path(@submission) do |f|
+      /     = f.submit "Update Status"
+      /     = f.select :submission_status_id,
+      /       SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}

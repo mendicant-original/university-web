@@ -2,43 +2,13 @@
 
 - content_for :header_bottom do
   :javascript
-    $(document).ready(function(){
-      $('.comment a.edit').click(function(e){
-        $(e.currentTarget).parents('.comment').children('.content').
-        trigger('edit');
-        e.preventDefault();
-      });
-      
+    $(document).ready(function(){      
       // Toggle Status / Description update messages
       $('.header').click(function(e){
         $(e.target).siblings('.content').slideToggle();
       });
       
-      $('.comment .content a').live('click', function(e){
-        window.open(e.target.href);
-        return false;
-      });
-      
-      $('.comment[data-editable=true]').each(function(i,el){
-        id = $(el).attr('data-id');
-        
-        $(el).children(".content").click(function(e){
-          if (e.target.tagName != "A")
-            $(e.target).trigger('edit');
-        });
-      
-        $(el).children(".content").editable('#{comments_path}/' + id, {
-          type:      'textarea',
-          method:    'PUT',
-          indicator: 'Saving ...',
-          cancel:    'Cancel',
-          submit:    'Save',
-          loadurl:   '#{comments_path}/' + id,
-          width:     '98%',
-          event:     'edit',
-          onblur:    'ignore'
-        });
-      });
+      UW.Comments.init('#{comments_path}/');
       
       enableTabs();
       
