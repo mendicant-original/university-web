@@ -1,11 +1,6 @@
 // UW.Timezones
 
-if (typeof UW == 'undefined') {
-  UW = {};
-}
-if (typeof UW.Timezones == 'undefined') {
-  UW.Timezones = {};
-}
+UW.setupNamespace("Timezones");
 
 UW.Timezones.init = function() {
 	UW.Timezones.updateTimes();
