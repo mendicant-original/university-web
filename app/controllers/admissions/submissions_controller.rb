@@ -16,7 +16,7 @@ class Admissions::SubmissionsController < ApplicationController
   end
   
   def show
-    
+    @statuses = Admissions::Status.order('sort_order').map {|s| [s.name, s.id]}
   end
   
   def thanks
@@ -25,6 +25,10 @@ class Admissions::SubmissionsController < ApplicationController
   
   def comment
     @submission.comments.create(params[:comment].merge(:user_id => current_user.id))
+    
+    if current_access_level.allows? :update_admissions_status
+      @submission.update_attribute(:status_id, params[:status_id])
+    end
 
     flash[:notice] = "Comment posted."
     

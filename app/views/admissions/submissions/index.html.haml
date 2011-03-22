@@ -21,7 +21,7 @@
       %th.discussion
     - @submissions.each do |submission|
       %tr
-        %td= link_to submission.user.name, edit_admin_user_path(submission.user)
+        %td= link_to_submission_user(submission)
         %td= submission.user.email
         %td= github_account_link submission.user.github_account_name
         %td= link_to "Download", submission_zip_path(submission)
