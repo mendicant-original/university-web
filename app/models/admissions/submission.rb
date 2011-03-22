@@ -11,6 +11,9 @@ class Admissions::Submission < ActiveRecord::Base
   has_many   :comments,   :as        => :commentable,
                           :dependent => :delete_all
   
+  scope :reviewable, includes(:status).
+    where(["admissions_statuses.reviewable = ?", true])
+  
   def attachment=(tempfile)
     @tempfile = tempfile
   end

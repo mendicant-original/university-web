@@ -8,8 +8,12 @@ AccessLevel::User.instance_eval do
   define "student",
     :permissions => [:view_directory, :view_courses]
 
-  define "admin",
+  define "alumnus",
     :parent      => "student",
+    :permissions => [:discuss_admissions]
+
+  define "admin",
+    :parent      => "alumnus",
     :permissions => [:manage_users, :manage_documents, :update_admissions_status]
 end
 

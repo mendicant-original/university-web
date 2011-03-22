@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :find_comment, :only => [:show, :update, :destroy]
+  before_filter :find_comment,     :only => [:show, :update, :destroy]
   before_filter :commentator_only, :only => [:show, :update, :destroy]
 
   def show

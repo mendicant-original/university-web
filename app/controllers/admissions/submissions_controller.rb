@@ -2,12 +2,17 @@ class Admissions::SubmissionsController < ApplicationController
   skip_before_filter :authenticate_user!,        :only => [:new, :create]
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
-  before_filter :find_submission, :only   => [:show, :attachment, :update,
+  before_filter :find_submission, :only => [:show, :attachment, :update,
                                               :comment ]
-  before_filter :admin_required,  :except => [:new, :create, :thanks]
+  before_filter :admin_required,  :only => [:update]
+  before_filter :authorized_users_required, :only => [:show, :index, :comment]
   
   def index
     @submissions = Admissions::Submission.order("created_at")
+    
+    unless current_access_level.allows?(:update_admissions_status)
+      @submissions = @submissions.reviewable
+    end
   end
   
   def show
@@ -65,5 +70,12 @@ class Admissions::SubmissionsController < ApplicationController
   
   def find_submission
     @submission = Admissions::Submission.find(params[:id])
+  end
+  
+  def authorized_users_required
+    unless current_access_level.allows?(:discuss_admissions)
+      flash[:error] = "Your account does not have access to this area"
+      redirect_to dashboard_path
+    end
   end
 end
