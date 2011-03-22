@@ -160,6 +160,57 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  context "alumnus dates" do
+    setup do
+      @alumnus1 = Factory(:user,
+                          :alumni_number => 1,
+                          :alumni_year => 2010,
+                          :alumni_month => 1)
+
+      @alumnus2 = Factory(:user,
+                          :alumni_number => 2,
+                          :alumni_year => 2010,
+                          :alumni_month => 2)
+
+      @alumnus3 = Factory(:user,
+                          :alumni_number => 3,
+                          :alumni_year => 2010,
+                          :alumni_month => 4)
+
+      @alumnus4 = Factory(:user,
+                          :alumni_number => 4,
+                          :alumni_year => 2011,
+                          :alumni_month => 12)
+
+      @student  = Factory(:user)
+    end
+
+    test "has alumni scope that returns all alumni" do
+      assert User.alumni.include?(@alumnus1)
+      assert User.alumni.include?(@alumnus2)
+      assert User.alumni.include?(@alumnus3)
+      assert User.alumni.include?(@alumnus4)
+
+      assert !User.alumni.include?(@student)
+    end
+
+    test "has per_year scope" do
+      assert User.per_year(2010).include?(@alumnus1)
+      assert User.per_year(2010).include?(@alumnus2)
+      assert User.per_year(2010).include?(@alumnus3)
+
+      assert !User.per_year(2010).include?(@alumnus4)
+      assert User.per_year(2011).include?(@alumnus4)
+    end
+
+    test "should get alumni_date from year and month" do
+      assert_equal @alumnus1.alumni_date, "2010-1-1".to_date
+      assert_equal @alumnus2.alumni_date, "2010-2-1".to_date
+      assert_equal @alumnus3.alumni_date, "2010-4-1".to_date
+      assert_equal @alumnus4.alumni_date, "2011-12-1".to_date
+    end
+  end
+
   private
 
   def swap_access_level_definitions(klass)

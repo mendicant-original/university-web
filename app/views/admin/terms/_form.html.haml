@@ -1,10 +1,34 @@
 %p
   = f.label :name
   = f.text_field :name
-  
+
+%p
+  = f.label :slug
+  = f.text_field :slug
+
+%p
+  = f.label :start_date
+  = f.text_field :start_date, :class => "datepicker"
+
+%p
+  = f.label :end_date
+  = f.text_field :end_date, :class => "datepicker"
+
 %p
   = f.label :registration_open
   = f.check_box :registration_open
-    
+
 %p.submit
   = f.submit
+
+- content_for :header_bottom do
+  :javascript
+    $(document).ready(function(){
+      $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        changeMonth: true,
+        changeYear: true
+      });
+
+      UW.Slugger.watch('term_name', 'term_slug');
+    });

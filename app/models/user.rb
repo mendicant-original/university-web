@@ -55,8 +55,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :comments,
     :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
+
+  scope :staff,  lambda { where(:access_level => "admin") }
+  scope :alumni, where("alumni_number IS NOT NULL").order('alumni_number')
   
-  scope :staff, lambda { where(:access_level => "admin") }
+  scope :per_year, lambda { |year| where(:alumni_year => year) }
 
   def self.search(search, page, options={})
     sql_condition = %w(
@@ -125,6 +128,12 @@ class User < ActiveRecord::Base
     !alumni_number.nil?
   end
 
+  # Returns a date object based on the alumni year and month
+  # to be used for comparing with terms start and end dates
+  def alumni_date
+    alumnus? ? "#{alumni_year}-#{alumni_month}-1".to_date : nil
+  end
+
   def gravatar_url(size=40)
     hash = Digest::MD5.hexdigest(email.downcase)
 
@@ -167,4 +176,5 @@ class User < ActiveRecord::Base
     
     return true
   end
+
 end
