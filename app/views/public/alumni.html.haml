@@ -4,14 +4,12 @@
 #alumni_links_container
   %ul#alumni_links
     - @terms_by_year.each_pair do |year, terms|
-      %li.term_year
+      %li.term_year{:class => ("selected" if params[:year].to_i == year && !defined?(@term))}
         = link_to year, alumni_path(year)
-      %li
-        %ul
-          - terms.each do |term|
-            %li.term_slug
-              = link_to term.name, alumni_path(year, term.slug)
-    %li.last
+      - terms.each do |term|
+        %li.term_slug{:class => ("selected" if @term == term)}
+          = link_to term.name, alumni_path(year, term.slug)
+    %li.last{:class => ("selected" if params[:year].blank? && @term.blank?)}
       = link_to "All".html_safe, "/alumni"
 
 #alumni
