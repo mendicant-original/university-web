@@ -1,6 +1,8 @@
 class Admissions::Submission < ActiveRecord::Base
   after_create   :save_attachment
   after_create   :notify_staff
+  
+  after_update   :send_reviewer_notice
   before_create  :set_status
   before_destroy :delete_attachment
   
@@ -59,6 +61,16 @@ class Admissions::Submission < ActiveRecord::Base
         errors.add("attachment", "must be present")
       elsif !File.basename(@tempfile.original_filename)[/.zip/]
         errors.add("attachment", "should be a zip file")
+      end
+    end
+  end
+  
+  def send_reviewer_notice
+    if self.status_id_changed?
+      old_status = Admissions::Status.find_by_id(self.status_id_was)
+      
+      if old_status && old_status.reviewable != true && self.status.reviewable
+        UserMailer.application_reviewable(self).deliver
       end
     end
   end

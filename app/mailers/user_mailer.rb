@@ -32,4 +32,11 @@ class UserMailer < ActionMailer::Base
     mail(:to      => User.staff.map {|s| s.email } << "rmu.management@gmail.com",
          :subject => "[rmu-admissions] New student application")
   end
+  
+  def application_reviewable(submission)
+    @submission = submission
+    
+    mail(:to      => "rmu-alumni@googlegroups.com",
+         :subject => "[rmu-admissions] New student application for review")
+  end
 end
