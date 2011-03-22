@@ -52,6 +52,8 @@ To configure University Web:
 * <tt>rake db:migrate</tt>
 * <tt>rake db:test:prepare</tt>
 
+3. Generate the static site by running <tt>rake public-site:generate</tt>
+
 Finally, run the test suite to make sure everything is working correctly:
 
 <tt>rake test</tt>
@@ -69,7 +71,6 @@ Finally, run the test suite to make sure everything is working correctly:
 
 * Each term is a group of one or more courses.
 * To create a new term, login as an admin user, and choose <b>Administration > Terms > Create Term</b>.
-* Optionally you create an exam for the term, such as an entrance exam.
 
 === Courses
 
