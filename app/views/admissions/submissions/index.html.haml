@@ -8,22 +8,25 @@
 
 %h1 Admissions
 
-%table.admin.admissions
-  %tr
-    %th Applicant
-    %th Email
-    %th Github
-    %th Attachment
-    %th.status Status
-    %th.discussion
-  - @submissions.each do |submission|
+- if @submissions.empty?
+  %h3 There are currently no admissions open for discussion
+- else
+  %table.admin.admissions
     %tr
-      %td= link_to submission.user.name, edit_admin_user_path(submission.user)
-      %td= submission.user.email
-      %td= github_account_link submission.user.github_account_name
-      %td= link_to "Download", submission_zip_path(submission)
-      %td
-        .submision_status{:'data-id' => submission.id}
-          = submission.status.try(:name)
-      %td= link_to image_tag("icons/comments/bubble.png"), 
-                    admissions_submission_path(submission)
+      %th Applicant
+      %th Email
+      %th Github
+      %th Attachment
+      %th.status Status
+      %th.discussion
+    - @submissions.each do |submission|
+      %tr
+        %td= link_to submission.user.name, edit_admin_user_path(submission.user)
+        %td= submission.user.email
+        %td= github_account_link submission.user.github_account_name
+        %td= link_to "Download", submission_zip_path(submission)
+        %td
+          .submision_status{:'data-id' => submission.id}
+            = submission.status.try(:name)
+        %td= link_to image_tag("icons/comments/bubble.png"), 
+                      admissions_submission_path(submission)

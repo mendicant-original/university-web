@@ -8,7 +8,7 @@ class Admissions::SubmissionsController < ApplicationController
   before_filter :authorized_users_required, :only => [:show, :index, :comment]
   
   def index
-    @submissions = Admissions::Submission.order("created_at")
+    @submissions = Admissions::Submission.order("admissions_submissions.created_at")
     
     unless current_access_level.allows?(:update_admissions_status)
       @submissions = @submissions.reviewable
