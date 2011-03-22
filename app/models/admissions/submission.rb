@@ -3,6 +3,7 @@ class Admissions::Submission < ActiveRecord::Base
   after_create   :notify_staff
   
   after_update   :send_reviewer_notice
+  after_update   :send_received_notice
   before_create  :set_status
   before_destroy :delete_attachment
   
@@ -72,6 +73,12 @@ class Admissions::Submission < ActiveRecord::Base
       if old_status && old_status.reviewable != true && self.status.reviewable
         UserMailer.application_reviewable(self).deliver
       end
+    end
+  end
+  
+  def send_received_notice
+    if self.status_id_changed? && status == Admissions::Status.received
+      UserMailer.application_received(self).deliver
     end
   end
 end

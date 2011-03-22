@@ -39,4 +39,11 @@ class UserMailer < ActionMailer::Base
     mail(:to      => "rmu-alumni@googlegroups.com",
          :subject => "[rmu-admissions] New student application for review")
   end
+  
+  def application_received(submission)
+    @submission = submission
+    
+    mail(:to      => submission.user.email,
+         :subject => "[rmu-admissions] Application received")
+  end
 end
