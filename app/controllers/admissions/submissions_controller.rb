@@ -1,9 +1,9 @@
 class Admissions::SubmissionsController < ApplicationController
-  skip_before_filter :authenticate_user!, :only => [:new, :create]
+  skip_before_filter :authenticate_user!,        :only => [:new, :create]
   skip_before_filter :change_password_if_needed, :only => [:new, :create]
   
-  before_filter :find_submission, :only => [:show, :attachment]
-  before_filter :admin_required, :except => [:new, :create, :thanks]
+  before_filter :find_submission, :only   => [:show, :attachment, :update]
+  before_filter :admin_required,  :except => [:new, :create, :thanks]
   
   def index
     @submissions = Admissions::Submission.order("created_at")
@@ -44,6 +44,12 @@ class Admissions::SubmissionsController < ApplicationController
     else
       render :action => :new
     end
+  end
+  
+  def update    
+    @submission.update_attribute(:status_id, params[:value])
+    
+    render :text => @submission.status.name
   end
   
   private

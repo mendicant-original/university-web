@@ -1,12 +1,20 @@
+- content_for :header_bottom do
+  - if current_access_level.allows? :update_admissions_status
+    :javascript
+      $(function(){
+        UW.Admissions.enableStatusUpdating('#{admissions_submissions_path}/',
+          '#{admissions_statuses_path(:format => :json)}');
+      });
+
 %h1 Admissions
 
-%table.admin
+%table.admin.admissions
   %tr
     %th Applicant
     %th Email
     %th Github
     %th Attachment
-    %th Status
+    %th.status Status
   - @submissions.each do |submission|
     %tr
       %td= link_to submission.user.name, edit_admin_user_path(submission.user)
@@ -16,4 +24,6 @@
         attachment_admissions_submission_path(submission.id, 
           "#{submission.user.name.underscore}_#{submission.id}", 
           :format => "zip")
-      %td= submission.status.try(:name)
+      %td
+        .submision_status{:'data-id' => submission.id}
+          = submission.status.try(:name)

@@ -81,6 +81,7 @@ University::Application.routes.draw do
         match '/:file' => 'submissions#attachment', :as => "attachment"
       end
     end
+    resources :statuses
   end
 
   get "/admissions" => 'Admissions::Submissions#new'

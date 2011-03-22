@@ -10,7 +10,7 @@ AccessLevel::User.instance_eval do
 
   define "admin",
     :parent      => "student",
-    :permissions => [:manage_users, :manage_documents]
+    :permissions => [:manage_users, :manage_documents, :update_admissions_status]
 end
 
 AccessLevel::Course.instance_eval do
