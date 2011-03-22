@@ -24,7 +24,7 @@
               %a{:href=>"/", :class => current_page('index', current)} Home
             %li.main
               %a{:href=>"/changelog.html",
-                :class => current_page('changelog', current)} News
+                :class => current_page('news', current)} News
             %li.main#about
               %a.dropdown{:href=>"#",
                 :class => current_page('about', current)}
@@ -35,7 +35,7 @@
                   %li
                     %a{:href => "/about/courses.html"} Courses
                   %li
-                    -# about/admissions.html
+                    -# Static Version => about/admissions.html
                     %a{:href => "/admissions"} Admissions
                   %li
                     %a{:href => "/about/staff.html"} Staff
@@ -64,7 +64,7 @@
 
             %li.main
               %a{:href=>"/alumni/recent.html",
-                :class => current_page('recent_alumni', current)} Alumni List
+                :class => current_page('alumni', current)} Alumni List
             %li.main.last
               %a{:href=>"/users/sign_in"} University Web
     #container

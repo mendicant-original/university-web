@@ -1,8 +1,9 @@
 class PublicController < ApplicationController
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
-  before_filter      :set_current_section
-  before_filter      :set_terms_by_year, :only => [:alumni, :recent_alumni]
+  before_filter      :set_alumni_section, :only => [:alumni, :recent_alumni]
+  before_filter      :set_news_section,   :only => [:changelog, :announcement]
+  before_filter      :set_terms_by_year,  :only => [:alumni, :recent_alumni]
 
   layout 'static'
 
@@ -50,9 +51,13 @@ class PublicController < ApplicationController
   end
 
   private
-
-  def set_current_section
-    @current = params[:action]
+  
+  def set_alumni_section
+    @current = "alumni"
+  end
+  
+  def set_news_section
+    @current = "news"
   end
 
   def set_terms_by_year
