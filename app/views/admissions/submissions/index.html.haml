@@ -28,5 +28,7 @@
         %td
           .submision_status{:'data-id' => submission.id}
             = submission.status.try(:name)
-        %td= link_to image_tag("icons/comments/bubble.png"), 
-                      admissions_submission_path(submission)
+        %td.discussion
+          - link_to admissions_submission_path(submission) do
+            = submission.comments.count
+            = image_tag("icons/comments/bubble.png")
