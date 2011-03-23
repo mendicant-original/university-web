@@ -24,7 +24,7 @@ class Admissions::SubmissionsController < ApplicationController
   end
   
   def comment
-    @submission.comments.create(params[:comment].merge(:user_id => current_user.id))
+    @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
     
     if current_access_level.allows? :update_admissions_status
       @submission.update_attribute(:status_id, params[:status_id])

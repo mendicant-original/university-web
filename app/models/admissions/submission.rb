@@ -30,9 +30,17 @@ class Admissions::Submission < ActiveRecord::Base
   end
   
   def notify_staff
-    UserMailer.application_created(self).deliver
+    AdmissionsMailer.application_created(self).deliver
     
     return true
+  end
+  
+  def create_comment(comment_data)
+    comment = comments.create(comment_data)
+
+    if comment.errors.empty?
+      AdmissionsMailer.application_comment_created(comment).deliver
+    end
   end
   
   private
@@ -71,14 +79,14 @@ class Admissions::Submission < ActiveRecord::Base
       old_status = Admissions::Status.find_by_id(self.status_id_was)
       
       if old_status && old_status.reviewable != true && self.status.reviewable
-        UserMailer.application_reviewable(self).deliver
+        AdmissionsMailer.application_reviewable(self).deliver
       end
     end
   end
   
   def send_received_notice
     if self.status_id_changed? && status == Admissions::Status.received
-      UserMailer.application_received(self).deliver
+      AdmissionsMailer.application_received(self).deliver
     end
   end
 end
