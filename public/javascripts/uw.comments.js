@@ -31,7 +31,8 @@ UW.Comments.init = function(commentsPath){
       loadurl:   commentsPath + id,
       width:     '98%',
       event:     'edit',
-      onblur:    'ignore'
+      onblur:    'ignore',
+      clicktoedit: false
     });
   });
 }

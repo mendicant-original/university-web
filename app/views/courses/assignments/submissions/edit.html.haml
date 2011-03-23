@@ -30,7 +30,7 @@
             $(e.target).trigger('edit');
         });
       
-        placeholder = '<div id=\'placeholder\'>Click here to update your ' +
+        placeholder = '<div id=\'placeholder\'>Click \'Edit\' to update your ' +
         'submission\'s description.</div>Comments on your submission go below.';
       
         $('.description').editable(editPath, {
@@ -41,10 +41,11 @@
           cancel:      'Cancel',
           submit:      'Save',
           loadurl:     '#{submission_path(@submission)}.text',
-          tooltip:     'Click here to edit',
+          tooltip:     "Click 'Edit' to make changes",
           event:       'edit',
           placeholder: placeholder,
           onblur:      'ignore',
+          clicktoedit: false,
           callback:    function(){ $('#description_controls').show(); }
         }).bind('edit', function(){ $('#description_controls').hide(); });
       })

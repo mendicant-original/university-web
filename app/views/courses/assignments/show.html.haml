@@ -26,10 +26,11 @@
         cancel:      'Cancel',
         submit:      'Save',
         loadurl:     '#{assignment_path(@assignment)}.text',
-        tooltip:     'Click to edit...',
+        tooltip:     "Click 'Edit' to make changes",
         event:       'edit',
         onblur:      'ignore',
-        placeholder: placeholder
+        placeholder: placeholder,
+        clicktoedit: false
       });
       
       SidebarMenu.register('sidebar');

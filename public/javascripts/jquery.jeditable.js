@@ -48,6 +48,7 @@
   * @param String  options[select]    true or false, when true text is highlighted ??
   * @param String  options[placeholder] Placeholder text or html to insert when element is empty. **
   * @param String  options[onblur]    'cancel', 'submit', 'ignore' or function ??
+  * @param Boolean options[clicktoedit] true allows click to edit [default], false prevents it
   *             
   * @param Function options[onsubmit] function(settings, original) { ... } called before submit
   * @param Function options[onreset]  function(settings, original) { ... } called before reset
@@ -121,6 +122,10 @@
             if (!$.trim($(this).html())) {
                 $(this).html(settings.placeholder);
             }
+            
+            /* Remove click event  */
+            if(settings.clicktoedit == false)
+                $(this).data('events')['click'] = null;
             
             $(this).bind(settings.event, function(e) {
                 
@@ -540,7 +545,8 @@
         placeholder: 'Click to edit',
         loaddata   : {},
         submitdata : {},
-        ajaxoptions: {}
+        ajaxoptions: {},
+        clicktoedit: true
     };
 
 })(jQuery);
