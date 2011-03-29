@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Ruby Mendicant University</title>
+    <meta content='text/html;charset=utf-8' http-equiv='Content-Type' />
+    <link href='/stylesheets/public.css' rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.4.2.js" type="text/javascript"></script> 
+    <script src="/javascripts/dropdownmenu.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id='header'>
+      <div id='logo'>
+        <img class='logo' src='/images/rmu_logo.png' />
+        <h1>Ruby Mendicant University</h1>
+      </div>
+      <div id='menu_bar'>
+        <div class='center'>
+          <ul class='menu'>
+            <li class='main first'>
+              <a class='current' href='/'>Home</a>
+            </li>
+            <li class='main'>
+              <a href='/changelog.html'>News</a>
+            </li>
+            <li class='main' id='about'>
+              <a class='dropdown' href='#'>
+                About RMU
+                <span class='arrow'></span>
+              </a>
+              <div id='about_dropdown'>
+                <ul>
+                  <li>
+                    <a href='/about/courses.html'>Courses</a>
+                  </li>
+                  <li>
+                    <a href='/admissions'>Admissions</a>
+                  </li>
+                  <li>
+                    <a href='/about/staff.html'>Staff</a>
+                  </li>
+                  <li>
+                    <a href='/about/contact.html'>Contact Us</a>
+                  </li>
+                </ul>
+              </div>
+              <script type='text/javascript'>
+                //<![CDATA[
+                  DropdownMenu.register('about');
+                //]]>
+              </script>
+            </li>
+            <li class='main' id='resources'>
+              <a class='dropdown' href='/projects.html'>
+                Resources
+                <span class='arrow'></span>
+              </a>
+              <div id='resources_dropdown'>
+                <ul>
+                  <li>
+                    <a href='/resources/learning_materials.html'>Learning Materials</a>
+                  </li>
+                  <li>
+                    <a href='/resources/core_projects.html'>Core Projects</a>
+                  </li>
+                  <li>
+                    <a href='/resources/student_projects.html'>Student Projects</a>
+                  </li>
+                </ul>
+              </div>
+              <script type='text/javascript'>
+                //<![CDATA[
+                  DropdownMenu.register('resources');
+                //]]>
+              </script>
+            </li>
+            <li class='main'>
+              <a href='/alumni.html'>Alumni List</a>
+            </li>
+            <li class='main last'>
+              <a href='/users/sign_in'>University Web</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id='container'>
+      <div id='content'>
+        <p class='announcement'>
+          <span class='header'>Registration for the May 2011 core skills course has started!</span>
+          Visit the
+          <a href='/admissions'>new student application page</a>
+          for details.
+        </p>
+        <div class='video_box'>
+          <object width="640" height="385"><param name="movie" value="http://www.youtube.com/v/_cnaed9Twz8?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed wmode="transparent" src="http://www.youtube.com/v/_cnaed9Twz8?fs=1&amp;hl=en_US&amp;rel=0&amp;hd=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="640" height="385"></embed></object>
+          <h2>Learning Ruby, one conversation at a time</h2>
+        </div>
+        <div id='overview'>
+          <a href='/about/courses.html'>
+            <div class='box'>
+              <h3>Philosophy</h3>
+            </div>
+          </a>
+          <div class='info'>
+            We provide top-notch technical training in an atmosphere that promotes intellectual curiosity, social responsibility, and getting things done.
+          </div>
+          <a href='/resources/learning_materials.html'>
+            <div class='box'>
+              <h3>Learning Resources</h3>
+            </div>
+          </a>
+          <div class='info'>
+            We are committed to making our exams, exercises, and other learning materials freely available so that others can benefit from them.
+          </div>
+          <a href='/resources/core_projects.html'>
+            <div class='box'>
+              <h3>FOSS Projects</h3>
+            </div>
+          </a>
+          <div class='info'>
+            We've made all the tooling we use to run RMU freely available, and many of our students have done the same with their class projects.
+          </div>
+          <div class='clear'></div>
+        </div>
+        <div id='footer'>
+          An
+          <a href='http://educationreimagined.com'>Education Reimagined</a>
+          Project
+        </div>
+      </div>
+    </div>
+    <script type='text/javascript'>
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-15397397-3']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

@@ -22,6 +22,9 @@
           %li
             = link_to "Directory", users_path
             = selected_arrow(:directory)
+        - if current_access_level.allows? :discuss_admissions
+          %li
+            = link_to "Admissions", admissions_submissions_path
         - if current_access_level.allows? :manage_users
           %li#administration
             = link_to "Administration".html_safe + image_tag("down_arrow.png", :class => "drop"), '#'

@@ -8,9 +8,17 @@ AccessLevel::User.instance_eval do
   define "student",
     :permissions => [:view_directory, :view_courses]
 
-  define "admin",
+  define "alumnus",
     :parent      => "student",
-    :permissions => [:manage_users, :manage_documents]
+    :permissions => [:discuss_admissions]
+
+  define "visiting teacher",
+    :parent      => "alumnus",
+    :permissions => []
+
+  define "admin",
+    :parent      => "alumnus",
+    :permissions => [:manage_users, :manage_documents, :update_admissions_status]
 end
 
 AccessLevel::Course.instance_eval do
@@ -19,6 +27,14 @@ AccessLevel::Course.instance_eval do
   
   define "mentor", 
     :permissions => [:comment]
+    
+  define "assistant instructor", 
+    :parent => "mentor",
+    :permissions => []
+    
+  define "visiting teacher", 
+    :parent => "ta",
+    :permissions => []
   
   define "instructor",  
     :permissions => [:comment, :create_assignments]

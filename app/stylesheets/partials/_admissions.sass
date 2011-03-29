@@ -34,3 +34,27 @@
       list-style-type: disc
       li
         margin: 0.5em 0
+        
+table.admissions
+  th.status
+    width: 225px
+  th.discussion
+    width: 40px
+  td.discussion
+    text-align: right
+    
+div.admissions-two-col
+
+  #main
+    +column(24, true)
+    
+    #submission
+      margin-top: 1em
+      
+      #submission_header
+        form
+          float: right
+          display: inline
+          input
+            margin-top: 12px
+            margin-right: 12px

@@ -1,11 +1,6 @@
 // UW.Slugger
 
-if (typeof UW == 'undefined') {
-  UW = {};
-}
-if (typeof UW.Slugger == 'undefined') {
-  UW.Slugger = {};
-}
+UW.setupNamespace("Slugger");
 
 UW.Slugger.watch = function(sourceField, destinationField){
   sourceField      = $('#' + sourceField);

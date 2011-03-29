@@ -1,19 +1,34 @@
+- content_for :header_bottom do
+  - if current_access_level.allows? :update_admissions_status
+    :javascript
+      $(function(){
+        UW.Admissions.enableStatusUpdating('#{admissions_submissions_path}/',
+          '#{admissions_statuses_path(:format => :json)}');
+      });
+
 %h1 Admissions
 
-%table.admin
-  %tr
-    %th Applicant
-    %th Email
-    %th Github
-    %th Attachment
-    %th Status
-  - @submissions.each do |submission|
+- if @submissions.empty?
+  %h3 There are currently no admissions open for discussion
+- else
+  %table.admin.admissions
     %tr
-      %td= link_to submission.user.name, edit_admin_user_path(submission.user)
-      %td= submission.user.email
-      %td= github_account_link submission.user.github_account_name
-      %td= link_to "Download", 
-        attachment_admissions_submission_path(submission.id, 
-          "#{submission.user.name.underscore}_#{submission.id}", 
-          :format => "zip")
-      %td= submission.status.try(:name)
+      %th Applicant
+      %th Email
+      %th Github
+      %th Attachment
+      %th.status Status
+      %th.discussion
+    - @submissions.each do |submission|
+      %tr
+        %td= link_to_submission_user(submission)
+        %td= submission.user.email
+        %td= github_account_link submission.user.github_account_name
+        %td= link_to "Download", submission_zip_path(submission)
+        %td
+          .submision_status{:'data-id' => submission.id}
+            = submission.status.try(:name)
+        %td.discussion
+          - link_to admissions_submission_path(submission) do
+            = submission.comments.count
+            = image_tag("icons/comments/bubble.png")

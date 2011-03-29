@@ -25,11 +25,4 @@ class UserMailer < ActionMailer::Base
     mail(:to      => to_from_submission(@submission, @user.email),
          :subject => subject)
   end
-  
-  def application_created(submission)
-    @submission = submission
-    
-    mail(:to      => User.staff.map {|s| s.email } << "rmu.management@gmail.com",
-         :subject => "[rmu-admissions] New student application")
-  end
 end
