@@ -23,7 +23,8 @@ class PublicController < ApplicationController
 
   # List the alumni of the most recent Term that has alumni
   def recent_alumni
-    @alumni  = User.alumni.select {|u| u.alumni_date >= 6.months.ago.to_date }
+    @alumni = User.alumni.select {|u| u.alumni_date >= 6.months.ago.to_date }.
+                reverse
 
     render 'alumni'
   end
