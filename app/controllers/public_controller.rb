@@ -13,7 +13,7 @@ class PublicController < ApplicationController
     if params[:term]
       redirect_to("/alumni") && return if !params[:year]
 
-      @term = Term.per_year(params[:year]).where(:slug => params[:term]).first
+      @term = Term.where(:year => params[:year], :number => params[:term]).first
       @alumni = @term.alumni
     else
       @alumni = User.alumni
@@ -23,9 +23,7 @@ class PublicController < ApplicationController
 
   # List the alumni of the most recent Term that has alumni
   def recent_alumni
-    @term = Term.order("start_date DESC").select {|t| !t.alumni.blank?}.first
-    redirect_to("/alumni") && return if !@term
-    @alumni = @term.alumni
+    @alumni  = User.alumni.select {|u| u.alumni_date >= 6.months.ago.to_date }
 
     render 'alumni'
   end

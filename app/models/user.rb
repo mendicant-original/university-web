@@ -56,9 +56,8 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
 
-  scope :staff,  lambda { where(:access_level => "admin") }
-  scope :alumni, where("alumni_number IS NOT NULL").order('alumni_number')
-  
+  scope :staff,    where(:access_level => "admin")
+  scope :alumni,   where("alumni_number IS NOT NULL").order('alumni_number')
   scope :per_year, lambda { |year| where(:alumni_year => year) }
 
   def self.search(search, page, options={})

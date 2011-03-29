@@ -1,10 +1,14 @@
 %p
   = f.label :name
-  = f.text_field :name
+  = f.text_field :name, :disabled => "disabled"
+  
+%p
+  = f.label :year
+  = f.text_field :year
 
 %p
-  = f.label :slug
-  = f.text_field :slug
+  = f.label :number, "Term Number"
+  = f.text_field :number
 
 %p
   = f.label :start_date
