@@ -10,63 +10,60 @@
 
   %body
     #header
-      #logo
-        %img.logo{:src=>"/images/rmu_logo.png"}
-        %h1 Ruby Mendicant University
+      %h1 Ruby Mendicant University
 
       - # HACK for Rails layout
       - current = @current if @current
 
       #menu_bar
-        .center
-          %ul.menu
-            %li.main.first
-              %a{:href=>"/", :class => current_page('index', current)} Home
-            %li.main
-              %a{:href=>"/changelog.html",
-                :class => current_page('news', current)} News
-            %li.main#about
-              %a.dropdown{:href=>"#",
-                :class => current_page('about', current)}
-                About RMU
-                %span.arrow
-              #about_dropdown
-                %ul
-                  %li
-                    %a{:href => "/about/courses.html"} Courses
-                  %li
-                    -# Static Version => about/admissions.html
-                    %a{:href => "/admissions"} Admissions
-                  %li
-                    %a{:href => "/about/staff.html"} Staff
-                  %li
-                    %a{:href => "/about/contact.html"} Contact Us
+        %ul.menu
+          %li.main.first
+            %a{:href=>"/", :class => current_page('index', current)} Home
+          %li.main
+            %a{:href=>"/changelog.html",
+              :class => current_page('news', current)} News
+          %li.main#about
+            %a.dropdown{:href=>"#",
+              :class => current_page('about', current)}
+              About RMU
+              %span.arrow
+            #about_dropdown
+              %ul
+                %li
+                  %a{:href => "/about/courses.html"} Courses
+                %li
+                  -# Static Version => about/admissions.html
+                  %a{:href => "/admissions"} Admissions
+                %li
+                  %a{:href => "/about/staff.html"} Staff
+                %li
+                  %a{:href => "/about/contact.html"} Contact Us
 
-              :javascript
-                DropdownMenu.register('about');
+            :javascript
+              DropdownMenu.register('about');
 
-            %li.main#resources
-              %a.dropdown{:href=>"/projects.html",
-                :class => current_page('resources', current)}
-                Resources
-                %span.arrow
-              #resources_dropdown
-                %ul
-                  %li
-                    %a{:href => "/resources/learning_materials.html"} Learning Materials
-                  %li
-                    %a{:href => "/resources/core_projects.html"} Core Projects
-                  %li
-                    %a{:href => "/resources/student_projects.html"} Student Projects
+          %li.main#resources
+            %a.dropdown{:href=>"/projects.html",
+              :class => current_page('resources', current)}
+              Resources
+              %span.arrow
+            #resources_dropdown
+              %ul
+                %li
+                  %a{:href => "/resources/learning_materials.html"} Learning Materials
+                %li
+                  %a{:href => "/resources/core_projects.html"} Core Projects
+                %li
+                  %a{:href => "/resources/student_projects.html"} Student Projects
 
-              :javascript
-                DropdownMenu.register('resources');
+            :javascript
+              DropdownMenu.register('resources');
 
-            %li.main
-              %a{:href=>"/alumni/recent.html",
-                :class => current_page('alumni', current)} Alumni List
-            %li.main.last
-              %a{:href=>"/users/sign_in"} University Web
+          %li.main
+            %a{:href=>"/alumni/recent.html",
+              :class => current_page('alumni', current)} Alumni List
+          %li.main.last
+            %a{:href=>"/users/sign_in"} University Web
     #container
       #content
         = yield
@@ -74,6 +71,7 @@
           An
           %a{:href=>"http://educationreimagined.com"} Education Reimagined
           Project
+          
     :javascript
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-15397397-3']);
