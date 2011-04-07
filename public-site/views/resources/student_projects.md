@@ -41,6 +41,8 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/gstark/munin-graph" rel="nofollow">munin-graph</a> (Gavin Stark): Sinatra app for a more dynamic viewing of munin graph data</li>
   <li><a href="https://github.com/carlism/UnScheduler" rel="nofollow">UnScheduler</a> (Carl Leiby): An Unconference / BarCamp Scheduler</li>
   <li><a href="https://github.com/jbarreneche/test_parser" rel="nofollow">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
+  <li><a href="https://github.com/jaimeiniesta/w3clove" rel="nofollow">w3clove</a> (Jaime Iniesta): Site-wide website markup validator.</li>
+  <li><a href="https://github.com/ghendry/index-test" rel="nofollow">index-test</a> (Ginny Hendry): Test helpers for MySQL performance tuning.</li>
 </ul>     
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._

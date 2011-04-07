@@ -28,5 +28,8 @@ We are committed to releasing our exams, exercises and other learning materials 
 * [s5-e2](https://github.com/rmu/s5-e2): Challenge Project: Elevator Simulator
 * [s5-e3](https://github.com/rmu/s5-e3): Building Classical Data structures
 * [Ups and Downs](https://github.com/rmu/ups_and_downs): s5-e2 Reference Implementation
+* [s6-e1](https://github.com/rmu/s6-e1): Background Job Processing
+* [s6-e2](https://github.com/rmu/s6-e2): Challenge Project: Tower Defense!
+* [s6-e3](https://github.com/rmu/s6-e3): Experimenting with Ripper
 
 _All materials, unless otherwise noted may be used under the terms of the [GNU Free Documentation License](http://www.gnu.org/licenses/fdl.html)._
