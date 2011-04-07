@@ -1,4 +1,6 @@
-Our courses are designed from the ground up to support these goals, and small class sizes combined with active personalized guidance from our instructors make for a unique experience not usually found in online training programs.
+Small class sizes combined with active personalized guidance from our
+instructors make for a unique experience not usually found in online
+training programs.
 
 ### Core Skills Course
 
