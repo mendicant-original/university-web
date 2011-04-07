@@ -36,13 +36,13 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/vinibaggio/outpost">outpost</a> (Vinicius Baggio Fuentes): Simple service monitoring with a clean DSL for configuration</li>
   <li><a href="https://github.com/etrepat/pentago">pentago</a> (Estanislau Trepat): Pentago Game and AI Bot</li>
   <li><a href="https://github.com/rfelix/iwannareadit">iwannareadit</a> (Raoul Felix): Web app to manage book suggestions, voting, and lending</li>
-  <li><a href="https://github.com/samnang/pair-with-me" rel="nofollow">pair-with-me</a> (Samnang Chhun): Pair programming session scheduling</li>
-  <li><a href="https://github.com/clnclarinet/twitter_digest" rel="nofollow">twitter-digest</a> (Carol Nichols): A Twitter reader optimized for occasional checking of twitter.</li>
-  <li><a href="https://github.com/gstark/munin-graph" rel="nofollow">munin-graph</a> (Gavin Stark): Sinatra app for a more dynamic viewing of munin graph data</li>
-  <li><a href="https://github.com/carlism/UnScheduler" rel="nofollow">UnScheduler</a> (Carl Leiby): An Unconference / BarCamp Scheduler</li>
-  <li><a href="https://github.com/jbarreneche/test_parser" rel="nofollow">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
-  <li><a href="https://github.com/jaimeiniesta/w3clove" rel="nofollow">w3clove</a> (Jaime Iniesta): Site-wide website markup validator.</li>
-  <li><a href="https://github.com/ghendry/index-test" rel="nofollow">index-test</a> (Ginny Hendry): Test helpers for MySQL performance tuning.</li>
+  <li><a href="https://github.com/samnang/pair-with-me">pair-with-me</a> (Samnang Chhun): Pair programming session scheduling</li>
+  <li><a href="https://github.com/clnclarinet/twitter_digest">twitter-digest</a> (Carol Nichols): A Twitter reader optimized for occasional checking of twitter.</li>
+  <li><a href="https://github.com/gstark/munin-graph">munin-graph</a> (Gavin Stark): Sinatra app for a more dynamic viewing of munin graph data</li>
+  <li><a href="https://github.com/carlism/UnScheduler">UnScheduler</a> (Carl Leiby): An Unconference / BarCamp Scheduler</li>
+  <li><a href="https://github.com/jbarreneche/test_parser">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
+  <li><a href="https://github.com/jaimeiniesta/w3clove">w3clove</a> (Jaime Iniesta): Site-wide website markup validator.</li>
+  <li><a href="https://github.com/ghendry/index-test">index-test</a> (Ginny Hendry): Test helpers for MySQL performance tuning.</li>
 </ul>     
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._
