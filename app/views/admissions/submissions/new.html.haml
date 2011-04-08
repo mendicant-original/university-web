@@ -6,75 +6,80 @@
 
 #admissions
   
-  #instructions
-    %h1 May 2011 Core Skills Course Application
+  - if @open.zero?
+    #instructions
+      %h1 Sorry, we're full!
+  - else
+  
+    #instructions
+      %h1 May 2011 Core Skills Course Application
     
-    :plain
-      <p>We are now accepting student applications for the May 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
+      :plain
+        <p>We are now accepting student applications for the May 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
 
-      <h3>Submission Guidelines</h3>
+        <h3>Submission Guidelines</h3>
 
-      <ul>
-      <li>Start by using Ruby to solve at least two <a href="http://puzzlenode.com">PuzzleNode</a> problems, choosing from puzzles #1 through #4. For each problem, submit your program's output through PuzzleNode to verify that your code works as expected. Make sure you have at least two accepted submissions in PuzzleNode before continuing on with the RMU application process.</li>
+        <ul>
+        <li>Start by using Ruby to solve at least two <a href="http://puzzlenode.com">PuzzleNode</a> problems, choosing from puzzles #1 through #4. For each problem, submit your program's output through PuzzleNode to verify that your code works as expected. Make sure you have at least two accepted submissions in PuzzleNode before continuing on with the RMU application process.</li>
 
-      <li>Choose the two best programs you wrote for solving the problems listed above. Refactor and improve your code so that it looks as close as possible to what you'd consider clean, idiomatic Ruby code.</li>
+        <li>Choose the two best programs you wrote for solving the problems listed above. Refactor and improve your code so that it looks as close as possible to what you'd consider clean, idiomatic Ruby code.</li>
 
-      <li>Create a single zip file with the source code for the two problems you've chosen to share with us. Put each program in its own folder, and include with each the inputs from the problem, as well as the output your program generates. Include a README in each folder with a brief explanation of how to run your code, and any notes about your submission that you might want to share with reviewers.</li>
+        <li>Create a single zip file with the source code for the two problems you've chosen to share with us. Put each program in its own folder, and include with each the inputs from the problem, as well as the output your program generates. Include a README in each folder with a brief explanation of how to run your code, and any notes about your submission that you might want to share with reviewers.</li>
 
-      <li>Fill out the form on this page and upload your zip file. Make sure the github account name you provide here matches the one you used on PuzzleNode to submit your problems there.</li>
-      </ul>
+        <li>Fill out the form on this page and upload your zip file. Make sure the github account name you provide here matches the one you used on PuzzleNode to submit your problems there.</li>
+        </ul>
 
-      <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session.</p>
+        <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session.</p>
       
-      <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open, so act fast!</b></p>
-  #application
-    = form_for @user, :url => admissions_submissions_path,
-      :html => {:class => 'bp inline', :multipart => true} do |f|
+        <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open, so act fast!</b></p>
+    #application
+      = form_for @user, :url => admissions_submissions_path,
+        :html => {:class => 'bp inline', :multipart => true} do |f|
       
-      %h3 Your Application Information
+        %h3 Your Application Information
       
-      = error_messages_for(@user)
+        = error_messages_for(@user)
 
-      %p
-        = f.label :email, :class => "infield"
-        = f.text_field :email
-
-      %p
-        = f.label :real_name, :class => "infield"
-        = f.text_field :real_name
-
-      %p
-        = f.label :nickname, :class => "infield"
-        = f.text_field :nickname
-
-      %p
-        = f.label :password, :class => "infield"
-        = f.password_field :password
-
-      %p
-        = f.label :password_confirmation, :class => "infield"
-        = f.password_field :password_confirmation
-
-      %hr.ruler
-
-      %p
-        = f.label :github_account_name, "Github name", :class => "infield"
-        = f.text_field :github_account_name
-
-      %p
-        = f.label :twitter_account_name, "Twitter name", :class => "infield"
-        = f.text_field :twitter_account_name
-
-      %hr.ruler
-
-      = f.fields_for :admissions_submission do |s|
         %p
-          %span.label Zip file of your source code
-          = s.file_field :attachment
+          = f.label :email, :class => "infield"
+          = f.text_field :email
 
-      %hr.ruler
+        %p
+          = f.label :real_name, :class => "infield"
+          = f.text_field :real_name
 
-      %p
-        = f.submit "Submit Application", :class => "clean"
+        %p
+          = f.label :nickname, :class => "infield"
+          = f.text_field :nickname
 
-      .clear
+        %p
+          = f.label :password, :class => "infield"
+          = f.password_field :password
+
+        %p
+          = f.label :password_confirmation, :class => "infield"
+          = f.password_field :password_confirmation
+
+        %hr.ruler
+
+        %p
+          = f.label :github_account_name, "Github name", :class => "infield"
+          = f.text_field :github_account_name
+
+        %p
+          = f.label :twitter_account_name, "Twitter name", :class => "infield"
+          = f.text_field :twitter_account_name
+
+        %hr.ruler
+
+        = f.fields_for :admissions_submission do |s|
+          %p
+            %span.label Zip file of your source code
+            = s.file_field :attachment
+
+        %hr.ruler
+
+        %p
+          = f.submit "Submit Application", :class => "clean"
+
+        .clear
