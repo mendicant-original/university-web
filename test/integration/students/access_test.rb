@@ -10,7 +10,7 @@ module Students
 
       scenario "sign in" do
         visit root_path
-        assert_content "Learning Ruby, one conversation at a time"
+        assert_current_path "/"
         
         click_link "University Web"
         assert_current_path new_user_session_path
@@ -43,7 +43,7 @@ module Students
 
         click_link "Sign Out"
 
-        assert_content "Learning Ruby, one conversation at a time"
+        assert_current_path "/"
       end
     end
   end
