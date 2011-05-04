@@ -1,6 +1,3 @@
-University Web
-==============
-
 ![University Web Logo](https://github.com/rmu/university-web/raw/master/doc/university-web.png)
 
 This Ruby on Rails application provides facilities to support a community of 
