@@ -15,8 +15,7 @@ We expect it to become potentially useful to other organizations, and hope that
 it will be adopted elsewhere as it becomes mature.
 
 Whether you are a member of RbMU or a developer interested in systems for 
-learning and education, we encourage you to check out the source code:
-
+learning and education, we encourage you to check out the source code: 
 <http://github.com/rmu/university-web>
 
 If you are not a member of RbMU, please get in touch through our public channels:
