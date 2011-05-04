@@ -1,6 +1,6 @@
 = University Web
 
-https://github.com/rmu/university-web/raw/master/doc/university-web.png
+<img src="https://github.com/rmu/university-web/raw/master/doc/university-web.png">
 
 This Ruby on Rails application provides facilities to support a community of teachers and learners. It currently offers the essentials needed to manage multiple courses, and we are now also developing other features for enabling members of the community to work together.
 
