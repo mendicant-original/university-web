@@ -56,6 +56,8 @@
   %span.separator &rarr;
   = render :partial => "courses/assignments/breadcrumbs"
   %span.separator &rarr;
+  = link_to "Submissions", course_assignment_path(@course, @assignment, :anchor => "submissions")
+  %span.separator &rarr;
   = @submission.user.name
 
 - content_for :bucket do
