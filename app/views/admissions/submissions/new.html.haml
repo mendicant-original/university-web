@@ -6,21 +6,21 @@
 
 #admissions
   
-  - if @open.zero?
+  - if @open <= 0
     #instructions
       %h1 Sorry, we're full!
   - else
   
     #instructions
-      %h1 May 2011 Core Skills Course Application
+      %h1 July 2011 Core Skills Course Application
     
       :plain
-        <p>We are now accepting student applications for the May 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
+        <p>We are now accepting student applications for the July 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
 
         <h3>Submission Guidelines</h3>
 
         <ul>
-        <li>Start by using Ruby to solve at least two <a href="http://puzzlenode.com">PuzzleNode</a> problems, choosing from puzzles #1 through #4. For each problem, submit your program's output through PuzzleNode to verify that your code works as expected. Make sure you have at least two accepted submissions in PuzzleNode before continuing on with the RMU application process.</li>
+        <li>Start by using Ruby to solve at least two <a href="http://puzzlenode.com">PuzzleNode</a> problems, choosing from puzzles #5 through #8. For each problem, submit your program's output through PuzzleNode to verify that your code works as expected. Make sure you have at least two accepted submissions in PuzzleNode before continuing on with the RbMU application process.</li>
 
         <li>Choose the two best programs you wrote for solving the problems listed above. Refactor and improve your code so that it looks as close as possible to what you'd consider clean, idiomatic Ruby code.</li>
 
@@ -29,9 +29,9 @@
         <li>Fill out the form on this page and upload your zip file. Make sure the github account name you provide here matches the one you used on PuzzleNode to submit your problems there.</li>
         </ul>
 
-        <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before April 15th, 2011 if you've been accepted into the May session.</p>
+        <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before June 15th, 2011 if you've been accepted into the July session.</p>
       
-        <p><b>Admissions for this course will end on April 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open, so act fast!</b></p>
+        <p><b>Admissions for this course will end on June 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open.</b></p>
     #application
       = form_for @user, :url => admissions_submissions_path,
         :html => {:class => 'bp inline', :multipart => true} do |f|

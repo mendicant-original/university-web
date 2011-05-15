@@ -43,7 +43,7 @@ class Admissions::SubmissionsController < ApplicationController
     @user = User.new
     @user.admissions_submission = Admissions::Submission.new
     
-    @open = Course.find_by_id(11).try(:available_slots) || 0
+    @open = Course.find_by_id(CURRENT_COURSE).try(:available_slots) || 0
   end
   
   def create
