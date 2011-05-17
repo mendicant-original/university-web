@@ -14,42 +14,8 @@
       
       $("#sidebar li a[data-id=submissions]").addClass('selected');
       
+      UW.Submissions.init('#{submission_path(@submission)}', #{@submission.editable_by?(current_user)});
     });
-    
-  - if @submission.editable_by?(current_user)
-    :javascript
-      $(function(){
-        var editPath = '#{submission_path(@submission)}/description';
-      
-        $('#edit_description').click(function(){
-          $('.description').trigger("edit");
-        });
-      
-        $('.description').click(function(e){
-          if (e.target.tagName != "A") 
-            $(e.target).trigger('edit');
-        });
-      
-        placeholder = '<div id=\'placeholder\'>Click \'Edit\' to update your ' +
-        'submission\'s description.</div>Comments on your submission go below.';
-      
-        $('.description').editable(editPath, {
-          type:        'textarea',
-          height:      '200px',
-          width:       '98%',
-          indicator:   'Saving ...',
-          cancel:      'Cancel',
-          submit:      'Save',
-          loadurl:     '#{submission_path(@submission)}.text',
-          tooltip:     "Click 'Edit' to make changes",
-          event:       'edit',
-          placeholder: placeholder,
-          onblur:      'ignore',
-          clicktoedit: false,
-          callback:    function(){ $('#description_controls').show(); }
-        }).bind('edit', function(){ $('#description_controls').hide(); });
-      })
-
 
 - content_for :breadcrumbs do
   = render :partial => "courses/breadcrumbs"
@@ -71,8 +37,8 @@
 
     - if @submission.editable_by?(current_user)
       #description_controls.controls
-        %input.clean-gray.small#edit_description{:type => "button", :value => "Edit"}
-    .description= md(@submission.description)
+        %input.gray#edit_description{:type => "button", :value => "Edit"}
+    #submission_description.description= md(@submission.description)
 
     .comments
       - group_by_description(@submission.activities.order('created_at')).each do |activity, more|
