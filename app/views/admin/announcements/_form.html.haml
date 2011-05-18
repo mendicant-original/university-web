@@ -1,7 +1,6 @@
 - content_for :header_bottom do
   :javascript
     $(function(){
-      enableTabs();
       UW.Slugger.watch('announcement_title', 'announcement_slug');
     })
 
@@ -24,13 +23,7 @@
   = f.select :author_id,
     User.where(:access_level => 'admin').map {|c| [c.name, c.id]}
 
-%ul.tabs
-  %li= link_to "Edit", '#edit'
-  %li= link_to "Preview", '#preview'
-
-.tab_container
-  #edit.tab_content= f.text_area :body
-  #preview.tab_content.description Preview
+  = f.text_area :body, 'data-preview' => true
 .clear
     
 %p.submit
