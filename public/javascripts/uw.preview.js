@@ -1,10 +1,12 @@
-$(document).ready(function(){
-	$("textarea[data-preview=true]").each(function(index) {
-		buildPreviewTab($(this));
+UW.setupNamespace("Preview");
+
+UW.Preview.init = function(){
+  $("textarea[data-preview=true]").each(function(index) {
+		UW.Preview.buildPreviewTab($(this));
 	});
 
 	// override tab clicks
-	$('a.tab').live('click', function() {
+	$('ul.tabs a').live('click', function(e) {
 		var tabs = $(this).parents('ul').find('li');
 		var tab_contents = $(this).parents('ul').next('.tab_container').find('.tab_content');
 
@@ -13,31 +15,31 @@ $(document).ready(function(){
 		tab_contents.hide();
 
 		// convert markdown for preview
-		var html = convertMarkdown(tab_contents.find('textarea').val());
-    tab_contents.filter('#preview').html(html);
+		if($(this).attr("href") == "#preview"){
+		  var html = UW.Preview.convertMarkdown(tab_contents.find('textarea').val());
+      tab_contents.filter('#preview').html(html);
+    }
 
 		// show active tab contents
 		var activeTab = tab_contents.filter($(this).attr("href"));
-		$(activeTab).fadeIn();
-
-		// why are we doing this?
-		// $.scrollTo('100%', { axis: 'y' });
-		return false;
+		$(activeTab).show();
+		
+		e.preventDefault();
 	});
 
 	// override links in preview
 	$('#preview a').live('click', function(e){
     window.open(e.target.href);
-    return false;
+    e.preventDefault();
 	});
-});
+}
 
-function buildPreviewTab(textarea) {
-	// insert tabs
+UW.Preview.buildPreviewTab = function(textarea){
+  // insert tabs
 	textarea.before(' \
 		<ul class="tabs"> \
-			<li><a class="tab" href="#edit">Edit</a></li> \
-			<li><a class="tab" href="#preview">Preview</a></li> \
+			<li><a href="#edit">Edit</a></li> \
+			<li><a href="#preview">Preview</a></li> \
 		</ul> \
 	');
 
@@ -51,10 +53,10 @@ function buildPreviewTab(textarea) {
 	textarea.parent().after('<div id="preview" class="tab_content description">Preview</div>');
 
 	// activate tab links
-	enableTabs(textarea);
+	UW.Preview.enableTabs(textarea);
 }
 
-function enableTabs(textarea) {
+UW.Preview.enableTabs = function(textarea) {
 	var tabs = textarea.parents('.tab_container').prev('ul.tabs').find('li');
 	var tab_contents = textarea.parents('.tab_container').find('.tab_content');
 
@@ -65,7 +67,7 @@ function enableTabs(textarea) {
 	tab_contents.first().show();
 }
 
-function convertMarkdown(text) {
+UW.Preview.convertMarkdown = function(text) {
 	var converter = new Showdown.converter();
 	return converter.makeHtml(text);
 }
