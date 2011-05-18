@@ -2,8 +2,6 @@
   :javascript
     $(function(){
       UW.Comments.init('#{comments_path}/');
-    
-      enableTabs();
     });
 
 .course-two-col.admissions-two-col
@@ -27,20 +25,13 @@
           = render :partial => "/comments/show", 
                                 :locals => { :comment => comment }
 
-        %ul.tabs
-          %li= link_to "Edit", '#edit'
-          %li= link_to "Preview", '#preview'
-
-        .tab_container
-          = form_for @submission.comments.build, 
-            :url => comment_admissions_submission_path(@submission) do |f|
-            #edit.tab_content= f.text_area :comment_text
-            #preview.tab_content.description
-              Preview
-            .tab_footer
-              - if current_access_level.allows? :update_admissions_status
-                = select_tag :status_id, options_for_select(@statuses, @submission.status_id)
-              = f.submit "Update Submission"
-              .clear
+        = form_for @submission.comments.build,
+          :url => comment_admissions_submission_path(@submission) do |f|
+          = f.text_area :comment_text, 'data-preview' => true
+          .tab_footer
+            - if current_access_level.allows? :update_admissions_status
+              = select_tag :status_id, options_for_select(@statuses, @submission.status_id)
+            = f.submit "Update Submission"
+            .clear
 
       .clear
