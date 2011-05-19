@@ -7,7 +7,7 @@ class Chat::Channel < ActiveRecord::Base
   validates_uniqueness_of :name
   validates_presence_of   :name
 
-  scope :visible_on_dashboard, where("chat_channel_memberships.visible_on_dashboard = true")
+  scope :visible_on_dashboard, where(["chat_channel_memberships.visible_on_dashboard = ?", true])
 
   def recent(number_of_messages=2)
     messages.order("recorded_at DESC").limit(number_of_messages).reverse
