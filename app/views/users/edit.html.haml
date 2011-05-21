@@ -1,8 +1,26 @@
+- content_for :header_bottom do
+  %script{ :src => "http://maps.google.com/maps/api/js?sensor=false" }
+  = javascript_include_tag 'jquery.ui.addresspicker'
+  :javascript
+    $(function () {
+      var picker = $("#user_location").addresspicker({
+          elements: {
+            map: "#map",
+            lat: "#user_latitude",
+            lng: "#user_longitude"
+          }
+        }),
+        marker = picker.addresspicker("marker");
+
+      marker.setVisible(true);
+      picker.addresspicker("updatePosition");
+    });
+
 - title 'Edit Personal Information'
 
 %h1.form-header Edit Personal Information
 
-= form_for @user, :html => {:class => 'bp'} do |form|
+= form_for @user, :html => {:class => 'bp', :id => 'user_edit'} do |form|
   = error_messages_for(@user)
   %p
     = form.label :email
@@ -34,6 +52,12 @@
                             :include_blank => true, :default => ""
 
   %p
+    = form.label :location, 'Address / Location'
+    = form.text_field :location
+    = form.hidden_field :latitude
+    = form.hidden_field :longitude
+
+  %p
     = render :partial => "irc_channels", :locals => {:form => form}
   
   - if @user.alumnus?
@@ -62,3 +86,5 @@
   
   %p
     = form.submit 'Update'
+
+%div#map

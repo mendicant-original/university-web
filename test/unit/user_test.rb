@@ -211,6 +211,25 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+  context "retrieving user locations" do
+    setup do
+      @expected = [[12.3456, 78.9012], [34.5678, 90.1234]]
+
+      @expected.each do |loc|
+        Factory.create(:user, :latitude => loc[0], :longitude => loc[1])
+      end
+    end
+
+    test "retrieve all user locations" do
+      assert_equal @expected, User.locations
+    end
+
+    test "retrieve locations only with a latitude & longitude" do
+      Factory.create(:user)
+      assert_equal @expected, User.locations
+    end
+  end
+
   private
 
   def swap_access_level_definitions(klass)
