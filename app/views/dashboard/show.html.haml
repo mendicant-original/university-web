@@ -1,4 +1,11 @@
 .two-col
+  .announcements
+    - if current_user.location.nil?
+      .announcement
+        University Web now allows users to enter their location so we can map
+        our students. Please update your 
+        = link_to "profile", edit_user_path(current_user)
+        to be included.
 
   .main
     - if current_user.student_courses.active.current.any?
