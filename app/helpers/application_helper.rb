@@ -49,4 +49,31 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
+
+  # Generates a map containing pins for all user locations. Uses Google Maps
+  # Static API (http://code.google.com/apis/maps/documentation/staticmaps).
+  #
+  # Options:
+  #   width,
+  #   height: the width / height in pixels for the image; default for both
+  #           is 512px
+  #
+  #   zoom_level: zoom level for the map; default is 0 ('world'). See
+  #               http://code.google.com/apis/maps/documentation/staticmaps/#Zoomlevels
+  #               for details.
+  def user_map_tag(options={})
+    width      = options[:width]      || 512
+    height     = options[:height]     || 512
+    zoom_level = options[:zoom_level] || 0
+
+    markers = User.locations.map { |loc| loc.join(',') }.join('%7C')
+
+    url = "http://maps.google.com/maps/api/staticmap?" +
+      "sensor=false" +
+      "&zoom=#{zoom_level}" +
+      "&size=#{width}x#{height}" +
+      "&markers=#{markers}"
+
+    image_tag(url, :alt => 'User Map')
+  end
 end
