@@ -91,6 +91,8 @@ class User < ActiveRecord::Base
     (1..8).map { |a| chars[rand(chars.size)] }.join
   end
 
+  # Retrieves locations for all users as an array of arrays where the inner
+  # array is in the form [latitude, longitude].
   def self.locations
     self.select("latitude, longitude")
       .where("latitude IS NOT NULL AND longitude IS NOT NULL")
