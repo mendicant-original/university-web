@@ -1,0 +1,7 @@
+.popup-container
+  = image_tag user.gravatar_url(size), :class => "trigger"
+  .popup.user
+    %span.name= user.name
+    = twitter_account_link user.twitter_account_name
+    = github_account_link user.github_account_name
+    

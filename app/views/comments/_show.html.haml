@@ -1,7 +1,7 @@
 .comment{:data => { :id => comment.id, 
                     :editable => (comment.user == current_user).inspect }}
   .header
-    = image_tag comment.user.gravatar_url(24)
+    = user_icon(comment.user)
     = comment.user.name
     .details made a comment
     .controls

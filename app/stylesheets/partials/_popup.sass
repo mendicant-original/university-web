@@ -1,0 +1,15 @@
+.popup-container
+  position: relative
+  display: inline-block
+  cursor: default
+  
+  .popup
+    position: absolute
+    display: none
+    z-index: 50
+    
+    &.user
+      background-color: #fff
+      +box-shadow(#000, 0px, 0px, 5px)
+      padding: 0.5em
+      width: 500px

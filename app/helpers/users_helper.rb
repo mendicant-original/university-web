@@ -1,13 +1,15 @@
 module UsersHelper
   def github_account_link(github_account)
     unless github_account.blank?
-      link_to github_account, "http://github.com/#{github_account}"
+      link_to github_account, "http://github.com/#{github_account}",
+              :target => "_blank"
     end
   end
 
   def twitter_account_link(twitter_account)
      unless twitter_account.blank?
-        link_to twitter_account, "http://twitter.com/#{twitter_account}"
+        link_to twitter_account, "http://twitter.com/#{twitter_account}",
+                :target => "_blank"
       end
   end
 
@@ -33,5 +35,9 @@ module UsersHelper
     else
       "#{user.access_level.to_s.humanize}: "
     end
+  end
+  
+  def user_icon(user, size=24)
+    render :partial => "users/icon", :locals => {:user => user, :size => size}
   end
 end
