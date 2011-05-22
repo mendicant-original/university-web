@@ -39,4 +39,12 @@ UW.Submissions.init = function(path, editable){
       callback:    onReset
     });
   }
+  
+  $('form.edit_assignment_submission').submit(function(e){
+    if($('#comment_comment_text').val() != ""){
+      if(confirm("You've started working on a comment.\n\n" +
+                 "Click OK to continue and discard your comment.") == false)
+        e.preventDefault();
+    }
+  });
 }
