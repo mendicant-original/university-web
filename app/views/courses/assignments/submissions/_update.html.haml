@@ -1,6 +1,6 @@
 .activity
   .header
-    = image_tag activity.user.gravatar_url(24)
+    = user_icon(activity.user)
     = activity.user.name
     .details
       - unless activity.context.blank?
