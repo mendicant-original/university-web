@@ -61,7 +61,7 @@
           %tr.submission{:class => (current_user == submission.user ? 'current' : nil),
               :"data-url" => submission_path(submission) }
             %td.student
-              = image_tag submission.user.gravatar_url(32)
+              = user_icon(submission.user, 32)
               = submission.user.name
             %td.status
               .box{:style => "background-color: ##{status.hex_color}"}
