@@ -1,3 +1,6 @@
+// Code from: http://jqueryfordesigners.com/coda-popup-bubbles/
+// Heavily inspired by Coda's popup bubble
+
 $(function () {
   $('.popup-container').each(function () {
     // options
