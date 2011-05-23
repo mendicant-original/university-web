@@ -13,7 +13,9 @@
           = link_to submission.status.name, submission_path(submission)
   - (course.students - [current_user]).each do |student|
     %tr.student{:style => ('display:none;' unless defined?(expanded))}
-      %td= student.name
+      %td
+        = user_icon(student, 16)
+        = student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
         %td.status
