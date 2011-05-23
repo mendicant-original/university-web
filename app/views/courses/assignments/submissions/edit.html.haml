@@ -27,7 +27,7 @@
 - content_for :bucket do
   #submission
     #submission_header
-      = image_tag @submission.user.gravatar_url(48)
+      = user_icon(@submission.user, 48)
       - if current_user != @submission.user
         = "#{@submission.user.name}'s Submission"
       - else
