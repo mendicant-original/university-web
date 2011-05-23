@@ -5,9 +5,11 @@
       - if current_access_level.allows?(:manage_users)
         = link_to user.name, edit_admin_user_path(user)
       - else
-        = user.name
-    %span.label Twitter:
-    = twitter_account_link user.twitter_account_name
-    %span.label Github:
-    = github_account_link user.github_account_name
+        =  link_to user.name, user_path(user)
+    - unless user.twitter_account_name.blank?
+      %span.label Twitter:
+      = twitter_account_link user.twitter_account_name
+    - unless user.github_account_name.blank?
+      %span.label Github:
+      = github_account_link user.github_account_name
     
