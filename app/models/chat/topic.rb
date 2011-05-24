@@ -7,6 +7,7 @@ class Chat::Topic < ActiveRecord::Base
 
   belongs_to :channel
   has_many :messages
+  has_many :meetings
 
   scope :sort_order_by, lambda { |sort_order| 
     o = SORT_ORDERS[sort_order  ] ||
