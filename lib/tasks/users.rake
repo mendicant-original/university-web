@@ -12,11 +12,11 @@ namespace :users do
 
       unless User.find_by_email(email)
         user = User.create(
-            :email                 => email,
-            :nickname              => nickname,
-            :password              => password,
-            :password_confirmation => password,
-            :github_account_name   => github_account
+            email:                 email,
+            nickname:              nickname,
+            password:              password,
+            password_confirmation: password,
+            github_account_name:   github_account
         )
 
         unless user.errors.empty?
