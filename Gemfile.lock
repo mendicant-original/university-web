@@ -72,6 +72,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mocha (0.9.12)
     nokogiri (1.4.4)
     pg (0.10.1)
     polyglot (0.3.1)
@@ -127,6 +128,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   json
+  mocha
   pg
   rack (~> 1.2.1)
   rails (= 3.0.0)

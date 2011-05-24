@@ -4,12 +4,8 @@ class ApplicationHelperTest < ActionView::TestCase
   include ApplicationHelper
 
   context "user map tag helper" do
-    # NOTE: This would be faster if a mocking framework was pulled in then we
-    # could just mock the locations class method and not have to hit the db
     setup do
-      [[1.0, 2.0], [3.0, 4.0], [5.0, 6.0]].each do |loc|
-        Factory(:user, :latitude => loc[0], :longitude => loc[1])
-      end
+      User.expects(:locations).returns([ [1.0, 2.0], [3.0, 4.0], [5.0, 6.0] ])
     end
 
     test "generates map tag with default options" do

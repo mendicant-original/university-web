@@ -18,4 +18,5 @@ group :test do
   gem "factory_girl_rails"
   gem "stories"
   gem "test-unit"
+  gem "mocha"
 end
