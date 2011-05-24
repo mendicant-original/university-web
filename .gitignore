@@ -15,7 +15,7 @@ admissions/submissions/*.zip
 lib/development_mail_interceptor.rb
 *.swp
 .idea/*
-emails.txt
+users.csv
 
 
 # Static Site [rake public-site:generate]
