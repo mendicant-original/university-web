@@ -4,12 +4,18 @@ namespace :users do
   task :import => :environment do
     File.foreach("#{RAILS_ROOT}/emails.txt") do |f|
       email = f.chomp
-      puts email
       unless User.find_by_email(email)
-        User.create(:email                 => email,
+        user = User.create(:email          => email,
                     :nickname              => email.split('@')[0],
                     :password              => "rmu1337",
-                    :password_confirmation => "rmu1337")
+                    :password_confirmation => "rmu1337",
+                    :github_account_name   => "fake_github_account")
+
+        unless user.errors.empty?
+          raise "Could not add user #{email}. Errors: #{user.errors}"
+        end
+
+        puts "Added: #{email}"
       end
     end
   end
