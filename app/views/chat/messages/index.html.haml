@@ -8,7 +8,7 @@
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
       
-      setInterval('loadMessages()', 3000);
+      setTimeout(loadMessages, 3000);
     });
     
     function loadMessages(){
@@ -32,6 +32,7 @@
             if(scrollToMessage == true)
               $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
+          setTimeout(loadMessages, 3000);
         }
       );
     }
