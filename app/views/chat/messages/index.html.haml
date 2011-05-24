@@ -12,13 +12,15 @@
     });
     
     function loadMessages(){
-      $.getJSON('#{chat_messages_path}',
-        { channel:  '#{params[:channel]}',
+      $.ajax({
+        url: '#{chat_messages_path}',
+        dataType: 'json',
+        data: { channel:  '#{params[:channel]}',
           since:    lastMessageRecordedAt,
           last_id:  lastMessageId,
           topic:    '#{params[:topic]}'
         },
-        function(data){
+        success: function(data){
           if(data.length > 0){
             lastMessageRecordedAt = data[data.length - 1].recorded_at;
             lastMessageId         = data[data.length - 1].id;
@@ -33,8 +35,13 @@
               $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
           setTimeout(loadMessages, 3000);
+        },
+        error: function() {
+          var errorMessage = "Error communicating to the server",
+            error = $("<div/>", { "class": "flash error", text: errorMessage });
+          $("#flash").append(error);
         }
-      );
+      });
     }
 
 %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
