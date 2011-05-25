@@ -4,8 +4,6 @@
     %td{:colspan=>3}= date
 %tr.message
   %td.handle= "#{message.handle.name}:"
-  - if message.action?
-    %td.body.action= auto_link(message.action, :html => { :target => '_blank' })
-  - else
-    %td.body= auto_link(message.body, :html => { :target => '_blank' })
+  %td{:class =>message.action ? 'body action' : 'body'}
+    = auto_link(message.body, :html => { :target => '_blank' })
   %td.recorded_at= message_time message
