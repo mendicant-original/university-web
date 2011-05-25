@@ -3,7 +3,7 @@
   = user_button
   #user_dropdown
     %ul
-      %li= link_to "View my Profile", user_path(current_user)
+      %li= link_to "View Profile"   , user_path(current_user)
       %li= link_to "Edit Profile"   , edit_user_path(current_user)
       %li= link_to "Sign Out"       , destroy_user_session_path
   :javascript

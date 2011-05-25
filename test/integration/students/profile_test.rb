@@ -2,18 +2,18 @@ require 'test_helper'
 
 module Students
   class ProfileTest < ActionDispatch::IntegrationTest
+
     story "As a Student i want to view my own profile information" do
       setup do
         @user = sign_user_in
       end
 
       scenario "view profile" do
-        click_link_within '#header', 'View my Profile'
-
+        click_link_within '#header', 'View Profile'
         assert_current_path user_path(@user)
-
       end
     end
+
     story "As a Student I want to change my profile information" do
       setup do
         @user = sign_user_in
