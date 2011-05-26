@@ -215,8 +215,8 @@ class UserTest < ActiveSupport::TestCase
     setup do
       @first_repo  = stub(:name => "repo1", :fork => false)
       @second_repo = stub(:name => "repo2", :fork => true)
-      @repos = [ @first_repo, @second_repo]
-      @user = Factory.create(:user , :github_account_name => "pellegrino")
+      @repos       = [ @first_repo, @second_repo]
+      @user        = Factory.create(:user , :github_account_name => "pellegrino")
     end
 
     test "fetching user's repositories" do
