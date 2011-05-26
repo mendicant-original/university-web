@@ -4,20 +4,26 @@
   %h1
     = image_tag @user.gravatar_url(50), :alt => ""
     = @user.name
+    %p
+      = @user.email
+  #social-presence
+    - unless @user.github_account_name.blank?
+      %p
+        Github:
+        = github_account_link @user.github_account_name
 
-%p
-  Email:
-  = @user.email
-  
-- unless @user.github_account_name.blank?
-  %p
-    Github:
-    = github_account_link @user.github_account_name
+    - unless @user.twitter_account_name.blank?
+      %p
+        Twitter:
+        = twitter_account_link @user.twitter_account_name
 
-- unless @user.twitter_account_name.blank?
-  %p
-    Twitter:
-    = twitter_account_link @user.twitter_account_name
-    
 - if current_user == @user
   %p= link_to "Edit my personal information", edit_user_path(@user)
+
+%h2 His github public repositories
+%ul#github-repositories
+  - @user.github_repositories.each do |repo|
+    %li
+      %p= repo.name
+  -
+
