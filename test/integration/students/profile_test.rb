@@ -10,8 +10,13 @@ module Students
       setup do
         @user = sign_user_in
         # Stubbing external access
-        @first_repo  = stub(:name => "repo1", :fork => false)
-        @second_repo = stub(:name => "repo2", :fork => true)
+        @first_repo  = mock_repository(:name        => "repo1",
+                                       :description => "foo bar project",
+                                       :fork        => false,
+                                       :watchers    => 37,
+                                       :forks       => 17)
+
+        @second_repo = mock_repository(:name => "repo2", :fork => true)
 
         Octokit.stubs("repos").with("rmu_student").returns([@first_repo, @second_repo])
       end
@@ -21,7 +26,11 @@ module Students
         assert_current_path user_path(@user)
 
         within("#github-repositories") do
-          assert       page.has_content? "repo1"
+          assert       page.has_content?  "repo1"
+          assert       page.has_content?  "foo bar project"
+          assert       page.has_content?  "watchers: 37"
+          assert       page.has_content?  "forks: 17"
+
           assert_false page.has_content? "repo2"
         end
       end
@@ -74,6 +83,16 @@ module Students
         assert_errors "Email is invalid",
           "Twitter account name can only contain letters, numbers or underscores"
       end
+    end
+    private
+    def mock_repository(params)
+      opts = { :name => 'repo1' ,
+               :fork => true,
+               :watchers => 1,
+               :forks => 1 ,
+               :description => "repo1 description"}.merge(params)
+
+      stub(opts)
     end
   end
 end

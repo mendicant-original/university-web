@@ -25,5 +25,7 @@
   - @user.github_repositories.each do |repo|
     %li
       %p= repo.name
+      %p= repo.description
+      %p= "watchers: #{repo.watchers}, forks: #{repo.forks}"
   -
 
