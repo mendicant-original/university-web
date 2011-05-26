@@ -8,17 +8,26 @@
     $(document).ready(function(){
       $.scrollTo('#bottom', { axis: 'y' });
       
-      setInterval('loadMessages()', 3000);
+      setTimeout(loadMessages, 3000);
     });
     
     function loadMessages(){
-      $.getJSON('#{chat_messages_path}',
-        { channel:  '#{params[:channel]}',
+      $.ajax({
+        url: '#{chat_messages_path}',
+        dataType: 'json',
+        data: { channel:  '#{params[:channel]}',
           since:    lastMessageRecordedAt,
           last_id:  lastMessageId,
           topic:    '#{params[:topic]}'
         },
-        function(data){
+        success: function(data){
+          if(!(data instanceof Array)) {
+            loadMessagesError();
+            return;
+          }
+
+          $("#flash > .flash.error").remove();
+
           if(data.length > 0){
             lastMessageRecordedAt = data[data.length - 1].recorded_at;
             lastMessageId         = data[data.length - 1].id;
@@ -32,8 +41,20 @@
             if(scrollToMessage == true)
               $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
+        },
+        error: loadMessagesError,
+        complete: function() {
+          setTimeout(loadMessages, 3000);
         }
-      );
+      });
+    }
+
+    function loadMessagesError() {
+      if($("#flash > .flash.error").length === 0) {
+        var errorMessage = "Error communicating to the server",
+          error = $("<div/>", { "class": "flash error", text: errorMessage });
+        $("#flash").append(error);
+      }
     }
 
 %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
