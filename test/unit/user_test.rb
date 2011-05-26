@@ -1,4 +1,5 @@
 require "test_helper"
+require 'mocha'
 
 class UserTest < ActiveSupport::TestCase
   setup do
@@ -210,7 +211,25 @@ class UserTest < ActiveSupport::TestCase
       assert_equal @alumnus4.alumni_date, "2011-12-1".to_date
     end
   end
+  context "retrieving user github repositories" do
+    setup do
+      @first_repo  = stub(:name => "repo1", :fork => false)
+      @second_repo = stub(:name => "repo2", :fork => true)
+      @repos = [ @first_repo, @second_repo]
+      @user = Factory.create(:user , :github_account_name => "pellegrino")
+    end
 
+    test "fetching user's repositories" do
+      Octokit.stubs("repos").with("pellegrino").returns(@repos)
+      assert_equal [ @first_repo ] , @user.github_repositories
+    end
+
+    test "non existing github account" do
+      Octokit.stubs("repos").with("pellegrino").raises("404: Not Found")
+      assert_equal [] ,  @user.github_repositories
+    end
+
+  end
   context "retrieving user locations" do
     setup do
       @expected = [[12.3456, 78.9012], [34.5678, 90.1234]]
@@ -230,6 +249,7 @@ class UserTest < ActiveSupport::TestCase
     end
   end
 
+
   private
 
   def swap_access_level_definitions(klass)
@@ -243,4 +263,5 @@ class UserTest < ActiveSupport::TestCase
       klass.definitions.merge!(current_definitions)
     end
   end
+
 end
