@@ -66,7 +66,8 @@ module Students
 
         assert_current_path user_path(@user)
         assert_flash "Profile sucessfully updated"
-        assert_content "rmu-other@test.com"
+
+        assert_content 'rmu-other@test.com'
         assert_content "Github: ruanrmu"
         assert_content "Twitter: rmuruan"
         assert_no_content "Brasilia"
