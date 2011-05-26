@@ -263,5 +263,4 @@ class UserTest < ActiveSupport::TestCase
       klass.definitions.merge!(current_definitions)
     end
   end
-
 end
