@@ -30,8 +30,9 @@
       %li
         %h3= link_to repo.name , repo.url
 
-        %p.additional-info
-          = "#{repo.language} watchers: #{repo.watchers}, forks: #{repo.forks}"
+        .additional-info
+          %p= "Language: #{repo.language}" unless repo.language.blank?
+          %p= "Watchers: #{repo.watchers}  Forks: #{repo.forks}"
 
         %p.clear= repo.description
     -
