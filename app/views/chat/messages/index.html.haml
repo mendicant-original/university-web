@@ -21,6 +21,11 @@
           topic:    '#{params[:topic]}'
         },
         success: function(data){
+          if(!(data instanceof Array)) {
+            loadMessagesError();
+            return;
+          }
+
           $("#flash > .flash.error").remove();
 
           if(data.length > 0){
@@ -37,17 +42,19 @@
               $.scrollTo('table.messages tr:last', { axis: 'y' });
           }
         },
-        error: function() {
-          if($("#flash > .flash.error").length === 0) {
-            var errorMessage = "Error communicating to the server",
-              error = $("<div/>", { "class": "flash error", text: errorMessage });
-            $("#flash").append(error);
-          }
-        },
+        error: loadMessagesError,
         complete: function() {
           setTimeout(loadMessages, 3000);
         }
       });
+    }
+
+    function loadMessagesError() {
+      if($("#flash > .flash.error").length === 0) {
+        var errorMessage = "Error communicating to the server",
+          error = $("<div/>", { "class": "flash error", text: errorMessage });
+        $("#flash").append(error);
+      }
     }
 
 %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
