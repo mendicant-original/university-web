@@ -6,7 +6,7 @@
     = @user.name
     %p
       = mail_to @user.email
-  #social-presence.block
+  #social-presence
     - unless @user.github_account_name.blank?
       %p
         Github:
@@ -21,12 +21,18 @@
 - if current_user == @user
   %p= link_to "Edit my personal information", edit_user_path(@user)
 
-%h2 His github public repositories
-%ul#github-repositories
-  - @user.github_repositories.each do |repo|
-    %li
-      %h3= "#{repo.name}"
-      %p= "watchers: #{repo.watchers}, forks: #{repo.forks}"
-      %p= repo.description
-  -
+
+#github-repositories
+  %h2= "His github public repositories (#{@user.github_repositories.size})"
+
+  %ul
+    - @user.github_repositories.each do |repo|
+      %li
+        %h3= link_to repo.name , repo.url
+
+        %p.additional-info
+          = "#{repo.language} watchers: #{repo.watchers}, forks: #{repo.forks}"
+
+        %p.clear= repo.description
+    -
 

@@ -17,22 +17,32 @@ module Students
                                        :forks       => 17)
 
         @second_repo = mock_repository(:name => "repo2", :fork => true)
-
         Octokit.stubs("repos").with("rmu_student").returns([@first_repo, @second_repo])
       end
+
       scenario "viewing profile" do
         click_link_within  '#header', 'View Profile'
 
         assert_current_path user_path(@user)
 
         within("#github-repositories") do
-          assert       page.has_content?  "repo1"
-          assert       page.has_content?  "foo bar project"
-          assert       page.has_content?  "watchers: 37"
-          assert       page.has_content?  "forks: 17"
+          assert_link_to "http://github.com/rmu_student/repo1"
+          assert         page.has_content? "repo1"
+          assert         page.has_content?  "foo bar project"
+          assert         page.has_content?  "watchers: 37"
+          assert         page.has_content?  "forks: 17"
+          assert         page.has_content?  "Ruby"
 
-          assert_false page.has_content? "repo2"
+          assert_false   page.has_content? "repo2"
         end
+      end
+      scenario "viewing a profile that don't have any repositories associated" do
+        Octokit.stubs("repos").raises("404 Error")
+
+        click_link_within  '#header', 'View Profile'
+
+        assert_current_path user_path(@user)
+        assert_false page.has_content? "#github-repositories"
       end
     end
 
@@ -87,11 +97,15 @@ module Students
     end
     private
     def mock_repository(params)
-      opts = { :name => 'repo1' ,
-               :fork => true,
-               :watchers => 1,
-               :forks => 1 ,
-               :description => "repo1 description"}.merge(params)
+      opts = {
+        :name => 'repo1' ,
+        :fork => true,
+        :watchers => 1,
+        :forks => 1 ,
+        :language => "Ruby",
+        :url => "http://github.com/rmu_student/repo1",
+        :description => "repo1 description"
+      }.merge(params)
 
       stub(opts)
     end
