@@ -1,40 +1,17 @@
 - title params[:channel]
 
 - content_for :header_bottom do
+  = javascript_include_tag 'uw.logs'
   :javascript
-    var lastMessageRecordedAt = '#{@messages.last.try(:recorded_at) || ""}';
-    var lastMessageId         = #{@messages.last.try(:id) || -1};
-  
-    $(document).ready(function(){
-      $.scrollTo('#bottom', { axis: 'y' });
-      
-      setInterval('loadMessages()', 3000);
+    $(function() {
+      UW.Logs.init({
+        lastMessageRecordedAt: '#{@messages.last.try(:recorded_at)}',
+        lastMessageId:          #{@messages.last.try(:id) || -1},
+        url:                   '#{chat_messages_path}',
+        channel:               '#{params[:channel]}',
+        topic:                 '#{params[:topic]}'
+      });
     });
-    
-    function loadMessages(){
-      $.getJSON('#{chat_messages_path}',
-        { channel:  '#{params[:channel]}',
-          since:    lastMessageRecordedAt,
-          last_id:  lastMessageId,
-          topic:    '#{params[:topic]}'
-        },
-        function(data){
-          if(data.length > 0){
-            lastMessageRecordedAt = data[data.length - 1].recorded_at;
-            lastMessageId         = data[data.length - 1].id;
-            
-            var scrollToMessage = isScrollBottom();
-            
-            for(var x = 0; x <= data.length - 1; x++){
-              $('table.messages tr:last').after(data[x].html);
-            }
-            
-            if(scrollToMessage == true)
-              $.scrollTo('table.messages tr:last', { axis: 'y' });
-          }
-        }
-      );
-    }
 
 %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
 
@@ -48,5 +25,5 @@
 %table.messages
   - @messages.each do |message|
     = render :partial => "display", :locals => {:message => message}
-    
+
 #bottom
