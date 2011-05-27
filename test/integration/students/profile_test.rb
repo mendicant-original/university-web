@@ -26,16 +26,16 @@ module Students
         assert_current_path user_path(@user)
 
         within("#github-repositories") do
-          assert_link_to "http://github.com/rmu_student/repo1"
           assert         page.has_content? "repo1"
-          assert         page.has_content?  "foo bar project"
-          assert         page.has_content?  "watchers: 37"
-          assert         page.has_content?  "forks: 17"
-          assert         page.has_content?  "Ruby"
+          assert         page.has_content? "foo bar project"
+          assert         page.has_content? "Watchers: 37"
+          assert         page.has_content? "Forks: 17"
+          assert         page.has_content? "Language: Ruby"
 
           assert_false   page.has_content? "repo2"
         end
       end
+
       scenario "viewing a profile that don't have any repositories associated" do
         Octokit.stubs("repos").raises("404 Error")
 
