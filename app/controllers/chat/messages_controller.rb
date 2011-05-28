@@ -1,7 +1,7 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  before_filter      :find_channel,       :only  => [:index, :discussions]
+  before_filter      :find_channel,       :only  => [:index, :discussions, :discussion]
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
   before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
@@ -77,6 +77,30 @@ class Chat::MessagesController < ApplicationController
     params[:sort] ||= 'created_at'
     @discussion_orders = Chat::Topic::SORT_ORDERS
     @discussions = @channel.topics.sort_order_by(params[:sort])
+  end
+
+  def discussion
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+
+    change_password_if_needed unless @channel.public?
+
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
+    end
+
+    unless @discussion = @channel.topics.find_by_name(params[:discussion])
+      flash[:error] = "Discussion does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+
+    @meetings = @discussion.meetings
   end
 
   def create

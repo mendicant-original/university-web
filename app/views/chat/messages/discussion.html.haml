@@ -1,0 +1,14 @@
+- title "#{@discussion.name} - #{@discussion.channel.name}"
+
+%h1= "#{@discussion.name} - #{@discussion.channel.name}"
+
+%p= link_to("Back to #{@discussion.channel.name}", chat_messages_path(:channel => @discussion.channel.name))
+
+%ul.meetings
+  - @meetings.each_with_index do |meeting, index|
+    %li
+      %h3= meeting_time_range(meeting)
+      %table.messages
+        - meeting.messages.each do |message|
+          = render :partial => "display", :locals => {:message => message}
+

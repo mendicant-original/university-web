@@ -12,6 +12,9 @@ University::Application.routes.draw do
   namespace :chat do
     resources :messages
   end
+
+  get 'chat/discussion/:channel/:discussion', :to => 'chat/messages#discussion', :as => 'chat_discussion'
+
   get 'chat/discussions/:channel' => 'chat/messages#discussions', :as => 'chat_discussions'
   get 'chat/discussion/url'       => 'chat/messages#discussion_topic_url'
 

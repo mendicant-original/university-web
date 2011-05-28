@@ -21,4 +21,9 @@ module Chat::MessagesHelper
   def message_time(message)
     message.recorded_at.strftime("%I:%M %p")
   end
+
+  def meeting_time_range(meeting)
+    format = "%A, %B %d, %Y"
+    "#{meeting.started_at.strftime(format)} - #{meeting.ended_at.strftime(format)}"
+  end
 end

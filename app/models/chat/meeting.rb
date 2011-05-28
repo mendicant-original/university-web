@@ -7,6 +7,7 @@ class Chat::Meeting < ActiveRecord::Base
     self.ended_at ||= DateTime.now
 
     Chat::Message.where(:channel_id => topic.channel_id).
-      where("recorded_at >= ? AND recorded_at <= ?", started_at, ended_at)
+      where("recorded_at >= ? AND recorded_at <= ?", started_at, ended_at).
+      order("recorded_at ASC")
   end
 end
