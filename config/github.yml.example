@@ -1,0 +1,13 @@
+test:
+    username:  username_goes_here
+    api_token: api_token_goes_here
+
+development:
+    username:  username_goes_here
+    api_token: api_token_goes_here
+
+production:
+    username:  username_goes_here
+    api_token: api_token_goes_here
+
+
