@@ -81,6 +81,21 @@ module Admissions
         assert_current_path thanks_admissions_submission_path(submission.id)
 
         assert_content "Thanks"
+
+        uploaded_file = File.join(Rails.root, "admissions", "submissions",
+                          "#{submission.id}.zip")
+
+        assert File.exists?(uploaded_file), "Uploaded file is missing"
+
+        submission.destroy
+      end
+
+      scenario "but can't because the course is full" do
+        @course.update_attribute(:class_size_limit, 0)
+
+        visit '/admissions'
+
+        assert_content "Sorry"
       end
     end
   end
