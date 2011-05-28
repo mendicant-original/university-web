@@ -24,6 +24,10 @@ module Chat::MessagesHelper
 
   def meeting_time_range(meeting)
     format = "%A, %B %d, %Y"
-    "#{meeting.started_at.strftime(format)} - #{meeting.ended_at.strftime(format)}"
+    if meeting.ended_at
+      "#{meeting.started_at.strftime(format)} - #{meeting.ended_at.strftime(format)}"
+    else
+      "#{meeting.started_at.strftime(format)} - In Progress"
+    end
   end
 end
