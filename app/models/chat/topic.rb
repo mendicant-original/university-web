@@ -15,4 +15,8 @@ class Chat::Topic < ActiveRecord::Base
 
     order("#{SORT_ORDERS.key(o)} #{o[:direction]}")
   }
+
+  def current_meeting
+    meetings.where(:ended_at => nil).first
+  end
 end

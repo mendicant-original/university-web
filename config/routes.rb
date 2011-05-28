@@ -13,6 +13,8 @@ University::Application.routes.draw do
     resources :messages
   end
 
+  post 'chat/meetings', :to => 'chat/meetings#index'
+
   get 'chat/discussion/:channel/:discussion', :to => 'chat/messages#discussion', :as => 'chat_discussion'
 
   get 'chat/discussions/:channel' => 'chat/messages#discussions', :as => 'chat_discussions'

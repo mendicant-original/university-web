@@ -16,4 +16,8 @@ class Chat::Channel < ActiveRecord::Base
   def last_message_date
     messages.order("recorded_at DESC").first.try(:recorded_at)
   end
+
+  def current_topic
+    topics.joins(:meetings).where(:chat_meetings => { :ended_at => nil } ).first
+  end
 end
