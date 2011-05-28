@@ -15,7 +15,7 @@ University::Application.routes.draw do
 
   post 'chat/meetings', :to => 'chat/meetings#index'
 
-  get 'chat/discussion/:channel/:discussion', :to => 'chat/messages#discussion', :as => 'chat_discussion'
+  get 'chat/discussion/:channel/:topic', :to => 'chat/messages#discussion', :as => 'chat_discussion'
 
   get 'chat/discussions/:channel' => 'chat/messages#discussions', :as => 'chat_discussions'
   get 'chat/discussion/url'       => 'chat/messages#discussion_topic_url'

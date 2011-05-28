@@ -12,5 +12,5 @@
 
 %ul.discussions
   - @discussions.each do |topic|
-    %li= link_to topic.name, chat_messages_path(:channel => topic.channel.name, :topic => topic.name)
+    %li= link_to topic.name, chat_discussion_path(:channel => topic.channel.name, :topic => topic.name)
 

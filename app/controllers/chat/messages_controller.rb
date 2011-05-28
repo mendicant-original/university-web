@@ -94,7 +94,7 @@ class Chat::MessagesController < ApplicationController
       return
     end
 
-    unless @discussion = @channel.topics.find_by_name(params[:discussion])
+    unless @discussion = @channel.topics.find_by_name(params[:topic])
       flash[:error] = "Discussion does not exist!"
       redirect_to dashboard_path
       return
