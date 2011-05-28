@@ -21,9 +21,9 @@ module Admissions
 
         click_button "Submit Application"
 
-        assert_path submissions_admissions_path
+        assert_current_path '/admissions/submissions'
 
-        assert_errors "github_account_name"
+        assert_errors "Github account name"
       end
     end
   end
