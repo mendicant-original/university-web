@@ -1,18 +1,18 @@
 ![University Web Logo](https://github.com/rmu/university-web/raw/master/doc/university-web.png)
 
-This Ruby on Rails application provides facilities to support a community of 
-teachers and learners. It currently offers the essentials needed to manage 
-multiple courses, and we are now also developing other features for enabling 
+This Ruby on Rails application provides facilities to support a community of
+teachers and learners. It currently offers the essentials needed to manage
+multiple courses, and we are now also developing other features for enabling
 members of the community to work together.
 
-University Web is developed by the 
-[Ruby Mendicant University](http://university.rubymendicant.com) (RbMU), a 
-rapidly growing online learning community, and it is our core infrastructure. 
-We expect it to become potentially useful to other organizations, and hope that 
+University Web is developed by the
+[Ruby Mendicant University](http://university.rubymendicant.com) (RbMU), a
+rapidly growing online learning community, and it is our core infrastructure.
+We expect it to become potentially useful to other organizations, and hope that
 it will be adopted elsewhere as it becomes mature.
 
-Whether you are a member of RbMU or a developer interested in systems for 
-learning and education, we encourage you to check out the source code: 
+Whether you are a member of RbMU or a developer interested in systems for
+learning and education, we encourage you to check out the source code:
 <http://github.com/rmu/university-web>
 
 If you are not a member of RbMU, please get in touch through our public channels:
@@ -23,7 +23,7 @@ If you are not a member of RbMU, please get in touch through our public channels
 
 ## Key Features
 
-University Web is constantly evolving, but currently offers the following 
+University Web is constantly evolving, but currently offers the following
 functionality:
 
 - Administration of course admissions
@@ -35,12 +35,12 @@ functionality:
 
 ## Installation
 
-University Web is a Ruby on Rails 3 application which runs on 
-[PostgreSQL](http://www.postgresql.org) databases. Other databases like MySQL 
+University Web is a Ruby on Rails 3 application which runs on
+[PostgreSQL](http://www.postgresql.org) databases. Other databases like MySQL
 or SQLite are not officially supported.
 
-**Always use the latest source code:** We are constantly working on this 
-application, with bug fixes and new features added daily, so please use the 
+**Always use the latest source code:** We are constantly working on this
+application, with bug fixes and new features added daily, so please use the
 very latest source code.
 
 ### Setting Up a Development Copy: Step by Step
@@ -53,14 +53,17 @@ To install a development version of University Web, follow these steps:
 
 To configure University Web:
 
-1. Create a `database.yml` file in `config`. The `config` directory contains 
+1. Create a `database.yml` file in `config`. The `config` directory contains
    an example `database.yml` for PostgreSQL.
-2. Run the Rails tasks to initialize a development and a test database:
+2. Create a `config/initializers/secret_token.rb` file. The
+   `config/initializers` directory contains an example `secret_token.rb` file
+   with instructions for generating a secret token.
+3. Run the Rails tasks to initialize a development and a test database:
 
     `rake db:migrate`
     `rake db:test:prepare`
 
-3. Generate the static site by running `rake public-site:generate`
+4. Generate the static site by running `rake public-site:generate`
 
 Finally, run the test suite to make sure everything is working correctly:
 
@@ -72,52 +75,52 @@ Finally, run the test suite to make sure everything is working correctly:
 
 - University Web user accounts may be either admins, students, or guests.
 - Every account is identified by email address.
-- The admin users may access all of the management features of University Web by 
+- The admin users may access all of the management features of University Web by
   choosing **Administration** from the navigation menu at the top of page.
-- The management features of University Web enable admin users to perform the 
-  standard tasks for running courses, such as creating other user accounts for 
+- The management features of University Web enable admin users to perform the
+  standard tasks for running courses, such as creating other user accounts for
   students and guests, defining the courses and managing assignment submissions.
 
 ### Terms
 
 - Each term is a group of one or more courses.
-- To create a new term, login as an admin user, and choose 
+- To create a new term, login as an admin user, and choose
   **Administration > Terms > Create Term**.
 
 ### Courses
 
 - To create a new course, choose **Administration > Courses > Create New Course**.
-- Once you have created a course, use the course form to attach a user to it as 
-  an instructor, along with students and assignments. The next section explains 
+- Once you have created a course, use the course form to attach a user to it as
+  an instructor, along with students and assignments. The next section explains
   assignments.
-- You may group courses into terms. Courses don't have to be associated with a 
+- You may group courses into terms. Courses don't have to be associated with a
   term.
 
 ### Assignments
 
 - Each course may have one or more assignments attached to it.
-- To create or manage assignments for a course, choose 
-  **Administration > Courses**, click on the **Assignments** link next to the 
+- To create or manage assignments for a course, choose
+  **Administration > Courses**, click on the **Assignments** link next to the
   name of the course, and choose **Create New Assignment**.
 - Once an assignment has been created, some or all of the students in the course
   may then be set that assignment.
-- The students may use the University Web interface to submit work for an 
+- The students may use the University Web interface to submit work for an
   assignment.
-- The course instructor can then review the submissions for an assignment, and 
-  take appropriate actions, such as commenting or marking the assignment as 
+- The course instructor can then review the submissions for an assignment, and
+  take appropriate actions, such as commenting or marking the assignment as
   completed.
 
 ## Contributing
 
-Approved features are tracked in 
-[Pivotal Tracker](https://www.pivotaltracker.com/projects/101484) while bugs 
-and requested features should be entered into 
+Approved features are tracked in
+[Pivotal Tracker](https://www.pivotaltracker.com/projects/101484) while bugs
+and requested features should be entered into
 [Github Issues](https://github.com/rmu/university-web/issues).
 
-Contributors retain copyright to their work but must agree to release their 
+Contributors retain copyright to their work but must agree to release their
 contributions under the [Affero GPL version 3](http://www.gnu.org/licenses/agpl.html)
 
-If you would like to help with developing University Web, please get in touch! 
+If you would like to help with developing University Web, please get in touch!
 Our contact details are at the top of this file.
 
 ### Submitting a Pull Request
