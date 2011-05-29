@@ -4,20 +4,36 @@
   %h1
     = image_tag @user.gravatar_url(50), :alt => ""
     = @user.name
+    %p
+      = mail_to @user.email
+  #social-presence
+    - unless @user.github_account_name.blank?
+      %p
+        Github:
+        = github_account_link @user.github_account_name
 
-%p
-  Email:
-  = @user.email
-  
-- unless @user.github_account_name.blank?
-  %p
-    Github:
-    = github_account_link @user.github_account_name
+    - unless @user.twitter_account_name.blank?
+      %p
+        Twitter:
+        = twitter_account_link @user.twitter_account_name
+%hr.clear
 
-- unless @user.twitter_account_name.blank?
-  %p
-    Twitter:
-    = twitter_account_link @user.twitter_account_name
-    
 - if current_user == @user
   %p= link_to "Edit my personal information", edit_user_path(@user)
+
+
+#github-repositories
+  %h2= "Github repos (#{@user.github_repositories.size})"
+
+  %ul
+    - @user.github_repositories.each do |repo|
+      %li
+        %h3= link_to repo.name , repo.url
+
+        .additional-info
+          %p= "Language: #{repo.language}" unless repo.language.blank?
+          %p= "Watchers: #{repo.watchers}  Forks: #{repo.forks}"
+
+        %p.clear= repo.description
+    -
+

@@ -1,7 +1,50 @@
 require 'test_helper'
+require 'mocha'
 
 module Students
   class ProfileTest < ActionDispatch::IntegrationTest
+
+    story "As a Student who has a github acount
+                i want to see my repositories listed" do
+
+      setup do
+        @user = sign_user_in
+        # Stubbing external access
+        @first_repo  = mock_repository(:name        => "repo1",
+                                       :description => "foo bar project",
+                                       :fork        => false,
+                                       :watchers    => 37,
+                                       :forks       => 17)
+
+        @second_repo = mock_repository(:name => "repo2", :fork => true)
+        Octokit.stubs("repos").with("rmu_student").returns([@first_repo, @second_repo])
+      end
+
+      scenario "viewing profile" do
+        click_link_within  '#header', 'View Profile'
+
+        assert_current_path user_path(@user)
+
+        within("#github-repositories") do
+          assert         page.has_content? "repo1"
+          assert         page.has_content? "foo bar project"
+          assert         page.has_content? "Watchers: 37"
+          assert         page.has_content? "Forks: 17"
+          assert         page.has_content? "Language: Ruby"
+
+          assert_false   page.has_content? "repo2"
+        end
+      end
+
+      scenario "viewing a profile that don't have any repositories associated" do
+        Octokit.stubs("repos").raises("404 Error")
+
+        click_link_within  '#header', 'View Profile'
+
+        assert_current_path user_path(@user)
+        assert_false page.has_content? "#github-repositories"
+      end
+    end
 
     story "As a Student i want to view my own profile information" do
       setup do
@@ -10,7 +53,6 @@ module Students
 
       scenario "view profile" do
         click_link_within '#header', 'View Profile'
-        assert_current_path user_path(@user)
       end
     end
 
@@ -34,7 +76,8 @@ module Students
 
         assert_current_path user_path(@user)
         assert_flash "Profile sucessfully updated"
-        assert_content "Email: rmu-other@test.com"
+
+        assert_content 'rmu-other@test.com'
         assert_content "Github: ruanrmu"
         assert_content "Twitter: rmuruan"
         assert_no_content "Brasilia"
@@ -51,6 +94,20 @@ module Students
         assert_errors "Email is invalid",
           "Twitter account name can only contain letters, numbers or underscores"
       end
+    end
+    private
+    def mock_repository(params)
+      opts = {
+        :name => 'repo1' ,
+        :fork => true,
+        :watchers => 1,
+        :forks => 1 ,
+        :language => "Ruby",
+        :url => "http://github.com/rmu_student/repo1",
+        :description => "repo1 description"
+      }.merge(params)
+
+      stub(opts)
     end
   end
 end
