@@ -6,3 +6,4 @@
 
 
 Mime::Type.register "application/zip", :zip
+Mime::Type.register "application/gzip", :gz
