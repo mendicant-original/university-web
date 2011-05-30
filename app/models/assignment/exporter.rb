@@ -21,6 +21,7 @@ class Assignment::Exporter
   # returns a tempfile containing the gzipped export
   def to_file
     file = Tempfile.new('assignment-exporter')
+    file.binmode
     file << to_gzip
     file.rewind
     file
