@@ -32,3 +32,6 @@
       = render :partial => "shared/flash", :locals => {:flash => flash}
       #content= yield
       .clear
+    = yield(:body_end) # useful for loading custom javascript
+
+

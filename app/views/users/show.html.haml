@@ -37,3 +37,11 @@
         %p.clear= repo.description
     -
 
+- content_for :body_end  do
+  = javascript_include_tag "uw.users"
+
+  :javascript
+    $(document).ready(function() {
+      UW.Users.init();
+    });
+-
