@@ -11,7 +11,8 @@ class Courses::AssignmentsController < Courses::Base
       format.html
       format.text { render :text => @assignment.notes }
       format.gz do
-        send_data Assignment::Exporter.new(@assignment).to_gzip,
+        serializer = params[:as] || :json
+        send_data Assignment::Exporter.new(@assignment).to_gzip(serializer),
                   :filename => "#{@assignment.name.parameterize}.gz"
       end
     end
