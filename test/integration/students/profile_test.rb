@@ -28,8 +28,10 @@ module Students
         within("#github-repositories") do
           assert         page.has_content? "repo1"
           assert         page.has_content? "foo bar project"
-          assert         page.has_content? "Watchers: 37"
-          assert         page.has_content? "Forks: 17"
+          assert_image   "github-watcher-icon.png"
+          assert         page.has_content? "37"
+          assert_image   "github-fork-icon.png"
+          assert         page.has_content? "17"
           assert         page.has_content? "Language: Ruby"
 
           assert_false   page.has_content? "repo2"
