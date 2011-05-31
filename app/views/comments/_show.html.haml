@@ -6,8 +6,9 @@
     = user_icon(comment.user)
     = comment.user.name
     .details
+      made a comment 
       - if comment.in_reply_to
-        made a comment in reply to
+        in reply to
         = link_to_comment comment.in_reply_to
     .controls
       = link_to '', '#new_comment', :class => "reply", :title => "Reply"
