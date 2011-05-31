@@ -1,10 +1,16 @@
-.comment{:data => { :id => comment.id, 
+.comment{:id => comment.index,
+         :data => { :id => comment.id, 
                     :editable => (comment.user == current_user).inspect }}
   .header
+    = "##{comment.index}"
     = user_icon(comment.user)
     = comment.user.name
-    .details made a comment
+    .details
+      - if comment.in_reply_to
+        made a comment in reply to
+        = link_to_comment comment.in_reply_to
     .controls
+      = link_to '', '#new_comment', :class => "reply", :title => "Reply"
       - if current_user == comment.user
         = link_to '', '#', :class => "edit", :title => "Edit"
         = link_to '', comment_path(comment),
