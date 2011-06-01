@@ -1,29 +1,38 @@
 #announcements
   margin-top: 2em
-  
+
   .announcement
     margin-bottom: 2em
-    
+    clear: both
+
     .title
       font-size: 1.1em
       border-bottom: 1px solid #eee
       padding: 0.25em 0.5em
       background: #eee
       +border-radius(5px)
-      
+
     .body
       color: #333
-      
+
+      .picture
+        margin: 2em 0
+        text-align: center
+        border-bottom: 1px solid #ccc
+        padding-bottom: 2em
+        img
+          +box-shadow(#333, 0, 0, 10px)
+
     .info
       float: right
       font-size: 0.6em
       color: #555
       padding: 0.5em 0
-      
+
       div
         display: inline-block
         padding: 0 0.5em
-        
+
         &.author
           border-right: 1px solid #ccc
 
