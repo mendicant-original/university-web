@@ -1,4 +1,4 @@
-Each student is required to work on an individual project during their core skills course at RMU.  Below you'll find the projects that have been made available publicly on github by our alumni.
+Each student is required to work on an individual project during their core skills course at RbMU.  Below you'll find the projects that have been made available publicly on github by our alumni.
 
 ### Student Projects
 
@@ -43,6 +43,6 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/jbarreneche/test_parser">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
   <li><a href="https://github.com/jaimeiniesta/w3clove">w3clove</a> (Jaime Iniesta): Site-wide website markup validator.</li>
   <li><a href="https://github.com/ghendry/index-test">index-test</a> (Ginny Hendry): Test helpers for MySQL performance tuning.</li>
-</ul>     
+</ul>
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._

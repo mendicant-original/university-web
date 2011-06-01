@@ -1,12 +1,12 @@
 %p
-  Bookmark this page and visit it often to keep track of news about RMU,
+  Bookmark this page and visit it often to keep track of news about RbMU,
   including new calls for participation, events with guest speakers, or
   study sessions with our alumni and staff.  You can also keep track of
   what's going on at RMU by following the #RbMU hash tag on twitter,
-  subscribing to the 
+  subscribing to the
   = link_to "rmu-talk mailing list", "http://groups.google.com/group/rmu-talk"
-  , or to the 
-  = link_to "RSS feed", 
+  , or to the
+  = link_to "RSS feed",
     :controller => "public", :action => "changelog", :format => "rss"
   for this page.
 
@@ -20,5 +20,5 @@
           .posted_date= announcement.created_at.to_date
       .body= md(announcement.body)
 
-  
+
 = will_paginate @announcements

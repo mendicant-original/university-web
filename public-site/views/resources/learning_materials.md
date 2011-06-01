@@ -1,4 +1,4 @@
-We are committed to releasing our exams, exercises and other learning materials in a timely fashion so that others may benefit from them.  Be sure to browse the network graphs on github to see solutions from RMU students and other Ruby developers.
+We are committed to releasing our exams, exercises and other learning materials in a timely fashion so that others may benefit from them.  Be sure to browse the network graphs on github to see solutions from RbMU students and other Ruby developers.
 
 ### 2010/T3
 
