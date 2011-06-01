@@ -3,27 +3,27 @@
   %head
     %title
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
-      \- RMU
+      \- RbMU
     = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'compiled/print.css', :media => 'print'
     /[if IE]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
     = stylesheet_link_tag 'buttons.css', 'smoothness/jquery-ui.css'
-    = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo', 
+    = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo',
                              'jquery.infieldlabel.min.js', 'jquery.jeditable.js',
-                             'jquery-ui', 'showdown', 'nested_form', 
-                             'application', 'rails', 'dropdownmenu', 'sidebarmenu', 
+                             'jquery-ui', 'showdown', 'nested_form',
+                             'application', 'rails', 'dropdownmenu', 'sidebarmenu',
                              'uw', 'uw.timezones', 'uw.admissions', 'uw.comments',
                              'uw.submissions', 'uw.preview', 'jquery.popup'
     = csrf_meta_tag
-    
+
     = yield(:header_bottom)
 
-  %body          
+  %body
     #wrap
       #header
         .centered
-          %h1 Ruby Mendicant University
+          %h1 Mendicant University
 
           - if current_user
             = render :partial => "shared/user"
