@@ -1,4 +1,10 @@
-- title @user.name.blank? ? @user.email : @user.name
+- content_for :header_bottom do
+  = javascript_include_tag "uw.users"
+
+  :javascript
+    $(function() { UW.Users.init(); });
+
+- title @user.name
 
 .profile
   %h1
@@ -28,23 +34,20 @@
   %ul
     - @user.github_repositories.each do |repo|
       %li
-        %h3= link_to repo.name , repo.url
-
         .additional-info
-          %p= "Language: #{repo.language}" unless repo.language.blank?
-          %p
-            = image_tag("github-watcher-icon.png", {:width => 16, :height => 16 , :alt => "Watchers", :title => "Watchers"})
+          -  unless repo.language.blank?
+            .language= repo.language
+          .watchers
+            = image_tag "icons/github/watcher.png",
+              :alt   => "#{repo.watchers} Watchers",
+              :title => "#{repo.watchers} Watchers"
             = repo.watchers
-            = image_tag("github-fork-icon.png", :alt => "Forks", :title => "Forks", :width => 16, :height => 16)
+          .forks
+            = image_tag "icons/github/fork.png",
+              :alt   => "#{repo.forks} Forks",
+              :title => "#{repo.forks} Forks"
             = repo.forks
-        %p.clear= repo.description
-    -
 
-- content_for :body_end  do
-  = javascript_include_tag "uw.users"
-
-  :javascript
-    $(document).ready(function() {
-      UW.Users.init();
-    });
--
+        %h3= link_to repo.name , repo.url
+        .description= repo.description
+        %p.clear
