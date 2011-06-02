@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   after_create :add_public_channels_to_dashboard
-  
+
   GITHUB_FORMAT = {
     :with        => /^(?!-)[a-z\d-]+/i,
     :message     => "can only contain alphanumeric characters and dashes.
@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   has_one  :admissions_submission,    :class_name => "Admissions::Submission",
                                       :dependent  => :destroy
-                                      
+
   accepts_nested_attributes_for       :admissions_submission
 
   attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
@@ -102,6 +102,18 @@ class User < ActiveRecord::Base
   def access_level
     AccessLevel::User[read_attribute(:access_level)]
   end
+
+  def github_repositories
+    begin
+      Octokit.repos(self.github_account_name).select do |repo|
+        not repo.fork
+      end.sort {|a, b| b.pushed_at <=> a.pushed_at }
+    rescue # Octokit raises an 404 code exception when there this
+           # github account name doesn't exist
+      []
+    end
+  end
+
 
   def name
     if !nickname.blank?
@@ -175,12 +187,12 @@ class User < ActiveRecord::Base
                  "You need to provide either a real name or a nick name")
     end
   end
-  
+
   def add_public_channels_to_dashboard
     Chat::Channel.where(:public => true).each do |channel|
       chat_channel_memberships.find_or_create_by_channel_id(channel.id)
     end
-    
+
     return true
   end
 

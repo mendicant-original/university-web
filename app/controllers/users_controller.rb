@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @github_repos = @user.github_repositories.
+      paginate(:per_page => 10, :page => params[:page])
   end
 
   def edit
@@ -38,12 +40,12 @@ class UsersController < ApplicationController
       flash[:alert] = current_user.errors.full_messages.to_sentence
     end
   end
-  
+
   private
-  
+
   def check_permissions
     return if params[:id] && User.find(params[:id]) == current_user
-    
+
     unless current_access_level.allows? :view_directory
       flash[:error] = "Your account does not have access to this area"
       redirect_to dashboard_path

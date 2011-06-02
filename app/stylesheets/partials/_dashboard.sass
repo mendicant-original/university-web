@@ -7,27 +7,45 @@
     +append(1)
   div.right
     +column(11, true)
-    
+
   div.left, div.right
     h4
       margin: 1em 0
       font-size: 1.25em
-      
+
   ul li
     margin-bottom: 0.25em
 
-.profile
+
+hr.clear
   border-bottom: 1px solid silver
+
+#social-presence
+  float: right
+
+  p
+    display: inline-block
+    padding: 15px
+
+.profile
   padding: 15px 0
-  
+  height: 50px
+  width: 100%
+
   .block
-    
     float: right
-  
+
   h1
     margin: 0
     display: inline-block
-    
+    float: left
+
+
+    p
+      margin: -20px 0 0 75px
+      a
+        font-size: 11px
+
     img
       vertical-align: middle
       padding: 2px
@@ -43,27 +61,27 @@ span.right
 
 .channel
   margin-bottom: 0.5em
-  
+
   .title
     border-bottom: 2px solid #256188
     margin-bottom: 0.25em
     padding-bottom: 3px
-    
+
     a
       display: inline-block
       color: #000
-      
+
     span.right
       float: right
       font-size: 0.75em
       vertical-align: bottom
       margin-top: 0.25em
       color: #555
-    
+
   .message
     margin-left: 10px
     line-height: 1.5em
-  
+
     .handle
       display: inline-block
       padding-right: 1em
@@ -73,79 +91,79 @@ span.right
     .body
       display: inline-block
       width: 320px
-      
+
       &.full
         width: 630px
-      
+
 /* div.assignment
   margin-bottom: 0.25em
   border-bottom: 1px solid #fff
-  
+
   span.right
     float: right */
-    
+
 .blog ul
   margin-left: 20px
   list-style-type: disc
-  
+
 .registration
   font-size: 1.5em
   margin: 1em 0
   padding: 10px
   background-color= $rmu_red
-  +linear-gradient(color-stops(#BF160B, $rmu_red))   
+  +linear-gradient(color-stops(#BF160B, $rmu_red))
   +border-radius(4px, 4px)
   border: 1px solid $rmu_red
   color: #e9e9e9
   +text-shadow(0,1px,0, #333)
-  
+
   &:hover
     background-color: #350603
     +linear-gradient(color-stops(#AD1006, #500A05))
-  
+
 table.status
   width: 100%
   margin: 1em 0
-  
+
   input[type="submit"]
     font-size: 0.7em
     margin: 0.5em 0
     float: none
-  
+
   border-collapse: collapse
-  
+
   td, th
     padding: 4px 5px
     border-style: collapse
     border-bottom: 1px solid #bbb
-    
+
     &.status
       text-align: left
       font-size: 0.9em
-      
+
       .status
         display: inline-block
         -moz-border-radius: 3px
         width: 10px
         height: 10px
         border: 1px solid #000
-        
+
       hr
         color: #ccc
         background: #fff
-  
+
   th.cu
     font-style: bold
     font-size: 1.25em
     padding: 10px
-  
+
   td
     color: #444
     font-size: 0.9em
-    
+
   tr.toggle
     background-color: #eee
-    
+
 div.announcements
   div.announcement
     padding: 0.5em

@@ -11,6 +11,8 @@ gem "rack", "~> 1.2.1"
 gem "rdiscount"
 gem "sanitize", "~> 2.0.0"
 gem "will_paginate", "~> 3.0.pre2"
+gem 'octokit'
+
 
 group :test do
   gem "capybara", "~> 0.4.1.1"
@@ -18,4 +20,5 @@ group :test do
   gem "factory_girl_rails"
   gem "stories"
   gem "test-unit"
+  gem 'mocha'
 end

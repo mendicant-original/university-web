@@ -57,6 +57,10 @@ module Support
         "Title #{title.inspect} does not exist"
     end
 
+    def assert_image(src)
+      assert has_css?('img', :src => "/images/#{src}"), "Image /images/#{src} does not exist"
+    end
+
     def click_link_within(scope, text)
       within(scope) { click_link(text) }
     end

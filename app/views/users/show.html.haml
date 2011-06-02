@@ -1,23 +1,55 @@
-- title @user.name.blank? ? @user.email : @user.name
+- content_for :header_bottom do
+  = javascript_include_tag "uw.users"
+
+  :javascript
+    $(function() { UW.Users.init(); });
+
+- title @user.name
 
 .profile
   %h1
     = image_tag @user.gravatar_url(50), :alt => ""
     = @user.name
+    %p
+      = mail_to @user.email
+  #social-presence
+    - unless @user.github_account_name.blank?
+      %p
+        Github:
+        = github_account_link @user.github_account_name
 
-%p
-  Email:
-  = @user.email
-  
-- unless @user.github_account_name.blank?
-  %p
-    Github:
-    = github_account_link @user.github_account_name
+    - unless @user.twitter_account_name.blank?
+      %p
+        Twitter:
+        = twitter_account_link @user.twitter_account_name
+%hr.clear
 
-- unless @user.twitter_account_name.blank?
-  %p
-    Twitter:
-    = twitter_account_link @user.twitter_account_name
-    
 - if current_user == @user
   %p= link_to "Edit my personal information", edit_user_path(@user)
+
+
+#github-repositories
+  %h2= "Github repos (#{@user.github_repositories.size})"
+
+  %ul
+    - @github_repos.each do |repo|
+      %li
+        .additional-info
+          -  unless repo.language.blank?
+            .language= repo.language
+          .watchers
+            = image_tag "icons/github/watcher.png",
+              :alt   => "#{repo.watchers} Watchers",
+              :title => "#{repo.watchers} Watchers"
+            = repo.watchers
+          .forks
+            = image_tag "icons/github/fork.png",
+              :alt   => "#{repo.forks} Forks",
+              :title => "#{repo.forks} Forks"
+            = repo.forks
+
+        %h3= link_to repo.name , repo.url
+        .description= repo.description
+        %p.clear
+
+  = will_paginate @github_repos
