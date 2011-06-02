@@ -1,4 +1,5 @@
 require "test_helper"
+require 'mocha'
 
 class UserTest < ActiveSupport::TestCase
   setup do
@@ -210,7 +211,33 @@ class UserTest < ActiveSupport::TestCase
       assert_equal @alumnus4.alumni_date, "2011-12-1".to_date
     end
   end
+  context "retrieving user github repositories" do
+    setup do
+      @first_repo  = stub(:name => "repo1", :fork => false, :pushed_at => Date.yesterday)
+      @second_repo = stub(:name => "repo2", :fork => true , :pushed_at => Date.yesterday)
+      @third_repo  = stub(:name => "repo3", :fork => false , :pushed_at => Date.today)
+      @repos       = [ @first_repo, @second_repo, @third_repo]
+      @user        = Factory.create(:user , :github_account_name => "pellegrino")
+    end
 
+    test "fetching user's repositories" do
+      Octokit.stubs("repos").with("pellegrino").returns(@repos)
+      retrieved_repositories = @user.github_repositories
+      assert_equal  2 , retrieved_repositories.size
+      assert_equal [ @third_repo, @first_repo ] , @user.github_repositories
+    end
+
+    test "returns a single element" do
+      Octokit.stubs("repos").with("pellegrino").returns [@first_repo]
+      assert_equal [ @first_repo ] , @user.github_repositories
+    end
+
+    test "non existing github account" do
+      Octokit.stubs("repos").with("pellegrino").raises("404: Not Found")
+      assert_equal [] ,  @user.github_repositories
+    end
+
+  end
   context "retrieving user locations" do
     setup do
       @expected = [[12.3456, 78.9012], [34.5678, 90.1234]]
@@ -229,6 +256,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal @expected, User.locations
     end
   end
+
 
   private
 
