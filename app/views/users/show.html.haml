@@ -32,7 +32,7 @@
   %h2= "Github repos (#{@user.github_repositories.size})"
 
   %ul
-    - @user.github_repositories.each do |repo|
+    - @github_repos.each do |repo|
       %li
         .additional-info
           -  unless repo.language.blank?
@@ -51,3 +51,5 @@
         %h3= link_to repo.name , repo.url
         .description= repo.description
         %p.clear
+
+  = will_paginate @github_repos
