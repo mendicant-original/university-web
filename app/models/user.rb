@@ -105,7 +105,9 @@ class User < ActiveRecord::Base
 
   def github_repositories
     begin
-      Octokit.repos(self.github_account_name).select { |repo| not repo.fork }
+      Octokit.repos(self.github_account_name).select do |repo|
+        not repo.fork
+      end.sort {|a, b| b.pushed_at <=> a.pushed_at }
     rescue # Octokit raises an 404 code exception when there this
            # github account name doesn't exist
       []

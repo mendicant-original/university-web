@@ -32,8 +32,19 @@
 
         .additional-info
           %p= "Language: #{repo.language}" unless repo.language.blank?
-          %p= "Watchers: #{repo.watchers}  Forks: #{repo.forks}"
-
+          %p
+            = image_tag("github-watcher-icon.png", {:width => 16, :height => 16 , :alt => "Watchers", :title => "Watchers"})
+            = repo.watchers
+            = image_tag("github-fork-icon.png", :alt => "Forks", :title => "Forks", :width => 16, :height => 16)
+            = repo.forks
         %p.clear= repo.description
     -
 
+- content_for :body_end  do
+  = javascript_include_tag "uw.users"
+
+  :javascript
+    $(document).ready(function() {
+      UW.Users.init();
+    });
+-
