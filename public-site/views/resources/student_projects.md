@@ -43,6 +43,15 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/jbarreneche/test_parser">test_parser</a> (Juan Manuel Barreneche): Tool for extracting test descriptions without running your test suite.</li>
   <li><a href="https://github.com/jaimeiniesta/w3clove">w3clove</a> (Jaime Iniesta): Site-wide website markup validator.</li>
   <li><a href="https://github.com/ghendry/index-test">index-test</a> (Ginny Hendry): Test helpers for MySQL performance tuning.</li>
+  <li><a href="https://github.com/geihsler/hl7-processor">HL7 Processor</a> (Chris Geihsler): Host and define HL7 endpoints with ease.</li>
+  <li><a href="https://github.com/utkarshkukreti/gitstats">GitStats</a> (Utkarsh Kukreti): Generate statistics for any local git repository.</li>
+  <li><a href="https://github.com/pellegrino/jackpot">Jackpot</a> (Vitor Pellegrino): It's the easiest way collect money from your users</li>
+  <li><a href="https://github.com/rubysolo/qrio">QRio</a> (Solomon White): QR code decoder for Ruby.</li>
+  <li><a href="https://github.com/Adeptus/Swiss_system">SwissSystem</a> (Mariusz Kozieł): Swiss tournament manager</li>
+  <li><a href="https://github.com/fguillen/SpaceSuckersChronicles">Space Suckers Chronicles</a> (Fernando Guillen): Text-based massively multiplayer online role-playing game</li>
+  <li><a href="https://github.com/andresf/spider">Spider</a> (Andres Freyria): Implementations of Artificial Neural Networks</li>
+  <li><a href="https://github.com/tjsingleton/fishing-log">FishingLog</a> (TJ Singleton): DSL for recording your fishing trip.</li>
+  <li><a href="https://github.com/andrewhr/parsable">Importable</a> (Andrew Rosa): Bridge for importing data from CSV file into Rails.</li>
 </ul>
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._
