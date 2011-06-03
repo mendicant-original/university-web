@@ -5,15 +5,22 @@
     });
 
 #admissions
-  
+
   - if @open <= 0
-    #instructions
-      %h1 Sorry, we're full!
+    %h1 Sorry, we're full!
+
+    %hr
+
+    %h3
+      The next round of admissions will be announced on our #{link_to "news feed", "/changelog"}.
+
+    %p
+      Thanks for your interest, and happy hacking!
   - else
-  
+
     #instructions
       %h1 July 2011 Core Skills Course Application
-    
+
       :plain
         <p>We are now accepting student applications for the July 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
 
@@ -30,14 +37,14 @@
         </ul>
 
         <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before June 15th, 2011 if you've been accepted into the July session.</p>
-      
+
         <p><b>Admissions for this course will end on June 15, 2011 or when all openings have been filled. Currently only #{@open} positions remain open.</b></p>
     #application
       = form_for @user, :url => admissions_submissions_path,
         :html => {:class => 'bp inline', :multipart => true} do |f|
-      
+
         %h3 Your Application Information
-      
+
         = error_messages_for(@user)
 
         %p
