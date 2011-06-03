@@ -34,7 +34,7 @@ We are committed to releasing our exams, exercises and other learning materials 
 
 ### 2011/T2
 
-* [s7-e1](https://github.com/rmu/s7-e1): Wrapping Command Line Applications in Ruby APIs
+* [s7-e1](https://github.com/rmu/s7-e1): Ruby Wrappers for command line utilities
 * [s7-e2](https://github.com/rmu/s7-e2): Conversation Simulator
 * [s7-e3](https://github.com/rmu/s7-e3): Decoding Binary Files
 
