@@ -96,7 +96,7 @@ class User < ActiveRecord::Base
   def self.locations
     where("latitude IS NOT NULL AND longitude IS NOT NULL").map do |user|
       {
-        name: user.name,
+        name: user.real_name || user.nickname,
         location: [user.latitude, user.longitude]
       }
     end
