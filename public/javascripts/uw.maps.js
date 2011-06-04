@@ -2,7 +2,7 @@
 
 UW.setupNamespace("Maps");
 
-UW.Maps.init = function(users){
+UW.Maps.init = function(people){
   var centerLatLng = new google.maps.LatLng(20,0);
   var mapOptions = {
     zoom: 2,
@@ -12,11 +12,11 @@ UW.Maps.init = function(users){
 
   var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-  $(users).each(function(i, user){
+  $(people).each(function(i, person){
     new google.maps.Marker({
-      position: new google.maps.LatLng(user.location[0], user.location[1]),
+      position: new google.maps.LatLng(person.location[0], person.location[1]),
       map: map,
-      title: user.name
+      title: person.name
     });
   });
 }
