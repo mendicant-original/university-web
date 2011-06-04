@@ -2,7 +2,7 @@
 
 UW.setupNamespace("Maps");
 
-UW.Maps.init = function(points){
+UW.Maps.init = function(users){
   var centerLatLng = new google.maps.LatLng(20,0);
   var mapOptions = {
     zoom: 2,
@@ -12,10 +12,11 @@ UW.Maps.init = function(points){
 
   var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
-  $(points).each(function(p, point){
+  $(users).each(function(i, user){
     new google.maps.Marker({
-      position: new google.maps.LatLng(point[0],point[1]),
-      map: map
+      position: new google.maps.LatLng(user.location[0], user.location[1]),
+      map: map,
+      title: user.name
     });
   });
 }
