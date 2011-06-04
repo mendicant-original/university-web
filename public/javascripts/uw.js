@@ -7,5 +7,5 @@ UW.setupNamespace = function(namespace){
 }
 
 jQuery(function(){
-  UW.Preview.init();
+  if(UW.Preview) UW.Preview.init();
 });
