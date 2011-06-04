@@ -94,9 +94,8 @@ class User < ActiveRecord::Base
   # Retrieves locations for all users as an array of arrays where the inner
   # array is in the form [latitude, longitude].
   def self.locations
-    self.select("latitude, longitude")
-      .where("latitude IS NOT NULL AND longitude IS NOT NULL")
-      .map { |u| [u.latitude, u.longitude] }
+    where("latitude IS NOT NULL AND longitude IS NOT NULL").
+      map { |u| [u.latitude, u.longitude] }
   end
 
   def access_level
