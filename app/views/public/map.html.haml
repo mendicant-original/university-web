@@ -1,10 +1,9 @@
-- content_for :header_bottom do
-  = javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",
-                           "uw.js", "uw.maps.js"
+= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",
+                         "uw.js", "uw.maps.js"
 
-  :javascript
-    $(function(){
-      UW.Maps.init(#{User.locations.to_json});
-    });
+:javascript
+  $(function(){
+    UW.Maps.init(#{User.locations.to_json});
+  });
 
 #map_canvas
