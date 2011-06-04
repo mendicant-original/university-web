@@ -91,11 +91,15 @@ class User < ActiveRecord::Base
     (1..8).map { |a| chars[rand(chars.size)] }.join
   end
 
-  # Retrieves locations for all users as an array of arrays where the inner
-  # array is in the form [latitude, longitude].
+  # Retrieves locations for all users as an array of hashes having the users
+  # name and location in the form [latitude, longitude].
   def self.locations
-    where("latitude IS NOT NULL AND longitude IS NOT NULL").
-      map { |u| [u.latitude, u.longitude] }
+    where("latitude IS NOT NULL AND longitude IS NOT NULL").map do |user|
+      {
+        name: user.name,
+        location: [user.latitude, user.longitude]
+      }
+    end
   end
 
   def access_level
