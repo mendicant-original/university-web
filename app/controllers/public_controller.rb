@@ -49,12 +49,16 @@ class PublicController < ApplicationController
     end
   end
 
+  def map
+
+  end
+
   private
-  
+
   def set_alumni_section
     @current = "alumni"
   end
-  
+
   def set_news_section
     @current = "news"
   end
