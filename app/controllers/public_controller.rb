@@ -50,7 +50,7 @@ class PublicController < ApplicationController
   end
 
   def map
-
+    @locations = User.alumni.locations
   end
 
   private
