@@ -21,8 +21,6 @@ University::Application.routes.draw do
 
   devise_for :users, :controllers => { :sessions => "user_sessions" }
 
-  resource :home, :controller => "home"
-
   get "slugger" => "slugger#index", :as => "slugger"
 
   resources :users do
