@@ -20,6 +20,13 @@ module Admissions
     story "As an applicant I want to apply" do
       setup do
         @course = Factory(:course, :class_size_limit => 99_999)
+
+        # TODO Silence this warning
+        #
+        # if self.class.const_defined?(:CURRENT_COURSE)
+        #   self.class.send(:remove_const, :CURRENT_COURSE)
+        # end
+
         ::CURRENT_COURSE = @course.id
       end
 
