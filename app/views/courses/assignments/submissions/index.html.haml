@@ -7,4 +7,4 @@
     = link_to submission_path(submission) do
       .submission
         .user= submission.user.name
-        .status= submission.status.name
+        .status= submission_status_name(submission.status)

@@ -12,12 +12,12 @@
           $('#note_content').trigger("edit");
         }
       });
-      
+
       var editPath = '#{assignment_path(@assignment)}/notes';
-      
+
       var placeholder = "Click to edit this page. It's like a wiki page that is" +
       " shared with all students in the course.";
-    
+
       $('#note_content').editable(editPath, {
         type:        'textarea',
         height:      '200px',
@@ -32,9 +32,9 @@
         placeholder: placeholder,
         clicktoedit: false
       });
-      
+
       SidebarMenu.register('sidebar');
-      
+
       $('tr.submission').click(function(e){
         window.location = $(e.currentTarget).attr('data-url');
       });
@@ -46,12 +46,12 @@
   = render :partial => "breadcrumbs"
   %span.separator &rarr;
   %span#current_section
-  
+
 - content_for :bucket do
   #description.bucket
     = md(@assignment.description)
 
-  #submissions.bucket    
+  #submissions.bucket
     %table.submissions
       %tr
         %th Student
@@ -64,17 +64,17 @@
               = user_icon(submission.user, 32)
               = submission.user.name
             %td.status
-              .box{:style => "background-color: ##{status.hex_color}"}
-              = status.name
-              
+              .box{:style => "background-color: ##{submission_status_hex_color(status)}"}
+              = submission_status_name(status)
+
   #notes.bucket
     .controls
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     #note_content= md(@assignment.notes)
-    
+
   #activity.bucket
     - @activities.each do |activity|
-      = render :partial => "courses/activity", 
+      = render :partial => "courses/activity",
               :locals => {:activity => activity}
     = will_paginate @activities, :params => {:anchor => "activity"}
 

@@ -2,16 +2,16 @@
 
 - content_for :header_bottom do
   :javascript
-    $(document).ready(function(){      
+    $(document).ready(function(){
       // Toggle Status / Description update messages
       $('.header').click(function(e){
         $(e.target).siblings('.content').slideToggle();
       });
-      
+
       UW.Comments.init('#{comments_path}/');
-      
+
       $("#sidebar li a[data-id=submissions]").addClass('selected');
-      
+
       UW.Submissions.init('#{submission_path(@submission)}', #{@submission.editable_by?(current_user)});
     });
 
@@ -53,7 +53,7 @@
         = hidden_field_tag "status"
         = f.text_area :comment_text, 'data-preview' => true
         .tab_footer
-          - if current_user == @submission.user && @submission.status.name != "Submitted" && @submission.status.name != "Approved"
+          - if current_user == @submission.user && @submission.status.try(:name) != "Submitted" && @submission.status.try(:name) != "Approved"
             = f.submit "Comment & Request Review"
           - if @course.instructors.include?(current_user)
             = comment_and_update_status
@@ -63,7 +63,7 @@
     .clear
 
     - if @course.instructors.include?(current_user)
-    
+
       = form_for @submission, :url => submission_path(@submission) do |f|
         = f.submit "Update Status"
         = f.select :submission_status_id,
