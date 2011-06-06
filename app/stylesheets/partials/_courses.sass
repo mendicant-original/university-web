@@ -1,6 +1,6 @@
 .course-two-col
   +container
-      
+
   #breadcrumbs
     +column(24, true)
     .container
@@ -8,132 +8,131 @@
       background: #eee
       border: 1px solid #ddd
       margin-top: 1em
-      
+
       .admin_controls
         display: inline-block
         float: right
         margin-top: -0.5em
         margin-right: -1em
         padding: 0.1em
-        
+
         form, div
           display: inline-block
-        
+
         input[type=submit]
           float: none
           margin-left: 1em
-    
+
   div.nav
     +column(4)
-    
+
     li
       font-size: 1.25em
       margin: 0.5em 0
-      
+
       &:first-child
         margin-top: 0
-      
+
       a
         display: block
         padding: 0.75em
-        
+
         &:hover
           background-color: #ddd
-          
+
         &.selected
           background-color: #ddd
-        
+
   div.main
     +column(20, true)
-    
+
     #bucket
       border-left: 1px solid #ddd
       padding: 1em 0 1em 1em
       min-height: 350px
-      
-      div.bucket
-        p:first-of-type
-          margin-top: 0
-          
+
+      div.bucket > :first-child
+        margin-top: 0
+
         div.controls
           float: right
-          
+
       #progress
         padding: 0 0 0 1em
-        
+
       #notes, #activity, #participants, #irc_log
         padding: 1em 0 1em 1em
-      
+
   div.nav, #bucket
     padding-top: 1em
-  
+
   td.status
     font-size: 0.8em !important
-    
+
   #description
     +markdown
-    
+
     padding: 1em 0 1em 1em
-    
+
     p
       margin-top: 0
-      
+
   h2.header
     border-top: 1px solid #eee
     padding: 0.5em 0
     font-size: 1.5em
     color: #666
-    
+
     .controls
       display: inline-block
       float: right
-      
+
       input
         margin: 0
-        
+
   #notes
     +markdown
-      
+
 #assignments.bucket, #documents.bucket
   div.assignment, div.document
-  
+
     cursor: pointer
-  
+
     &:hover
       background-color: #eee
-    
+
     padding: 1em
-    
+
     span.description
       color: #000
       display: block
       margin-top: 0.25em
-    
+
     span.name
       font-size: 1.25em
       display: block
       color: #184FA0
- 
+
 #directory.bucket
   border-top: none
-  
+
   .pagination
     border-top: none
-  
+
   #directory_search
     border-bottom: 1px solid #ddd
-    
+
     label.infield
       top: 6px
       left: 8px
-      
+
     input
       margin-top: 0
-    
+
     input[type="submit"]
       float: none
       margin-left: 1em
-      
+
 #submissions, #courses
   .label
     margin: 1em 0
@@ -143,20 +142,20 @@
     border-bottom: 1px solid #eee
     margin-bottom: 1em
     padding-bottom: 1em
-    
+
     div
       display: inline-block
     .user, .name
       font-size: 1.25em
     .status, .start_end
       float: right
-      
+
     &.archived
       .name
         font-size: 1em
-      
+
 #submissions
-  
+
   .header
     background-color: #eee
     padding: 0.5em 0.25em
@@ -196,13 +195,13 @@ table.submissions
       background-color: #A9CAE6
       &:hover
         background-color: #9ab6d0
-    
+
 #submissions, table.submissions
   .submission
     padding-left: 1em
     &.current
       background-color: #9ab6d0
-  
+
   .status
     border-color: #999
     color: #333
@@ -213,7 +212,7 @@ table.submissions
       height: 10px
       border: 1px solid #000
       margin-right: 0.5em
-      
+
 form.edit_assignment_submission
   margin: 1em 0
 
@@ -221,7 +220,7 @@ form.edit_assignment_submission
   #submission_header
     background-color: #eee
     font-size: 1.5em
-    
+
     img
       vertical-align: middle
       margin-right:  0.5em
@@ -231,10 +230,10 @@ form.edit_assignment_submission
     input
       margin-top: 15px
       cursor: pointer
-  
+
   div.description
     margin-top: 20px
-    
+
   #placeholder
     font-size: 1.5em
     margin: 0.5em 0
