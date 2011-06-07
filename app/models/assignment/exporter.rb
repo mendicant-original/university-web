@@ -65,7 +65,8 @@ class Assignment
     def export_submission(submission)
       data = {
         :description => submission.description,
-        :status      => submission.status.try(:name)
+        :status      => submission.status.try(:name),
+        :user        => submission.user.name
       }
 
       data[:comments]   = submission.comments.map   { |c| export_comment c }
