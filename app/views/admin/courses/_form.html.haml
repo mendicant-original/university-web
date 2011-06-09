@@ -1,23 +1,19 @@
 %p
   = form.label :name
   = form.text_field :name
-  
-%p
-  = form.label :description
-  = form.text_area :description
-      
+
 %p
   = form.label :start_date
   = form.text_field :start_date, :class => "datepicker"
-  
+
 %p
   = form.label :end_date
   = form.text_field :end_date, :class => "datepicker"
-  
+
 %p
   = form.label :class_size_limit
   = form.text_field :class_size_limit
-  
+
 %p
   = form.label :archived
   = form.check_box :archived
@@ -31,7 +27,13 @@
   = form.label :term_id
   = form.select :term_id, Term.all.map {|t| [t.name, t.id] },
     :include_blank => true
-    
+
+%hr
+
+%h3 Course Description
+
+= form.text_area :description, :'data-preview' => true
+
 %hr
 
 %h2 Instructors
@@ -42,7 +44,7 @@
  @course.course_memberships.where(:access_level => 'instructor').all do |m|
   %p
     = m.label :user_id, "Instructor"
-    = m.select :user_id, 
+    = m.select :user_id,
       User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
       :include_blank => "Select an instructor"
 
@@ -61,11 +63,11 @@
     = d.select :document_id, Document.order("title").map {|c| [c.title, c.id]},
       :include_blank => "Select a document"
     = d.link_to_remove "Remove"
-  
-%p.submit
+
+#submit_bar
   = form.submit @course.new_record? ? "Create" : "Update"
   = link_to "Cancel", admin_courses_path, :class => "cancel"
-  
+
 
 - content_for :header_bottom do
   :javascript
