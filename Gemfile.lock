@@ -141,7 +141,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (~> 0.4.1.1)
-  compass (>= 0.10.4)
+  compass (~> 0.10.4)
   contest
   devise!
   factory_girl_rails
