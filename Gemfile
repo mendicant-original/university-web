@@ -21,4 +21,5 @@ group :test do
   gem "stories"
   gem "test-unit"
   gem 'mocha'
+  gem 'test_notifier', '~> 0.3.6'
 end
