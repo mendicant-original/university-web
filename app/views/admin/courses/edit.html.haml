@@ -4,14 +4,15 @@
 
 = nested_form_for @course, :url => admin_course_path(@course), :html => {:class => 'bp'} do |f|
   = render :partial => "form", :object => f
- 
+
 %hr
 
 %h2 Students
 
 = render :partial => "students", :locals => {:students => @course.students}
-  
+
 %h2= link_to "Assignments", admin_course_assignments_path(@course)
-  
+
 = render :partial => "/admin/assignments/assignments"
-  
+
+#submit_bar_padding
