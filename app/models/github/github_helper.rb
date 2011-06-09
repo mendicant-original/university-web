@@ -2,14 +2,15 @@ require 'octokit'
 
 module Github
   module GithubHelper
+    extend self
 
     CONFIG_FILE = "github.yml"
 
-    def self.config(file = CONFIG_FILE)
+    def config(file = CONFIG_FILE)
       @config ||= parse_config(file)
     end
 
-    def self.check_for_new_commits
+    def check_for_new_commits
       login_opts = {
           login: config["username"],
           token: config["api_token"],
@@ -20,7 +21,7 @@ module Github
 
     private
 
-    def self.parse_config(file)
+    def parse_config(file)
       filename = "#{::Rails.root.to_s}/config/#{file}"
 
       unless File.exists?(filename)
