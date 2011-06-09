@@ -10,9 +10,11 @@
   = f.label :sort_order
   = f.text_field :sort_order
 
-%p
-  = f.label :description
-  = f.text_area :description
+%hr
+
+%h3 Assignment Description
+
+= f.text_area :description, :'data-preview' => true
 
 %hr
 
