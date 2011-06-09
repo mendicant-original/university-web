@@ -1,3 +1,5 @@
+# API Token: https://github.com/account/admin
+
 test:
     username:  username_goes_here
     api_token: api_token_goes_here
