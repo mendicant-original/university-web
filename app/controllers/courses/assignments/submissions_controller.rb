@@ -1,5 +1,6 @@
 class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
-  before_filter :find_submission, :only => %w(show edit update comment description)
+  before_filter :find_submission, :only => %w(show edit update comment
+                                             description associate_with_github)
   before_filter :student_and_instructor_only, :only => %w(update)
   def index
     @submissions = @assignment.submissions.sort_by {|s| s.last_active_on }.reverse
@@ -21,6 +22,14 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
 
     respond_to do |format|
       format.text
+    end
+  end
+
+  def associate_with_github
+    @submission.associate_with_github(params[:value])
+
+    respond_to do |format|
+      format.text { render :text => @submission.github_repository }
     end
   end
 

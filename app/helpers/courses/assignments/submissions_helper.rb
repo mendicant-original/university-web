@@ -29,4 +29,10 @@ module Courses::Assignments::SubmissionsHelper
        $('form.new_comment').submit()},
       :class => "gray"
   end
+
+  def github_link(github_repo)
+    return link_to(github_repo, "https://github.com/#{github_repo}") if github_repo
+    "Click 'Edit' to set the github repository for this assignment."
+  end
+
 end
