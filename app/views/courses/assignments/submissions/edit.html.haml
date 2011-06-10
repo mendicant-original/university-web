@@ -45,7 +45,7 @@
     #submission_github.github
       Github:
       %br
-      =github_link(@submission.github_repository)
+      = github_link(@submission.github_repository)
 
     .comments
       - group_by_description(@submission.activities.order('created_at')).each do |activity, more|
