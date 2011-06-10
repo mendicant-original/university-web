@@ -56,9 +56,14 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attributes| attributes['comment_text'].blank? },
     :allow_destroy => true
 
+  scope :staff_and_alumni, order('alumni_number').
+    where("access_level = 'admin' OR alumni_number IS NOT NULL")
   scope :staff,    where(:access_level => "admin")
   scope :alumni,   where("alumni_number IS NOT NULL").order('alumni_number')
   scope :per_year, lambda { |year| where(:alumni_year => year) }
+
+  scope :publically_visible, joins(:alumni_preferences).
+    where(['alumni_preferences.show_on_public_site = ?', true])
 
   def self.search(search, page, options={})
     sql_condition = %w(
@@ -91,11 +96,46 @@ class User < ActiveRecord::Base
     (1..8).map { |a| chars[rand(chars.size)] }.join
   end
 
-  # Retrieves locations for all users as an array of arrays where the inner
-  # array is in the form [latitude, longitude].
+  # Returns a hash of lists of users at each lat, lng pair
   def self.locations
     where("latitude IS NOT NULL AND longitude IS NOT NULL").
-      map { |u| [u.latitude, u.longitude] }
+      inject({}) do |h, user|
+        h[user.latlng_key] ||= []
+        h[user.latlng_key] << user.attributes_for_map
+        h
+      end
+  end
+
+  def latlng_key
+    "#{ '%.5f' % latitude },#{ '%.5f' % longitude }"
+  end
+
+  # generate a hash of the data needed to populate a map marker info window
+  def attributes_for_map
+    attributes.slice('real_name', 'alumni_year').tap do |attrs|
+      attrs['alumni_month'] = Date::MONTHNAMES[alumni_month] if alumni_month.present?
+      attrs['staff']        = staff?
+      attrs['ghash']        = gravatar_hash
+      attrs['real_name']    = nickname if attrs['real_name'].blank? ||
+                            ! alumni_preferences.try(:show_real_name)
+
+      attrs['twitter_account_name'] = public_twitter_account_name
+      attrs['github_account_name']  = public_github_account_name
+    end
+  end
+
+  def public_twitter_account_name
+    alumni_preferences.try(:show_twitter) && twitter_account_name.present? ?
+      twitter_account_name : nil
+  end
+
+  def public_github_account_name
+    alumni_preferences.try(:show_github) && github_account_name.present? ?
+      github_account_name : nil
+  end
+
+  def staff?
+    read_attribute(:access_level) == "admin"
   end
 
   def access_level
@@ -153,9 +193,11 @@ class User < ActiveRecord::Base
   end
 
   def gravatar_url(size=40)
-    hash = Digest::MD5.hexdigest(email.downcase)
+    "http://www.gravatar.com/avatar/#{gravatar_hash}?s=#{size}&d=mm"
+  end
 
-    "http://www.gravatar.com/avatar/#{hash}?s=#{size}&d=mm"
+  def gravatar_hash
+    Digest::MD5.hexdigest(email.downcase)
   end
 
   def instructor_courses

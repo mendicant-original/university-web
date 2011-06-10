@@ -1,5 +1,126 @@
+#map_container
+  position: relative
+
 #map_canvas
   height: 500px
   width: 900px
   margin: 1em auto
   +box-shadow(#000, 0px, 0px, 7px)
+
+#info_window
+  position: absolute
+  top: 15px
+
+  &.left
+    #pointer
+      left: 0px
+    #content
+      left: 40px
+
+  &.right
+    #pointer
+      left: 270px
+      background-position: right center
+    #content
+      left: 0px
+
+  #pointer
+    height: 40px
+    width: 40px
+    position: absolute
+    top: 147px
+    background-image: url(/images/pointer.png)
+    opacity: 0.9
+
+  #content
+    position: absolute
+    left: 40px
+    height: 400px
+    width: 250px
+    background-color: white
+    opacity: 0.9
+    +box-shadow(#000, 0px, 0px, 7px)
+    +border-radius(5px)
+
+    &.scrollable
+      overflow-y: scroll
+
+  .person
+    height: 69px
+    &.staff
+      .staff-ribbon-holder
+        display: inline-block
+
+  .staff-ribbon-holder
+    display: none
+    position: absolute
+    overflow: hidden
+    right: 10px
+    width: 80px
+    height: 80px
+
+    .staff-ribbon
+      position: relative
+      top: 10px
+      width: 100px
+      height: 15px
+      padding: 3px 0px 0px 10px
+      text-align: center
+      font-size: 0.7em
+      color: #661C11
+      background-color: silver
+      background-image: -webkit-gradient(linear, left bottom, left top, from(#a8a8a8), to(#cfcfcf))
+      background-image: -moz-linear-gradient(left bottom, #a8a8a8 100%, #cfcfcf 100)
+      background-image: linear-gradient(left bottom, #a8a8a8 100%, #cfcfcf 100)
+      -moz-transform: rotate(45deg)
+      -webkit-transform: rotate(45deg)
+      +box-shadow(#000, 0px, 0px, 5px)
+
+  .name
+    margin-bottom: -28px
+    font-size: 1.1em
+    padding: 7px
+    text-align: center
+    color: #ccc
+    text-shadow: 0 1px 0 #000
+    background: #333
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, #555), color-stop(100%, #333))
+    background-image: -moz-linear-gradient(top, #555 0%, #333 100%)
+    background-image: linear-gradient(top, #555 0%, #333 100%)
+
+  .information
+    padding: 10px 5px 0px 5px
+
+    .month
+      margin-top: 18px
+      display: inline-block
+      color: #555
+      text-align: center
+
+      .class-of
+        font-size: 0.8em
+
+    .social
+      float: right
+      text-align: right
+      padding-bottom: 5px
+      padding-top: 18px
+      a
+        img
+          border: none
+
+  .badge
+    padding: 5px
+    float: left
+    margin-right: 10px
+    color: #bbb
+    text-align: right
+    text-shadow: none
+    color: #333
+
+    img
+      display: block
+      -moz-box-shadow: black 0px 0px 5px 0
+      -webkit-box-shadow: black 0px 0px 5px 0
+      -o-box-shadow: black 0px 0px 5px 0
+      box-shadow: black 0px 0px 5px 0

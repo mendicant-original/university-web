@@ -1,9 +1,50 @@
 = javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",
-                         "uw.js", "uw.maps.js"
+                         "uw.js", "uw.maps.js", "jquery.tmpl.min.js"
 
 :javascript
   $(function(){
     UW.Maps.init(#{@people.to_json});
   });
 
-#map_canvas
+#map_container
+  #map_canvas
+  #info_window{:style => "display:none"}
+    #content
+    #pointer
+
+
+#person-template{:style => "display:none"}
+  %div{:class => 'person{{if staff}} staff{{/if}}'}
+    .staff-ribbon-holder
+      .staff-ribbon RMU STAFF
+
+    %h1.name
+      ${real_name}
+
+    .badge
+      %img{:src => 'http://www.gravatar.com/avatar/${ghash}?s=40&d=mm'}
+
+    .information
+      .month
+        {{if alumni_month}}
+        .class-of class of
+        ${alumni_month}
+        ${alumni_year}
+        {{/if}}
+
+      .social
+        {{if github_account_name}}
+        %a{:href => 'http://github.com/${github_account_name}',
+          :title => '${github_account_name}'}
+          %img{:src => "/images/icons/social/github.png"}
+        {{else}}
+        %img{:src => "/images/icons/social/github_disabled.png"}
+        {{/if}}
+
+        {{if twitter_account_name}}
+        %a{:href => 'http://twitter.com/${twitter_account_name}',
+          :title => '${twitter_account_name}'}
+          %img{:src => "/images/icons/social/twitter.png"}
+        {{else}}
+        %img{:src => "/images/icons/social/twitter_disabled.png"}
+        {{/if}}
