@@ -6,12 +6,12 @@ module Github
     def initialize(hash)
       @id           = hash[:id]
       @login        = hash[:committer][:login]
-      @commit_time  = Time.parse(hash[:committed_date]).utc
+      @commit_time  = Time.parse(hash[:committed_date])
       @message      = hash[:message]
     end
 
     def to_s
-      "#{@commit_time} - #{@message}"
+      @message
     end
 
   end
