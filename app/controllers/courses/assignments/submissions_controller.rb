@@ -29,7 +29,7 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
     @submission.associate_with_github(params[:value])
 
     respond_to do |format|
-      format.text { render :text => @submission.github_repository }
+      format.text
     end
   end
 
@@ -50,7 +50,7 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
     if params[:commit] && params[:commit][/Request Review/]
       @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
     end
-    
+
     if @course.instructors.include?(current_user) && !params[:status].blank?
       @submission.update_status(current_user, SubmissionStatus.find(params[:status]))
     end
