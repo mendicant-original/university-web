@@ -43,8 +43,8 @@
         %input.gray#edit_github{:type => "button", :value => "Edit"}
 
     #submission_github.github
-      Github repository:
-      %br
+      #github_header
+        Github repository:
       = github_link(@submission.github_repository)
 
     .comments

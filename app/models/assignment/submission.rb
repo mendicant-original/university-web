@@ -16,7 +16,10 @@ class Assignment::Submission < ActiveRecord::Base
   scope :with_github_repository, all_active.where('github_repository IS NOT NULL')
 
   def associate_with_github(github_repo)
-    full_repo = "#{user.github_account_name}/#{github_repo}"
+
+    stripped_repo = github_repo.split('/').last
+
+    full_repo = "#{user.github_account_name}/#{stripped_repo}"
 
     update_attribute(:github_repository, full_repo)
 

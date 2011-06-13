@@ -32,7 +32,9 @@ module Courses::Assignments::SubmissionsHelper
 
   def github_link(github_repo)
     return link_to(github_repo, "https://github.com/#{github_repo}") if github_repo
-    "Click 'Edit' to set the github repository for this assignment."
+    raw("<div id=github_help_text>Click 'Edit' to associate this submission with a
+    github repository. You may enter the full repository URL or just its
+    name.</div>")
   end
 
 end

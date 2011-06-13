@@ -55,7 +55,13 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
       @github_account = @submission.user.github_account_name
     end
 
-    test "persists the github repository" do
+    test "can handle full URL" do
+      @submission.associate_with_github('https://github.com/username/github_repo')
+
+      assert_equal "#{@github_account}/github_repo", @submission.github_repository
+    end
+
+    test "can handle a simple repo name" do
       @submission.associate_with_github('github_repo')
 
       assert_equal "#{@github_account}/github_repo", @submission.github_repository

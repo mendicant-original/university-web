@@ -53,9 +53,6 @@ var initGithub = function(path){
     bind('edit', function(){ $('#github_controls').hide(); }).
     bind('cancel', function(){ $('#github_controls').show(); });
 
-    var placeholder = "<div id='placeholder'>Click 'Edit' to update your " +
-    "submission's github repository.</div>";
-
     var onGithubReset = function(){ $('#github_controls').show(); };
 
     $('#submission_github').editable(editGithubPath, {
@@ -68,7 +65,6 @@ var initGithub = function(path){
         submit:      'Save',
         tooltip:     "Click 'Edit' to make changes",
         event:       'edit',
-        placeholder: placeholder,
         onblur:      'ignore',
         clicktoedit: false,
         onreset:     onGithubReset,
