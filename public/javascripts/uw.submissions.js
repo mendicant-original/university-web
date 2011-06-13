@@ -16,7 +16,7 @@ var initDescription = function(path){
     bind('edit', function(){ $('#description_controls').hide(); }).
     bind('cancel', function(){ $('#description_controls').show(); });
 
-    placeholder = "<div id='placeholder'>Click 'Edit' to update your " +
+    var placeholder = "<div id='placeholder'>Click 'Edit' to update your " +
     "submission's description.</div>Comments on your submission go below.";
 
     var onReset = function(){ $('#description_controls').show(); };
@@ -53,14 +53,14 @@ var initGithub = function(path){
     bind('edit', function(){ $('#github_controls').hide(); }).
     bind('cancel', function(){ $('#github_controls').show(); });
 
-    placeholder = "<div id='placeholder'>Click 'Edit' to update your " +
+    var placeholder = "<div id='placeholder'>Click 'Edit' to update your " +
     "submission's github repository.</div>";
 
     var onGithubReset = function(){ $('#github_controls').show(); };
 
     $('#submission_github').editable(editGithubPath, {
         type:        'textarea',
-        data:        function(value, options) { '' },
+        data:        function(value, options) { return ''; },
         height:      '20px',
         width:       '98%',
         indicator:   'Saving ...',
