@@ -7,7 +7,7 @@
       on
       = "#{activity.submission.user.name}'s"
       submission
-    
+
     -  if @assignment.nil?
       for
       %span.assignment= activity.assignment.name
@@ -20,4 +20,3 @@
         = md(activity.context)
       - else
         = activity.context
-    
