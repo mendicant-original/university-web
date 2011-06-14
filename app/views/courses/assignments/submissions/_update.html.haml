@@ -1,5 +1,5 @@
 .activity
-  .header
+  %div{:id => ("github-header" if activity.is_a_github_commit?), :class => "header"}
     = user_icon(activity.user)
     = activity.user.name
     .details
@@ -10,4 +10,4 @@
     .on
       = time_ago_in_words activity.created_at
       ago
-  .content{:style => "display:none;"}= md(activity.context)
+.content{:style => "display:none;"}= md(activity.context)
