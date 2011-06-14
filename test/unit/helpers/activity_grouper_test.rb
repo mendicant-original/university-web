@@ -5,7 +5,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
   context "no activities" do
 
     setup do
-      @grouped = ActivityHelper::ActivityGrouper.new([]).group_by_description
+      @grouped = Assignment::ActivityGrouper.new([]).group_by_description
     end
 
     should "return an empty array" do
@@ -18,7 +18,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
 
     setup do
       @activity = Factory(:activity)
-      @grouped = ActivityHelper::ActivityGrouper.new([@activity]).group_by_description
+      @grouped = Assignment::ActivityGrouper.new([@activity]).group_by_description
     end
 
     should "return one result" do
@@ -45,7 +45,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @activity_two.description = "updated description"
 
       @activities = [@activity_one, @activity_two]
-      @grouped = ActivityHelper::ActivityGrouper.new(@activities).group_by_description
+      @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
     should "return one result" do
@@ -76,7 +76,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @activity_two.description = "something else"
 
       @activities = [@activity_one, @activity_two]
-      @grouped = ActivityHelper::ActivityGrouper.new(@activities).group_by_description
+      @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
     should "return two results" do
@@ -95,7 +95,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @activity_two.description = "Github commit"
 
       @activities = [@activity_one, @activity_two]
-      @grouped = ActivityHelper::ActivityGrouper.new(@activities).group_by_description
+      @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
     should "return one result" do
