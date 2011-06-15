@@ -26,7 +26,7 @@ module Github
       end
 
       user_commits = all_commits.select do |commit|
-        commit.login == @login &&
+        commit.login == submission.user.github_account_name &&
         commit.commit_time > submission.last_commit_time
       end
 

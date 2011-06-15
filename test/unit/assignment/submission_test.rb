@@ -42,8 +42,8 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
       @submission.add_github_commit(@commit)
 
       activity = @submission.activities.last
-      assert_equal "committed to github: commit message", activity.context
-      assert_equal "Github commit: #{@commit.to_s}", activity.description
+      assert_equal "committed to github: commit message", activity.description
+      assert_equal "commit id-commit message", activity.context
       assert_equal @now, activity.created_at
     end
 

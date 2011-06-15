@@ -19,7 +19,7 @@ class Assignment::Activity < ActiveRecord::Base
   end
 
   def is_a_github_commit?
-    description[/^github commit/i]
+    description[/github/i]
   end
 
   private
