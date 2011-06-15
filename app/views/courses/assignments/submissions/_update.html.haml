@@ -1,12 +1,12 @@
 .activity
-  %div{:id => ("github-header" if activity.is_a_github_commit?), :class => "header"}
+  .header
     = user_icon(activity.user)
     = activity.user.name
     .details
-      - unless activity.context.blank?
-        = md(activity.context.downcase, :no_p => true)
-      - else
+      - if activity.context.blank?
         = activity.description
+      - else
+        = md(activity.context.downcase, :no_p => true)
     .on
       = time_ago_in_words activity.created_at
       ago
