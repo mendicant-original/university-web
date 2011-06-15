@@ -43,8 +43,8 @@ class Assignment::Submission < ActiveRecord::Base
 
     activities.create(
         user_id:       user.id,
-        description:   "Github commit: #{commit.to_s}",
-        context:       "committed to github: #{commit.message}",
+        context:       "#{commit.id}-#{commit.message}",
+        description:   "committed to github: #{commit.message}",
         created_at:    commit.commit_time,
         actionable:    self
     )

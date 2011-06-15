@@ -11,7 +11,7 @@ module Github
     end
 
     def to_s
-      @message
+      "#{@id[0..7]} - #{@message}"
     end
 
   end
