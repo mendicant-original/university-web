@@ -47,13 +47,18 @@ module Courses::Assignments::SubmissionsHelper
   end
 
   def github_commit_link(activity)
-    full_commit = activity.context.split('-')[0]
+    full_commit = github_commit_id(activity)
     "https://github.com/#{activity.actionable.github_repository}/commit/#{full_commit}"
   end
 
-  def short_github_commit_id(activity)
+  def github_commit_id(activity, short=false)
     full_commit = activity.context.split('-')[0]
-    full_commit[0..7]
+
+    if short
+      full_commit[0..7]
+    else
+      full_commit
+    end
   end
 
 end
