@@ -23,3 +23,7 @@ group :test do
   gem 'mocha'
   gem 'test_notifier', '~> 0.3.6'
 end
+
+group :production do
+  gem "whenever", "~> 0.6.8", :require => false
+end
