@@ -4,6 +4,5 @@
 
 - nested_form_for @user, :url => admin_user_path(@user), :html => {:class => 'bp'} do |f|
   = render :partial => "form", :object => f
-  %p.submit
-    = f.submit "Update"
-    = link_to "Cancel", admin_users_path, :class => "cancel"
+
+#submit_bar_padding
