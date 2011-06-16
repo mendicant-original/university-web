@@ -38,6 +38,15 @@
         %input.gray#edit_description{:type => "button", :value => "Edit"}
     #submission_description.description= md(@submission.description)
 
+    - if @submission.editable_by?(current_user)
+      #github_controls.controls
+        %input.gray#edit_github{:type => "button", :value => "Edit"}
+
+    #submission_github.github
+      #github_header
+        Github repository:
+      = github_link(@submission.github_repository)
+
     .comments
       - group_by_description(@submission.activities.order('created_at')).each do |activity, more|
         = render_activity(activity)

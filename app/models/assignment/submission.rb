@@ -9,6 +9,48 @@ class Assignment::Submission < ActiveRecord::Base
 
   has_many   :activities, :dependent => :delete_all
 
+  validates :github_repository, :length => { :maximum => 25 }
+
+  scope :all_active, includes(:assignment => :course).where(:courses => {:archived => false})
+
+  scope :with_github_repository, all_active.where('github_repository IS NOT NULL')
+
+  def associate_with_github(github_repo)
+
+    stripped_repo = github_repo.split('/').last
+
+    full_repo = "#{user.github_account_name}/#{stripped_repo}"
+
+    update_attribute(:github_repository, full_repo)
+
+    activities.create(
+      user_id:       user.id,
+      context:       "updated github repository",
+      description:   "updated github repository to: #{full_repo}",
+      actionable:    self
+    )
+
+  end
+
+  def add_github_commit(commit)
+
+    if(commit.commit_time > last_commit_time)
+      update_attributes(
+          last_commit_time:  commit.commit_time,
+          last_commit_id:    commit.id
+      )
+    end
+
+    activities.create(
+        user_id:       user.id,
+        context:       "#{commit.id}-#{commit.message}",
+        description:   "committed to github: #{commit.message}",
+        created_at:    commit.commit_time,
+        actionable:    self
+    )
+
+  end
+
   def create_comment(comment_data)
     comment = comments.create(comment_data)
 

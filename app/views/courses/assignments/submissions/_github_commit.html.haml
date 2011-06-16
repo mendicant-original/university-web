@@ -1,0 +1,10 @@
+.activity
+  #github-header.header
+    = user_icon(activity.user)
+    = activity.user.name
+    .details= activity.description
+    .on
+      = time_ago_in_words activity.created_at
+      ago
+  .content{:style => "display:none;"}
+    = link_to "View commit #{short_github_commit_id(activity)} on github", github_commit_link(activity)
