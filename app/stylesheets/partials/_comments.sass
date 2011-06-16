@@ -5,21 +5,22 @@
     list-style-type: disc
     li
       margin: 0.5em 0
-      
+
   ol
     list-style-type: decimal
   em
     font-style: italic
   strong
     font-weight: bold
-  
+
   pre, code
     font-family: "Bitstream Vera Sans Mono",Courier,Monaco,ProFont,"American Typewriter","Andale Mono",monospace
-    
+
   blockquote
-    border-left: 2px solid #256188
-    padding: 0 0.5em
-    
+    border-left: 2px solid #777
+    padding: 0 0.75em
+    color: #555
+
   pre
     background-color: #eee
     border: 1px solid #999
@@ -28,7 +29,7 @@
     +border-radius(5px)
     color: #444
     margin: 1.5em 0
-    
+
   code
     background-color: #eee
     border: 1px solid #ccc
@@ -36,14 +37,14 @@
     padding: 0.2em 0.2em
     font-size: 12px
     +border-radius(2px)
-    
+
   pre code
     background-color: #eee
     border: none
     padding: none
     font-size: 1em
     line-height: 1.2em
-    
+
 .description
   +markdown
   p
@@ -52,14 +53,14 @@
 #comments, .comments
   clear: both
   margin-top: 20px
-  
+
   ul.tabs
     margin-top: 20px
 
   .comment, .activity
     margin: 20px 0
     border: 1px solid #ccc
-    
+
     +markdown
 
     #github-header
@@ -76,13 +77,13 @@
         vertical-align: middle
         margin-right: 5px
         cursor: default
-        
+
       .details
         display: inline-block
         +text-shadow(0, 1px, 0, #fff)
         color: #777
         cursor: default
-      
+
       .on
         display: inline-block
         float: right
@@ -90,34 +91,34 @@
         color: #888
         font-size: 0.9em
         cursor: default
-        
+
       .controls
         float: right
         display: inline-block
         cursor: default
-        
+
         a
           vertical-align: middle
           width: 16px
           height: 16px
           display: inline-block
           margin-left: 5px
-          
+
           &.edit
             background: transparent url(/images/icons/comments/edit.png) 0 0  no-repeat
             &:hover
               background-position: 0 -16px
-          
+
           &.remove
             background: transparent url(/images/icons/comments/remove.png) 0 0  no-repeat
             &:hover
               background-position: 0 -16px
-    
+
     .content
       padding: 5px
       background-color: #fafafa
       line-height: 1.4em
-        
+
   form.new_comment
     textarea
       height: 150px
