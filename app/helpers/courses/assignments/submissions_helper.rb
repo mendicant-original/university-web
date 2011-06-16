@@ -25,7 +25,7 @@ module Courses::Assignments::SubmissionsHelper
               :locals => { :activity => activity })
     end
   end
-  
+
   def comment_and_update_status
     button_to_function "Comment & Update Status",
     %{ $('form.new_comment #status').val($('#assignment_submission_submission_status_id').val());
@@ -42,7 +42,7 @@ module Courses::Assignments::SubmissionsHelper
 
   def github_commit_link(activity)
     full_commit = activity.context.split('-')[0]
-    "https://github.com/#{activity.actionable.github_repository}/commits/#{full_commit}"
+    "https://github.com/#{activity.actionable.github_repository}/commit/#{full_commit}"
   end
 
   def short_github_commit_id(activity)
