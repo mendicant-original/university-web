@@ -34,10 +34,16 @@ module Courses::Assignments::SubmissionsHelper
   end
 
   def github_link(github_repo)
-    return link_to(github_repo, "https://github.com/#{github_repo}") if github_repo
-    raw("<div id=github_help_text>Click 'Edit' to associate this submission with a
-    github repository. You may enter the full repository URL or just its
-    name.</div>")
+    if github_repo
+      link_to github_repo,
+              "https://github.com/#{github_repo}",
+              :target => "_blank"
+    else
+      %{<div id=github_help_text>
+          Click 'Edit' to associate this submission with a github repository.
+          You may enter the full repository URL or just its name.
+        </div>}.html_safe
+    end
   end
 
   def github_commit_link(activity)
