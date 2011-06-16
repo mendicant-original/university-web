@@ -11,7 +11,7 @@
       = time_ago_in_words activity.created_at
       ago
   .content{:style => "display:none;"}
-    - unless activity.description[/updated repository to/]
+    - unless activity.description[/updated github repository to/]
       = link_to "View commit #{github_commit_id(activity, true)} on github",
         github_commit_link(activity),
         :target => "_blank"
