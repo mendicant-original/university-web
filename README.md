@@ -59,7 +59,9 @@ To configure University Web:
    `config/initializers` directory contains an example `secret_token.rb` file
    with instructions for generating a secret token.
 3. Create a `config/github.yml` files. The `config` directory contains an
-   example `github.yml` file.
+   example `github.yml` file. You can find your github API token
+   [here](https://github.com/account/admin).
+
 4. Run the Rails tasks to initialize a development and a test database:
 
     `rake db:migrate`
@@ -111,6 +113,18 @@ Finally, run the test suite to make sure everything is working correctly:
 - The course instructor can then review the submissions for an assignment, and
   take appropriate actions, such as commenting or marking the assignment as
   completed.
+
+### Github Integration
+
+- After a student makes a submission for an assignment, an instructor needs
+  to review the student's code. For this reason, University Web shows the
+  student's github commit activity on the submissions page. 
+- In order to configure this integration, the student should set their 
+  github username on the profile page and set the github repository specific to
+  each assignment on the submissions page.
+- Once configured, University Web will periodically check for new github commits.
+  It may take up to 15 minutes before new commits will appear on the submissions
+  page.
 
 ## Contributing
 
