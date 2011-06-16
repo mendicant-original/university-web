@@ -58,12 +58,14 @@ To configure University Web:
 2. Create a `config/initializers/secret_token.rb` file. The
    `config/initializers` directory contains an example `secret_token.rb` file
    with instructions for generating a secret token.
-3. Run the Rails tasks to initialize a development and a test database:
+3. Create a `config/github.yml` files. The `config` directory contains an
+   example `github.yml` file.
+4. Run the Rails tasks to initialize a development and a test database:
 
     `rake db:migrate`
     `rake db:test:prepare`
 
-4. Generate the static site by running `rake public-site:generate`
+5. Generate the static site by running `rake public-site:generate`
 
 Finally, run the test suite to make sure everything is working correctly:
 
