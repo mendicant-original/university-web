@@ -10,8 +10,16 @@ class UserMailer < ActionMailer::Base
     subject = "[rmu-submission] #{@submission.assignment.name}: " +
               "#{@submission.user.name}"
 
-    mail(:to      => to_from_submission(@submission, @comment.user.email, true),
-         :subject => subject)
+    options = {
+      :to      => to_from_submission(@submission, @comment.user.email, true),
+      :subject => subject
+    }
+
+    unless @submission.assignment.course.cc_comments.blank?
+      options[:cc] = @submission.assignment.course.cc_comments
+    end
+
+    mail(options)
   end
 
   def submission_updated(activity)

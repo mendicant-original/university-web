@@ -30,8 +30,15 @@ class UserMailerTest < ActionMailer::TestCase
       assert @email.to.include?(@instructor.user.email)
     end
 
+    test "doesn't cc anyone if Course#cc_comments is blank" do
+      assert @course.cc_comments.blank?
+      assert @email.cc.nil?
+    end
+
     test "ccs if Course#cc_comments is set" do
-      @course.cc_comments = "mailinglist@rubymendicant.com"
+      @course.update_attribute(:cc_comments, "mailinglist@rubymendicant.com")
+      @comment.reload # Reload to capture the change in @course
+
       @email = UserMailer.submission_comment_created(@comment).deliver
 
       assert_equal 1, @email.cc.length
