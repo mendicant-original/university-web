@@ -12,16 +12,16 @@
 %p
   = form.label :nickname
   = form.text_field :nickname
-  
+
 %p
   = form.label :time_zone
   = form.time_zone_select :time_zone, ActiveSupport::TimeZone.all.sort, :include_blank => true, :default => ""
 
 - if form.object.new_record?
   %p.info
-    To manually set the users password enter it below. 
+    To manually set the users password enter it below.
     // Otherwise leave the fields blank and a password will be generated and emailed to the user.
-    
+
 %p
   = form.label :password, form.object.new_record? ? nil : "Change password"
   = form.password_field :password
@@ -33,13 +33,13 @@
 %p
   = form.label :access_level
   = user_access_level_select(form.object)
-  
+
 %hr
 
 %p
   = form.label :github_account_name, "Github Name"
   = form.text_field :github_account_name
-  
+
 %p
   = form.label :twitter_account_name, "Twitter Name"
   = form.text_field :twitter_account_name
@@ -53,7 +53,7 @@
 %p
   = form.label :alumni_number, "Alumni #"
   = form.text_field :alumni_number
-  
+
 %p
   = form.label :alumni_month
   = form.text_field :alumni_month
@@ -72,11 +72,11 @@
   %p.no-label
     = m.select :course_id, Course.all.map {|c| [c.full_name, c.id]},
       :include_blank => "Select a course"
-    = m.select :access_level, 
+    = m.select :access_level,
       AccessLevel::Course.definitions.keys.reject {|k| k == 'instructor' }
     = m.link_to_remove "Remove"
-  
-      
+
+
 %hr
 
 %h2 Chat Channel Memberships
@@ -98,3 +98,7 @@
   %p.no-label
     = c.text_area :comment_text
     = c.link_to_remove "Remove"
+
+#submit_bar
+  = form.submit @user.new_record? ? "Create" : "Update"
+  = link_to "Cancel", admin_users_path, :class => "cancel"
