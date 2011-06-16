@@ -11,7 +11,7 @@ class UserMailerTest < ActionMailer::TestCase
       @instructor = Factory(:course_membership,
         :course => @course, :access_level => "instructor")
       @comment    = Factory(:comment,
-        :commentable => @assignment.submission_for(@student),
+        :commentable => @assignment.submission_for(@student.user),
         :user        => @student.user)
 
       @email = UserMailer.submission_comment_created(@comment).deliver
