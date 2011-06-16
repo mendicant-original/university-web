@@ -14,6 +14,7 @@ class Admin::CoursesController < Admin::Base
     @course = Course.new(params[:course])
 
     if @course.save
+      flash[:notice] = "Course sucessfully created."
       redirect_to admin_courses_path
     else
       render :action => :new
@@ -22,6 +23,7 @@ class Admin::CoursesController < Admin::Base
 
   def update
     if @course.update_attributes(params[:course])
+      flash[:notice] = "Course sucessfully updated."
       redirect_back admin_courses_path
     else
       render :action => :edit
@@ -31,7 +33,8 @@ class Admin::CoursesController < Admin::Base
   def destroy
     @course.destroy
 
-    flash[:notice] = @course.errors.full_messages.join(",")
+    flash[:error] = @course.errors.full_messages.join(",")
+    flash[:notice] = "Course sucessfully destroyed."
 
     redirect_to admin_courses_path
   end
