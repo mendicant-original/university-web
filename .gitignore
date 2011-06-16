@@ -17,6 +17,7 @@ lib/development_mail_interceptor.rb
 *.swp
 .idea/*
 users.csv
+config/github.yml
 
 
 # Static Site [rake public-site:generate]
