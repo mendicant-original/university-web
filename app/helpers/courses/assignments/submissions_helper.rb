@@ -47,8 +47,8 @@ module Courses::Assignments::SubmissionsHelper
   end
 
   def github_commit_link(activity)
-    full_commit = github_commit_id(activity)
-    "https://github.com/#{activity.actionable.github_repository}/commit/#{full_commit}"
+    id = github_commit_id(activity)
+    "https://github.com/#{activity.actionable.github_repository}/commit/#{id}"
   end
 
   def github_commit_id(activity, short=false)
