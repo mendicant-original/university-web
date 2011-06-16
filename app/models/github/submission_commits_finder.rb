@@ -21,9 +21,7 @@ module Github
     def find_and_store_new_commits_for_submission(submission)
 
       puts "Looking for new commits in: #{submission.github_repository}"
-      all_commits  = @client.commits(submission.github_repository).map do |c|
-        GithubCommit.new(c)
-      end
+      all_commits  = get_commits_across_branches(submission.github_repository)
 
       user_commits = all_commits.select do |commit|
         commit.login == submission.user.github_account_name &&
@@ -40,6 +38,22 @@ module Github
         puts "Adding commit: #{commit.to_s}"
       end
 
+    end
+
+    def get_commits_across_branches(repository)
+      @client.branches(repository).keys.inject([]) do |results, branch|
+        results.concat(get_commits_for_branch(repository, branch))
+      end
+    end
+
+    def get_commits_for_branch(repository, branch)
+      begin
+        @client.commits(repository, branch).map {|c| GithubCommit.new(c)}
+      rescue
+        #If this repo is a fork, branches will be returned by the Github API
+        #that don't exist on this fork.
+        []
+      end
     end
 
   end
