@@ -1,10 +1,12 @@
-= link_to  user_path(user) do
-  .user
+= link_to user_path(user) do
+  %div{:class => "user #{css_class}"}
     .icon= image_tag user.gravatar_url(48)
     .name= user.name
     .since
       %span.type
-        - if defined? roles
+        - if defined? roles && roles.is_a?(String)
+          = roles + ": "
+        - elsif defined? roles
           = roles.map {|cm| cm.access_level.to_s.humanize }.join(', ') + ": "
         - else
           = user_type(user)

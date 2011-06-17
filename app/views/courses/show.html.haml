@@ -38,6 +38,7 @@
       jQuery("label.infield").inFieldLabels();
       
       UW.Timezones.init();
+      
     });
 
 - content_for :breadcrumbs do
@@ -96,11 +97,13 @@
           :class => "infield"
         = text_field_tag :search, params[:search]
         = submit_tag "Search"
-  
-      - @users.each do |user|
-        = render :partial => '/users/user', :locals => { :user => user, 
-          :roles => user.course_memberships.where(:course_id => @course.id)}
-
+      
+      - @grouped_users.keys.each do |role|
+        %h3= role.pluralize
+        - group_size = @grouped_users[role].length
+        - @grouped_users[role].each_with_index do |user, i| i+=1
+          = render :partial => '/users/user', :locals => { :user => user, :roles => role, :css_class => "#{role.downcase} #{get_last(group_size, i)}" } 
+      
       = will_paginate @users, :params => {:anchor => "participants"}, 
         :param_name => "user_page"
     

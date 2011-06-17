@@ -22,4 +22,5 @@ group :test do
   gem "test-unit"
   gem 'mocha'
   gem 'test_notifier', '~> 0.3.6'
+  gem 'launchy'
 end
