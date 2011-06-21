@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem "rails", "3.0.0"
-gem "devise", :path => "vendor/gems/devise"
+gem "devise"
 
 gem "compass", ">= 0.10.4"
 gem "haml"
