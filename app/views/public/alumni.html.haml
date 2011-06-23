@@ -1,6 +1,16 @@
 .alumni_header
   Our alumni have all successfully completed the Mendicant University core skills course, an intense three week session that covers a number of important topics that any practicing Ruby developer should be familiar with. The students on this list have all shown they can ship clean code under tight deadlines while maintaining a balance between learning new things and getting things done. These are the folks to watch if you want to know who's up and coming in the Ruby world.
 
+= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false",
+                         "uw.js", "uw.maps.js"
+
+:javascript
+  $(function(){
+    UW.Maps.init(#{ MappableUserCollection.new(@alumni).to_json });
+  });
+
+#map_canvas
+
 #alumni_links_container
   %ul#alumni_links
     - @terms_by_year.each_pair do |year, terms|
@@ -13,7 +23,9 @@
 
 #alumni
   - @alumni.each do |alumnus|
-    .alumnus
+    .alumnus.highlight{:id => "alumnus-#{ alumnus.id }"}
+      .overlay-filter
+
       .name
         = alumnus_name(alumnus)
 
