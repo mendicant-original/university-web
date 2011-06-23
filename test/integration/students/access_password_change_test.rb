@@ -16,9 +16,9 @@ module Students
         fill_in "Password Confirmation", :with => "654321"
         click_button "Update User"
 
-        assert_current_path dashboard_path
-        assert_no_field "New Password"
-        assert_content "IRC Channels"
+        assert_current_path new_user_session_path
+        assert_content 'You need to sign in before continuing.'
+        assert_no_content "IRC Channels"
       end
 
       scenario "attempt to use invalid password combination when required" do
