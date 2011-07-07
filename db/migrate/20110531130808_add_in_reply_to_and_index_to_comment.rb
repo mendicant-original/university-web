@@ -12,7 +12,6 @@ class AddInReplyToAndIndexToComment < ActiveRecord::Migration
     add_column :comments, :in_reply_to_id,   :integer
     add_column :comments, :index, :integer
 
-    add_index_to_commentables Admissions::Submission.all
     add_index_to_commentables Assignment::Submission.all
   end
 
