@@ -63,13 +63,10 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
 
   create_table "assignment_reviews", :force => true do |t|
     t.integer  "submission_id"
-    t.boolean  "closed",               :default => false
-    t.text     "description"
+    t.string   "review_type"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "closed_date"
-    t.integer  "closed_by_id"
-    t.integer  "submission_status_id"
   end
 
   create_table "assignment_submissions", :force => true do |t|
@@ -80,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.datetime "updated_at"
     t.text     "description"
     t.string   "github_repository"
-    t.datetime "last_commit_time",     :default => '2011-01-01 02:00:00', :null => false
+    t.datetime "last_commit_time",     :default => '2011-01-01 05:00:00', :null => false
     t.string   "last_commit_id"
   end
 
@@ -139,6 +136,8 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.text     "comment_text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "in_reply_to_id"
+    t.integer  "index"
   end
 
   create_table "course_documents", :force => true do |t|
