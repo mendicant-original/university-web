@@ -5,10 +5,11 @@
     = user_icon(comment.user)
     = comment.user.name
     .details
-      = link_to "commented", "##{comment.index}"
       - if comment.in_reply_to
-        in reply to
+        = link_to "replied to", "##{comment.index}"
         = link_to_comment comment.in_reply_to
+      - else
+        = link_to "commented", "##{comment.index}"
     .controls
       = link_to '', '#new_comment', :class => "reply", :title => "Reply"
       - if current_user == comment.user
