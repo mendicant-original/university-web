@@ -1,6 +1,8 @@
 = link_to activity_path(activity) do
   .activity
-    = user_icon(activity.user)
+    = image_tag activity.user.gravatar_url(24), :alt => ""
+    - #= user_icon(activity.user)
+    - # Removed due to illegal nested links: https://www.pivotaltracker.com/story/show/14551241
     %span.name= activity.user.name
     = activity.description.downcase
     -  if activity.submission
