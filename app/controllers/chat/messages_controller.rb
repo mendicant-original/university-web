@@ -114,12 +114,6 @@ class Chat::MessagesController < ApplicationController
 
   private
 
-  def authenticate_service
-    authenticate_or_request_with_http_basic do |id, password|
-      id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
-    end
-  end
-
   def find_channel
     @channel = Chat::Channel.find_by_name(params[:channel])
   end
