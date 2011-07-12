@@ -1,10 +1,11 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.0"
-gem "devise"
+gem "rails", "3.0.7"
+gem "devise", "1.3.4"
 
 gem "compass", "~> 0.10.4"
 gem "haml"
+gem "sass"
 gem "json"
 gem "pg"
 gem "rack", "~> 1.2.1"
