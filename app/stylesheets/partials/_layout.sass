@@ -46,7 +46,6 @@ $rmu_red= #70130B
     color: #333
     position: relative
     z-index: 4
-    display: inline-block
     +border-top-radius(3px)
 
 @font-face
@@ -106,6 +105,7 @@ body
     +dropdown_container
     a
       color: #fff
+      display: inline-block
       +dropdown_link
 
     img.gravatar
@@ -114,6 +114,7 @@ body
       
     #user_dropdown
       +dropdown_menu
+      margin-top: -1px
    
 #nav
   background-color: #256188
