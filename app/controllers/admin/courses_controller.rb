@@ -12,9 +12,7 @@ class Admin::CoursesController < Admin::Base
 
   def create
     @course = Course.new(params[:course])
-    puts "=========received: #{params[:course]}"
-    puts "=======valid? #{@course.valid?}"
-    puts "=========errors: #{@course.errors.inspect}"
+
     if @course.save
       flash[:notice] = "Course sucessfully created."
       redirect_to admin_courses_path
