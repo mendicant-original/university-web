@@ -3,9 +3,9 @@ class CourseMembership < ActiveRecord::Base
   after_create   :create_assignment_submissions,  :create_channel_membership
 
   belongs_to :user
-  belongs_to :course
+  belongs_to :course, :inverse_of => :course_memberships
 
-  validates_presence_of   :course_id, :unless => :new_record?
+  validates_presence_of   :course
   validates_uniqueness_of :course_id, :scope => [:user_id]
 
   def access_level
