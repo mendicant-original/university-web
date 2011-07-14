@@ -5,7 +5,7 @@ class CourseMembership < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
 
-  validates_presence_of   :course_id
+  validates_presence_of   :course_id, :unless => :new_record?
   validates_uniqueness_of :course_id, :scope => [:user_id]
 
   def access_level
