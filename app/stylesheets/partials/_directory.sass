@@ -2,18 +2,21 @@
   border-top: 1px solid #ddd
   .user
     padding: 0.5em 0
-    border-bottom: 1px solid #ddd
     clear: both
-    
+
     &:hover
       background-color: #eee
-      
+
     cursor: pointer
 
     .name
       color: #222
       font-size: 1.25em
       padding-top: 5px
+
+      span.nickname
+        color: #999
+
     .icon
       float: left
       padding: 5px
@@ -24,19 +27,26 @@
       font-size: 0.75em
       margin-top: 0.5em
       color:  #777
-      
-      span.type
-        color: #999
+
     .timezone
       font-size: 0.75em
       margin-top: 0.1em
       color:  #777
-      
+
+  hr
+    border: none
+    background: #ddd
+    color: #ddd
+    margin: 0
+    height: 1px
+
 #directory_search
   position: relative
-  
+
   input, select
     padding: 2px 4px
+    float: none
+    margin-right: 4px
 
   label.infield
     width: auto
@@ -44,6 +54,6 @@
     color: #999
     position: absolute
     top: 15px
-    left: 10px
+    left: 6px
     font-weight: normal
     margin: 0

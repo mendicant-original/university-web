@@ -27,16 +27,18 @@ module UsersHelper
     end
   end
 
-  def user_type(user)
-    if user.alumnus?
-      "Alumnus: "
-    elsif user.instructor_courses.any?
-      "Instructor: "
-    else
-      "#{user.access_level.to_s.humanize}: "
+  def user_header(user)
+    output = [
+      user.real_name.blank? ? user.nickname : user.real_name
+    ]
+
+    unless user.nickname.blank? || user.real_name.blank?
+      output << content_tag(:span, "/ #{user.nickname}", :class => "nickname")
     end
+
+    output.join("\n").html_safe
   end
-  
+
   def user_icon(user, size=24)
     render :partial => "users/icon", :locals => {:user => user, :size => size}
   end

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.search(params[:search], params[:page],
-      :sort => :name, :course_id => params[:course])
+      :sort => "real_name", :course_id => params[:course])
   end
 
   def show
