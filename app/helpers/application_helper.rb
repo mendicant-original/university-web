@@ -49,4 +49,8 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
+  
+  def get_last(collection_size, index) 
+    collection_size == index ? "last" : ""
+  end
 end
