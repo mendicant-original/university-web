@@ -7,4 +7,5 @@ module CoursesHelper
       ''
     end
   end
+  
 end

@@ -72,10 +72,9 @@ class User < ActiveRecord::Base
         where(["course_memberships.course_id = ?", options[:course_id].to_i])
     end
 
-    # TODO: sort_by will trigger the sql query, instead of using a relation.
-    # The pagination would be created over the result array. Use a relation.
     if options[:sort]
-      results = results.sort_by(&options[:sort])
+      results = options[:sort].is_a?(Symbol) ? 
+        results.order(&options[:sort]) : results.order(options[:sort])
     else
       results = results.order('email')
     end
@@ -168,6 +167,10 @@ class User < ActiveRecord::Base
 
   def mentor_courses
     course_by_membership_type("mentor")
+  end
+  
+  def current_course_membership(course)
+    course_memberships.where(:course_id => course.id).first
   end
 
   private

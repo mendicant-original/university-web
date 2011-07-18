@@ -14,7 +14,12 @@ class CoursesController < ApplicationController
                                               :page     => params[:activity_page])
 
     @users = User.search(params[:search], params[:user_page],
-      :sort => :name, :course_id => @course.id, :per_page => 7)
+      :sort => "course_memberships.access_level ASC",
+      :course_id => @course.id, :per_page => 7)
+      
+    @grouped_users = @users.group_by do |user| 
+      user.current_course_membership(@course).access_level.to_s.humanize
+    end
       
     respond_to do |format|
       format.html
