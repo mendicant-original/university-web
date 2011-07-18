@@ -72,17 +72,12 @@ class User < ActiveRecord::Base
         where(["course_memberships.course_id = ?", options[:course_id].to_i])
     end
 
-    if options[:sort]
-      results = options[:sort].is_a?(Symbol) ? 
-        results.order(&options[:sort]) : results.order(options[:sort])
-    else
-      results = results.order('email')
-    end
+    options[:sort]     ||= 'email'
+    options[:per_page] ||= 20
 
-    per_page = options[:per_page]
-    per_page ||= 20
-
-    results.paginate :per_page => per_page, :page => page
+    results.paginate :per_page => options[:per_page],
+                     :page     => page,
+                     :order    => options[:sort]
   end
 
   def self.random_password
@@ -168,7 +163,7 @@ class User < ActiveRecord::Base
   def mentor_courses
     course_by_membership_type("mentor")
   end
-  
+
   def current_course_membership(course)
     course_memberships.where(:course_id => course.id).first
   end

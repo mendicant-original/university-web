@@ -112,7 +112,7 @@ class UserTest < ActiveSupport::TestCase
       user1 = Factory(:user, :nickname => "foo2")
       user2 = Factory(:user, :nickname => "foo1")
 
-      results = User.search("foo", 1, :sort => :nickname)
+      results = User.search("foo", 1, :sort => "nickname")
       assert_equal [user2, user1], results
     end
 

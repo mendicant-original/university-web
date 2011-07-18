@@ -1,5 +1,5 @@
 - title @course.name
-      
+
 - content_for :header_bottom do
   :javascript
     $(function(){
@@ -12,7 +12,7 @@
           $('#note_content').trigger("edit");
         }
       });
-      
+
       var editPath = '#{course_path(@course)}/notes';
 
       var placeholder = "Click to edit this page. It's like a wiki page that is" +
@@ -32,40 +32,40 @@
         placeholder: placeholder,
         clicktoedit: false
       });
-      
+
       SidebarMenu.register('sidebar');
-      
+
       jQuery("label.infield").inFieldLabels();
-      
+
       UW.Timezones.init();
-      
+
     });
 
 - content_for :breadcrumbs do
   = render :partial => "breadcrumbs"
   %span.separator &rarr;
   %span#current_section
-  
+
 - content_for :bucket do
   #description.bucket
     = md(@course.description)
-  
+
   #assignments.bucket
     - @course.assignments.each do |assignment|
       = link_to course_assignment_path(@course, assignment) do
         .assignment
           %span.name= assignment.name
           %span.description= assignment.short_description
-  
+
   #progress.bucket
-    = render :partial => "dashboard/assignments", 
+    = render :partial => "dashboard/assignments",
       :locals => {:course => @course, :expanded => true}
-  
+
   #notes.bucket
     .controls
       %input.clean-gray.small#edit_notes{:type => "button", :value => "Edit"}
     #note_content= md(@course.notes)
-      
+
   #documents.bucket
     - @course.documents.each do |document|
       .document
@@ -75,36 +75,37 @@
 
   #activity.bucket
     - @activities.each do |activity|
-      = render :partial => "activity", 
+      = render :partial => "activity",
               :locals => {:activity => activity}
     = will_paginate @activities, :params => {:anchor => "activity"},
       :param_name => "activity_page"
-      
+
   - if @course.channel
     #irc_log.bucket
-      = render :partial => "/chat/recent", 
-        :locals => { :channel            => @course.channel, 
+      = render :partial => "/chat/recent",
+        :locals => { :channel            => @course.channel,
                      :full_body          => true,
                      :number_of_messages => 20 }
-      = link_to "View full logs", 
+      = link_to "View full logs",
         chat_messages_path(:channel => @course.channel.name)
-    
+
   #participants.bucket
     #directory
-      = form_tag course_path(@course, :anchor => "participants"), :method => :get, 
+      = form_tag course_path(@course, :anchor => "participants"), :method => :get,
         :id => "directory_search" do
-        = label_tag :search, "Name or Email", 
+        = label_tag :search, "Name or Email",
           :class => "infield"
         = text_field_tag :search, params[:search]
         = submit_tag "Search"
-      
+
       - @grouped_users.keys.each do |role|
-        %h3= role.pluralize
-        - group_size = @grouped_users[role].length
-        - @grouped_users[role].each_with_index do |user, i| i+=1
-          = render :partial => '/users/user', :locals => { :user => user, :roles => role, :css_class => "#{role.downcase} #{get_last(group_size, i)}" } 
-      
-      = will_paginate @users, :params => {:anchor => "participants"}, 
+        %div{:class => role.downcase.pluralize}
+          %h3= role.pluralize
+          = render :partial => '/users/user',
+            :collection => @grouped_users[role],
+            :spacer_template => "/users/divider"
+
+      = will_paginate @users, :params => {:anchor => "participants"},
         :param_name => "user_page"
-    
+
 = render :partial => "layout"

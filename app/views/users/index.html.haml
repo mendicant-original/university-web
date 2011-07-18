@@ -17,7 +17,7 @@
   = submit_tag "Search"
 
 #directory
-  - @users.each do |user|
-    = render :partial => 'user', :locals => {:user => user}
+  = render :partial => 'user', :collection => @users,
+    :spacer_template => "/users/divider"
 
 = will_paginate @users

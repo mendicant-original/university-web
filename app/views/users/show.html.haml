@@ -7,9 +7,9 @@
 - title @user.name
 
 .profile
+  = image_tag @user.gravatar_url(50), :alt => ""
   %h1
-    = image_tag @user.gravatar_url(50), :alt => ""
-    = @user.name
+    = user_header(@user)
     %p
       = mail_to @user.email
   #social-presence
