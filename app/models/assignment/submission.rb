@@ -1,4 +1,4 @@
-module Assignment
+class Assignment
   class Submission < ActiveRecord::Base
     belongs_to :status,     :class_name  => "::SubmissionStatus",
                             :foreign_key => "submission_status_id"
