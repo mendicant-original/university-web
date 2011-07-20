@@ -1,32 +1,31 @@
 class UsersController < ApplicationController
   respond_to :json
   skip_before_filter :authenticate_user!, :only => [:index]
-  skip_before_filter :change_password_if_needed
-  before_filter :check_permissions, :except => [:index, :edit, :update, :change_password]
+  skip_before_filter :change_password_if_needed, :only => [:index]
+  before_filter :check_permissions, :except => [:index]
 
-  def index 
+  def index
     respond_to do |format|
       format.html do
         authenticate_user!
         check_permissions
         @users = User.search(params[:search], params[:page],
-          :sort => :name, :course_id => params[:course]) 
+          :sort => :name, :course_id => params[:course])
       end
-      
+
       format.json do
-        raise unless authenticate_service
+        return unless authenticate_service
         @users = User.where(:github_account_name => params[:github]).all
-        
+
         github_users = @users.map do |user|
-          { :github  => user.github_account_name, 
-            :alumnus => user.alumnus?, 
+          { :github  => user.github_account_name,
+            :alumnus => user.alumnus?,
             :staff   => user.staff? }
         end
-        
+
         render :json => github_users.to_json
       end
     end
-    
   end
 
   def show
