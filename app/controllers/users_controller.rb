@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  respond_to :json
-  skip_before_filter :authenticate_user!, :only => [:index]
-  skip_before_filter :change_password_if_needed, :only => [:index]
-  before_filter :check_permissions, :except => [:index]
+  skip_before_filter :authenticate_user!,        :only   => [:index]
+  skip_before_filter :change_password_if_needed, :only   => [:index]
+  before_filter      :check_permissions,         :except => [:index]
 
   def index
     respond_to do |format|
