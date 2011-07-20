@@ -145,6 +145,10 @@ class User < ActiveRecord::Base
   def alumnus?
     !alumni_number.nil?
   end
+  
+  def staff?
+    access_level.to_s == "admin"
+  end
 
   # Returns a date object based on the alumni year and month
   # to be used for comparing with terms start and end dates
