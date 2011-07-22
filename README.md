@@ -6,20 +6,21 @@ multiple courses, and we are now also developing other features for enabling
 members of the community to work together.
 
 University Web is developed by the
-[Ruby Mendicant University](http://university.rubymendicant.com) (RbMU), a
-rapidly growing online learning community, and it is our core infrastructure.
+[Mendicant University](http://university.rubymendicant.com), an
+online learning community, and it is our core infrastructure.
 We expect it to become potentially useful to other organizations, and hope that
 it will be adopted elsewhere as it becomes mature.
 
-Whether you are a member of RbMU or a developer interested in systems for
-learning and education, we encourage you to check out the source code:
-<http://github.com/rmu/university-web>
+Whether you are a member of Mendicant University or a developer interested in
+systems for learning and education, we encourage you to check out the source
+code: <http://github.com/rmu/university-web>
 
-If you are not a member of RbMU, please get in touch through our public channels:
+If you are not a member of Mendicant University, please get in touch through our
+public channels:
 
 - **Email:** <http://groups.google.com/group/rmu-talk>
 - **IRC:** #rmu
-- **Twitter:** #RbMU
+- **Twitter:** #mendicant / #RbMU
 
 ## Key Features
 
@@ -118,8 +119,8 @@ Finally, run the test suite to make sure everything is working correctly:
 
 - After a student makes a submission for an assignment, an instructor needs
   to review the student's code. For this reason, University Web shows the
-  student's github commit activity on the submissions page. 
-- In order to configure this integration, the student should set their 
+  student's github commit activity on the submissions page.
+- In order to configure this integration, the student should set their
   github username on the profile page and set the github repository specific to
   each assignment on the submissions page.
 - Once configured, University Web will periodically check for new github commits.
@@ -153,4 +154,4 @@ Our contact details are at the top of this file.
 
 ------
 
-University Web - a [Ruby Mendicant University](http://university.rubymendicant.com) project
+University Web - a [Mendicant University](http://university.rubymendicant.com) project
