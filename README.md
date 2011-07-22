@@ -36,7 +36,7 @@ functionality:
 
 ## Installation
 
-University Web is a Ruby on Rails 3 application which runs on
+University Web is a Ruby on Rails 3 application which runs on Ruby 1.9.2 and on
 [PostgreSQL](http://www.postgresql.org) databases. Other databases like MySQL
 or SQLite are not officially supported.
 
