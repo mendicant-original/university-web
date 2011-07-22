@@ -19,6 +19,23 @@ class CourseTest < ActiveSupport::TestCase
     assert course.valid?
   end
 
+  test "a course can be created with an instructor already associated" do
+    term = Factory :term
+    user = Factory :user, :access_level => :admin
+    course = Course.create!({
+      :name => "Foo", 
+      :term_id => term.id, 
+      :course_memberships_attributes => [{
+        :user_id => user.id,
+        :access_level => :instructor
+      }]
+    })
+    
+    assert_equal 1, Course.count
+    assert_equal 1, course.instructors.reload.count
+    assert_equal user.name, course.instructors.first.name
+  end
+
   context ".active" do
     test "finds only not archived courses" do
       archived_course     = Factory(:course, :archived => true)
