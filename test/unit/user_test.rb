@@ -211,6 +211,7 @@ class UserTest < ActiveSupport::TestCase
       assert_equal @alumnus4.alumni_date, "2011-12-1".to_date
     end
   end
+
   context "retrieving user github repositories" do
     setup do
       @first_repo  = stub(:name => "repo1", :fork => false, :pushed_at => Date.yesterday)
@@ -236,15 +237,24 @@ class UserTest < ActiveSupport::TestCase
       Octokit.stubs("repos").with("pellegrino").raises("404: Not Found")
       assert_equal [] ,  @user.github_repositories
     end
-
   end
+
   context "retrieving user locations" do
     setup do
-      @expected = [[12.3456, 78.9012], [34.5678, 90.1234]]
+      @points = [
+        [12.34560, 78.90120],
+        [34.56780, 90.12340]
+      ]
 
-      @expected.each do |loc|
-        Factory.create(:user, :latitude => loc[0], :longitude => loc[1])
-      end
+      @user_one = Factory.create(:user, :latitude  => @points[0].first,
+                                        :longitude => @points[0].last)
+      @user_two = Factory.create(:user, :latitude  => @points[1].first,
+                                        :longitude => @points[1].last)
+
+      @expected = {
+        '12.34560,78.90120' => [@user_one.attributes_for_map],
+        '34.56780,90.12340' => [@user_two.attributes_for_map]
+      }
     end
 
     test "retrieve all user locations" do
@@ -253,6 +263,13 @@ class UserTest < ActiveSupport::TestCase
 
     test "retrieve locations only with a latitude & longitude" do
       Factory.create(:user)
+      assert_equal @expected, User.locations
+    end
+
+    test "grouping users by location" do
+      @user_three = Factory.create(:user, :latitude  => @points[0].first,
+                                          :longitude => @points[0].last)
+      @expected['12.34560,78.90120'] << @user_three.attributes_for_map
       assert_equal @expected, User.locations
     end
   end

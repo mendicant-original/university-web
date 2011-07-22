@@ -50,7 +50,7 @@ class PublicController < ApplicationController
   end
 
   def map
-    @people = (User.alumni.locations + User.staff.locations).uniq
+    @people = User.staff_and_alumni.publically_visible.locations
   end
 
   private
