@@ -190,7 +190,6 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
   create_table "users", :force => true do |t|
     t.string   "email",                                   :default => "",   :null => false
     t.string   "encrypted_password",       :limit => 128, :default => "",   :null => false
-    t.string   "password_salt",                           :default => "",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "requires_password_change",                :default => true
