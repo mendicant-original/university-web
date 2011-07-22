@@ -35,7 +35,7 @@ class Assignment
 
     def add_github_commit(commit)
 
-      if(commit.commit_time > last_commit_time)
+      if(last_commit_time.nil? || commit.commit_time > last_commit_time)
         update_attributes(
             last_commit_time:  commit.commit_time,
             last_commit_id:    commit.id
