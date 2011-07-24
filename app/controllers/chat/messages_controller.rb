@@ -1,7 +1,7 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  before_filter      :find_channel,       :only  => [:index, :discussions]
+  before_filter      :find_channel,       :only  => [:index, :discussions, :search]
   skip_before_filter :authenticate_user!
   skip_before_filter :change_password_if_needed
   before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
@@ -28,7 +28,7 @@ class Chat::MessagesController < ApplicationController
 
     if params[:since] && !params[:since].blank?
       @since    = DateTime.parse(params[:since])
-      @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?",
+      @messages = @messages.where(["recorded_at >= ? AND chat_messages.id <> ?",
                     @since, params[:last_id].to_i])
     else
       total_messages = @messages.count
@@ -57,6 +57,30 @@ class Chat::MessagesController < ApplicationController
         render :json => json_messages.to_json
       end
     end
+  end
+
+  def search
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+    
+    change_password_if_needed unless @channel.public?
+
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
+    end
+    
+    @messages = Chat::Message.search({body: params[:search]})
+    @num_results = @messages.count.to_s
+    
+    respond_to do |format|
+      format.html
+    end
+    
   end
 
   def discussions

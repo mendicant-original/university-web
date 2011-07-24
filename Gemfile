@@ -12,7 +12,7 @@ gem "rdiscount"
 gem "sanitize", "~> 2.0.0"
 gem "will_paginate", "~> 3.0.pre2"
 gem 'octokit'
-
+gem 'texticle', "2.0", :require => 'texticle/rails'
 
 group :test do
   gem "capybara", "~> 0.4.1.1"
