@@ -1,4 +1,7 @@
-# API Token: https://github.com/account/admin
+# Github authentication is required to access commit history for private repos
+#
+# To find your API Token, log into GitHub and visit this page:
+#   https://github.com/account/admin
 
 test:
     username:  username_goes_here
