@@ -1,26 +1,13 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  before_filter      :find_channel,       :only  => [:index, :discussions, :search]
-  skip_before_filter :authenticate_user!
-  skip_before_filter :change_password_if_needed
-  before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
+  before_filter       :find_and_authorize_channel, 
+                      :only  => [:index, :discussions, :search]
+  skip_before_filter  :authenticate_user!
+  skip_before_filter  :change_password_if_needed
+  before_filter       :authenticate_service, :only => [:create, :discussion_topic_path]
 
   def index
-    unless @channel
-      flash[:error] = "Channel does not exist!"
-      redirect_to dashboard_path
-      return
-    end
-
-    change_password_if_needed unless @channel.public?
-
-    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
-      flash[:error] = "You do not have access to this channel."
-      redirect_to dashboard_path
-      return
-    end
-
     topic = @channel.topics.find_by_name(params[:topic]) if params[:topic]
 
     @messages = @channel.messages.order("recorded_at DESC")
@@ -60,44 +47,18 @@ class Chat::MessagesController < ApplicationController
   end
 
   def search
-    unless @channel
-      flash[:error] = "Channel does not exist!"
-      redirect_to dashboard_path
-      return
-    end
-    
-    change_password_if_needed unless @channel.public?
-
-    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
-      flash[:error] = "You do not have access to this channel."
-      redirect_to dashboard_path
-      return
-    end
+    #strip non-word chars, which confuse postgresql's search method
+    params[:search].gsub!(/\W/," ")
     
     @messages = Chat::Message.search({body: params[:search]})
     @num_results = @messages.count.to_s
     
     respond_to do |format|
       format.html
-    end
-    
+    end    
   end
 
   def discussions
-    unless @channel
-      flash[:error] = "Channel does not exist!"
-      redirect_to dashboard_path
-      return
-    end
-
-    change_password_if_needed unless @channel.public?
-
-    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
-      flash[:error] = "You do not have access to this channel."
-      redirect_to dashboard_path
-      return
-    end
-
     params[:sort] ||= 'created_at'
     @discussion_orders = Chat::Topic::SORT_ORDERS
     @discussions = @channel.topics.sort_order_by(params[:sort])
@@ -144,7 +105,22 @@ class Chat::MessagesController < ApplicationController
     end
   end
 
-  def find_channel
+  def find_and_authorize_channel
     @channel = Chat::Channel.find_by_name(params[:channel])
+    
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+
+    change_password_if_needed unless @channel.public?
+
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
+    end      
   end
+  
 end
