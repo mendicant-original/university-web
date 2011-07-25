@@ -61,18 +61,22 @@ To configure University Web [Basic]:
    with instructions for generating a secret token.
 3. Run the Rails tasks to initialize a development and a test database:
 
-```rake
-$ bundle exec rake db:migrate
-$ bundle exec rake db:test:prepare
-```
+    ```bash
+    $ bundle exec rake db:migrate
+    $ bundle exec rake db:test:prepare
+    ```
 
-5. Generate the static site by running `bundle exec rake public-site:generate`
+4. Generate the static site by running:
 
-Finally, run the test suite to make sure everything is working correctly:
+    ```bash
+    $ bundle exec rake public-site:generate
+    ```
 
-```rake
-$ bundle exec rake test
-```
+5. Finally, run the test suite to make sure everything is working correctly:
+
+    ```bash
+    $ bundle exec rake test
+    ```
 
 To configure University Web [Full]:
 
