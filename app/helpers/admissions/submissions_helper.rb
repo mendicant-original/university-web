@@ -2,7 +2,7 @@ module Admissions::SubmissionsHelper
 
   def submission_zip_path(submission)
     attachment_admissions_submission_path(submission.id,
-      "#{Slugger.generate(submission.user.name)}_#{submission.id}",
+      "#{Slugger.generate(submission.user.name)}-#{submission.id}",
       :format => "zip")
   end
 
