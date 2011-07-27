@@ -4,7 +4,7 @@ require 'mocha'
 module Courses
   class ActivityTest < ActionDispatch::IntegrationTest
 
-    story "As a Student I want to view an activity" do
+    context "As a Student I want to view an activity" do
 
       setup do
         @user       = sign_user_in
@@ -20,7 +20,7 @@ module Courses
         end
       end
 
-      scenario "view all activities" do
+      test "view all activities" do
         visit course_path(@course, :anchor => "activity")
 
         assert_content "made something"
@@ -28,7 +28,7 @@ module Courses
 
       # This is currently broken in most web browsers but not reproducing here
       # https://www.pivotaltracker.com/story/show/14551241
-      scenario "view an activity" do
+      test "view an activity" do
         visit course_path(@course, :anchor => "activity")
 
         click_link(@course.activities.first.description)

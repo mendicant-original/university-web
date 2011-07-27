@@ -21,10 +21,8 @@ group :test do
   gem "capybara", "~> 0.4.1.1"
   gem "contest"
   gem "factory_girl_rails"
-  gem "stories"
-  gem "test-unit"
   gem 'mocha'
-  gem 'test_notifier', '~> 0.3.6'
+  gem "colorific", "~> 1.0.0"
 end
 
 group :production do
