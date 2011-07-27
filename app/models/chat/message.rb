@@ -13,5 +13,19 @@ module Chat
         self.action = true
       end
     end
+    
+    def nearby_messages(before = 2, after = 2)
+      msgs_before = Chat::Message.
+        where("channel_id = ? and recorded_at <= ?", channel_id, recorded_at).
+        where("id != ?", id)
+        
+      msgs_after = Chat::Message.
+        where("channel_id = ? and recorded_at >= ?", channel_id, recorded_at).
+        where("id != ?", id)
+      msgs_before = msgs_before.order("recorded_at DESC").limit(before).reverse
+      msgs_after = msgs_after.order("recorded_at ASC").limit(after)
+      
+      return [msgs_before, self, msgs_after].flatten
+    end
   end
 end
