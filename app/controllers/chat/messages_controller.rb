@@ -1,26 +1,13 @@
 class Chat::MessagesController < ApplicationController
   respond_to :json
 
-  before_filter      :find_channel,       :only  => [:index, :discussions]
-  skip_before_filter :authenticate_user!
-  skip_before_filter :change_password_if_needed
-  before_filter      :authenticate_service, :only => [:create, :discussion_topic_path]
+  before_filter       :find_and_authorize_channel,
+                      :only  => [:index, :discussions, :search]
+  skip_before_filter  :authenticate_user!
+  skip_before_filter  :change_password_if_needed
+  before_filter       :authenticate_service, :only => [:create, :discussion_topic_path]
 
   def index
-    unless @channel
-      flash[:error] = "Channel does not exist!"
-      redirect_to dashboard_path
-      return
-    end
-
-    change_password_if_needed unless @channel.public?
-
-    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
-      flash[:error] = "You do not have access to this channel."
-      redirect_to dashboard_path
-      return
-    end
-
     topic = @channel.topics.find_by_name(params[:topic]) if params[:topic]
 
     @messages = @channel.messages.order("recorded_at DESC")
@@ -28,7 +15,7 @@ class Chat::MessagesController < ApplicationController
 
     if params[:since] && !params[:since].blank?
       @since    = DateTime.parse(params[:since])
-      @messages = @messages.where(["recorded_at > ? AND chat_messages.id <> ?",
+      @messages = @messages.where(["recorded_at >= ? AND chat_messages.id <> ?",
                     @since, params[:last_id].to_i])
     else
       total_messages = @messages.count
@@ -59,21 +46,19 @@ class Chat::MessagesController < ApplicationController
     end
   end
 
+  def search
+    #strip non-word chars, which confuse postgresql's search method
+    params[:search].gsub!(/\W/," ")
+
+    @messages = Chat::Message.search({body: params[:search]})
+    @num_results = @messages.count.to_s
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def discussions
-    unless @channel
-      flash[:error] = "Channel does not exist!"
-      redirect_to dashboard_path
-      return
-    end
-
-    change_password_if_needed unless @channel.public?
-
-    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
-      flash[:error] = "You do not have access to this channel."
-      redirect_to dashboard_path
-      return
-    end
-
     params[:sort] ||= 'created_at'
     @discussion_orders = Chat::Topic::SORT_ORDERS
     @discussions = @channel.topics.sort_order_by(params[:sort])
@@ -114,7 +99,28 @@ class Chat::MessagesController < ApplicationController
 
   private
 
-  def find_channel
-    @channel = Chat::Channel.find_by_name(params[:channel])
+  def authenticate_service
+    authenticate_or_request_with_http_basic do |id, password|
+      id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
+    end
   end
+
+  def find_and_authorize_channel
+    @channel = Chat::Channel.find_by_name(params[:channel])
+
+    unless @channel
+      flash[:error] = "Channel does not exist!"
+      redirect_to dashboard_path
+      return
+    end
+
+    change_password_if_needed unless @channel.public?
+
+    if !@channel.public? && !(current_user && current_user.chat_channels.include?(@channel))
+      flash[:error] = "You do not have access to this channel."
+      redirect_to dashboard_path
+      return
+    end
+  end
+
 end

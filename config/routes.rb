@@ -12,7 +12,11 @@ University::Application.routes.draw do
   resource :dashboard, :controller => "dashboard"
 
   namespace :chat do
-    resources :messages
+    resources :messages do
+      collection do
+        get 'search'
+      end
+    end
   end
   get 'chat/discussions/:channel' => 'chat/messages#discussions', :as => 'chat_discussions'
   get 'chat/discussion/url'       => 'chat/messages#discussion_topic_url'

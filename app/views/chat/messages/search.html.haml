@@ -1,0 +1,26 @@
+- title "Searching in #{params[:channel]}"
+
+%h1.form-header= "Searching in #{params[:channel]}" 
+
+= form_tag search_chat_messages_path, :class => "bp search", :method => :get do
+  %p.clearfix
+    = text_field_tag "search", params[:search]
+    = hidden_field_tag "channel", params[:channel]
+    = submit_tag "Search", :class => "inline"
+= link_to "Return to recent entries", chat_messages_path(:channel => params[:channel])
+
+%hr
+
+
+
+%h3= "Found #{@num_results} results"
+
+- @messages.each do |message|
+  %h4= link_to "On #{message.recorded_at.strftime('%a, %b %d')}", chat_messages_path(:channel => params[:channel], :since => message.nearby_messages.first.recorded_at, :highlight => params[:search])
+  %hr
+  %table.messages
+    - message.nearby_messages.each do |context_message|
+      = render :partial => "search_result", :locals => {:message => context_message}
+      
+
+#bottom
