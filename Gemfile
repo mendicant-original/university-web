@@ -3,6 +3,8 @@ source "http://rubygems.org"
 gem "rails", "3.0.7"
 gem "devise", "1.3.4"
 
+gem 'rake', '0.8.7'
+
 gem "compass", "~> 0.10.4"
 gem "haml"
 gem "sass"
