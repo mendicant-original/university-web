@@ -3,7 +3,7 @@ require 'test_helper'
 module Courses
   class DirectoryTest < ActionDispatch::IntegrationTest
 
-    story "As a student I want to view the paricipants of my course" do
+    context "As a student I want to view the paricipants of my course" do
 
       setup do
         @course = Factory(:course)
@@ -15,7 +15,7 @@ module Courses
         end
       end
 
-      scenario "view all participants" do
+      test "view all participants" do
 
         visit course_path(@course, :anchor => "participants")
 
@@ -28,7 +28,7 @@ module Courses
         end
       end
 
-      story "and participants should be grouped by their role" do
+      context "and participants should be grouped by their role" do
 
         setup do
           @instructor = Factory(:user, :nickname => "Ida Instructress")
@@ -38,7 +38,7 @@ module Courses
           Factory(:course_membership, :user => @mentor, :course => @course, :access_level => "mentor")
         end
 
-        scenario "role headings are visible" do
+        test "role headings are visible" do
 
           visit course_path(@course, :anchor => "participants")
 
@@ -52,7 +52,7 @@ module Courses
           end
         end
 
-        scenario "roles are correctly assigned" do
+        test "roles are correctly assigned" do
 
           visit course_path(@course, :anchor => "participants")
 
@@ -64,7 +64,7 @@ module Courses
           end
         end
 
-        story "pagination works over grouped participants" do
+        context "pagination works over grouped participants" do
           # testing for currently set page size of 7
           setup do
             3.times do |i|
@@ -73,7 +73,7 @@ module Courses
             end
           end
 
-          scenario "when clicking the next page, one student is visible" do
+          test "when clicking the next page, one student is visible" do
             visit course_path(@course, :anchor => "participants")
             click_link_within("div.pagination", "2")
 

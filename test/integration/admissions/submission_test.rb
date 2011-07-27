@@ -17,7 +17,7 @@ module Admissions
       end
     end
 
-    story "As an applicant I want to apply" do
+    context "As an applicant I want to apply" do
       setup do
         @course = Factory(:course, :class_size_limit => 99_999)
 
@@ -30,14 +30,14 @@ module Admissions
         ::CURRENT_COURSE = @course.id
       end
 
-      scenario "view application page" do
+      test "view application page" do
         visit '/admissions'
         assert_current_path '/admissions'
 
         assert_content @course.class_size_limit.to_s
       end
 
-      scenario "without entering any information" do
+      test "without entering any information" do
         visit '/admissions'
 
         click_button "Submit Application"
@@ -47,7 +47,7 @@ module Admissions
         assert_errors "Github account name"
       end
 
-      scenario "without including the attachment" do
+      test "without including the attachment" do
         visit '/admissions'
 
         fill_application_form(nil)
@@ -59,7 +59,7 @@ module Admissions
         assert_errors "attachment must be present"
       end
 
-      scenario "including an invalid attachment" do
+      test "including an invalid attachment" do
         visit '/admissions'
 
         fill_application_form(File.join(Rails.root, 'Gemfile'))
@@ -72,7 +72,7 @@ module Admissions
       end
 
 
-      scenario "including all required information" do
+      test "including all required information" do
         visit '/admissions'
 
         zip_file = Tempfile.new("application.zip")
@@ -97,7 +97,7 @@ module Admissions
         submission.destroy
       end
 
-      scenario "but can't because the course is full" do
+      test "but can't because the course is full" do
         @course.update_attribute(:class_size_limit, 0)
 
         visit '/admissions'

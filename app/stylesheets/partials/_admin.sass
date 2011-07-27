@@ -1,4 +1,4 @@
-=delete($font_size = 1em)
+@mixin delete($font_size: 1em)
   padding: 0 0 0 16px
   background: url(../../images/minus.png) no-repeat left center
   color: #70130B
@@ -6,7 +6,7 @@
 
 
 a.delete
-  +delete
+  @include delete
 
 #submit_bar_padding
   height: 33px
