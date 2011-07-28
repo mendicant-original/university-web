@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 
   def self.random_password
     chars = (('a'..'z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
-    (1..8).map { |a| chars[rand(chars.size)] }.join
+    chars.sample(8).join
   end
 
   # Retrieves locations for all users as an array of arrays where the inner
