@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_filter :find_comment,     :only => [:show, :update, :destroy]
-  before_filter :commentator_only, :only => [:show, :update, :destroy]
+  before_filter :comment_viewer_only, :only => [:show]
+  before_filter :commentator_only, :only => [:update, :destroy]
 
   def show
     render :text => @comment.comment_text
@@ -26,6 +27,13 @@ class CommentsController < ApplicationController
 
   def find_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def comment_viewer_only
+    raise "Access Denied" unless @comment.user == current_user || (
+      @comment.commentable.is_a?(Assignment::Submission) &&
+      @comment.commentable.assignment.course.users.include?(current_user)
+    )
   end
 
   def commentator_only

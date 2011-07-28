@@ -46,7 +46,17 @@ UW.Comments.init = function(commentsPath){
     reply_container.find("a:first").attr('href', '#' + index)
                                     .text('Comment #' + index);
     reply_container.show();
-    $("form.new_comment textarea").focus();
+    var input = $("form.new_comment textarea");
+    $.ajax({
+      url: "/comments/"+id,
+      success: function(text){
+        quoted = $.map(text.split("\n"), function(line){
+          return line ? "> "+line : "";
+        }).join("\n")+"\n\n";
+        input.val(input.val() + quoted).focus();
+        input.scrollTo('max');
+      }
+    });
   });
 
   $('form.new_comment #in_reply_to a.cancel_reply').click(function(e){
