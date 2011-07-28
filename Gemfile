@@ -23,6 +23,12 @@ group :test do
   gem "factory_girl_rails"
   gem 'mocha'
   gem "colorific", "~> 1.0.0"
+
+  # Use jordanbyron's unofficial fork of test_notifier until the support for
+  # MiniTest gets merged
+  #
+  gem "test_notifier", :git =>
+    "git://github.com/jordanbyron/test_notifier.git", :branch => "minitest-test"
 end
 
 group :production do
