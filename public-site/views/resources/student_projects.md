@@ -54,7 +54,7 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/andrewhr/parsable">Importable</a> (Andrew Rosa): Bridge for importing data from CSV file into Rails.</li>
   <li><a href="https://github.com/adambray/triumph">triumph</a> (Adam Bray): Achievement system for Rails</li>
   <li><a href="https://github.com/marksim/omelettes">omelettes</a> (Mark Simoneau): Tool for obfuscating database strings</li>
-  <li><a href="https://github.com/gmiklaszewski/Gino.git">gino</a> (Grzegorz Miklaszewski): Git notification service</li>
+  <li><a href="https://github.com/gmiklaszewski/Gino">gino</a> (Grzegorz Miklaszewski): Git notification service</li>
   <li><a href="https://github.com/montague/blirb">blirb</a> (Ian Asaff): IRB-based Ruby learning tool</li>
   <li><a href="https://github.com/mikbe/Brawl">Brawl</a> (Mike Bethany): Programming game with some similarities to RRobots</li>
   <li><a href="https://github.com/eregon/suby">Suby</a> (Benoit Daloze): Subtitle downloader</li>
