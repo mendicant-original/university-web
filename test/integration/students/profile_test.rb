@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'mocha'
 
 module Students
   class ProfileTest < ActionDispatch::IntegrationTest
@@ -17,6 +16,7 @@ module Students
                                        :forks       => 17)
 
         @second_repo = mock_repository(:name => "repo2", :fork => true)
+
         Octokit.stubs("repos").with("rmu_student").returns([@first_repo, @second_repo])
       end
 
@@ -97,7 +97,9 @@ module Students
           "Twitter account name can only contain letters, numbers or underscores"
       end
     end
+
     private
+
     def mock_repository(params)
       opts = {
         :name => 'repo1' ,
@@ -109,7 +111,9 @@ module Students
         :description => "repo1 description"
       }.merge(params)
 
-      stub(opts)
+      mock = Mocha::Mock.new("Repo")
+      mock.stubs(opts)
+      mock
     end
   end
 end

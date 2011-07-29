@@ -23,14 +23,14 @@ class CourseTest < ActiveSupport::TestCase
     term = Factory :term
     user = Factory :user, :access_level => :admin
     course = Course.create!({
-      :name => "Foo", 
-      :term_id => term.id, 
+      :name => "Foo",
+      :term_id => term.id,
       :course_memberships_attributes => [{
         :user_id => user.id,
         :access_level => :instructor
       }]
     })
-    
+
     assert_equal 1, Course.count
     assert_equal 1, course.instructors.reload.count
     assert_equal user.name, course.instructors.first.name
@@ -91,11 +91,11 @@ class CourseTest < ActiveSupport::TestCase
         :access_level => 'student')
     end
 
-    should 'not be full' do
+    test 'not be full' do
       assert !@subject.full?
     end
 
-    should 'have one available slot' do
+    test 'have one available slot' do
       assert_equal 1, @subject.available_slots
     end
   end
@@ -105,7 +105,7 @@ class CourseTest < ActiveSupport::TestCase
       setup do
         @course = Factory(:course, :start_date => nil, :end_date => 3.weeks.from_now)
       end
-      should 'be nil' do
+      test 'be nil' do
         assert_nil @course.start_end
       end
     end
@@ -114,7 +114,7 @@ class CourseTest < ActiveSupport::TestCase
       setup do
         @course = Factory(:course, :start_date => 2.days.ago, :end_date => 3.weeks.from_now)
       end
-      should 'be a range from its start date to its end date' do
+      test 'be a range from its start date to its end date' do
         assert_equal((@course.start_date..@course.end_date), @course.start_end)
       end
     end

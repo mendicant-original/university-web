@@ -7,12 +7,12 @@ class CommentTest < ActiveSupport::TestCase
       @submission = Factory(:submission)
     end
 
-    should "start with comment #1" do
+    test "start with comment #1" do
       comment = @submission.comments.create(:comment_text => "dummy")
       assert_equal 1, comment.index
     end
 
-    should "create a ascending index when are created" do
+    test "create a ascending index when are created" do
       @submission.comments.create(:comment_text => "dummy")
       second = @submission.comments.create(:comment_text => "dummy")
       third  = @submission.comments.create(:comment_text => "dummy")

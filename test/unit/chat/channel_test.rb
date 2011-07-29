@@ -8,7 +8,7 @@ class Chat::ChannelTest < ActiveSupport::TestCase
     end
 
     context 'with no messages' do
-      should 'not have a last-message date' do
+      test 'not have a last-message date' do
         assert_nil @subject.last_message_date
       end
     end
@@ -22,7 +22,7 @@ class Chat::ChannelTest < ActiveSupport::TestCase
         end
       end
 
-      should 'have a last-message date' do
+      test 'have a last-message date' do
         assert_not_nil @subject.last_message_date
         assert @subject.last_message_date > 10.minutes.ago
       end

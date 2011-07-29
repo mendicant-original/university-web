@@ -8,7 +8,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @grouped = Assignment::ActivityGrouper.new([]).group_by_description
     end
 
-    should "return an empty array" do
+    test "return an empty array" do
       assert_equal 0, @grouped.length
     end
 
@@ -21,15 +21,15 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @grouped = Assignment::ActivityGrouper.new([@activity]).group_by_description
     end
 
-    should "return one result" do
+    test "return one result" do
       assert_equal 1, @grouped.length
     end
 
-    should "return the activity" do
+    test "return the activity" do
       assert_equal @activity, @grouped[0][0]
     end
 
-    should "have no grouped activities" do
+    test "have no grouped activities" do
       assert_equal 0, @grouped[0][1].length
     end
 
@@ -48,19 +48,19 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
-    should "return one result" do
+    test "return one result" do
       assert_equal 1, @grouped.length
     end
 
-    should "return the first activity" do
+    test "return the first activity" do
       assert_equal @activity_one, @grouped[0][0]
     end
 
-    should "have one activity in the group" do
+    test "have one activity in the group" do
       assert_equal 1, @grouped[0][1].length
     end
 
-    should "include the other activity in the group" do
+    test "include the other activity in the group" do
       assert_equal @activity_two, @grouped[0][1][0]
     end
 
@@ -79,7 +79,7 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
-    should "return two results" do
+    test "return two results" do
       assert_equal 2, @grouped.length
     end
 
@@ -98,11 +98,11 @@ class Assignment::ActivityGrouperTest < ActionView::TestCase
       @grouped = Assignment::ActivityGrouper.new(@activities).group_by_description
     end
 
-    should "return one result" do
+    test "return one result" do
       assert_equal 1, @grouped.length
     end
 
-    should "include the other activity in the group" do
+    test "include the other activity in the group" do
       assert_equal @activity_two, @grouped[0][1][0]
     end
 

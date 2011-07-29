@@ -9,11 +9,11 @@ class CommentsHelperTest < ActionView::TestCase
       @comment = Factory(:comment)
     end
 
-    should 'show the number of comment' do
+    test 'show the number of comment' do
       assert_match /#{@comment.user.name}'s comment/, link_to_comment(@comment)
     end
 
-    should 'have a anchor link to comment' do
+    test 'have a anchor link to comment' do
       assert_match /href="#1"/, link_to_comment(@comment)
     end
   end

@@ -11,7 +11,7 @@ class CoursesHelperTest < ActionView::TestCase
                           :end_date => Date.parse('2010-11-01'))
       end
 
-      should 'show the duration of the course' do
+      test 'show the duration of the course' do
         assert_equal '17 September 2010 thru 01 November 2010',
                      course_dates(@course)
       end
@@ -22,7 +22,7 @@ class CoursesHelperTest < ActionView::TestCase
         @course = Factory(:course, :start_date => nil)
       end
 
-      should 'be an empty string' do
+      test 'be an empty string' do
         assert_equal '', course_dates(@course)
       end
     end
