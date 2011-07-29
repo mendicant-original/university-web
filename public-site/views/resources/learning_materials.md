@@ -40,5 +40,6 @@ We are committed to releasing our exams, exercises and other learning materials 
 * [s8-e1](https://github.com/rmu/s8-e1): Integrating with C libraries via FFI
 * [s8-e2](https://github.com/rmu/s8-e2): Challenge Project: Train Games
 * [s8-e3](https://github.com/rmu/s8-e3): Explorations in Combinatorics
+* [Vectorize](http://github.com/rmu/vectorize): Group project implementing a cairo wrapper to satisfy s8-e1
 
 _All materials, unless otherwise noted may be used under the terms of the [GNU Free Documentation License](http://www.gnu.org/licenses/fdl.html)._
