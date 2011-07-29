@@ -161,6 +161,7 @@ DEPENDENCIES
   factory_girl_rails
   haml
   json
+  minitest (~> 2.3.1)
   mocha
   octokit
   pg
