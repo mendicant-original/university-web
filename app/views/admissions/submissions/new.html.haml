@@ -38,7 +38,7 @@
 
         <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before #{@close_date} if you've been accepted into the July session.</p>
 
-        <p><b>Admissions for this course will end on #{@close_date} or when all openings have been filled. Currently only #{@open} positions remain open.</b></p>
+        <p><b>Admissions for this course will end on #{@close_date} or when all openings have been filled. Currently only #{pluralize(@open, 'position')} remain open.</b></p>
 
     #application
       = form_for @user, :url => admissions_submissions_path,
