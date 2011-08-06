@@ -1,3 +1,5 @@
+= error_messages_for(@course)
+
 %p
   = form.label :name
   = form.text_field :name
@@ -31,6 +33,14 @@
   = form.label :term_id
   = form.select :term_id, Term.all.map {|t| [t.name, t.id] },
     :include_blank => true
+
+%p
+  = form.label :open_for_enrollment, "Open Admissions"
+  = form.check_box :open_for_enrollment
+
+%p
+  = form.label :enrollment_close_date, "Admissions Close"
+  = form.text_field :enrollment_close_date, :class => "datepicker"
 
 %hr
 
