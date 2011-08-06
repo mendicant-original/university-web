@@ -10,7 +10,7 @@ class Chat::MessagesHelperTest < ActionView::TestCase
         @channel = Factory(:chat_channel)
       end
 
-      should 'return "No Messages"' do
+      test 'return "No Messages"' do
         assert_equal 'No Messages',
                      last_message_timestamp_for_channel(@channel)
       end
@@ -27,7 +27,7 @@ class Chat::MessagesHelperTest < ActionView::TestCase
         )
       end
 
-      should 'return a meaningful "Last Message" notice' do
+      test 'return a meaningful "Last Message" notice' do
         timestamp = @recorded_at.strftime('%m/%d/%Y %I:%M%p')
         assert_equal "Last Message: #{timestamp}",
                      last_message_timestamp_for_channel(@channel)

@@ -1,10 +1,9 @@
 require 'test_helper'
-require 'mocha'
 
 module Students
   class ProfileTest < ActionDispatch::IntegrationTest
 
-    story "As a Student who has a github acount
+    context "As a Student who has a github acount
                 i want to see my repositories listed" do
 
       setup do
@@ -17,10 +16,11 @@ module Students
                                        :forks       => 17)
 
         @second_repo = mock_repository(:name => "repo2", :fork => true)
+
         Octokit.stubs("repos").with("rmu_student").returns([@first_repo, @second_repo])
       end
 
-      scenario "viewing profile" do
+      test "viewing profile" do
         click_link_within  '#header', 'View Profile'
 
         assert_current_path user_path(@user)
@@ -34,36 +34,36 @@ module Students
           assert         page.has_content? "17"
           assert         page.has_content? "Ruby"
 
-          assert_false   page.has_content? "repo2"
+          refute         page.has_content? "repo2"
         end
       end
 
-      scenario "viewing a profile that don't have any repositories associated" do
+      test "viewing a profile that don't have any repositories associated" do
         Octokit.stubs("repos").raises("404 Error")
 
         click_link_within  '#header', 'View Profile'
 
         assert_current_path user_path(@user)
-        assert_false page.has_content? "#github-repositories"
+        refute page.has_content? "#github-repositories"
       end
     end
 
-    story "As a Student i want to view my own profile information" do
+    context "As a Student i want to view my own profile information" do
       setup do
         @user = sign_user_in
       end
 
-      scenario "view profile" do
+      test "view profile" do
         click_link_within '#header', 'View Profile'
       end
     end
 
-    story "As a Student I want to change my profile information" do
+    context "As a Student I want to change my profile information" do
       setup do
         @user = sign_user_in
       end
 
-      scenario "edit profile" do
+      test "edit profile" do
         click_link_within '#header', 'Edit Profile'
 
         assert_current_path edit_user_path(@user)
@@ -85,7 +85,7 @@ module Students
         assert_no_content "Brasilia"
       end
 
-      scenario "attempt to edit profile with invalid info" do
+      test "attempt to edit profile with invalid info" do
         click_link_within '#header', 'Edit Profile'
 
         fill_in "Email",     :with => "rmu-invalid@test"
@@ -97,7 +97,9 @@ module Students
           "Twitter account name can only contain letters, numbers or underscores"
       end
     end
+
     private
+
     def mock_repository(params)
       opts = {
         :name => 'repo1' ,
@@ -109,7 +111,9 @@ module Students
         :description => "repo1 description"
       }.merge(params)
 
-      stub(opts)
+      mock = Mocha::Mock.new("Repo")
+      mock.stubs(opts)
+      mock
     end
   end
 end

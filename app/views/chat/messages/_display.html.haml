@@ -5,5 +5,5 @@
 %tr.message
   %td.handle= "#{message.handle.name}:"
   %td.body{ :class => ('action' if message.action?)}
-    = auto_link(message.body, :html => { :target => '_blank' })
+    = auto_link(highlight(message.body,params[:highlight].try(:split)), :html => { :target => '_blank' })
   %td.recorded_at= message_time message

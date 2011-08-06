@@ -3,11 +3,8 @@ require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 require 'capybara/rails'
 require 'support/integration'
-require 'test_notifier/runner/test_unit'
-
-class ActiveSupport::TestCase
-  # fixtures :all
-end
+require 'support/mini_contest'
+require 'test_notifier/runner/minitest'
 
 class ActionDispatch::IntegrationTest
   include Capybara

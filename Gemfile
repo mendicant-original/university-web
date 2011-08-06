@@ -1,27 +1,47 @@
 source "http://rubygems.org"
 
-gem "rails", "3.0.0"
-gem "devise"
+########
+# Core #
+########
 
-gem "compass", "~> 0.10.4"
-gem "haml"
-gem "json"
+gem "rails",  "3.0.7"
+gem "devise", "1.3.4"
+gem "rake",   "0.8.7"
+gem "rack",   "~> 1.2.1"
+
+########
+# Data #
+########
+
 gem "pg"
-gem "rack", "~> 1.2.1"
-gem "rdiscount"
+gem "json"
 gem "sanitize", "~> 2.0.0"
+gem "octokit"
+gem "texticle", "2.0", :require => "texticle/rails"
+
+################
+# Presentation #
+################
+
+gem "compass",       "~> 0.10.4"
+gem "haml"
+gem "sass"
+gem "rdiscount"
 gem "will_paginate", "~> 3.0.pre2"
-gem 'octokit'
 
 
 group :test do
-  gem "capybara", "~> 0.4.1.1"
-  gem "contest"
+  gem "minitest",  "~> 2.3.1"
+  gem "capybara",  "~> 0.4.1.1"
   gem "factory_girl_rails"
-  gem "stories"
-  gem "test-unit"
-  gem 'mocha'
-  gem 'test_notifier', '~> 0.3.6'
+  gem "mocha"
+  gem "colorific", "~> 1.0.0"
+
+  # Use jordanbyron"s unofficial fork of test_notifier until the support for
+  # MiniTest gets merged
+  #
+  gem "test_notifier", :git =>
+    "git://github.com/jordanbyron/test_notifier.git", :branch => "minitest-test"
 end
 
 group :production do

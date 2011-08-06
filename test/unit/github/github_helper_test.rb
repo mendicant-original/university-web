@@ -4,7 +4,7 @@ class GithubHelperTest < ActiveSupport::TestCase
   context "reading the config file" do
 
     test "should fail if the github config file is not present" do
-      assert_raise do
+      assert_raises(RuntimeError) do
         Github::GithubHelper.config("doesnt_exist")
       end
     end

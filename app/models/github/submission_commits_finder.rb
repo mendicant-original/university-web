@@ -25,7 +25,8 @@ module Github
 
       user_commits = all_commits.select do |commit|
         commit.login == submission.user.github_account_name &&
-        commit.commit_time > submission.last_commit_time
+        ( submission.last_commit_time.nil? ||
+          commit.commit_time > submission.last_commit_time )
       end
 
       if(user_commits.empty?)

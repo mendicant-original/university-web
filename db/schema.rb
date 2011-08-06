@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110616132915) do
+ActiveRecord::Schema.define(:version => 20110722223403) do
 
   create_table "admissions_statuses", :force => true do |t|
     t.text     "name"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.text     "context"
   end
 
+  create_table "assignment_reviews", :force => true do |t|
+    t.integer  "submission_id"
+    t.string   "review_type"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "assignment_submissions", :force => true do |t|
     t.integer  "assignment_id"
     t.integer  "user_id"
@@ -69,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.datetime "updated_at"
     t.text     "description"
     t.string   "github_repository"
-    t.datetime "last_commit_time",     :default => '2011-01-01 05:00:00', :null => false
+    t.datetime "last_commit_time"
     t.string   "last_commit_id"
   end
 
@@ -128,11 +136,20 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.text     "comment_text"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "in_reply_to_id"
+    t.integer  "index"
   end
 
   create_table "course_documents", :force => true do |t|
     t.integer  "document_id"
     t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "course_instructor_associations", :force => true do |t|
+    t.integer  "course_id"
+    t.integer  "instructor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -168,6 +185,24 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.datetime "updated_at"
   end
 
+  create_table "exam_submissions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "exam_id"
+    t.integer  "submission_status_id"
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "exams", :force => true do |t|
+    t.string   "name"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "term_id"
+  end
+
   create_table "submission_statuses", :force => true do |t|
     t.text     "name"
     t.integer  "sort_order"
@@ -190,6 +225,7 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
   create_table "users", :force => true do |t|
     t.string   "email",                                   :default => "",   :null => false
     t.string   "encrypted_password",       :limit => 128, :default => "",   :null => false
+    t.string   "password_salt",                           :default => "",   :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "requires_password_change",                :default => true
@@ -207,6 +243,13 @@ ActiveRecord::Schema.define(:version => 20110616132915) do
     t.string   "location"
     t.decimal  "latitude"
     t.decimal  "longitude"
+  end
+
+  create_table "waitlisted_students", :force => true do |t|
+    t.integer  "term_id"
+    t.integer  "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

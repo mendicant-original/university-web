@@ -60,7 +60,12 @@
       = form_for @submission.comments.build,
         :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
         = hidden_field_tag "status"
-        = f.text_area :comment_text, 'data-preview' => true
+        #in_reply_to{:style => "display: none"}
+          = f.hidden_field :in_reply_to_id
+          Replying to
+          = link_to "comment #1", "#1"
+          = link_to 'X', '#', :class => 'cancel_reply', :title => "Cancel reply"
+        = f.text_area    :comment_text, 'data-preview' => true
         .tab_footer
           - if current_user == @submission.user && @submission.status.try(:name) != "Submitted" && @submission.status.try(:name) != "Approved"
             = f.submit "Comment & Request Review"

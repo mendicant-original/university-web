@@ -2,13 +2,13 @@ require 'test_helper'
 
 module Students
   class AccessTest < ActionDispatch::IntegrationTest
-    story "As a Student I want to access the application" do
+    context "As a Student I want to access the application" do
       setup do
         @user = Factory(:user, :email => "rmu@test.com",
           :password => "123456", :password_confirmation => "123456")
       end
 
-      scenario "sign in" do
+      test "sign in" do
         visit root_path
         assert_current_path "/"
         
@@ -25,7 +25,7 @@ module Students
         assert_link "Sign Out"
       end
 
-      scenario "attempt to sign in with invalid credentials" do
+      test "attempt to sign in with invalid credentials" do
         visit new_user_session_path
 
         fill_in "Email",    :with => "rmu@test.com"
@@ -37,7 +37,7 @@ module Students
         assert_no_link "Sign Out"
       end
 
-      scenario "sign out" do
+      test "sign out" do
         sign_user_in @user
         assert_current_path dashboard_path
 

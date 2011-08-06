@@ -72,7 +72,6 @@
       background-color: #ccc
       color: #333
       +linear-gradient(color-stops(#F0F0F0, #ccc))
-      cursor: pointer
 
       img
         vertical-align: middle
@@ -83,7 +82,12 @@
         display: inline-block
         +text-shadow(0, 1px, 0, #fff)
         color: #777
-        cursor: default
+
+        a
+          color: #555
+          &:hover
+            color: #000
+            text-decoration: underline
 
       .on
         display: inline-block
@@ -104,6 +108,11 @@
           height: 16px
           display: inline-block
           margin-left: 5px
+
+          &.reply
+            background: transparent url(/images/icons/comments/reply.png) 0 0  no-repeat
+            &:hover
+              background-position: 0 -16px
 
           &.edit
             background: transparent url(/images/icons/comments/edit.png) 0 0  no-repeat
@@ -128,3 +137,17 @@
       margin-left: 1em
     select
       margin: 12px 0
+
+    #in_reply_to
+      padding: 10px
+      color: #fff
+      background-color: #668ADD
+      +linear-gradient(color-stops(#668ADD, #5676BF))
+      +border-radius(5px)
+
+      a
+        color: #fff
+        &:hover
+          color: #eee
+        &.cancel_reply
+          float: right

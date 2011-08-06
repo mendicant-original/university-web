@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def index
+
     respond_to do |format|
 
       format.json do
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
           :sort => :name, :course_id => params[:course])
       end
     end
+
   end
 
   def show
