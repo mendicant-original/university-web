@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110726121949) do
+ActiveRecord::Schema.define(:version => 20110806171707) do
 
   create_table "admissions_statuses", :force => true do |t|
     t.text     "name"
@@ -182,7 +182,6 @@ ActiveRecord::Schema.define(:version => 20110726121949) do
 
   create_table "terms", :force => true do |t|
     t.text     "name"
-    t.boolean  "registration_open", :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "start_date"

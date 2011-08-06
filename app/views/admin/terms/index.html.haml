@@ -7,11 +7,9 @@
   %thead
     %tr
       %th Name
-      %th Registration Open?
-      %th 
+      %th
   %tbody
     - @terms.each do |term|
       %tr{:class => cycle('even','odd')}
         %td= link_to term.name, edit_admin_term_path(term)
-        %td= term.registration_open ? 'Yes' : 'No'
         %td.action= link_to("Destroy", admin_term_path(term), :confirm => "Are you sure you wish to delete this term?", :method => 'DELETE', :class => "delete")
