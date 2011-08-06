@@ -3,7 +3,7 @@ class GroupMail
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :recipients, :subject, :content, :group_type, :group_id
+  attr_accessor :recipients, :subject, :content, :group_type, :group_id, :reply_to
 
   validates_presence_of :recipients, :content, :subject
 

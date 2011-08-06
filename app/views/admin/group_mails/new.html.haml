@@ -30,6 +30,10 @@
     = form.label :content, :class => "top"
     = form.text_area :content, :rows => 15
 
+  %p
+    = form.label :reply_to, :class => "top"
+    = form.text_field :reply_to
+
   %p.submit
     = form.submit "Send Mail"
     = link_to "Cancel", admin_users_path, :class => "cancel"

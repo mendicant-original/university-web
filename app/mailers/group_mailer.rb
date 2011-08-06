@@ -2,6 +2,8 @@ class GroupMailer < ActionMailer::Base
   default :from => "rmu.management@gmail.com"
 
   def mass_email(group_mail)
+    headers "Reply-To" => group_mail.reply_to if group_mail.reply_to
+
     @content = group_mail.content
     to_mails = group_mail.recipients.split(", ")
     mail(:to => "rmu.management@gmail.com", :bcc => to_mails,
