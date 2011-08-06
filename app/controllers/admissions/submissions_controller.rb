@@ -4,7 +4,7 @@ class Admissions::SubmissionsController < ApplicationController
 
   before_filter :find_submission, :only => [:show, :attachment, :update,
                                               :comment ]
-  before_filter :find_available_slots, :only => [:new, :create]
+  before_filter :find_course,     :only => [:new, :create]
   before_filter :admin_required,  :only => [:update]
   before_filter :authorized_users_required, :only => [:show, :index, :comment]
 
@@ -82,7 +82,11 @@ class Admissions::SubmissionsController < ApplicationController
     end
   end
 
-  def find_available_slots
-    @open = Course.find_by_id(CURRENT_COURSE).try(:available_slots) || 0
+  def find_course
+    @course = Course.current_course
+    if @course
+      @open = @course.available_slots || 0
+      @close_date = @course.enrollment_close_date.strftime("%B %d, %Y")
+    end
   end
 end

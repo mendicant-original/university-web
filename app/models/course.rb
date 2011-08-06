@@ -15,6 +15,9 @@ class Course < ActiveRecord::Base
   validates_presence_of   :term_id
   validates_uniqueness_of :name, :scope => :term_id
 
+  validates_uniqueness_of :open_for_enrollment,   :if => "open_for_enrollment?"
+  validates_presence_of   :enrollment_close_date, :if => "open_for_enrollment?"
+
   accepts_nested_attributes_for :assignments
 
   accepts_nested_attributes_for :course_memberships,
@@ -28,6 +31,10 @@ class Course < ActiveRecord::Base
   scope :active,   where(:archived => false).order('start_date')
   scope :archived, where(:archived => true ).order('start_date')
   scope :current,  where(["start_date < ?", Date.today + 15.days])
+
+  def self.current_course
+    find_by_open_for_enrollment(true)
+  end
 
   def students
     course_member_by_type('student')

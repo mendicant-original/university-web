@@ -19,15 +19,9 @@ module Admissions
 
     context "As an applicant I want to apply" do
       setup do
-        @course = Factory(:course, :class_size_limit => 99_999)
-
-        # TODO Silence this warning
-        #
-        # if self.class.const_defined?(:CURRENT_COURSE)
-        #   self.class.send(:remove_const, :CURRENT_COURSE)
-        # end
-
-        ::CURRENT_COURSE = @course.id
+        @course = Factory(:course, :class_size_limit      => 99_999,
+                                   :open_for_enrollment   => true,
+                                   :enrollment_close_date => Date.tomorrow )
       end
 
       test "view application page" do
@@ -99,6 +93,14 @@ module Admissions
 
       test "but can't because the course is full" do
         @course.update_attribute(:class_size_limit, 0)
+
+        visit '/admissions'
+
+        assert_content "Sorry"
+      end
+
+      test "but can't because admissions are closed" do
+        @course.update_attribute(:enrollment_close_date, Date.yesterday)
 
         visit '/admissions'
 

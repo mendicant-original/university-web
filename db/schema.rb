@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722223403) do
+ActiveRecord::Schema.define(:version => 20110726121949) do
 
   create_table "admissions_statuses", :force => true do |t|
     t.text     "name"
@@ -154,12 +154,14 @@ ActiveRecord::Schema.define(:version => 20110722223403) do
     t.integer  "channel_id"
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "archived",         :default => false
+    t.boolean  "archived",              :default => false
     t.integer  "term_id"
     t.integer  "class_size_limit"
     t.text     "description"
     t.text     "notes"
     t.string   "cc_comments"
+    t.boolean  "open_for_enrollment"
+    t.date     "enrollment_close_date"
   end
 
   create_table "documents", :force => true do |t|

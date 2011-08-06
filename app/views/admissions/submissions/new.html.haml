@@ -6,8 +6,8 @@
 
 #admissions
 
-  - if @open <= 0
-    %h1 Sorry, we're full!
+  - if @course.nil? || @open <= 0 || @course.enrollment_close_date <= Date.today
+    %h1 Sorry, admissions are currently closed.
 
     %hr
 
@@ -19,10 +19,10 @@
   - else
 
     #instructions
-      %h1 September 2011 Core Skills Course Application
+      %h1 #{@course.name} Core Skills Course Application
 
       :plain
-        <p>We are now accepting student applications for the September 2011 core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
+        <p>We are now accepting student applications for the #{@course.name} core skills course. Rather than doing formal entrance exams as we have in the past, we will instead use our newly released programming quiz site <a href="http://puzzlenode.com">PuzzleNode</a> to determine qualified candidates. The guidelines below describe how to complete your application.</p>
 
         <h3>Submission Guidelines</h3>
 
@@ -36,9 +36,10 @@
         <li>Fill out the form on this page and upload your zip file. Make sure the github account name you provide here matches the one you used on PuzzleNode to submit your problems there.</li>
         </ul>
 
-        <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before August 18th, 2011 if you've been accepted into the September session.</p>
+        <p>Once you have submitted your application, we will be in touch within 48 hours to verify that we have received your submission, and will let you know on or before #{@close_date} if you've been accepted into the July session.</p>
 
-        <p><b>Admissions for this course will end on August 18, 2011 or when all openings have been filled. Currently only #{@open} positions remain open.</b></p>
+        <p><b>Admissions for this course will end on #{@close_date} or when all openings have been filled. Currently only #{@open} positions remain open.</b></p>
+
     #application
       = form_for @user, :url => admissions_submissions_path,
         :html => {:class => 'bp inline', :multipart => true} do |f|
