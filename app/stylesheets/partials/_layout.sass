@@ -16,18 +16,18 @@ $rmu_red: #70130B
   color: #333
   z-index: 3
   width: 150px
-  
+
   ul
     li
       border-bottom: 1px solid #bbb
       float: none
       display: block
       margin-right: 0
-      
+
       &.term
         padding: 5px 10px
         background-color: #ddd
-      
+
       &.small
         a
           font-size: 1em
@@ -38,7 +38,7 @@ $rmu_red: #70130B
         color: #333
         &:hover
           background-color: #e9e9e9
-          
+
 =dropdown_link
   padding: 5px 10px
   &.active
@@ -70,7 +70,7 @@ body
   margin: 0 auto
   background-color: #f9f9f9
   width: 990px
-  
+
 #content
   margin-top: 1px
   margin-bottom: 1em
@@ -85,9 +85,9 @@ body
 #header
   background-color: #710F0A
   +linear-gradient(color-stops(#A10507, #7D0406))
-  
+
   padding: 1em 20px
-  
+
   h1
     color: #fff
     font-family: "ThryomanesNormal","Baskerville Old Face","Century Schoolbook","Tw Cen MT", serif
@@ -95,7 +95,7 @@ body
     display: inline-block
     margin: 0.25em 0
     font-size: 2.5em
-    
+
   #user
     color: #fff
     float: right
@@ -111,19 +111,19 @@ body
     img.gravatar
       vertical-align: middle
       margin: 5px 0px 5px 10px
-      
+
     #user_dropdown
       +dropdown_menu
       margin-top: -1px
-   
+
 #nav
   background-color: #256188
   color: #fff
   padding: 5px 20px 0
-  
+
   ul
     list-style: none outside none
-    
+
     li
       display: inline
       float: left
@@ -132,19 +132,19 @@ body
       margin-right: 1em
       white-space: nowrap
       position: relative
-    
+
       img.selected
         position: absolute
         bottom: -1px
         left: 50%
         margin-left: -7px
-    
+
       a
         color: #fff
         padding: 5px 10px 10px
         display: inline-block
         font-size: 1.25em
-        
+
         &.first
           padding-left: 0px
 
@@ -154,6 +154,15 @@ body
     margin-top: 5px
     &:hover
       color: #7F92B1
+
+div#warning
+  padding: 0.5em 20px
+  font-weight: bold
+  text-align: center
+  background-color: #FFE682
+  +linear-gradient(color-stops(#FFE682, #FFC441))
+  border-bottom: 1px solid #CA882A
+
 
 #courses, #administration
   +dropdown_container
@@ -172,7 +181,7 @@ body
     li
       a
         padding: 10px
-        
+
 #administration_dropdown
   a
     font-size: 1em !important
@@ -184,6 +193,6 @@ a
     color: #184FA0
   &:hover
     color: #000
-    
+
 img.drop
   margin-left: 5px
