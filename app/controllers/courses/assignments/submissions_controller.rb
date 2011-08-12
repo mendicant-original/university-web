@@ -8,13 +8,13 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
 
   def show
     respond_to do |format|
-      format.html { redirect_to :action => :edit }
+      format.html
       format.text { render :text => @submission.description }
     end
   end
 
   def edit
-
+    redirect_to :action => :show
   end
 
   def description
