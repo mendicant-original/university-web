@@ -15,14 +15,7 @@
       UW.Submissions.init('#{submission_path(@submission)}', #{@submission.editable_by?(current_user)});
     });
 
-- content_for :breadcrumbs do
-  = render :partial => "courses/breadcrumbs"
-  %span.separator &rarr;
-  = render :partial => "courses/assignments/breadcrumbs"
-  %span.separator &rarr;
-  = link_to "Submissions", course_assignment_path(@course, @assignment, :anchor => "submissions")
-  %span.separator &rarr;
-  = @submission.user.name
+= render :partial => "breadcrumbs"
 
 - content_for :bucket do
   #submission
