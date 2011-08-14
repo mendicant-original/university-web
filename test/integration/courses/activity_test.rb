@@ -33,7 +33,7 @@ module Courses
 
         click_link(@course.activities.first.description)
 
-        assert_current_path edit_course_assignment_submission_path(@course, @assignment, @submission)
+        assert_current_path course_assignment_submission_path(@course, @assignment, @submission)
       end
     end
   end
