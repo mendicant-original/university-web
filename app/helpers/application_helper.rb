@@ -11,7 +11,7 @@ module ApplicationHelper
         content_tag(:ul) do
           object.errors.full_messages.map do |msg|
             content_tag(:li) { msg }
-          end.join('')
+          end.join("\n").html_safe
         end
       end
     end
@@ -49,8 +49,8 @@ module ApplicationHelper
       ].join("\n").html_safe
     end
   end
-  
-  def get_last(collection_size, index) 
+
+  def get_last(collection_size, index)
     collection_size == index ? "last" : ""
   end
 end

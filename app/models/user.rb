@@ -21,6 +21,9 @@ class User < ActiveRecord::Base
   validates :github_account_name,  :length => { :maximum => 40 },
                                    :format => GITHUB_FORMAT
 
+  validates_format_of   :email,
+                        :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
   validate              :real_name_or_nick_name_required
   validates_presence_of :github_account_name
 

@@ -4,8 +4,8 @@ source "http://rubygems.org"
 # Core #
 ########
 
-gem "rails",  "3.0.7"
-gem "devise", "1.3.4"
+gem "rails",  "~> 3.0.7"
+gem "devise", "~> 1.4.2"
 gem "rake",   "0.8.7"
 gem "rack",   "~> 1.2.1"
 
@@ -27,7 +27,7 @@ gem "compass",       "~> 0.10.4"
 gem "haml"
 gem "sass"
 gem "rdiscount"
-gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate", "~> 3.0"
 
 
 group :test do
