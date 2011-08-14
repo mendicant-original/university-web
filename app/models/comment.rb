@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
                            :dependent  => :delete_all,
                            :as         => :actionable
   belongs_to :in_reply_to, :class_name => "Comment"
-  
+
   validates_presence_of :comment_text
 
   before_create :setup_index
@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
   private
 
   def setup_index
-    last_comment = self.commentable.comments.last
+    last_comment = self.commentable.comments.order("created_at").last
     self.index = last_comment ? last_comment.index + 1 : 1
 
     return true
