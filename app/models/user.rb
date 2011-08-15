@@ -139,7 +139,7 @@ class User < ActiveRecord::Base
   def alumnus?
     !alumni_number.nil?
   end
-  
+
   def staff?
     access_level.to_s == "admin"
   end

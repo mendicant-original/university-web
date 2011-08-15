@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
       format.html do
         @users = User.search(params[:search], params[:page],
-          :sort => :name, :course_id => params[:course])
+          :sort => "real_name", :course_id => params[:course])
       end
     end
 
