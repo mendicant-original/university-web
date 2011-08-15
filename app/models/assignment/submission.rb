@@ -45,7 +45,7 @@ class Assignment
       activities.create(
           user_id:       user.id,
           context:       "#{commit.id}-#{commit.message}",
-          description:   "committed to github: #{commit.message}",
+          description:   "committed: #{commit.message}",
           created_at:    commit.commit_time,
           actionable:    self
       )
