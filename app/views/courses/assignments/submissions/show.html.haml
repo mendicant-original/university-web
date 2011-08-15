@@ -13,41 +13,27 @@
       $("#sidebar li a[data-id=submissions]").addClass('selected');
 
       UW.Submissions.init('#{submission_path(@submission)}', #{@submission.editable_by?(current_user)});
+
+      $('form').submit(function(){
+          $('input[type=submit]', this).attr('disabled', 'disabled');
+      });
     });
 
 = render :partial => "breadcrumbs"
 
 - content_for :bucket do
   #submission
-    #submission_header
-      = user_icon(@submission.user, 48)
-      - if current_user != @submission.user
-        = "#{@submission.user.name}'s Submission"
-      - else
-        My Submission
 
-    - if @submission.editable_by?(current_user)
-      #description_controls.controls
-        %input.gray#edit_description{:type => "button", :value => "Edit"}
-    #submission_description.description= md(@submission.description)
-
-    - if @submission.editable_by?(current_user)
-      #github_controls.controls
-        %input.gray#edit_github{:type => "button", :value => "Edit"}
-
-    #submission_github.github
-      #github_header
-        Github repository:
-      = github_link(@submission.github_repository)
+    = render :partial => "header"
 
     .comments
-      - group_by_description(@submission.activities.order('created_at')).each do |activity, more|
+      - @activities.each do |activity, similar_activities|
         = render_activity(activity)
-        - if more.any?
+        - if similar_activities.any?
           %div{:id => "hidden_#{activity.id}", :style => "display: none;"}
-            - more.each do |hidden_activity|
+            - similar_activities.each do |hidden_activity|
               = render_activity(hidden_activity)
-          = link_to_function "Display #{more.length} more like this.",
+          = link_to_function "Display #{similar_activities.length} more like this.",
             %{$('#hidden_#{activity.id}').show(); $(this).remove()}
 
       = form_for @submission.comments.build,

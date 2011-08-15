@@ -80,6 +80,8 @@ class Assignment
     end
 
     def update_description(user, new_description)
+      return unless new_description != self.description
+
       activity = activities.create(
         :user_id     => user.id,
         :description => "updated description",

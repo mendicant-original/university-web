@@ -2,13 +2,17 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   before_filter :find_submission, :only => %w(show edit update comment
                                              description associate_with_github)
   before_filter :student_and_instructor_only, :only => %w(update)
+
   def index
     @submissions = @assignment.submissions.sort_by {|s| s.last_active_on }.reverse
   end
 
   def show
     respond_to do |format|
-      format.html
+      format.html do
+        @activities = @submission.activities.
+          group_by_description(:order => 'created_at')
+      end
       format.text { render :text => @submission.description }
     end
   end
