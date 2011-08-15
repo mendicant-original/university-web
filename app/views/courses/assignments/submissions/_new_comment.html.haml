@@ -11,16 +11,18 @@
   = f.text_area :comment_text, 'data-preview' => true
 
   .tab_footer
-
-    = radio_button_tag "[comment][type]", "discussion", true,
-      :id => 'comment_type_discussion'
-    = label_tag "comment_type_discussion", "Discussion"
-    = radio_button_tag "[comment][type]", "feedback", false,
-      :id => 'comment_type_feedback'
-    = label_tag "comment_type_feedback", "Peer Feedback"
-    = radio_button_tag "[comment][type]", "review", false,
-      :id => 'comment_type_review'
-    = label_tag "comment_type_review", "Instructor Review"
+    - unless @submission.current_review
+      = radio_button_tag "[comment][type]", "discussion", true,
+        :id => 'comment_type_discussion'
+      = label_tag "comment_type_discussion", "Discussion"
+      = radio_button_tag "[comment][type]", "feedback", false,
+        :id => 'comment_type_feedback'
+      = label_tag "comment_type_feedback", "Peer Feedback"
+      = radio_button_tag "[comment][type]", "review", false,
+        :id => 'comment_type_review'
+      = label_tag "comment_type_review", "Instructor Review"
+    - else
+      Currently requesting #{@submission.current_review}
 
     - if @course.instructors.include?(current_user)
       = comment_and_update_status

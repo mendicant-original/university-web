@@ -51,8 +51,8 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
       @submission.update_status(current_user, SubmissionStatus.find(params[:status]))
     end
 
-    params[:comment].merge(:user_id => current_user.id)
-    comment = @submission.create_comment(params[:comment])
+    comment_data = params[:comment].merge(:user_id => current_user.id)
+    comment = @submission.create_comment(comment_data)
 
     unless comment.new_record?
       flash[:notice] = "Comment posted."

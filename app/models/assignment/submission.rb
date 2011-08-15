@@ -52,7 +52,18 @@ class Assignment
 
     end
 
+    def create_review(review_type, comment)
+      case review_type
+      when "feedback"
+        
+      when "review"
+        
+      end
+    end
+
     def create_comment(comment_data)
+      review_type = comment_data.delete(:type)
+
       comment = comments.build(comment_data)
 
       if comment.save
@@ -65,6 +76,8 @@ class Assignment
         )
 
         UserMailer.submission_comment_created(comment).deliver
+
+        create_review(review_type, comment)
 
       end
 
@@ -103,6 +116,11 @@ class Assignment
 
     def editable_by?(user)
       assignment.course.instructors.include?(user) or self.user == user
+    end
+
+    def current_review
+      @current_review ||= Review.where(:comment_id => comments).current
+      @current_review
     end
 
     def last_active_on

@@ -4,6 +4,9 @@ class Comment < ActiveRecord::Base
   has_many   :activities,  :class_name => "Assignment::Activity",
                            :dependent  => :delete_all,
                            :as         => :actionable
+  has_many   :reviews,     :class_name => "Assignment::Review",
+                           :dependent  => :delete_all
+
   belongs_to :in_reply_to, :class_name => "Comment"
 
   validates_presence_of :comment_text
