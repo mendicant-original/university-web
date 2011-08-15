@@ -53,16 +53,22 @@ class Assignment
     end
 
     def create_comment(comment_data)
-      comment = comments.create(comment_data)
+      comment = comments.build(comment_data)
 
-      activities.create(
-        :user_id       => comment.user.id,
-        :description   => "made a comment",
-        :context       => ActivityHelper.context_snippet(comment.comment_text),
-        :actionable    => comment
-      )
+      if comment.save
 
-      UserMailer.submission_comment_created(comment).deliver
+        activities.create(
+          :user_id       => comment.user.id,
+          :description   => "made a comment",
+          :context       => ActivityHelper.context_snippet(comment.comment_text),
+          :actionable    => comment
+        )
+
+        UserMailer.submission_comment_created(comment).deliver
+
+      end
+
+      comment
     end
 
     def update_status(user, new_status)

@@ -9,10 +9,7 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
 
   def show
     respond_to do |format|
-      format.html do
-        @activities = @submission.activities.
-          group_by_description(:order => 'created_at')
-      end
+      format.html { find_activities }
       format.text { render :text => @submission.description }
     end
   end
@@ -49,24 +46,33 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   end
 
   def comment
-    @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
-
-    if params[:commit] && params[:commit][/Request Review/]
-      @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
-    end
 
     if @course.instructors.include?(current_user) && !params[:status].blank?
       @submission.update_status(current_user, SubmissionStatus.find(params[:status]))
     end
 
-    flash[:notice] = "Comment posted."
-    redirect_to :action => :edit
+    params[:comment].merge(:user_id => current_user.id)
+    comment = @submission.create_comment(params[:comment])
+
+    unless comment.new_record?
+      flash[:notice] = "Comment posted."
+      redirect_to :action => :show
+    else
+      find_activities
+      flash[:error] = comment.errors.map {|f, e| [f.to_s.humanize, e].join(" ") }.join(", ")
+      render :action => :show
+    end
   end
 
   private
 
   def find_submission
     @submission = Assignment::Submission.find(params[:id])
+  end
+
+  def find_activities
+    @activities = @submission.activities.
+      group_by_description(:order => 'created_at')
   end
 
   def student_and_instructor_only
