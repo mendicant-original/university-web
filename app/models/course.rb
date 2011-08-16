@@ -48,6 +48,22 @@ class Course < ActiveRecord::Base
     course_member_by_type('mentor')
   end
 
+  def reviews(user=nil)
+    reviews = Assignment::Review.includes(:submission => {:assignment => :course}).
+      where("courses.id = ? and assignment_reviews.closed = ?", id, false)
+
+    if user
+      if instructors.include?(user)
+        reviews.where(:type => "Assignment::InstructorReview")
+      else
+        reviews.where("assignment_reviews.type = ? OR assignment_submissions.user_id = ?",
+          "Assignment::PeerFeedback", user.id)
+      end
+    else
+      reviews.where(:type => "Assignment::PeerFeedback")
+    end
+  end
+
   def start_end
     if start_date.nil? or end_date.nil?
       nil

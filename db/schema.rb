@@ -63,7 +63,8 @@ ActiveRecord::Schema.define(:version => 20110811140835) do
 
   create_table "assignment_reviews", :force => true do |t|
     t.integer  "comment_id"
-    t.boolean  "closed",      :default => false, :null => false
+    t.integer  "submission_id"
+    t.boolean  "closed",        :default => false, :null => false
     t.string   "type"
     t.integer  "assigned_id"
     t.datetime "created_at"

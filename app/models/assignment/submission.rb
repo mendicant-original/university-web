@@ -62,7 +62,7 @@ class Assignment
         InstructorReview
       end
 
-      review_class.create(:comment => comment) if review_class
+      review_class.create(:comment => comment, :submission => self) if review_class
     end
 
     def create_comment(comment_data)
@@ -123,7 +123,7 @@ class Assignment
     end
 
     def current_review
-      @current_review ||= Review.where(:comment_id => comments).current
+      @current_review ||= Review.where(:submission_id => id).current
       @current_review
     end
 

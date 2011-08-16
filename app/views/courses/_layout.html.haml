@@ -16,6 +16,9 @@
         = link_to "Assignments", course_path(@course, :anchor => "assignments"),
           :"data-id" => "assignments"
       %li
+        = link_to "Reviews", course_path(@course, :anchor => "reviews"),
+          :"data-id" => "reviews"
+      %li
         = link_to "Progress Report", course_path(@course, :anchor => "progress"),
           :"data-id" => "progress"
       %li
@@ -34,6 +37,6 @@
       %li
         = link_to "Participants", course_path(@course, :anchor => "participants"),
           :"data-id" => "participants"
-  
+
   .main
     #bucket= yield(:bucket)

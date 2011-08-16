@@ -57,6 +57,13 @@
           %span.name= assignment.name
           %span.description= assignment.short_description
 
+  #reviews.bucket
+    - @reviews.each do |review|
+      = link_to submission_path(review.submission) do
+        .review
+          %span.assignment= review.submission.assignment.name
+          %span.student= review.submission.user.name
+
   #progress.bucket
     = render :partial => "dashboard/assignments",
       :locals => {:course => @course, :expanded => true}
