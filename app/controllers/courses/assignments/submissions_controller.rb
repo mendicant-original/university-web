@@ -1,7 +1,9 @@
 class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
-  before_filter :find_submission, :only => %w(show edit update comment
-                                             description associate_with_github)
-  before_filter :student_and_instructor_only, :only => %w(update)
+  before_filter :find_submission,
+    :only => %w(show edit update comment description associate_with_github
+                close_review)
+  before_filter :student_and_instructor_only,
+    :only => %w(update close_review associate_with_github)
 
   def index
     @submissions = @assignment.submissions.sort_by {|s| s.last_active_on }.reverse
@@ -62,6 +64,14 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
       flash[:error] = comment.errors.map {|f, e| [f.to_s.humanize, e].join(" ") }.join(", ")
       render :action => :show
     end
+  end
+
+  def close_review
+    review = @submission.current_review
+    review.update_attribute(:closed, true)
+
+    flash[:notice] = "#{review} Request Closed."
+    redirect_to :action => :show
   end
 
   private

@@ -53,12 +53,16 @@ class Assignment
     end
 
     def create_review(review_type, comment)
-      case review_type
+      return if current_review
+
+      review_class = case review_type
       when "feedback"
-        
+        PeerFeedback
       when "review"
-        
+        InstructorReview
       end
+
+      review_class.create(:comment => comment) if review_class
     end
 
     def create_comment(comment_data)

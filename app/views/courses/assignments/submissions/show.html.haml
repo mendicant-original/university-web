@@ -26,6 +26,8 @@
 
     = render :partial => "header"
 
+    = render :partial => "current_review"
+
     .comments
       - @activities.each do |activity, similar_activities|
         = render_activity(activity)
@@ -39,6 +41,8 @@
       = render :partial => "new_comment"
 
     .clear
+
+    = render :partial => "current_review"
 
     - if @course.instructors.include?(current_user)
 

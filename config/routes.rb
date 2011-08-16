@@ -51,6 +51,7 @@ University::Application.routes.draw do
           post :comment
           post :description
           post :associate_with_github
+          post :close_review
         end
       end
     end
