@@ -1,16 +1,16 @@
-%table.status{:'data-id' => course.id}
+%table.progress_report{:'data-id' => course.id}
   %tr
     %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
-      %th.status= link_to assignment.name, assignment_path(assignment)
+      %th.assignment= link_to assignment.name, assignment_path(assignment)
   - if course.students.include?(current_user)
     %tr
       %th.cu= current_user.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(current_user)
-        %td.status
-          .status{:style => "background-color: ##{submission_status_hex_color(submission.status)}"}
-          = link_to submission_status_name(submission.status), submission_path(submission)
+        %td
+          .status{:style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);"}
+            = link_to submission_status_name(submission.status), submission_path(submission)
   - (course.students - [current_user]).each do |student|
     %tr.student{:style => ('display:none;' unless defined?(expanded))}
       %td
@@ -18,9 +18,9 @@
         = student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
-        %td.status
-          .status{:style => "background-color: ##{submission_status_hex_color(submission.status)}"}
-          = link_to submission_status_name(submission.status), submission_path(submission)
+        %td
+          .status{:style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);"}
+            = link_to submission_status_name(submission.status), submission_path(submission)
 
   - unless defined?(expanded)
     %tr.toggle

@@ -3,23 +3,23 @@
     - if current_user.location.nil?
       .announcement
         University Web now allows users to enter their location so we can map
-        our students. Please update your 
+        our students. Please update your
         = link_to "profile", edit_user_path(current_user)
         to be included.
 
   .main
     - if current_user.student_courses.active.current.any?
       %h3 Current Progress
-  
+
     - current_user.student_courses.active.current.each do |course|
-      = render :partial => "assignments", :locals => {:course => course}
-          
+      = render :partial => "courses/progress_report", :locals => {:course => course}
+
     - current_user.mentor_courses.active.current.each do |course|
-      = render :partial => "assignments", :locals => {:course => course}
-      
+      = render :partial => "courses/progress_report", :locals => {:course => course}
+
     - current_user.instructor_courses.current.active.each do |course|
-      = render :partial => "assignments", :locals => {:course => course}
-  
+      = render :partial => "courses/progress_report", :locals => {:course => course}
+
   - content_for :header_bottom do
     = javascript_include_tag "jquery.jgfeed-min", "blog_feed"
 
