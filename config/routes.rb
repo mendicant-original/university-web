@@ -39,6 +39,12 @@ University::Application.routes.draw do
       get  :directory
     end
 
+    resources :reviews, :controller => "Courses::Reviews" do
+      member do
+        post :close
+      end
+    end
+
     resources :documents, :controller => "Courses::Documents"
 
     resources :assignments, :controller => "Courses::Assignments" do
@@ -51,7 +57,6 @@ University::Application.routes.draw do
           post :comment
           post :description
           post :associate_with_github
-          post :close_review
         end
       end
     end

@@ -6,5 +6,7 @@
       (##{@submission.current_review.comment.index})
     - if @submission.editable_by?(current_user)
       = button_to 'Close Request',
-        close_review_course_assignment_submission_path,
+        close_course_review_path(@course, @submission.current_review),
         :class   => 'cancel_review'
+
+  - #if @course.instructors.include?(current_user)

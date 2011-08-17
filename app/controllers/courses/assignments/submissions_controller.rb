@@ -66,14 +66,6 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
     end
   end
 
-  def close_review
-    review = @submission.current_review
-    review.update_attribute(:closed, true)
-
-    flash[:notice] = "#{review} Request Closed."
-    redirect_to :action => :show
-  end
-
   private
 
   def find_submission
