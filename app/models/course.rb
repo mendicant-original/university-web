@@ -54,13 +54,13 @@ class Course < ActiveRecord::Base
 
     if user
       if instructors.include?(user)
-        reviews.where(:type => "Assignment::InstructorReview")
+        reviews
       else
         reviews.where("assignment_reviews.type = ? OR assignment_submissions.user_id = ?",
-          "Assignment::PeerFeedback", user.id)
+          "Assignment::Feedback", user.id)
       end
     else
-      reviews.where(:type => "Assignment::PeerFeedback")
+      reviews.where(:type => "Assignment::Feedback")
     end
   end
 

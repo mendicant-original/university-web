@@ -114,6 +114,35 @@
       display: block
       color: #184FA0
 
+#reviews
+  div.review
+
+    cursor: pointer
+
+    &:hover
+      background-color: #eee
+
+    padding: 0.5em
+
+    .description
+      color: #222
+      font-size: 1.25em
+      padding-top: 5px
+
+      span.student_name
+        color: #555
+
+    .icon
+      float: left
+      padding: 5px
+      margin-right: 10px
+      img
+        +box-shadow(#000, 0px, 0px, 5px)
+    .context
+      font-size: 0.9em
+      margin-top: 0.5em
+      color:  #777
+
 #directory.bucket
   border-top: none
 
