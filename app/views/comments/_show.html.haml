@@ -1,6 +1,7 @@
 .comment{:id => comment.index,
          :data => { :id => comment.id,
-                    :editable => (comment.user == current_user).inspect }}
+                    :editable => (comment.user == current_user).inspect },
+         :class => ('active' if comment.reviews.current)}
   .header
     = user_icon(comment.user)
     = comment.user.name
