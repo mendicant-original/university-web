@@ -21,7 +21,10 @@ class User < ActiveRecord::Base
   validates :github_account_name,  :length => { :maximum => 40 },
                                    :format => GITHUB_FORMAT
 
-  validate              :real_name_or_nick_name_required
+  validates_format_of   :email,
+                        :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+
+  validates_presence_of :real_name
   validates_presence_of :github_account_name
 
   has_many :chat_channel_memberships, :class_name => "Chat::ChannelMembership",
@@ -109,10 +112,10 @@ class User < ActiveRecord::Base
 
 
   def name
-    if !nickname.blank?
-      nickname
-    elsif !real_name.blank?
+    if !real_name.blank?
       real_name
+    elsif !nickname.blank?
+      nickname
     else
       email[/([^\@]*)@.*/,1]
     end

@@ -114,6 +114,41 @@
       display: block
       color: #184FA0
 
+#reviews
+  div.review
+    &.eval
+      background-color: #DEF0FF
+
+    cursor: pointer
+
+    &:hover
+      background-color: #eee
+
+    padding: 0.5em
+    margin-bottom: 0.25em
+
+    .description
+      color: #222
+      font-size: 1.25em
+      padding-top: 5px
+
+      span.student_name
+        color: #555
+      span.assigned
+        float: right
+        color: #555
+
+    .icon
+      float: left
+      padding: 5px
+      margin-right: 10px
+      img
+        +box-shadow(#000, 0px, 0px, 5px)
+    .context
+      font-size: 0.9em
+      margin-top: 0.5em
+      color:  #777
+
 #directory.bucket
   border-top: none
 
@@ -225,6 +260,23 @@ form.edit_assignment_submission
     img
       vertical-align: middle
       margin-right:  0.5em
+
+  div.current_review
+    margin: 1em 0
+    padding: 10px
+    color: #fff
+    +linear-gradient($review-colors)
+    +border-radius(5px)
+    a
+      color: #fff
+      &:hover
+        color: #eee
+
+    form, form div
+      display: inline
+      input.cancel_review
+        float: right
+        margin-top: -4px
 
   #description_controls
     float: right

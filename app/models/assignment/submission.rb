@@ -45,24 +45,57 @@ class Assignment
       activities.create(
           user_id:       user.id,
           context:       "#{commit.id}-#{commit.message}",
-          description:   "committed to github: #{commit.message}",
+          description:   "committed: #{commit.message}",
           created_at:    commit.commit_time,
           actionable:    self
       )
 
     end
 
-    def create_comment(comment_data)
-      comment = comments.create(comment_data)
+    def create_review(review_type, comment)
+      return if current_review
+
+      review_class = case review_type
+      when "feedback"
+        Feedback
+      when "evaluation"
+        Evaluation
+      else
+        return
+      end
+
+      review = review_class.create(:comment => comment,
+                                   :submission => self)
 
       activities.create(
         :user_id       => comment.user.id,
-        :description   => "made a comment",
+        :description   => "requested #{review_type}",
         :context       => ActivityHelper.context_snippet(comment.comment_text),
         :actionable    => comment
       )
+    end
 
-      UserMailer.submission_comment_created(comment).deliver
+    def create_comment(comment_data)
+      review_type = comment_data.delete(:type)
+
+      comment = comments.build(comment_data)
+
+      if comment.save
+
+        review = create_review(review_type, comment)
+
+        activities.create(
+          :user_id       => comment.user.id,
+          :description   => "made a comment",
+          :context       => ActivityHelper.context_snippet(comment.comment_text),
+          :actionable    => comment
+        ) unless review
+
+        UserMailer.submission_comment_created(comment).deliver
+
+      end
+
+      comment
     end
 
     def update_status(user, new_status)
@@ -80,6 +113,8 @@ class Assignment
     end
 
     def update_description(user, new_description)
+      return unless new_description != self.description
+
       activity = activities.create(
         :user_id     => user.id,
         :description => "updated description",
@@ -95,6 +130,11 @@ class Assignment
 
     def editable_by?(user)
       assignment.course.instructors.include?(user) or self.user == user
+    end
+
+    def current_review
+      @current_review ||= Review.where(:submission_id => id).current
+      @current_review
     end
 
     def last_active_on

@@ -57,8 +57,24 @@
           %span.name= assignment.name
           %span.description= assignment.short_description
 
+  #reviews.bucket
+    - @reviews.each do |review|
+      = link_to submission_path(review.submission) do
+        .review{:class => ('eval' if Assignment::Evaluation === review)}
+          .icon
+            = image_tag review.submission.user.gravatar_url(48), :alt => ""
+          .description
+            = review.submission.assignment.name
+            %span.student_name= "/ #{review.submission.user.name}"
+            - if review.assigned_id && @course.instructors.include?(current_user)
+              %span.assigned
+                Assigned to:
+                = review.assigned.name
+          .context= context_snippet(review.comment.comment_text, 250)
+
+          .clear
   #progress.bucket
-    = render :partial => "dashboard/assignments",
+    = render :partial => "progress_report",
       :locals => {:course => @course, :expanded => true}
 
   #notes.bucket

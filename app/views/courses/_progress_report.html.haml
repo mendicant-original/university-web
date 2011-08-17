@@ -1,0 +1,27 @@
+%table.progress_report{:'data-id' => course.id}
+  %tr
+    %th= link_to course.name, course_path(course)
+    - course.assignments.each do |assignment|
+      %th.assignment= link_to assignment.name, assignment_path(assignment)
+  - progress_report_students(course).each do |student|
+    %tr{:style => ('display:none;' unless defined?(expanded) || student == current_user),
+        :class => ('student' unless student == current_user)}
+      - if student == current_user
+        %th.cu= current_user.name
+      - else
+        %td
+          = user_icon(student, 24)
+          = student.name
+      - course.assignments.each do |assignment|
+        - submission = assignment.submission_for(student)
+        %td
+          = link_to(submission_status_name(submission.status),
+            submission_path(submission),
+            :class => "status #{' review' if submission.current_review}",
+            :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: ##{submission_status_hex_color(submission.status)};")
+
+  - unless defined?(expanded)
+    %tr.toggle
+      %td{:colspan => course.assignments.count + 1}
+        = link_to_function 'Show students',
+          %{$('table[data-id=#{course.id}] tr.student').toggle(); $(this).text((/Show/.test($(this).text()) ? 'Hide' : 'Show') + ' students')}

@@ -1,0 +1,28 @@
+= form_for @submission.comments.build,
+  :url => comment_course_assignment_submission_path(@course, @assignment, @submission) do |f|
+  = hidden_field_tag "status"
+
+  #in_reply_to{:style => "display: none"}
+    = f.hidden_field :in_reply_to_id
+    Replying to
+    = link_to "comment #1", "#1"
+    = link_to 'X', '#', :class => 'cancel_reply', :title => "Cancel reply"
+
+  = f.text_area :comment_text, 'data-preview' => true
+
+  .tab_footer
+    - if !@submission.current_review && @submission.editable_by?(current_user)
+      = radio_button_tag "[comment][type]", "discussion", true,
+        :id => 'comment_type_discussion'
+      = label_tag "comment_type_discussion", "Discussion"
+      = radio_button_tag "[comment][type]", "feedback", false,
+        :id => 'comment_type_feedback'
+      = label_tag "comment_type_feedback", "Feedback Request"
+      = radio_button_tag "[comment][type]", "evaluation", false,
+        :id => 'comment_type_review'
+      = label_tag "comment_type_review", "Evaluation Request"
+
+    - if @course.instructors.include?(current_user)
+      = comment_and_update_status
+    = f.submit "Comment"
+    .clear

@@ -7,5 +7,16 @@ module CoursesHelper
       ''
     end
   end
-  
+
+  def progress_report_students(course)
+    students = course.students.to_a
+
+    if students.include? current_user
+      students.delete(current_user)
+      students.insert(0, current_user)
+    end
+
+    students
+  end
+
 end

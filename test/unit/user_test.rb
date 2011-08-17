@@ -19,15 +19,8 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
 
-  test "should require a real name or nickname" do
-    no_name_user = User.new(@attrs.merge(:real_name => "", :nickname => ""))
-    assert !no_name_user.valid?
-    assert no_name_user.errors[:base].include?(
-      "You need to provide either a real name or a nick name")
-  end
-
-  test "should allow nickname without a real name" do
-    user = User.new(@attrs.merge(:nickname => ""))
+  test "should allow real name without a nickname" do
+    user = User.new(@attrs.merge(:real_name => "Person Name"))
     assert user.valid?
   end
 
@@ -126,19 +119,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   context "#name" do
-    test "returns nickname if available" do
+    test "returns realname by default" do
       user = User.new(@attrs)
-      assert_equal @attrs[:nickname], user.name
-    end
-
-    test "returns real name if nickname is not available" do
-      user = User.new(@attrs.merge(:nickname => ""))
       assert_equal @attrs[:real_name], user.name
-    end
-
-    test "returns email id if both nickname and real name are not available" do
-      user = User.new(@attrs.merge(:nickname => "", :real_name => ""))
-      assert_equal "one", user.name
     end
   end
 

@@ -1,6 +1,7 @@
 .comment{:id => comment.index,
          :data => { :id => comment.id,
-                    :editable => (comment.user == current_user).inspect }}
+                    :editable => (comment.user == current_user).inspect },
+         :class => ('active' if comment.reviews.current)}
   .header
     = user_icon(comment.user)
     = comment.user.name
@@ -10,8 +11,8 @@
         = link_to_comment comment.in_reply_to
       - else
         = link_to "commented", "##{comment.index}"
+    = link_to comment.index, "##{comment.index}", :class => "number"
     .controls
-      = link_to '', '#new_comment', :class => "reply", :title => "Reply"
       - if current_user == comment.user
         = link_to '', '#', :class => "edit", :title => "Edit"
         = link_to '', comment_path(comment),
@@ -22,4 +23,5 @@
         .on
           = time_ago_in_words comment.created_at
           ago
+      = link_to '', '#new_comment', :class => "reply", :title => "Reply"
   .content= md(comment.comment_text)
