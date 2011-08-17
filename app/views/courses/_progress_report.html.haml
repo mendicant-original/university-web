@@ -3,24 +3,24 @@
     %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
       %th.assignment= link_to assignment.name, assignment_path(assignment)
-  - if course.students.include?(current_user)
-    %tr
-      %th.cu= current_user.name
-      - course.assignments.each do |assignment|
-        - submission = assignment.submission_for(current_user)
+  - ([current_user] + (course.students - [current_user])).each do |student|
+    %tr{:style => ('display:none;' unless defined?(expanded) || student == current_user),
+        :class => ('student' unless student == current_user)}
+      - if student == current_user
+        %th.cu= current_user.name
+      - else
         %td
-          .status{:style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);"}
-            = link_to submission_status_name(submission.status), submission_path(submission)
-  - (course.students - [current_user]).each do |student|
-    %tr.student{:style => ('display:none;' unless defined?(expanded))}
-      %td
-        = user_icon(student, 16)
-        = student.name
+          = user_icon(student, 16)
+          = student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
         %td
-          .status{:style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);"}
-            = link_to submission_status_name(submission.status), submission_path(submission)
+          = link_to(submission_status_name(submission.status),
+            submission_path(submission),
+            :class => "status #{' review' if submission.current_review}",
+            :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: ##{submission_status_hex_color(submission.status)};")
+
+
 
   - unless defined?(expanded)
     %tr.toggle
