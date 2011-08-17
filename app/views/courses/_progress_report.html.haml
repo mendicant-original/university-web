@@ -3,7 +3,7 @@
     %th= link_to course.name, course_path(course)
     - course.assignments.each do |assignment|
       %th.assignment= link_to assignment.name, assignment_path(assignment)
-  - ([current_user] + (course.students - [current_user])).each do |student|
+  - progress_report_students(course).each do |student|
     %tr{:style => ('display:none;' unless defined?(expanded) || student == current_user),
         :class => ('student' unless student == current_user)}
       - if student == current_user
