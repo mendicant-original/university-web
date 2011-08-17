@@ -65,7 +65,7 @@
           %span.student= review.submission.user.name
 
   #progress.bucket
-    = render :partial => "dashboard/assignments",
+    = render :partial => "progress_report",
       :locals => {:course => @course, :expanded => true}
 
   #notes.bucket
