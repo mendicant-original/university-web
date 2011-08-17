@@ -10,7 +10,7 @@
         %th.cu= current_user.name
       - else
         %td
-          = user_icon(student, 16)
+          = user_icon(student, 24)
           = student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
@@ -19,8 +19,6 @@
             submission_path(submission),
             :class => "status #{' review' if submission.current_review}",
             :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: ##{submission_status_hex_color(submission.status)};")
-
-
 
   - unless defined?(expanded)
     %tr.toggle
