@@ -19,7 +19,13 @@ module Admissions::SubmissionsHelper
   end
 
   def submission_status_hex_color(status)
-    status.try(:hex_color) || '333'
+    status.try(:hex_color) || '333333'
+  end
+
+  def submission_status_rgb_color(status)
+    hex = submission_status_hex_color(status)
+
+    hex2rgb(hex).join(",")
   end
 
 end

@@ -53,4 +53,9 @@ module ApplicationHelper
   def get_last(collection_size, index)
     collection_size == index ? "last" : ""
   end
+
+  def hex2rgb(hex)
+    r,g,b = hex[0..1], hex[2..3], hex[4..5]
+    [r,g,b].map {|e| e.to_i(16)}
+  end
 end
