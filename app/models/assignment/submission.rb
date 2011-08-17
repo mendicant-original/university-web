@@ -60,9 +60,19 @@ class Assignment
         Feedback
       when "evaluation"
         Evaluation
+      else
+        return
       end
 
-      review_class.create(:comment => comment, :submission => self) if review_class
+      review = review_class.create(:comment => comment,
+                                   :submission => self)
+
+      activities.create(
+        :user_id       => comment.user.id,
+        :description   => "requested #{review_type}",
+        :context       => ActivityHelper.context_snippet(comment.comment_text),
+        :actionable    => comment
+      )
     end
 
     def create_comment(comment_data)
@@ -72,16 +82,16 @@ class Assignment
 
       if comment.save
 
+        review = create_review(review_type, comment)
+
         activities.create(
           :user_id       => comment.user.id,
           :description   => "made a comment",
           :context       => ActivityHelper.context_snippet(comment.comment_text),
           :actionable    => comment
-        )
+        ) unless review
 
         UserMailer.submission_comment_created(comment).deliver
-
-        create_review(review_type, comment)
 
       end
 
