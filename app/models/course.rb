@@ -50,14 +50,15 @@ class Course < ActiveRecord::Base
 
   def reviews(user=nil)
     reviews = Assignment::Review.includes(:submission => {:assignment => :course}).
-      where("courses.id = ? and assignment_reviews.closed = ?", id, false)
+      where("courses.id = ? and assignment_reviews.closed = ?", id, false).
+      order("assignment_reviews.created_at DESC")
 
     if user
       if instructors.include?(user)
-        reviews
+        reviews.order("type, assigned_id desc")
       else
         reviews.where("assignment_reviews.type = ? OR assignment_submissions.user_id = ?",
-          "Assignment::Feedback", user.id)
+          "Assignment::Feedback", user.id).sort {|u| u == user ? 0 : 1 }
       end
     else
       reviews.where(:type => "Assignment::Feedback")

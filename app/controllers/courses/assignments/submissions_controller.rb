@@ -70,6 +70,7 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
 
   def find_submission
     @submission = Assignment::Submission.find(params[:id])
+    @review     = @submission.current_review
   end
 
   def find_activities

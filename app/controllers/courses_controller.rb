@@ -21,8 +21,7 @@ class CoursesController < ApplicationController
       user.current_course_membership(@course).access_level.to_s.humanize
     end
 
-    @reviews = @course.reviews(current_user).
-      order("assignment_reviews.created_at DESC")
+    @reviews = @course.reviews(current_user)
 
     respond_to do |format|
       format.html

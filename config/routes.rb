@@ -42,6 +42,7 @@ University::Application.routes.draw do
     resources :reviews, :controller => "Courses::Reviews" do
       member do
         post :close
+        put :assign
       end
     end
 
