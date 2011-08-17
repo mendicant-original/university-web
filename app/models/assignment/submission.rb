@@ -57,9 +57,9 @@ class Assignment
 
       review_class = case review_type
       when "feedback"
-        PeerFeedback
-      when "review"
-        InstructorReview
+        Feedback
+      when "evaluation"
+        Evaluation
       end
 
       review_class.create(:comment => comment, :submission => self) if review_class

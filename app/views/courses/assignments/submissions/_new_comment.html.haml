@@ -17,10 +17,10 @@
       = label_tag "comment_type_discussion", "Discussion"
       = radio_button_tag "[comment][type]", "feedback", false,
         :id => 'comment_type_feedback'
-      = label_tag "comment_type_feedback", "Peer Feedback"
-      = radio_button_tag "[comment][type]", "review", false,
+      = label_tag "comment_type_feedback", "Feedback Request"
+      = radio_button_tag "[comment][type]", "evaluation", false,
         :id => 'comment_type_review'
-      = label_tag "comment_type_review", "Instructor Review"
+      = label_tag "comment_type_review", "Evaluation Request"
 
     - if @course.instructors.include?(current_user)
       = comment_and_update_status
