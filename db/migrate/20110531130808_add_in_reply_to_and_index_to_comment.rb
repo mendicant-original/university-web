@@ -2,7 +2,7 @@ class AddInReplyToAndIndexToComment < ActiveRecord::Migration
 
   def self.add_index_to_commentables(commentables)
     commentables.each do |commentable|
-      commentable.comments.each_with_index do |comment, index|
+      commentable.comments.order("created_at").each_with_index do |comment, index|
         comment.update_attributes(:index => index + 1)
       end
     end

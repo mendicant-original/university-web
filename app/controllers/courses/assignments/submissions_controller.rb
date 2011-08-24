@@ -1,20 +1,23 @@
 class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
-  before_filter :find_submission, :only => %w(show edit update comment
-                                             description associate_with_github)
-  before_filter :student_and_instructor_only, :only => %w(update)
+  before_filter :find_submission,
+    :only => %w(show edit update comment description associate_with_github
+                close_review)
+  before_filter :student_and_instructor_only,
+    :only => %w(update close_review associate_with_github)
+
   def index
     @submissions = @assignment.submissions.sort_by {|s| s.last_active_on }.reverse
   end
 
   def show
     respond_to do |format|
-      format.html { redirect_to :action => :edit }
+      format.html { find_activities }
       format.text { render :text => @submission.description }
     end
   end
 
   def edit
-
+    redirect_to :action => :show
   end
 
   def description
@@ -45,24 +48,34 @@ class Courses::Assignments::SubmissionsController < Courses::Assignments::Base
   end
 
   def comment
-    @submission.create_comment(params[:comment].merge(:user_id => current_user.id))
-
-    if params[:commit] && params[:commit][/Request Review/]
-      @submission.update_status(current_user, SubmissionStatus.find_by_name("Submitted"))
-    end
 
     if @course.instructors.include?(current_user) && !params[:status].blank?
       @submission.update_status(current_user, SubmissionStatus.find(params[:status]))
     end
 
-    flash[:notice] = "Comment posted."
-    redirect_to :action => :edit
+    comment_data = params[:comment].merge(:user_id => current_user.id)
+    comment = @submission.create_comment(comment_data)
+
+    unless comment.new_record?
+      flash[:notice] = "Comment posted."
+      redirect_to :action => :show
+    else
+      find_activities
+      flash[:error] = comment.errors.map {|f, e| [f.to_s.humanize, e].join(" ") }.join(", ")
+      render :action => :show
+    end
   end
 
   private
 
   def find_submission
     @submission = Assignment::Submission.find(params[:id])
+    @review     = @submission.current_review
+  end
+
+  def find_activities
+    @activities = @submission.activities.
+      group_by_description(:order => 'created_at')
   end
 
   def student_and_instructor_only

@@ -7,6 +7,10 @@ class Assignment
     belongs_to :submission
     belongs_to :actionable, :polymorphic => true
 
+    def self.group_by_description(options={})
+      Assignment::ActivityGrouper.group_activities(all(options))
+    end
+
     def on
       created_at.strftime("%m/%d/%Y %I:%M%p")
     end
@@ -14,7 +18,6 @@ class Assignment
     def type
       actionable.class.name.split('::').last || ''
     end
-
 
     def is_a_description_update?
       description[/description/]

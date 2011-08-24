@@ -42,7 +42,7 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
       @submission.add_github_commit(@commit)
 
       activity = @submission.activities.last
-      assert_equal "committed to github: commit message", activity.description
+      assert_equal "committed: commit message", activity.description
       assert_equal "commit id-commit message", activity.context
       assert_equal @now, activity.created_at
     end
@@ -135,13 +135,13 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
         mail = ActionMailer::Base.deliveries.last
         assert_equal [instructor.user.email, @submission.user.email], mail.to
       end
-      
+
       test "escapes HTML elements" do
         @submission.create_comment(:comment_text => "This &amp; that <p>Go</p>",
                                    :user => Factory(:user))
 
         mail = ActionMailer::Base.deliveries.last
-        
+
         assert !mail.body.to_s[/\&amp;/], "Body contains &amp;"
       end
     end

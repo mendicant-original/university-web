@@ -1,0 +1,56 @@
+- title "#{@submission.user.name}'s #{@assignment.name} Submission"
+
+- content_for :header_bottom do
+  :javascript
+    $(document).ready(function(){
+      // Toggle Status / Description update messages
+      $('.header').click(function(e){
+        $(e.target).siblings('.content').slideToggle();
+      });
+
+      UW.Comments.init('#{comments_path}/');
+
+      $("#sidebar li a[data-id=submissions]").addClass('selected');
+
+      UW.Submissions.init('#{submission_path(@submission)}', #{@submission.editable_by?(current_user)});
+
+      $('form').submit(function(){
+          $('input[type=submit]', this).attr('disabled', 'disabled');
+      });
+    });
+
+= render :partial => "breadcrumbs"
+
+- content_for :bucket do
+  #submission
+
+    = render :partial => "header"
+
+    = render :partial => "current_review"
+
+    .comments
+      - @activities.each do |activity, similar_activities|
+        = render_activity(activity)
+        - if similar_activities.any?
+          %div{:id => "hidden_#{activity.id}", :style => "display: none;"}
+            - similar_activities.each do |hidden_activity|
+              = render_activity(hidden_activity)
+          = link_to_function "Display #{similar_activities.length} more like this.",
+            %{$('#hidden_#{activity.id}').show(); $(this).remove()}
+
+      = render :partial => "new_comment"
+
+    .clear
+
+    = render :partial => "current_review"
+
+    - if @course.instructors.include?(current_user)
+
+      = form_for @submission, :url => submission_path(@submission) do |f|
+        = f.submit "Update Status"
+        = f.select :submission_status_id,
+          SubmissionStatus.order('sort_order').map {|ss| [ss.name, ss.id]}
+
+      .clear
+
+= render :partial => "courses/assignments/layout"

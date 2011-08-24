@@ -1,0 +1,16 @@
+- if @review
+  .current_review
+    Currently Requesting #{@review.to_s} -
+    = link_to "##{@review.comment.index}" do
+      = context_snippet(@review.comment.comment_text, 50)
+      (##{@review.comment.index})
+    - if @submission.editable_by?(current_user)
+      = button_to 'Close Request',
+        close_course_review_path(@course, @review),
+        :class   => 'cancel_review'
+
+  - if @course.instructors.include?(current_user)
+    = form_for @review, :url => assign_course_review_path(@course, @review), do |f|
+      = f.submit "Assign Evaluation"
+      = f.select :assigned_id, @course.instructors.map {|c| [c.name, c.id]},
+        :include_blank => true

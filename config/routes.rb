@@ -39,6 +39,13 @@ University::Application.routes.draw do
       get  :directory
     end
 
+    resources :reviews, :controller => "Courses::Reviews" do
+      member do
+        post :close
+        put :assign
+      end
+    end
+
     resources :documents, :controller => "Courses::Documents"
 
     resources :assignments, :controller => "Courses::Assignments" do
