@@ -2,7 +2,75 @@
 
 %h1.form-header New Course
 
-- nested_form_for @course, :url => admin_courses_path, :html => {:class => "bp"} do |f|
-  = render :partial => "form", :object => f
+- nested_form_for @course, :url => admin_courses_path, :html => {:class => "bp"} do |form|
+  = #render :partial => "form", :object => f
+  = error_messages_for(@course)
+
+  %p
+    = form.label :name
+    = form.text_field :name
+
+  %p
+    = form.label :start_date
+    = form.text_field :start_date, :class => "datepicker"
+
+  %p
+    = form.label :end_date
+    = form.text_field :end_date, :class => "datepicker"
+
+  %p
+    = form.label :class_size_limit
+    = form.text_field :class_size_limit
+
+  %p
+    = form.label :cc_comments, "CC Comments to"
+    = form.text_field :cc_comments
+
+  %p
+    = form.label :archived
+    = form.check_box :archived
+
+  %p
+    = form.label :channel_id, "IRC Channel"
+    = form.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+      :include_blank => "None"
+
+  %p
+    = form.label :term_id
+    = form.select :term_id, Term.all.map {|t| [t.name, t.id] },
+      :include_blank => true
+
+  %p
+    = form.label :open_for_enrollment, "Open Admissions"
+    = form.check_box :open_for_enrollment
+
+  %p
+    = form.label :enrollment_close_date, "Admissions Close"
+    = form.text_field :enrollment_close_date, :class => "datepicker"
+
+  %hr
+
+  %h3 Course Description
+
+  = form.text_area :description, :'data-preview' => true
+
+  %hr
+
+  %h2 Instructors
+
+  = form.link_to_add "Add an instructor", :course_memberships
+
+  = form.fields_for :course_memberships,
+   @course.course_memberships.where(:access_level => 'instructor').all do |m|
+    %p
+      = m.label :user_id, "Instructor"
+      = m.select :user_id,
+        User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
+        :include_blank => "Select an instructor"
+
+      = m.hidden_field :access_level, :value => 'instructor'
+      = m.link_to_remove "Remove"
+
+  %hr
 
 #submit_bar_padding
