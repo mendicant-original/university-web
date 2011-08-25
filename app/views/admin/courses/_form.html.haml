@@ -52,31 +52,21 @@
 
 %h2 Instructors
 
-= form.link_to_add "Add an instructor", :course_memberships
+.course_instructors
+  = link_to_add_association "Add an instructor", form, :course_memberships, :"data-association-insertion-position" => "after", :class => "add_nested_fields"
 
 = form.fields_for :course_memberships,
  @course.course_memberships.where(:access_level => 'instructor').all do |m|
-  %p
-    = m.label :user_id, "Instructor"
-    = m.select :user_id,
-      User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
-      :include_blank => "Select an instructor"
-
-    = m.hidden_field :access_level, :value => 'instructor'
-    = m.link_to_remove "Remove"
+  = render "course_membership_fields", :f => m
 
 %hr
 
 %h2 Documents
-
-= form.link_to_add "Add a document", :course_documents
+.course_documents
+  = link_to_add_association "Add a document", form, :course_documents, :"data-association-insertion-position" => "after", :class => "add_nested_fields"
 
 = form.fields_for :course_documents do |d|
-  %p
-    = d.label :document_id, "Document"
-    = d.select :document_id, Document.order("title").map {|c| [c.title, c.id]},
-      :include_blank => "Select a document"
-    = d.link_to_remove "Remove"
+  = render "course_document_fields", :f => d
 
 #submit_bar
   = form.submit @course.new_record? ? "Create" : "Update"
