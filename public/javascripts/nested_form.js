@@ -34,7 +34,7 @@ jQuery(function($) {
     var new_id = new Date().getTime();
     content = content.replace(regexp, "new_" + new_id);
 
-    var field = $(content).insertBefore(this);
+    var field = $(content).insertAfter(this);
     $(this).closest("form").trigger({type: 'nested:fieldAdded', field: field});
     return false;
   });

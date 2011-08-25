@@ -25,7 +25,7 @@ gem 'nested_form', "~> 0.1.1"
 ################
 
 gem "compass",       "~> 0.10.4"
-gem "haml"
+gem "haml", "= 3.0.4"
 gem "sass"
 gem "rdiscount"
 gem "will_paginate", "~> 3.0"
