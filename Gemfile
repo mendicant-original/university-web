@@ -28,7 +28,7 @@ gem "compass",       "~> 0.10.4"
 gem "haml", "= 3.0.4"
 gem "sass"
 gem "rdiscount"
-gem "will_paginate", "~> 3.0"
+gem "will_paginate", "= 3.0.pre4"
 
 
 group :test do
