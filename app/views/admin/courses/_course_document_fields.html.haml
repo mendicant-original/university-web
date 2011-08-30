@@ -1,0 +1,6 @@
+.nested-fields
+  %p
+    = f.label :document_id, "Document"
+    = f.select :document_id, Document.order("title").map {|c| [c.title, c.id]},
+      :include_blank => "Select a document"
+    = link_to_remove_association "Remove", f, :class => "delete"

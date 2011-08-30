@@ -28,6 +28,7 @@ gem "haml", "~> 3.1"
 gem "sass"
 gem "rdiscount"
 gem "will_paginate", "~> 3.0"
+gem "cocoon"
 
 
 group :test do

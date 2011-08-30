@@ -1,0 +1,8 @@
+.nested-fields
+  %p.no-label
+    = f.select :course_id, Course.all.map {|c| [c.full_name, c.id]},
+      :include_blank => "Select a course"
+    = f.select :access_level,
+      AccessLevel::Course.definitions.keys.reject {|k| k == 'instructor' }
+    = link_to_remove_association "Remove", f, :class => "delete"
+
