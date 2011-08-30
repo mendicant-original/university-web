@@ -51,7 +51,7 @@ module University
     config.action_mailer.default_url_options = { :host => "university.rubymendicant.com" }
 
     Haml::Template.options[:ugly] = true
-    
+
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end
