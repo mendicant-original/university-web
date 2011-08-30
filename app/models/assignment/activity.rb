@@ -27,14 +27,6 @@ class Assignment
       description[/github/i]
     end
 
-    def is_a_description_update?
-      description[/description/]
-    end
-
-    def is_a_github_commit?
-      description[/github/i]
-    end
-
     private
 
     def set_assignment
