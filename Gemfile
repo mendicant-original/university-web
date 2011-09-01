@@ -16,9 +16,7 @@ gem "pg"
 gem "json"
 gem "sanitize", "~> 2.0.0"
 gem "octokit"
-# Using jordanbyron's fork until his pull request is merged
-gem "texticle", :git => "git://github.com/jordanbyron/texticle.git",
-  :require => "texticle/rails"
+gem "texticle", "~> 2.0.2", :require => "texticle/rails"
 
 ################
 # Presentation #
