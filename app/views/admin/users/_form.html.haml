@@ -65,39 +65,32 @@
 %hr
 
 %h2 Courses
-= form.link_to_add "Add a course", :course_memberships
+
+.user_courses
+  = link_to_add_association 'Add a course', form, :course_memberships, :"data-association-insertion-position" => "after", :class => "add_nested_fields"
 
 = form.fields_for :course_memberships,
   @user.course_memberships.where(["access_level <> 'instructor'"]).all do |m|
-  %p.no-label
-    = m.select :course_id, Course.all.map {|c| [c.full_name, c.id]},
-      :include_blank => "Select a course"
-    = m.select :access_level,
-      AccessLevel::Course.definitions.keys.reject {|k| k == 'instructor' }
-    = m.link_to_remove "Remove"
-
+  = render "course_membership_fields", :f => m
 
 %hr
 
 %h2 Chat Channel Memberships
-= form.link_to_add "Add a channel", :chat_channel_memberships
+.user_channel_memberships
+  = link_to_add_association 'Add a channel', form, :chat_channel_memberships, :"data-association-insertion-position" => "after", :class => "add_nested_fields"
 
 = form.fields_for :chat_channel_memberships do |m|
-  %p.no-label
-    = m.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
-      :include_blank => "Select a channel"
-    = m.link_to_remove "Remove"
+  = render "chat_channel_membership_fields", :f => m
 
 %hr
 
 %h2 Comments
 
-= form.link_to_add "Add a comment", :comments
+.user_comments
+  = link_to_add_association 'Add a comment', form, :comments, :"data-association-insertion-position" => "after", :class => "add_nested_fields"
 
 = form.fields_for :comments do |c|
-  %p.no-label
-    = c.text_area :comment_text
-    = c.link_to_remove "Remove"
+  = render "comment_fields", :f => c
 
 #submit_bar
   = form.submit @user.new_record? ? "Create" : "Update"

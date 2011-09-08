@@ -6,7 +6,6 @@ source "http://rubygems.org"
 
 gem "rails",  "~> 3.0.7"
 gem "devise", "~> 1.4.2"
-gem "rake",   "0.8.7"
 gem "rack",   "~> 1.2.1"
 
 ########
@@ -17,18 +16,18 @@ gem "pg"
 gem "json"
 gem "sanitize", "~> 2.0.0"
 gem "octokit"
-#gem "texticle", "2.0", :require => "texticle/rails"
-gem 'nested_form', "~> 0.1.1"
+gem "texticle", "~> 2.0.2", :require => "texticle/rails"
 
 ################
 # Presentation #
 ################
 
 gem "compass",       "~> 0.10.4"
-gem "haml", "= 3.0.4"
+gem "haml", "~> 3.1"
 gem "sass"
 gem "rdiscount"
 gem "will_paginate", "~> 3.0"
+gem "cocoon"
 
 
 group :test do

@@ -1,0 +1,5 @@
+.nested-fields  
+  %p.no-label
+    = f.select :channel_id, Chat::Channel.all.map {|c| [c.name, c.id]},
+      :include_blank => "Select a channel"
+    = link_to_remove_association "Remove", f, :class => "delete"

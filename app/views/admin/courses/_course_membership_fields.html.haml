@@ -1,0 +1,9 @@
+.nested-fields
+  %p
+    = f.label :user_id, "Instructor"
+    = f.select :user_id,
+      User.where(:access_level => 'admin').map {|c| [c.name, c.id]},
+      :include_blank => "Select an instructor"
+
+    = f.hidden_field :access_level, :value => 'instructor'
+    = link_to_remove_association "Remove", f, :class => "delete"

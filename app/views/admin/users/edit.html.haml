@@ -2,7 +2,7 @@
 
 %h1.form-header Edit User
 
-- nested_form_for @user, :url => admin_user_path(@user), :html => {:class => 'bp'} do |f|
+- form_for @user, :url => admin_user_path(@user), :html => {:class => 'bp'} do |f|
   = render :partial => "form", :object => f
 
 #submit_bar_padding
