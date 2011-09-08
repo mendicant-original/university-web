@@ -17,7 +17,7 @@ gem "pg"
 gem "json"
 gem "sanitize", "~> 2.0.0"
 gem "octokit"
-gem "texticle", "2.0", :require => "texticle/rails"
+#gem "texticle", "2.0", :require => "texticle/rails"
 gem 'nested_form', "~> 0.1.1"
 
 ################
