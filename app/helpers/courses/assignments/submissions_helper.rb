@@ -61,14 +61,16 @@ module Courses::Assignments::SubmissionsHelper
     end
   end
 
-  def submission_status_link(submission, with_trigger = false)
-    css_classes = with_trigger ? "trigger status" : "status"
+  def submission_status_link(submission)
+    css_classes = "status"
     css_classes += " review" if submission.current_review
+    link_options = {:class => css_classes,
+    :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);
+    border-color: ##{submission_status_hex_color(submission.status)};"}
+    link_options.merge!(:title => context_snippet(submission.description, 150)) if submission.description
     link_to(submission_status_name(submission.status),
     submission_path(submission),
-    :class => css_classes,
-    :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15);
-    border-color: ##{submission_status_hex_color(submission.status)};")
+    link_options)
   end
 
 end

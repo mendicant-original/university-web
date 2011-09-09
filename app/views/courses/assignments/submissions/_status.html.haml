@@ -1,7 +1,0 @@
-- if submission.description
-  .popup-container
-    = submission_status_link(submission, true)
-    .popup.submission_status
-      = context_snippet(submission.description, 150)
-- else
-  = submission_status_link(submission)

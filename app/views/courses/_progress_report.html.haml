@@ -14,8 +14,8 @@
           = student.name
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
-        %td.submission_status
-          = render :partial => "/courses/assignments/submissions/status", :locals => {:submission => submission}
+        %td
+          = submission_status_link(submission)
 
   - unless defined?(expanded)
     %tr.toggle
