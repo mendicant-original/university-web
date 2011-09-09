@@ -19,4 +19,31 @@ module CoursesHelper
     students
   end
 
+  def submission_status_class(submission)
+    css_class = "status"
+
+    if submission.current_review
+      if Assignment::Feedback === submission.current_review ||
+         submission.editable_by?(current_user)
+        css_class << " review"
+      end
+    end
+
+    css_class
+  end
+
+  def submission_status_style(submission)
+    background   = submission_status_rgb_color(submission.status)
+    border_color = submission_status_hex_color(submission.status)
+
+    if Assignment::Evaluation === submission.current_review &&
+       submission.editable_by?(current_user)
+      border_color = "C81A12"
+    end
+
+    %{ background-color: rgba(#{background}, 0.15);
+       border-color: ##{border_color};
+     }
+  end
+
 end

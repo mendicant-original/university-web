@@ -17,8 +17,8 @@
         %td
           = link_to(submission_status_name(submission.status),
             submission_path(submission),
-            :class => "status #{' review' if submission.current_review}",
-            :style => "background-color: rgba(#{submission_status_rgb_color(submission.status)}, 0.15); border-color: ##{submission_status_hex_color(submission.status)};")
+            :class => submission_status_class(submission),
+            :style => submission_status_style(submission))
 
   - unless defined?(expanded)
     %tr.toggle
