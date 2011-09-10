@@ -50,7 +50,7 @@ class Chat::MessagesController < ApplicationController
     #strip non-word chars, which confuse postgresql's search method
     params[:search].gsub!(/\W/," ")
 
-    @messages = Chat::Message.search({body: params[:search]})
+    @messages = Chat::Message.search_within_channel(@channel, {body: params[:search]})
     @num_results = @messages.count.to_s
 
     respond_to do |format|
