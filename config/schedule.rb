@@ -1,4 +1,4 @@
-every 15.minutes do
+every 1.hour do
   rake "github:check_for_new_commits"
 end
 
