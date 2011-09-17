@@ -10,8 +10,20 @@ module Github
 
     def find_and_store_new_commits
 
-      Assignment::Submission.with_github_repository.each do |submission|
-        find_and_store_new_commits_for_submission(submission)
+      Assignment::Submission.all_active.with_github_repository.each do |submission|
+        begin
+          find_and_store_new_commits_for_submission(submission)
+        rescue Octokit::NotFound
+          puts "Invalid Github Repository"
+
+          submission.description ||= ""
+          submission.description += %{\n\n**Invalid Github Repository**: #{submission.github_repository}}
+          submission.github_repository = nil
+          submission.save
+        rescue Octokit::Forbidden
+          puts "Too many requests"
+          break
+        end
       end
 
     end
