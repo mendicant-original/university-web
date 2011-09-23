@@ -7,12 +7,12 @@
 
 - title 'Sign in'
 
+%h1
+  Mendicant University
+
 = image_tag "MU_logo_no_letters_no_circle_300.png"
 
 %p
-
-/= image_tag "rmu_header.png", :alt => "Ruby Mendicant University", 
-/  :class => "rmu-header"
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'bp'}) do |f|
   %p
@@ -29,5 +29,5 @@
       = f.label :remember_me
 
   .block= f.submit "Sign in", :class => "slick-black"
-  
+
   .clear
