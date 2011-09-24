@@ -3,4 +3,9 @@
   = label_tag :search, "Keyword", 
     :class => "infield"
   = text_field_tag :search, params[:search]
-  = submit_tag 'Search'
+  = submit_tag 'Search' 
+
+- content_for :breadcrumbs do
+  = render :partial => "breadcrumbs"
+  %span.separator &rarr;
+  %span#current_section
