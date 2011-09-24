@@ -1,0 +1,6 @@
+- form_tag search_course_path, :method => "get",
+  do
+  = label_tag :search, "Keyword", 
+    :class => "infield"
+  = text_field_tag :search, params[:search]
+  = submit_tag 'Search'
