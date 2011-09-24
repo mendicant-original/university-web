@@ -16,7 +16,7 @@ gem "pg"
 gem "json"
 gem "sanitize", "~> 2.0.0"
 gem "octokit"
-gem "texticle", "~> 2.0.2", :require => "texticle/rails"
+gem "texticle", :require => "texticle/rails", :git => 'git://github.com/tenderlove/texticle.git'
 
 ################
 # Presentation #

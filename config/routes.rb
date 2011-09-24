@@ -35,6 +35,7 @@ University::Application.routes.draw do
 
   resources :courses do
     member do
+      get  :search
       post :notes
       get  :directory
     end
