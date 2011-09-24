@@ -30,7 +30,7 @@ class Course < ActiveRecord::Base
 
   scope :active,   where(:archived => false).order('start_date')
   scope :archived, where(:archived => true ).order('start_date')
-  scope :current,  where(["start_date < ?", Date.today + 15.days])
+  scope :current,  where(["start_date < ?", Date.today + 15.days]) 
 
   def self.current_course
     find_by_open_for_enrollment(true)
