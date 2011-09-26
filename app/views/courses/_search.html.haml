@@ -1,11 +1,15 @@
-- form_tag search_course_path, :method => "get",
+= form_tag search_course_path, :method => "get",
   do
-  = label_tag :search, "Keyword", 
+  = label_tag :search, "Keyword",
     :class => "infield"
   = text_field_tag :search, params[:search]
-  = submit_tag 'Search' 
+  = submit_tag 'Search'
 
-- content_for :breadcrumbs do
-  = render :partial => "breadcrumbs"
-  %span.separator &rarr;
-  %span#current_section
+- unless @results.nil?
+  %h1 Matches
+  #results
+    %ul
+      - @results.each do |result|
+        %li
+          = link_to("#{result.description}", result.link) unless result.link.nil?
+          = ("#{result.description}" + result.content) unless result.content.nil?
