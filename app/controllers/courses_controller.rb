@@ -37,31 +37,9 @@ class CoursesController < ApplicationController
     end
   end
 
-  def search
-    @course = Course.find(params[:id])
-    search_key = params[:search]
-
-    @results = Hash.new(0)
-
-    @results[:course_description] = Course.search({description: search_key}, @course)
-
-    @results[:notes] = Course.search({notes: search_key}, @course)
-
-    @results[:assignments] = Assignment.search(search_key, @course.assignments)
-
-    @results[:submission] = Assignment::Submission.search(search_key, @course.assignments.each.map {|a| a.submissions}.flatten)
-
-    @results[:submission_comments] = []
-    @results[:submission_comments]
-    (@course.assignments.each.map &:submissions).flatten.each do |submission|
-      @results[:submission_comments] << submission unless Comment.search(search_key, submission.comments).empty?
-    end
-                                                                                                
-    if @course.channel
-      @results[:irc_messages] = Chat::Message.search(search_key, @course.channel.messages)
-    else                     
-      @results[:irc_messages] = []
-    end
+  def search             
+    @course = find_course
+    @results = search_course_resources(params[:search], @course)
   end
 
   def directory

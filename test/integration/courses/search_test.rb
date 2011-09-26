@@ -3,7 +3,7 @@ require 'mocha'
 
 module Courses
   class SearchTest < ActionDispatch::IntegrationTest
-    describe "As a user, I want to have full text-search capabilities" do            
+    context "As a user, I want to have full text-search capabilities" do            
       context "# In a course" do                                         
         setup do
           @course = Factory(:course)
@@ -19,7 +19,7 @@ module Courses
             
         test "I don't get result if there is no match" do
           visit course_path(@course, :anchor => "search")
-          fill_in 'search', @search_key
+          fill_in 'search', with: @search_key
           within('div#results') do
             assert_content 'No results'
           end
@@ -27,7 +27,7 @@ module Courses
         
         test "I get results from the course's description" do
           #visit course_path(@course, :anchor => "search")
-          #fill_in 'search', @search_key
+          #fill_in 'search', with: @search_key
           #within('div#results') do
           #  assert_content @course.name
           #end
