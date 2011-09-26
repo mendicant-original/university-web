@@ -36,19 +36,21 @@ class Assignment
     def add_github_commit(commit)
 
       if(last_commit_time.nil? || commit.commit_time > last_commit_time)
-        update_attributes(
-            last_commit_time:  commit.commit_time,
-            last_commit_id:    commit.id
-        )
-      end
 
-      activities.create(
-          user_id:       user.id,
-          context:       "#{commit.id}-#{commit.message}",
-          description:   "committed: #{commit.message}",
-          created_at:    commit.commit_time,
-          actionable:    self
-      )
+        update_attributes(
+          last_commit_time: commit.commit_time,
+          last_commit_id:   commit.id
+        )
+
+        activities.find_or_create_by_description_and_created_at(
+          "committed: #{commit.message}", commit.commit_time).
+        update_attributes(
+          user_id:    user.id,
+          context:    "#{commit.id}-#{commit.message}",
+          actionable: self
+        )
+
+      end
 
     end
 
