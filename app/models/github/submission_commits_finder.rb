@@ -39,7 +39,7 @@ module Github
         commit.login == submission.user.github_account_name &&
         ( submission.last_commit_time.nil? ||
           commit.commit_time > submission.last_commit_time )
-      end
+      end.sort_by {|c| c.commit_time }
 
       if(user_commits.empty?)
         puts "No new commits."
@@ -61,7 +61,7 @@ module Github
 
     def get_commits_for_branch(repository, branch)
       begin
-        @client.commits(repository, branch).map {|c| GithubCommit.new(c)}
+        @client.commits(repository, branch).map {|c| GithubCommit.new(c) }
       rescue
         #If this repo is a fork, branches will be returned by the Github API
         #that don't exist on this fork.
