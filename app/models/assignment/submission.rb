@@ -22,7 +22,7 @@ class Assignment
 
       full_repo = "#{user.github_account_name}/#{stripped_repo}"
 
-      update_attribute(:github_repository, full_repo)
+      update_attribute(:github_repository, full_repo, :last_commit_time => nil)
 
       activities.create(
         user_id:       user.id,
