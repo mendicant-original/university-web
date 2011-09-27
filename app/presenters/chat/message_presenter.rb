@@ -38,7 +38,7 @@ class Chat::MessagePresenter
       @message = message
       @id = message.id
       @name = message.handle.name
-      @display_name = @name.dup
+      @display_name = "#{@name}:"
       @body = message.body
       @recorded_at = message.recorded_at
     end
