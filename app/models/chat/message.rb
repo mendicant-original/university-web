@@ -6,6 +6,8 @@ module Chat
     belongs_to :handle
     belongs_to :topic
 
+    validates_presence_of :recorded_at, :channel
+
     def self.search_within_channel(channel, search_options)
       where(:channel_id => channel.id).search(search_options)
     end
