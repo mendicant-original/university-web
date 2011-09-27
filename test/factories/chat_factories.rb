@@ -16,13 +16,6 @@ Factory.define :chat_message, :class => Chat::Message do |m|
     Factory(:chat_topic, :channel => message.channel)
   }
   m.handle  { |_| Factory(:chat_handle) }
-  m.channel { |message|
-    if message.topic? && message.topic.channel?
-      message.topic.channel
-    else
-      Factory(:chat_channel)
-    end
-  }
   m.recorded_at { |_| 3.minutes.ago }
   m.body "Could anyone take a look at this?"
 end
