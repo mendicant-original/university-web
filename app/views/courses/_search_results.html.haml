@@ -4,11 +4,11 @@
   %ul
     - unless @results[:course_description].empty?
       %h3 Course's description
-      = @course.description
+      = highlight(@course.description, @search_key)
 
     - unless @results[:notes].empty?
       %h3 Shared Notes
-      = @course.notes
+      = highlight(@course.notes, @search_key)
 
     - unless @results[:assignments].empty?
       %h3 Assignments

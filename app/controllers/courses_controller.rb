@@ -38,7 +38,8 @@ class CoursesController < ApplicationController
   end
 
   def search
-    @results = @course.search_course_resources(params[:search])   
+    @search_key = params[:search]
+    @results = @course.search_course_resources(@search_key)   
     
     respond_to do |format|
       format.js
