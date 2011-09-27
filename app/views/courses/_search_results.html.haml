@@ -28,7 +28,7 @@
       - @results[:submission_comments].each do |submission|
         %ul
           %li
-            = link_to submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
+            = link_to 'A comment in ' + submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
 
     - unless @results[:irc_messages].empty?
       %h3 Irc Channel
