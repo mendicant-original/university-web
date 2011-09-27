@@ -18,4 +18,18 @@ class Chat::MessagesControllerTest < ActionController::TestCase
     assert_select 'tr', { :text => /One/, :count => 1 }
     assert_select 'tr', { :text => /Two/, :count => 0 }
   end
+
+  test 'groups messages from one user under the same name' do
+    @handle = Factory(:chat_handle, :name => 'Josh')
+    Factory(:chat_message, :channel => @channel_one, :handle => @handle, :body => 'A')
+    Factory(:chat_message, :channel => @channel_one, :handle => @handle, :body => 'B')
+    Factory(:chat_message, :channel => @channel_one, :handle => @handle, :body => 'C')
+    Factory(:chat_message, :channel => @channel_one, :body => 'Gibberish')
+    Factory(:chat_message, :channel => @channel_one, :handle => @handle, :body => 'D')
+
+    get :index, :channel => @channel_one.name
+
+    assert_response :success
+    assert_select 'tr', { :text => /#{@handle.name}/, :count => 2 }
+  end
 end
