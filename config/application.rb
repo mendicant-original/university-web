@@ -53,5 +53,6 @@ module University
     Haml::Template.options[:ugly] = true
 
     config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/presenters)
   end
 end

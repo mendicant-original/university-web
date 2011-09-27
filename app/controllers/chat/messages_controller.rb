@@ -27,13 +27,15 @@ class Chat::MessagesController < ApplicationController
 
     @messages.reverse!
 
+    @messages = Chat::MessagePresenter.new(@messages)
+
     respond_to do |format|
       format.html
       format.json do
         json_messages = @messages.map do |message|
           {
             :body        => message.body,
-            :handle      => message.handle.name,
+            :handle      => message.name,
             :recorded_at => message.recorded_at,
             :id          => message.id,
             :html        => render_to_string(:partial => 'display.html.haml',
