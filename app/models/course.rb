@@ -106,10 +106,11 @@ class Course < ActiveRecord::Base
     results[:submission] = Assignment::Submission.search(search_key, self.assignments.each.map {|a| a.submissions}.flatten)
 
     results[:submission_comments] = []
-    results[:submission_comments]
     (self.assignments.each.map &:submissions).flatten.each do |submission|
-      results[:submission_comments] << submission unless Comment.search(search_key, submission.comments).empty?
-    end
+      Comment.search(search_key, submission.comments).each do |comment|
+        results[:submission_comments] << comment.commentable
+      end      
+    end    
                                                                                                 
     if self.channel
       results[:irc_messages] = Chat::Message.search(search_key, self.channel.messages)

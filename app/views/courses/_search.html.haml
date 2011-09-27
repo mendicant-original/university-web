@@ -1,4 +1,4 @@
-= form_tag search_course_path, :method => "get",
+= form_tag search_course_path, :method => "get", :remote => true,
   do
   = label_tag :search, "Keyword",
     :class => "infield"
