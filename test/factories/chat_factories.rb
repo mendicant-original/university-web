@@ -17,7 +17,7 @@ Factory.define :chat_message, :class => Chat::Message do |m|
   }
   m.handle  { |_| Factory(:chat_handle) }
   m.channel { |message|
-    if message.topic? && message.topic.channel?
+    if message.topic && message.topic.channel
       message.topic.channel
     else
       Factory(:chat_channel)
