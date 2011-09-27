@@ -12,25 +12,23 @@ module Courses
           2.times do |i|
             user = Factory(:user, :nickname => "Student #{i+1}")
             Factory(:course_membership, :user => user, :course => @course)
-          end             
-          @search_key = 'lorem'
-          
+          end                       
         end
             
         test "I don't get result if there is no match" do
-          visit course_path(@course, :anchor => "search")
-          fill_in 'search', with: @search_key
-          within('div#results') do
-            assert_content 'No results'
-          end
+          pending()
+          #visit course_path(@course, :anchor => "search")
+          #fill_in 'search', with: 'blablabla'
+          #click_button('Search')
+          #assert_content 'No matches found'
         end
         
         test "I get results from the course's description" do
+          pending()
           #visit course_path(@course, :anchor => "search")
-          #fill_in 'search', with: @search_key
-          #within('div#results') do
-          #  assert_content @course.name
-          #end
+          #fill_in 'search', with: 'lorem'
+          #click_button('Search')
+          #assert_content "Course's Description"
         end                                            
         
         test "I get results from the Notes" do
