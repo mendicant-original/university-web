@@ -8,6 +8,8 @@ UW.Logs.init = function(options){
   this.url                   = options.url;
   this.channel               = options.channel;
   this.topic                 = options.topic;
+  this.refreshInterval       = options.refreshInterval || 60 * 60 * 1000;
+  this.startedTime           = new Date;
 
   $.scrollTo('#bottom', { axis: 'y' });
 
@@ -48,7 +50,11 @@ UW.Logs.loadMessages = function(){
     },
     error: UW.Logs.loadMessagesError,
     complete: function() {
-      setTimeout(UW.Logs.loadMessages, 3000);
+      if (UW.Logs.continueToLoadMessages()) {
+        setTimeout(UW.Logs.loadMessages, 3000);
+      } else {
+        UW.Logs.displayStoppedRefreshMessage();
+      }
     }
   });
 }
@@ -65,4 +71,24 @@ UW.Logs.loadMessagesError = function(){
     $("#flash").append(error);
     $("#flash > .flash:hidden").slideDown();
   }
+}
+
+UW.Logs.continueToLoadMessages = function(){
+  var elapsedTime = (new Date) - this.startedTime;
+
+  return elapsedTime < this.refreshInterval;
+}
+
+UW.Logs.displayStoppedRefreshMessage = function(){
+  var message = "Autoloading of messages is stopped after an hour",
+    error = $("<div/>", {
+      "class": "flash notice",
+      text:    message,
+      style:   "display: none;"
+    });
+
+  $("#flash").append(error);
+  $("#flash > .flash:hidden").slideDown();
+
+  $.scrollTo('#flash', { axis: 'y' });
 }
