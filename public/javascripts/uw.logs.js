@@ -13,9 +13,10 @@ UW.Logs.init = function(options){
   this.offset                = 0;
 
   $.scrollTo('#bottom', { axis: 'y' });
+  $('#messages_container').scrollTo('#bottom', { axis: 'y' });
 
   setTimeout(this.loadMessages, 3000);
-  $(document).bind('scroll', this.loadPreviousMessages);
+  $('#messages_container').bind('scroll', this.loadPreviousMessages);
 }
 
 UW.Logs.loadMessages = function(){
@@ -47,7 +48,7 @@ UW.Logs.loadMessages = function(){
         }
 
         if(scrollToMessage == true)
-          $.scrollTo('table.messages tr:last', { axis: 'y' });
+          $('#messages_container').scrollTo('table.messages tr:last', { axis: 'y' });
       }
     },
     error: UW.Logs.loadMessagesError,
@@ -96,15 +97,13 @@ UW.Logs.displayStoppedRefreshMessage = function(){
 }
 
 UW.Logs.loadPreviousMessages = function(){
-  var firstMessagePosition = $('table.messages tr.date:first').position().top,
-    doc = $(document);
+  var doc = $('#messages_container');
 
-  if (firstMessagePosition < doc.scrollTop()) return;
+  if (doc.scrollTop() > 200) return;
 
   doc.unbind('scroll', UW.Logs.loadPreviousMessages);
 
   UW.Logs.offset += 1;
-  var currentView = doc.height() - doc.scrollTop();
 
   $.ajax({
     url: UW.Logs.url,
@@ -126,9 +125,11 @@ UW.Logs.loadPreviousMessages = function(){
         for (var x = 0; x < data.length; x++) {
           container.append(data[x].html);
         }
+        container.find('tr:last').attr('id', 'last-message');
 
         $('table.messages tr.date:first').replaceWith(container.html());
-        doc.scrollTop(doc.height() - currentView);
+        doc.scrollTo('#last-message', { axis: 'y' });
+        $('#last-message').attr('id', null);
 
         doc.bind('scroll', UW.Logs.loadPreviousMessages);
       }
