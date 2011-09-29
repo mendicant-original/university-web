@@ -10,10 +10,12 @@ UW.Logs.init = function(options){
   this.topic                 = options.topic;
   this.refreshInterval       = options.refreshInterval || 60 * 60 * 1000;
   this.startedTime           = new Date;
+  this.offset                = 0;
 
   $.scrollTo('#bottom', { axis: 'y' });
 
   setTimeout(this.loadMessages, 3000);
+  $(document).bind('scroll', this.loadPreviousMessages);
 }
 
 UW.Logs.loadMessages = function(){
@@ -91,4 +93,46 @@ UW.Logs.displayStoppedRefreshMessage = function(){
   $("#flash > .flash:hidden").slideDown();
 
   $.scrollTo('#flash', { axis: 'y' });
+}
+
+UW.Logs.loadPreviousMessages = function(){
+  var firstMessagePosition = $('table.messages tr.date:first').position().top,
+    doc = $(document);
+
+  if (firstMessagePosition < doc.scrollTop()) return;
+
+  doc.unbind('scroll', UW.Logs.loadPreviousMessages);
+
+  UW.Logs.offset += 1;
+  var currentView = doc.height() - doc.scrollTop();
+
+  $.ajax({
+    url: UW.Logs.url,
+    dataType: 'json',
+    data: {
+      channel:  UW.Logs.channel,
+      topic:    UW.Logs.topic,
+      offset:   UW.Logs.offset
+    },
+    success: function(data){
+      if(!(data instanceof Array)) {
+        UW.Logs.loadMessagesError();
+        return;
+      }
+
+      if (data.length > 0) {
+        var container = $('<div></div>');
+
+        for (var x = 0; x < data.length; x++) {
+          container.append(data[x].html);
+        }
+
+        $('table.messages tr.date:first').replaceWith(container.html());
+        doc.scrollTop(doc.height() - currentView);
+
+        doc.bind('scroll', UW.Logs.loadPreviousMessages);
+      }
+    },
+    error: UW.Logs.loadMessagesError
+  });
 }
