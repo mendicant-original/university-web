@@ -10,12 +10,16 @@ UW.Logs.init = function(options){
   this.topic                 = options.topic;
   this.refreshInterval       = options.refreshInterval || 60 * 60 * 1000;
   this.startedTime           = new Date;
+  this.loadMessagesOnScroll  = options.loadMessagesOnScroll || false;
   this.offset                = 0;
 
   $.scrollTo('#bottom', { axis: 'y' });
 
   setTimeout(this.loadMessages, 3000);
-  $(document).bind('scroll', this.loadPreviousMessages);
+
+  if (this.loadMessagesOnScroll) {
+    $(document).bind('scroll', this.loadPreviousMessages);
+  }
 }
 
 UW.Logs.loadMessages = function(){
