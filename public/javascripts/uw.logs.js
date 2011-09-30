@@ -45,7 +45,7 @@ UW.Logs.loadMessages = function(){
         UW.Logs.lastMessageRecordedAt = data[data.length - 1].recorded_at;
         UW.Logs.lastMessageId         = data[data.length - 1].id;
 
-        var scrollToMessage = isScrollBottom();
+        var scrollToMessage = UW.Logs.isScollBottom();
 
         for(var x = 0; x <= data.length - 1; x++){
           $('table.messages tr:last').after(data[x].html);
@@ -78,6 +78,13 @@ UW.Logs.loadMessagesError = function(){
     $("#flash").append(error);
     $("#flash > .flash:hidden").slideDown();
   }
+}
+
+UW.Logs.isScollBottom = function(){
+  var lastMessageHeight = $('table.messages').height(),
+    scrollPosition = $('#messages_container').height() + $('#messages_container').scrollTop();
+
+    return (lastMessageHeight == scrollPosition);
 }
 
 UW.Logs.continueToLoadMessages = function(){
