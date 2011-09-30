@@ -9,7 +9,8 @@
         lastMessageId:          #{@messages.last.try(:id) || -1},
         url:                   '#{chat_messages_path}',
         channel:               '#{params[:channel]}',
-        topic:                 '#{params[:topic]}'
+        topic:                 '#{params[:topic]}',
+        loadMessagesOnScroll:  #{! params[:full_log]}
       });
     });
 
@@ -30,8 +31,10 @@
 
   = link_to "Discussions", chat_discussions_path(params[:channel])
 
-%table.messages
-  - @messages.each do |message|
-    = render :partial => "display", :locals => {:message => message}
+#messages_container
+  %table.messages
+    - @messages.each do |message|
+      = render :partial => "display", :locals => {:message => message}
 
-#bottom
+  #bottom
+
