@@ -8,7 +8,7 @@
 
     = yield(:header_bottom)
 
-  %body
+  %body{:class => yield(:body_class)}
     #wrap
       #header_container
         = render :partial => "shared/dev_warning"

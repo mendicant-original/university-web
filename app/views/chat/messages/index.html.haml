@@ -1,4 +1,5 @@
 - title params[:channel]
+- content_for(:body_class) { 'irc' }
 
 - content_for :header_bottom do
   = javascript_include_tag 'uw.logs'
@@ -16,22 +17,16 @@
 
 - content_for :subnav do
   #subnav
-    %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
+    .channel_name= "#{@channel.name} " + (@topic.present? ? "(#{@topic.name})" : "")
 
     = form_tag search_chat_messages_path, :class => "bp search", :method => :get do
-      %p.clearfix
-        = text_field_tag "search", params[:search]
-        = hidden_field_tag "channel", params[:channel]
-        = submit_tag "Search", :class => "inline"
-      %hr
+      = text_field_tag "search", params[:search]
+      = hidden_field_tag "channel", params[:channel]
+      = submit_tag "Search", :class => "inline"
 
 
-    %p
-      - if @more_messages
-        = link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
-        \|
-
-      = link_to "Discussions", chat_discussions_path(params[:channel])
+    .right= link_to "Discussions", chat_discussions_path(params[:channel])
+    .clear
 
 %table.messages
   - @messages.each do |message|

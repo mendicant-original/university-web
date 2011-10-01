@@ -1,8 +1,8 @@
-table.messages 
+table.messages
   margin-left: 1em
   width: 98%
 
-table.messages td.handle 
+table.messages td.handle
   padding-right: 1em
   color: #555
   vertical-align: top
@@ -24,8 +24,37 @@ table.messages td.action
 
 table.messages td
   padding-bottom: 0.25em
-  
+
 table.messages tr.date td
   padding: 1.25em 0
   color: #333
-  
+
+ul.discussions li
+  margin-bottom: 1em
+  font-size: 1.25em
+
+body.irc
+  #content
+    margin-top: 160px
+  #header_container
+    background-color: #f9f9f9
+    width: 990px
+    position: fixed
+    top: 0
+    +box-shadow(#333, 0px, 1px, 5px)
+
+    #subnav
+      padding: 0 20px
+      background-color: #88414A
+      color: #fff
+      a
+        color: #fff
+
+  .channel_name
+    float: left
+    margin-right: 1em
+    margin-top: 1em
+    font-weight: bold
+  .right
+    float: right
+    margin-top: 1em
