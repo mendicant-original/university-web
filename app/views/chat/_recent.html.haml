@@ -8,4 +8,4 @@
     .message
       .handle= "#{message.handle.name}:"
       .body{:class => (defined?(full_body) ? 'full' : '')}
-        = auto_link(message.body, :html => { :target => '_blank' })
+        = message_body(message)
