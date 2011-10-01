@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for       :admissions_submission
 
-  attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
+  attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year,
+                 :inactive
 
   has_one                       :alumni_preferences
   accepts_nested_attributes_for :alumni_preferences
