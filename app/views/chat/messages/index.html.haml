@@ -9,26 +9,29 @@
         lastMessageId:          #{@messages.last.try(:id) || -1},
         url:                   '#{chat_messages_path}',
         channel:               '#{params[:channel]}',
-        topic:                 '#{params[:topic]}'
+        topic:                 '#{params[:topic]}',
+        loadMessagesOnScroll:  #{! params[:full_log]}
       });
     });
 
-%h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
+- content_for :subnav do
+  #subnav
+    %h1= "IRC Log " + (@topic.present? ? "(#{@topic.name})" : "")
 
-= form_tag search_chat_messages_path, :class => "bp search", :method => :get do
-  %p.clearfix
-    = text_field_tag "search", params[:search]
-    = hidden_field_tag "channel", params[:channel]
-    = submit_tag "Search", :class => "inline"
-  %hr
+    = form_tag search_chat_messages_path, :class => "bp search", :method => :get do
+      %p.clearfix
+        = text_field_tag "search", params[:search]
+        = hidden_field_tag "channel", params[:channel]
+        = submit_tag "Search", :class => "inline"
+      %hr
 
 
-%p
-  - if @more_messages
-    = link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
-    \|
+    %p
+      - if @more_messages
+        = link_to "Load all messages", chat_messages_path(:channel => params[:channel], :full_log => true, :topic => params[:topic])
+        \|
 
-  = link_to "Discussions", chat_discussions_path(params[:channel])
+      = link_to "Discussions", chat_discussions_path(params[:channel])
 
 %table.messages
   - @messages.each do |message|

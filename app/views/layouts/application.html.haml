@@ -10,16 +10,18 @@
 
   %body
     #wrap
-      = render :partial => "shared/dev_warning"
-      #header
-        .centered
-          %h1 Mendicant University
+      #header_container
+        = render :partial => "shared/dev_warning"
+        #header
+          .centered
+            %h1 Mendicant University
 
-          - if current_user
-            = render :partial => "shared/user"
+            - if current_user
+              = render :partial => "shared/user"
 
-      = render :partial => "shared/nav"
-      = render :partial => "shared/flash", :locals => {:flash => flash}
+        = render :partial => "shared/nav"
+        = yield(:subnav)
+        = render :partial => "shared/flash", :locals => {:flash => flash}
       #content= yield
       .clear
 
