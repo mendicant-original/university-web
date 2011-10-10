@@ -3,6 +3,6 @@ class AlumnusActivity < ActiveRecord::Base
   belongs_to :term
 
   def self.statuses
-    ["Not Started", "Accepted"]
+    ["Not Completed", "Completed"]
   end
 end
