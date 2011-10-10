@@ -26,7 +26,7 @@
           %li.main#about
             %a.dropdown{:href=>"#",
               :class => current_page('about', current)}
-              About RMU
+              About
               %span.arrow
             #about_dropdown
               %ul
@@ -67,10 +67,6 @@
     #container
       #content
         = yield
-        #footer
-          An
-          %a{:href=>"http://educationreimagined.com"} Education Reimagined
-          Project
 
     :javascript
       var _gaq = _gaq || [];
