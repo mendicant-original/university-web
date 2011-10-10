@@ -31,17 +31,9 @@
     - current_user.chat_channels.visible_on_dashboard.each do |channel|
       = render :partial => "/chat/recent", :locals => {:channel => channel}
 
-  #majestic_blog.right.blog.last
-    %h4= link_to "RMU Blog",
-          "http://blog.majesticseacreature.com/tag/rubymendicant",
-          :target => "_blank"
-
-    %ul
-      %li Loading...
-
-  #learning_blog.right.blog.last
-    %h4= link_to "Education Reimagined Blog",
-          "http://educationreimagined.com/",
+  #mendicant-news.right.blog.last
+    %h4= link_to "Mendicant News",
+          "/changelog",
           :target => "_blank"
 
     %ul
