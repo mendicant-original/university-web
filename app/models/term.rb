@@ -21,7 +21,11 @@ class Term < ActiveRecord::Base
   end
 
   def activity_for(user)
-    alumnus_activities.find_or_create_by_user_id(user.id)
+    activity = alumnus_activities.find_or_create_by_user_id(user.id)
+
+    activity.update_attribute(:status, "Not Completed") unless activity.status
+
+    activity
   end
 
   private
