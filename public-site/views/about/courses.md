@@ -4,7 +4,7 @@ training programs.
 
 ### Core Skills Course
 
-At the heart of RbMU is the core skills course, an intense three week program that is designed to help students hone their craft through active practice in several important topic areas.  Each session features an exercise on each of the following topics:
+At the heart of Mendicant University is the core skills course, an intense three week program that is designed to help students hone their craft through active practice in several important topic areas.  Each session features an exercise on each of the following topics:
 
   * Modeling complex business logic
   * Integration with third party software libraries and/or web services
@@ -17,4 +17,4 @@ Throughout the course, the instructor as well as some student mentors are highly
 
 ### Other Courses
 
-Students who successfully complete the core skills course become part of the RMU Alumni network.  Starting in 2011, the RbMU Alumni will have a number of courses to choose from to help them continue to improve their skills.  Once we've had a chance to test-drive some of our new course ideas, we'll be sure to update this page with some more details on our alumni course offerings.
+Students who successfully complete the core skills course become part of the Mendicant Alumni network.  Starting in 2011, the Mendicant Alumni will have a number of courses to choose from to help them continue to improve their skills.  Once we've had a chance to test-drive some of our new course ideas, we'll be sure to update this page with some more details on our alumni course offerings.

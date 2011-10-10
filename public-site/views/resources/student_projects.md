@@ -1,4 +1,4 @@
-Each student is required to work on an individual project during their core skills course at RbMU.  Below you'll find the projects that have been made available publicly on github by our alumni.
+Each student is required to work on an individual project during their core skills course at Mendicant University.  Below you'll find the projects that have been made available publicly on github by our alumni.
 
 ### Student Projects
 
