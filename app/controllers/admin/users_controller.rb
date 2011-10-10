@@ -25,9 +25,9 @@ class Admin::UsersController < Admin::Base
     # end
 
     if @user.save
-      update_access_level
+      update_protected
       update_alumni_attributes
-      
+
       flash[:notice] = "User sucessfully created"
 
       redirect_to admin_users_path
@@ -37,11 +37,11 @@ class Admin::UsersController < Admin::Base
   end
 
   def edit
-    
+
   end
 
   def update
-    update_access_level
+    update_protected
     update_alumni_attributes
 
     if params[:user][:password].blank?
@@ -51,7 +51,7 @@ class Admin::UsersController < Admin::Base
 
     if @user.update_attributes(params[:user])
       flash[:notice] = "User sucessfully updated"
-      
+
       redirect_to admin_users_path
     else
       #raise @user.errors.inspect
@@ -73,10 +73,12 @@ class Admin::UsersController < Admin::Base
     @user = User.find(params[:id])
   end
 
-  def update_access_level
+  def update_protected
     access_level = params[:user].delete("access_level")
+    inactive     = params[:user].delete("inactive")
 
     @user.update_attribute(:access_level, access_level)
+    @user.update_attribute(:inactive, inactive)
   end
 
   def update_alumni_attributes

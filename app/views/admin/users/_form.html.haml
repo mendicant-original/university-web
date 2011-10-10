@@ -1,6 +1,7 @@
 = error_messages_for(@user)
 
 %h2 Login Info
+
 %p
   = form.label :email
   = form.text_field :email
@@ -33,6 +34,11 @@
 %p
   = form.label :access_level
   = user_access_level_select(form.object)
+
+
+%p
+  = form.label :inactive
+  = form.check_box :inactive
 
 %hr
 
