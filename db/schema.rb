@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111001200017) do
+ActiveRecord::Schema.define(:version => 20111001202929) do
 
   create_table "admissions_statuses", :force => true do |t|
     t.text     "name"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(:version => 20111001200017) do
     t.boolean  "show_twitter"
     t.boolean  "show_github"
     t.boolean  "show_real_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "alumnus_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "term_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

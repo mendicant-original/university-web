@@ -74,6 +74,11 @@ University::Application.routes.draw do
     resources :announcements
     resources :terms
     resources :submission_statuses
+    resources :alumnus_activities do
+      collection do
+        get :statuses
+      end
+    end
     resources :group_mails, :only => [:new, :create] do
       collection do
         get :update_group_select

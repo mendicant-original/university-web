@@ -21,7 +21,7 @@ class Admin::TermsController < Admin::Base
   end
 
   def edit
-    
+
   end
 
   def update
@@ -43,6 +43,7 @@ class Admin::TermsController < Admin::Base
   private
 
   def find_term
-    @term = Term.find(params[:id])
+    @term   = Term.find(params[:id])
+    @alumni = User.order("real_name").alumni
   end
 end
