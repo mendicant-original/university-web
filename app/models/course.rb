@@ -92,8 +92,34 @@ class Course < ActiveRecord::Base
   def activities
     assignments.map { |a| a.recent_activities }.flatten.
       sort_by { |a| a.created_at }.reverse
-  end
+  end                                     
+  
+  def search_course_resources(search_key)
+    results = Hash.new()                    
 
+    results[:course_description] = Course.search({description: search_key}, self)
+
+    results[:notes] = Course.search({notes: search_key}, self)
+
+    results[:assignments] = Assignment.search(search_key, self.assignments)
+
+    results[:submission] = Assignment::Submission.search(search_key, self.assignments.each.map {|a| a.submissions}.flatten)
+
+    results[:submission_comments] = []
+    (self.assignments.each.map &:submissions).flatten.each do |submission|
+      Comment.search(search_key, submission.comments).each do |comment|
+        results[:submission_comments] << comment.commentable
+      end      
+    end    
+                                                                                                
+    if self.channel
+      results[:irc_messages] = Chat::Message.search(search_key, self.channel.messages)
+    else                     
+      results[:irc_messages] = []
+    end        
+    results
+  end
+  
   private
 
   def course_member_by_type(type)

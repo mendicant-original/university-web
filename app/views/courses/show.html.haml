@@ -46,7 +46,11 @@
   %span.separator &rarr;
   %span#current_section
 
-- content_for :bucket do
+- content_for :bucket do 
+
+  #search.bucket
+    = render :partial => 'search'
+
   #description.bucket
     = md(@course.description)
 

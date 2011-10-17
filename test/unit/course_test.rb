@@ -119,4 +119,45 @@ class CourseTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context "Course#search_course_resources" do
+    context "when you search" do
+      setup do
+        @course = Factory(:course, :notes => 'note', :description => 'Lorem ipsum')
+      end
+
+      test "should return an empty array" do
+        assert @course.search_course_resources('qdwkrvekrvjbnerkjn').values.all? {|k| k.empty? }
+      end
+
+      test "should return notes" do
+        assert !@course.search_course_resources('note')[:notes].empty?
+      end
+
+      test "should return assignments" do
+        assignment = Factory(:assignment, :course => @course, :description => "This is an assigment")
+        assert !@course.search_course_resources('assigment')[:assignments].empty?
+      end
+
+      test "should return submission" do
+        assignment = Factory(:assignment, :course => @course)
+        Factory(:submission, :assignment => assignment, :description => "This is a submission")
+        assert !@course.search_course_resources('submission')[:submission].empty?
+      end
+
+      test "should return submission's comments" do
+        assignment = Factory(:assignment, :course => @course)
+        submission = Factory(:submission, :assignment => assignment)
+        comment    = Factory(:comment, :commentable => submission, :comment_text => 'comment')
+        assert !@course.search_course_resources('comment')[:submission_comments].empty?
+      end
+
+      test "should return irc messages" do
+        channel      = Factory(:chat_channel)
+        chat_message = Factory(:chat_message, :channel => channel, :body => 'message')
+        @course      = Factory(:course, :channel => channel)
+        assert !@course.search_course_resources('message')[:irc_messages].empty?
+      end
+    end
+  end
 end

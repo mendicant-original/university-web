@@ -1,0 +1,38 @@
+- if @results.values.flatten.empty?
+  %h1 No matches found
+- else
+  %ul
+    - unless @results[:course_description].empty?
+      %h3 Course's description
+      = highlight(@course.description, @search_key)
+
+    - unless @results[:notes].empty?
+      %h3 Shared Notes
+      = highlight(@course.notes, @search_key)
+
+    - unless @results[:assignments].empty?
+      %h3 Assignments
+      %ul
+        - @results[:assignments].each do |assignment|
+          = link_to assignment.name, course_assignment_path(@course, assignment)
+
+    - unless @results[:submission].empty?
+      %h3 Submissions
+      - @results[:submission].each do |submission|
+        %ul
+          %li
+            = link_to submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
+
+    - unless @results[:submission_comments].empty?
+      %h3 Submission Comments
+      - @results[:submission_comments].each do |submission|
+        %ul
+          %li
+            = link_to 'A comment in ' + submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
+
+    - unless @results[:irc_messages].empty?
+      %h3 Irc Channel
+      - results[:irc_messages].each do |message|
+        %ul
+          %li
+            = message.body

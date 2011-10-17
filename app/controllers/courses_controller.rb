@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_filter { @selected = :courses }
-  before_filter :find_course, :only => [:show, :notes, :directory]
+  before_filter :find_course, :only => [:show, :notes, :directory, :search]
   before_filter :course_members_only, :only => [:show, :notes, :directory]
 
   def index
@@ -34,6 +34,15 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       format.text
+    end
+  end
+
+  def search
+    @search_key = params[:search]
+    @results = @course.search_course_resources(@search_key)   
+    
+    respond_to do |format|
+      format.js
     end
   end
 
