@@ -6,6 +6,8 @@ require 'support/integration'
 require 'support/mini_contest'
 require 'test_notifier/runner/minitest'
 
+TestNotifier.silence_no_notifier_warning = true
+
 class ActionDispatch::IntegrationTest
   include Capybara
   include Support::Integration
