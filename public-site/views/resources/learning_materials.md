@@ -42,4 +42,10 @@ We are committed to releasing our exams, exercises and other learning materials 
 * [s8-e3](https://github.com/rmu/s8-e3): Explorations in Combinatorics
 * [Vectorize](http://github.com/rmu/vectorize): Group project implementing a cairo wrapper to satisfy s8-e1
 
+### 2011/T3
+
+* [s9-e1](https://github.com/rmu/s9-e1): Create Ruby wrappers around Java libraries using JRuby
+* [s9-e2](http://github.com/rmu/s9-e2): Designing and implementing a cooperative game
+* [s9-e3](https://github.com/rmu/s9-e3): Educational tool for exploring digital logic and circuitry
+
 _All materials, unless otherwise noted may be used under the terms of the [GNU Free Documentation License](http://www.gnu.org/licenses/fdl.html)._
