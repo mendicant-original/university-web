@@ -58,6 +58,13 @@ Each student is required to work on an individual project during their core skil
   <li><a href="https://github.com/montague/blirb">blirb</a> (Ian Asaff): IRB-based Ruby learning tool</li>
   <li><a href="https://github.com/mikbe/Brawl">Brawl</a> (Mike Bethany): Programming game with some similarities to RRobots</li>
   <li><a href="https://github.com/eregon/suby">Suby</a> (Benoit Daloze): Subtitle downloader</li>
+  <li><a href="https://github.com/gjp/pdf-barber">PDF Barber</a> (Gregory Parkhurst): A command line PDF cropping tool</li>
+  <li><a href="https://github.com/coreypurcell/reconnoiterer">Reconnoiterer</a> (Corey Purcell): A command line application that wraps the Outpost gem</li>
+  <li><a href="https://github.com/stevemorris/stock-returns">stock-returns</a> (Steve Morris): Gem that calculates investment returns on individual US stocks</li>
+  <li><a href="https://github.com/chriskottom/rslow">RSlow</a> (Chris Kottom): Website performance testing engine</li>
+  <li><a href="https://github.com/nerian/Pugnacious-Juices">Pugnacious Juices</a> (Gonzalo Rodríguez-Baltanás Díaz): Game where two or more fluids battle for dominance</li>
+  <li><a href="https://github.com/PragTob/infoes">Infoes</a> (Tobias Pfeiffer): Information aggregation client</li>
+  <li><a href="https://github.com/xenda/suggestor">Suggestor</a> (Alvaro Pereyra Rabanal): Gem that will help relating data</li>
 </ul>
 
 _While students were given guidance on their projects throughout the course, the focus was on education, and not on quality assurance. Please do not consider this listing of projects a personal endorsement that they’ll be suitable for a particular purpose.  Student projects are under various licensing terms, please contact the author of each project for details._
