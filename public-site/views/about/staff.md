@@ -12,3 +12,12 @@ Eric Gjertsen ([ericgj](https://github.com/ericgj) on github) is the
 newest alumni member of our staff, joining in September 2011. Before
 joining staff, Eric worked closely with us for many months to expand our one-on-one mentoring program. He is now officially responsible for
 running that project as well as helping us develop Mendicant University's broader social mission. Eric is a community activist who has been hacking with ruby since 2005, and looks forward to finding new ways to make software useful to the world.
+
+Andrea Singh ([@madebydna](http://twitter.com/madebydna)) was invited to join
+the MU staff in November 2011. Since becoming an alumna in September 2010, she
+has been actively involved in many diverse MU activities, ranging from
+mentoring, being an assistant teacher in the core course to helping to create
+puzzles for the MU entrance exams. Andrea started out with front-end web
+development and began programming in earnest after discovering Rails several
+years ago. She grew up in Germany, lived for eight years in Hawaii and recently
+moved to New Haven, CT, where she now works as a freelance Ruby developer.
