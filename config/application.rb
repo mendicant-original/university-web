@@ -55,3 +55,8 @@ module University
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end
+
+# Default uses divs which rendering issues with inline labels
+ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
+  "<span class=\"field_with_errors\">#{html_tag}</span>".html_safe
+}

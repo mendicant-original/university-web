@@ -1,36 +1,39 @@
   /*Rails default error summary
  --------------------------------------------- */
-.field_with_errors {
-  display: inline;
+
+.field_with_errors input, .field_with_errors select, .field_with_errors textarea {
+  border: 1px solid #B60040 !important;
 }
- .field_with_errors input, .field_with_errors select, .field_with_errors textarea {
-   border: 1px solid #B60040;
- }
+
+.field_with_errors input[type=file] {
+  padding: 5px;
+}
+
 #errorExplanation {
-   padding: 0.5em; 
-   border: 1px solid #B60040; 
-   background: #FFDCE8; 
+   padding: 0.5em;
+   border: 1px solid #B60040;
+   background: #FFDCE8;
    margin: 0 0 30px;
  }
   #errorExplanation h2 {
-  color: #B60040; 
-  margin: 5px 0; 
-  border: none; 
-  font-size: 1.1em; 
+  color: #B60040;
+  margin: 5px 0;
+  border: none;
+  font-size: 1.1em;
   padding: 0;
   }
 
   #errorExplanation p {
-   color: #4B4742; 
+   color: #4B4742;
    margin-bottom: 5px;
  }
 
-  #errorExplanation ul { 
-   list-style: disc; 
+  #errorExplanation ul {
+   list-style: disc;
    margin-left: 15px;
    }
     #errorExplanation li {
-     color: #B60040; 
-     padding: 5px 0; 
+     color: #B60040;
+     padding: 5px 0;
      font-size: 1em;
    }
