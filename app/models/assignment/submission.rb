@@ -10,8 +10,6 @@ class Assignment
 
     has_many   :activities, :dependent => :delete_all
 
-    validates :github_repository, :length => { :maximum => 25 }
-
     scope :all_active, includes(:assignment => :course).where(:courses => {:archived => false})
 
     scope :with_github_repository, all_active.where('github_repository IS NOT NULL')
