@@ -20,9 +20,10 @@ class UsersController < ApplicationController
         @users = User.where(:github_account_name => params[:github]).all
 
         github_users = @users.map do |user|
-          { :github  => user.github_account_name,
-            :alumnus => user.alumnus?,
-            :staff   => user.staff? }
+          { :github           => user.github_account_name,
+            :alumnus          => user.alumnus?,
+            :staff            => user.staff?,
+            :visiting_teacher => user.visiting_teacher? }
         end
 
         render :json => github_users.to_json

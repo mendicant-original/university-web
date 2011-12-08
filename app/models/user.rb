@@ -148,6 +148,10 @@ class User < ActiveRecord::Base
     access_level.to_s == "admin"
   end
 
+  def visiting_teacher?
+    access_level.to_s == "visiting teacher"
+  end
+
   # Returns a date object based on the alumni year and month
   # to be used for comparing with terms start and end dates
   def alumni_date
