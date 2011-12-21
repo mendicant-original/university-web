@@ -6,7 +6,7 @@ multiple courses, and we are now also developing other features for enabling
 members of the community to work together.
 
 University Web is developed by the
-[Mendicant University](http://university.rubymendicant.com), an
+[Mendicant University](http://mendicantuniversity.org), an
 online learning community, and it is our core infrastructure.
 We expect it to become potentially useful to other organizations, and hope that
 it will be adopted elsewhere as it becomes mature.
@@ -18,9 +18,8 @@ code: <http://github.com/rmu/university-web>
 If you are not a member of Mendicant University, please get in touch through our
 public channels:
 
-- **Email:** <http://groups.google.com/group/rmu-talk>
-- **IRC:** #rmu
-- **Twitter:** #mendicant / #RbMU
+- **IRC:** #mendicant on freenode.net
+- **Twitter:** #mendicant
 
 ## Key Features
 
@@ -139,10 +138,7 @@ To configure University Web [Full]:
 
 ## Contributing
 
-Approved features are tracked in
-[Pivotal Tracker](https://www.pivotaltracker.com/projects/101484) while bugs
-and requested features should be entered into
-[Github Issues](https://github.com/rmu/university-web/issues).
+Features and bugs are tracked through [Github Issues](https://github.com/rmu/university-web/issues).
 
 Contributors retain copyright to their work but must agree to release their
 contributions under the [Affero GPL version 3](http://www.gnu.org/licenses/agpl.html)
@@ -152,16 +148,25 @@ Our contact details are at the top of this file.
 
 ### Submitting a Pull Request
 
-1. Fork the project.
-2. Create a topic branch.
-3. Implement your feature or bug fix.
-4. Add documentation for your feature or bug fix.
-5. Add tests for your feature or bug fix.
-6. Run `rake test`. If your changes are not 100% covered, go back to step 5.
-7. If your change affects something in this README, please update it
-8. Commit and push your changes.
-9. Submit a pull request.
+1. If a ticket doesn't exist for your bug or feature, create one on GitHub.
+    - _NOTE: Don't be afraid to get feedback on your idea before you begin development work._
+2. Fork the project.
+3. Create a topic branch.
+4. Implement your feature or bug fix.
+5. Add documentation for your feature or bug fix.
+6. Add tests for your feature or bug fix.
+7. Run `rake test`. If your changes are not 100% covered, go back to step 5.
+8. If your change affects something in this README, please update it
+9. Commit and push your changes.
+10. Submit a pull request.
+
+### Contributors
+
+Jordan Byron // [jordanbyron.com](http://jordanbyron.com) <br/>
+Gregory Brown // [majesticseacreature.com](http://majesticseacreature.com/)
+
+[Full List](https://github.com/rmu/university-web/contributors)
 
 ------
 
-University Web - a [Mendicant University](http://university.rubymendicant.com) project
+University Web - a [Mendicant University](http://mendicantuniversity.org) project
