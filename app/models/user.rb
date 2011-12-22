@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
 
   def alumni_number=(number)
     if alumni_number.nil? and not number.blank?
-      alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
+      alumni_channel = Chat::Channel.find_by_name("#mendicant-alumni")
       if alumni_channel
         alumni_channel_membership = chat_channel_memberships.
           find_by_channel_id(alumni_channel.id)

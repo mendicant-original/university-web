@@ -1,4 +1,4 @@
-![University Web Logo](https://github.com/rmu/university-web/raw/master/doc/university-web.png)
+![University Web Logo](https://github.com/mendicant-university/university-web/raw/master/doc/university-web.png)
 
 This Ruby on Rails application provides facilities to support a community of
 teachers and learners. It currently offers the essentials needed to manage
@@ -13,7 +13,7 @@ it will be adopted elsewhere as it becomes mature.
 
 Whether you are a member of Mendicant University or a developer interested in
 systems for learning and education, we encourage you to check out the source
-code: <http://github.com/rmu/university-web>
+code: <http://github.com/mendicant-university/university-web>
 
 If you are not a member of Mendicant University, please get in touch through our
 public channels:
@@ -47,7 +47,7 @@ very latest source code.
 
 To install a development version of University Web, follow these steps:
 
-1. Fork our GitHub repository: <http://github.com/rmu/university-web>
+1. Fork our GitHub repository: <http://github.com/mendicant-university/university-web>
 2. Clone the fork to your computer
 3. Run `bundle install` to install all of the dependencies
 
@@ -138,7 +138,7 @@ To configure University Web [Full]:
 
 ## Contributing
 
-Features and bugs are tracked through [Github Issues](https://github.com/rmu/university-web/issues).
+Features and bugs are tracked through [Github Issues](https://github.com/mendicant-university/university-web/issues).
 
 Contributors retain copyright to their work but must agree to release their
 contributions under the [Affero GPL version 3](http://www.gnu.org/licenses/agpl.html)
@@ -165,7 +165,7 @@ Our contact details are at the top of this file.
 Jordan Byron // [jordanbyron.com](http://jordanbyron.com) <br/>
 Gregory Brown // [majesticseacreature.com](http://majesticseacreature.com/)
 
-[Full List](https://github.com/rmu/university-web/contributors)
+[Full List](https://github.com/mendicant-university/university-web/contributors)
 
 ------
 

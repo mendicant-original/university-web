@@ -8,4 +8,4 @@ For issues with any of our web applications, including the main site and univers
 
 For pretty much everything else, contact Gregory Brown (gregory.t.brown@gmail.com)
 
-If your question or comment is something that would be best discussed in public, feel free to use the rmu-talk mailing list, or find seacreature (Gregory), sweetmango (Jia), or jordanbyron in #rmu on Freenode.
+If your question or comment is something that would be best discussed in public, feel free to find seacreature (Gregory), sweetmango (Jia), or jordanbyron in #mendicant on Freenode.
