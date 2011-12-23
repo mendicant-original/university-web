@@ -65,13 +65,7 @@ To configure University Web [Basic]:
     $ bundle exec rake db:test:prepare
     ```
 
-4. Generate the static site by running:
-
-    ```bash
-    $ bundle exec rake public-site:generate
-    ```
-
-5. Finally, run the test suite to make sure everything is working correctly:
+4. Finally, run the test suite to make sure everything is working correctly:
 
     ```bash
     $ bundle exec rake test

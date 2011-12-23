@@ -5,7 +5,7 @@ class PublicController < ApplicationController
   before_filter      :set_news_section,   :only => [:changelog, :announcement]
   before_filter      :set_terms_by_year,  :only => [:alumni, :recent_alumni]
 
-  layout 'static'
+  # layout 'public'
 
   # Find the list of alumni, which can be all of them,
   # filtered by year or by year and term slug.

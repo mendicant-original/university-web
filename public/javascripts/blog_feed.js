@@ -1,6 +1,6 @@
 $(function() {
   $.jGFeed(
-    "http://university.rubymendicant.com/changelog.rss",
+    "http://school.mendicantuniversity.org/changelog.rss",
     function(feed) {
       if(!feed) {
         return false;

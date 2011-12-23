@@ -14,7 +14,7 @@
         = render :partial => "shared/dev_warning"
         #header
           .centered
-            %h1 Mendicant University
+            %h1= link_to "Mendicant University", "http://mendicantuniversity.org"
 
             - if current_user
               = render :partial => "shared/user"
