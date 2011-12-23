@@ -29,6 +29,11 @@ gem "rdiscount"
 gem "will_paginate", "~> 3.0"
 gem "cocoon"
 
+###############
+# Maintenance #
+###############
+
+gem 'capistrano'
 
 group :test do
   gem "minitest",  "~> 2.3.1"
