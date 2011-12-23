@@ -5,11 +5,7 @@ project_path = Compass::AppIntegration::Rails.root
 # Set this to the root of your project when deployed:
 http_path = "/"
 
-if Compass::AppIntegration::Rails.env == :development
-  css_dir = "public/stylesheets/compiled"
-else
-  css_dir = "tmp/stylesheets/compiled" # For Heroku
-end
+css_dir = "public/stylesheets/compiled"
 
 sass_dir = "app/stylesheets"
 environment = Compass::AppIntegration::Rails.env
