@@ -64,6 +64,9 @@ class User < ActiveRecord::Base
   scope :alumni,   where("alumni_number IS NOT NULL").order('alumni_number')
   scope :per_year, lambda { |year| where(:alumni_year => year) }
 
+  scope :publicly_visible, joins(:alumni_preferences).
+    where(['alumni_preferences.show_on_public_site = ?', true])
+
   def self.search(search, page, options={})
     sql_condition = %w(
       email real_name nickname twitter_account_name github_account_name

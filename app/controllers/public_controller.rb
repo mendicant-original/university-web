@@ -19,12 +19,14 @@ class PublicController < ApplicationController
       @alumni = User.alumni
       @alumni = @alumni.per_year(params[:year]) if params[:year]
     end
+
+    @alumni = @alumni.publicly_visible
   end
 
   # List the alumni of the most recent Term that has alumni
   def recent_alumni
-    @alumni = User.alumni.select {|u| u.alumni_date >= 6.months.ago.to_date }.
-                reverse
+    @alumni = User.alumni.publicly_visible.
+                select {|u| u.alumni_date >= 6.months.ago.to_date }.reverse
 
     render 'alumni'
   end
