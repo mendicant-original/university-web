@@ -7,8 +7,6 @@ University::Application.routes.draw do
   get "changelog" => 'public#changelog'
   get "changelog/:slug" => 'public#announcement'
 
-  get "map" => 'public#map'
-
   resource :dashboard, :controller => "dashboard"
 
   namespace :chat do

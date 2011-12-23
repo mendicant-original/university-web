@@ -49,10 +49,6 @@ class PublicController < ApplicationController
     end
   end
 
-  def map
-    @people = (User.alumni.locations + User.staff.locations).uniq
-  end
-
   private
 
   def set_alumni_section
