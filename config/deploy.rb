@@ -1,7 +1,6 @@
 require 'bundler/capistrano'
 
- #TODO Remove -cap after testing is complete
-set :application, "university-web-cap"
+set :application, "university-web"
 set :repository,  "git://github.com/mendicant-university/university-web.git"
 
 set :scm, :git
@@ -12,8 +11,8 @@ set :use_sudo, false
 
 set :deploy_via, :remote_cache
 
-set :branch, "master"
-server "mendicantuniversity.org", :app, :web, :db, :primary => true
+set :branch, "remove-public-site"
+server "school.mendicantuniversity.org", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :restart, :roles => :app do
