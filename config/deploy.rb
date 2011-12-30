@@ -11,7 +11,7 @@ set :use_sudo, false
 
 set :deploy_via, :remote_cache
 
-set :branch, "remove-public-site"
+set :branch, "master"
 server "school.mendicantuniversity.org", :app, :web, :db, :primary => true
 
 namespace :deploy do
