@@ -15,10 +15,7 @@
       - course.assignments.each do |assignment|
         - submission = assignment.submission_for(student)
         %td
-          = link_to(submission_status_name(submission.status),
-            submission_path(submission),
-            :class => submission_status_class(submission),
-            :style => submission_status_style(submission))
+          = submission_status_link(submission)
 
   - unless defined?(expanded)
     %tr.toggle

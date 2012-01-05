@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Mendicant University</title>
+    <meta content='text/html;charset=utf-8' http-equiv='Content-Type' />
+    <link href='/stylesheets/public.css' rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.4.3.js" type="text/javascript"></script>
+    <script src="/javascripts/dropdownmenu.js" type="text/javascript"></script>
+    <link rel="alternate" type="application/rss+xml" title="Ruby Mendicant University's News Feed" href="http://university.rubymendicant.com/changelog.rss" />
+  </head>
+  <body>
+    <div id='header'>
+      <h1>Mendicant University</h1>
+      <div id='menu_bar'>
+        <ul class='menu'>
+          <li class='main first'>
+            <a href='/'>Home</a>
+          </li>
+          <li class='main'>
+            <a href='/changelog.html'>News</a>
+          </li>
+          <li class='main' id='about'>
+            <a class='current dropdown' href='#'>
+              About RMU
+              <span class='arrow'></span>
+            </a>
+            <div id='about_dropdown'>
+              <ul>
+                <li>
+                  <a href='/about/courses.html'>Courses</a>
+                </li>
+                <li>
+                  <a href='/about/admissions.html'>Admissions</a>
+                </li>
+                <li>
+                  <a href='/about/staff.html'>Staff</a>
+                </li>
+                <li>
+                  <a href='/about/contact.html'>Contact Us</a>
+                </li>
+              </ul>
+            </div>
+            <script type='text/javascript'>
+              //<![CDATA[
+                DropdownMenu.register('about');
+              //]]>
+            </script>
+          </li>
+          <li class='main' id='resources'>
+            <a class='dropdown' href='/projects.html'>
+              Resources
+              <span class='arrow'></span>
+            </a>
+            <div id='resources_dropdown'>
+              <ul>
+                <li>
+                  <a href='/resources/learning_materials.html'>Learning Materials</a>
+                </li>
+                <li>
+                  <a href='/resources/core_projects.html'>Core Projects</a>
+                </li>
+                <li>
+                  <a href='/resources/student_projects.html'>Student Projects</a>
+                </li>
+              </ul>
+            </div>
+            <script type='text/javascript'>
+              //<![CDATA[
+                DropdownMenu.register('resources');
+              //]]>
+            </script>
+          </li>
+          <li class='main'>
+            <a href='/alumni/recent.html'>Alumni List</a>
+          </li>
+          <li class='main last'>
+            <a href='/dashboard'>University Web</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id='container'>
+      <div id='content'>
+        <h3>Our Staff</h3>
+          
+          <p>Mendicant University was founded by Gregory Brown (<a href="http://twitter.com/seacreature">@seacreature</a>), author of the book <a href="http://rubybestpractices.com">Ruby Best Practices</a> and original author of the popular PDF generation library <a href="http://prawn.majesticseacreature.com">Prawn</a>.  Gregory hopes that RbMU will serve as a good example of what can happen when the ideas behind the Free Software Movement are applied to education.</p>
+          
+          <p>Jordan Byron (<a href="http://twitter.com/jordan_byron">@Jordan_Byron</a>) serves as RbMU's technical coordinator, and is the maintainer of our classroom administration software, <a href="https://github.com/rmu/university-web">university-web</a>.  In addition to working alongside Gregory doing consulting work through <a href="http://madriska.com">Madriska</a>, Jordan volunteers his time working on CT Mission of Mercy's <a href="https://github.com/jordanbyron/mission_of_mercy">clinic management system</a>.</p>
+          
+          <p>Jia Wu is RbMU's administrative coordinator, and assists with various miscellaneous tasks that would otherwise be neglected by Jordan and Gregory.  Jia is a post-doctoral psychology researcher at the Yale Child Study Center, where she works on developing software for experiments as well as statistical programming for brain wave analysis.  Jia is also Gregory's wife, and is responsible for tearing him away from the computer every once in a while.</p>
+          
+          <p>Shane Emmons (<a href="http://twitter.com/semmons99">@semmons99</a>) joined our staff in June 2011, and is the first teacher at Mendicant University who is also an alumnus. Shane is active in the open source community as a maintainer of the RubyMoney projects (<a href="https://github.com/RubyMoney">https://github.com/RubyMoney</a>) and the author of cashrb (<a href="https://github.com/semmons99/cashrb">https://github.com/semmons99/cashrb</a>).</p>
+        <div id='footer'>
+          An
+          <a href='http://educationreimagined.com'>Education Reimagined</a>
+          Project
+        </div>
+      </div>
+    </div>
+    <script type='text/javascript'>
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-15397397-3']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>

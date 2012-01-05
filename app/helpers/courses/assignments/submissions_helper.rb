@@ -13,6 +13,19 @@ module Courses::Assignments::SubmissionsHelper
     course_assignment_submissions_path(assignment.course, assignment)
   end
 
+  def submission_status_link(submission)
+    link_options = {:class => submission_status_class(submission),
+                    :style => submission_status_style(submission) }
+
+    if submission.description
+      link_options.merge!(:title => context_snippet(submission.description, 150))
+    end
+
+    link_to(submission_status_name(submission.status),
+    submission_path(submission),
+    link_options)
+  end
+
   def render_activity(activity)
     if Comment === activity.actionable
       render( :partial => "/comments/show",

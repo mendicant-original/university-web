@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Mendicant University</title>
+    <meta content='text/html;charset=utf-8' http-equiv='Content-Type' />
+    <link href='/stylesheets/public.css' rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.4.3.js" type="text/javascript"></script>
+    <script src="/javascripts/dropdownmenu.js" type="text/javascript"></script>
+    <link rel="alternate" type="application/rss+xml" title="Ruby Mendicant University's News Feed" href="http://university.rubymendicant.com/changelog.rss" />
+  </head>
+  <body>
+    <div id='header'>
+      <h1>Mendicant University</h1>
+      <div id='menu_bar'>
+        <ul class='menu'>
+          <li class='main first'>
+            <a href='/'>Home</a>
+          </li>
+          <li class='main'>
+            <a href='/changelog.html'>News</a>
+          </li>
+          <li class='main' id='about'>
+            <a class='current dropdown' href='#'>
+              About RMU
+              <span class='arrow'></span>
+            </a>
+            <div id='about_dropdown'>
+              <ul>
+                <li>
+                  <a href='/about/courses.html'>Courses</a>
+                </li>
+                <li>
+                  <a href='/about/admissions.html'>Admissions</a>
+                </li>
+                <li>
+                  <a href='/about/staff.html'>Staff</a>
+                </li>
+                <li>
+                  <a href='/about/contact.html'>Contact Us</a>
+                </li>
+              </ul>
+            </div>
+            <script type='text/javascript'>
+              //<![CDATA[
+                DropdownMenu.register('about');
+              //]]>
+            </script>
+          </li>
+          <li class='main' id='resources'>
+            <a class='dropdown' href='/projects.html'>
+              Resources
+              <span class='arrow'></span>
+            </a>
+            <div id='resources_dropdown'>
+              <ul>
+                <li>
+                  <a href='/resources/learning_materials.html'>Learning Materials</a>
+                </li>
+                <li>
+                  <a href='/resources/core_projects.html'>Core Projects</a>
+                </li>
+                <li>
+                  <a href='/resources/student_projects.html'>Student Projects</a>
+                </li>
+              </ul>
+            </div>
+            <script type='text/javascript'>
+              //<![CDATA[
+                DropdownMenu.register('resources');
+              //]]>
+            </script>
+          </li>
+          <li class='main'>
+            <a href='/alumni/recent.html'>Alumni List</a>
+          </li>
+          <li class='main last'>
+            <a href='/dashboard'>University Web</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id='container'>
+      <div id='content'>
+        <!-- <meta http-equiv="refresh" content="0;url=http://university.rubymendicant.com/admissions"> -->
+          <h3>Getting Involved With RMU</h3>
+          
+          <p>We are not currently accepting new students, but stay tuned for announcements of new entrance exams and other public events on our <a href="/changelog.html">news page</a>.  While you're waiting, you can meet with current RMU participants and discuss the program via the <a href="http://groups.google.com/group/rmu-talk">rmu-talk mailing list</a>, or the #rmu IRC channel on Freenode.</p>
+          
+          <p>We occasionally hold events that are open to the public, such as meetings with guest speakers or study sessions hosted by our staff and alumni. These events will also be announced on our <a href="/changelog.html">news page</a>, so be sure to keep an eye on it if you'd like to get involved.</p>
+          
+          <p>Feel free to <a href="/about/contact.html">contact us</a> if you have any questions</p>
+        <div id='footer'>
+          An
+          <a href='http://educationreimagined.com'>Education Reimagined</a>
+          Project
+        </div>
+      </div>
+    </div>
+    <script type='text/javascript'>
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-15397397-3']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
+  </body>
+</html>
