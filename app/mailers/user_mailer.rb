@@ -7,7 +7,7 @@ class UserMailer < ActionMailer::Base
     @comment    = comment
     @submission = comment.commentable
 
-    subject = "[rmu-submission] #{@submission.assignment.name}: " +
+    subject = "[mendicant-submission] #{@submission.assignment.name}: " +
               "#{@submission.user.name}"
 
     options = {
@@ -27,7 +27,7 @@ class UserMailer < ActionMailer::Base
     @submission = activity.actionable
     @user       = activity.user
 
-    subject = "[rmu-submission] #{@submission.assignment.name}: " +
+    subject = "[mendicant-submission] #{@submission.assignment.name}: " +
               "#{@submission.user.name}"
 
     mail(:to      => to_from_submission(@submission, @user.email),

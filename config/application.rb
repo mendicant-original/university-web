@@ -48,10 +48,15 @@ module University
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
 
-    config.action_mailer.default_url_options = { :host => "university.rubymendicant.com" }
+    config.action_mailer.default_url_options = { :host => "school.mendicantuniversity.org" }
 
     Haml::Template.options[:ugly] = true
 
     config.autoload_paths += %W(#{config.root}/lib)
   end
 end
+
+# Default uses divs which rendering issues with inline labels
+ActionView::Base.field_error_proc = Proc.new { |html_tag, instance|
+  "<span class=\"field_with_errors\">#{html_tag}</span>".html_safe
+}

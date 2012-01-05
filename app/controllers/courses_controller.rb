@@ -48,7 +48,7 @@ class CoursesController < ApplicationController
   end
 
   def course_members_only
-    unless @course.users.include?(current_user)
+    unless @course.users.include?(current_user) || current_access_level.allows?(:view_all_courses)
       flash[:error] = "You are not enrolled in this course!"
       redirect_to courses_path
     end

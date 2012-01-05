@@ -8,10 +8,10 @@ module Chat::MessagesHelper
       'No Messages'
     end
   end
-  
-  def message_date(message)    
+
+  def message_date(message)
     params[:last_date] = @since.to_date if @since && params[:last_date].nil?
-    
+
     if params[:last_date].nil? || params[:last_date] != message.recorded_at.to_date
       params[:last_date] = message.recorded_at.to_date
       message.recorded_at.strftime("%A, %B %d, %Y")
@@ -20,5 +20,13 @@ module Chat::MessagesHelper
 
   def message_time(message)
     message.recorded_at.strftime("%I:%M %p")
+  end
+
+  def message_body(message, highlight=nil)
+    body = sanitize(message.body)
+
+    body = highlight(body, highlight) if highlight
+
+    auto_link(body, :html => { :target => '_blank' }).html_safe
   end
 end

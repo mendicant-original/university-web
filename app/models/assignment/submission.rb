@@ -10,8 +10,6 @@ class Assignment
 
     has_many   :activities, :dependent => :delete_all
 
-    validates :github_repository, :length => { :maximum => 25 }
-
     scope :all_active, includes(:assignment => :course).where(:courses => {:archived => false})
 
     scope :with_github_repository, all_active.where('github_repository IS NOT NULL')
@@ -22,7 +20,7 @@ class Assignment
 
       full_repo = "#{user.github_account_name}/#{stripped_repo}"
 
-      update_attribute(:github_repository, full_repo)
+      update_attributes(:github_repository => full_repo, :last_commit_time => nil)
 
       activities.create(
         user_id:       user.id,
@@ -36,19 +34,21 @@ class Assignment
     def add_github_commit(commit)
 
       if(last_commit_time.nil? || commit.commit_time > last_commit_time)
-        update_attributes(
-            last_commit_time:  commit.commit_time,
-            last_commit_id:    commit.id
-        )
-      end
 
-      activities.create(
-          user_id:       user.id,
-          context:       "#{commit.id}-#{commit.message}",
-          description:   "committed: #{commit.message}",
-          created_at:    commit.commit_time,
-          actionable:    self
-      )
+        update_attributes(
+          last_commit_time: commit.commit_time,
+          last_commit_id:   commit.id
+        )
+
+        activities.find_or_create_by_description_and_created_at(
+          "committed: #{commit.message}", commit.commit_time).
+        update_attributes(
+          user_id:    user.id,
+          context:    "#{commit.id}-#{commit.message}",
+          actionable: self
+        )
+
+      end
 
     end
 

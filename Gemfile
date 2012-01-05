@@ -29,6 +29,11 @@ gem "rdiscount"
 gem "will_paginate", "~> 3.0"
 gem "cocoon"
 
+###############
+# Maintenance #
+###############
+
+gem 'capistrano'
 
 group :test do
   gem "minitest",  "~> 2.3.1"
@@ -36,7 +41,7 @@ group :test do
   gem "factory_girl_rails"
   gem "mocha"
   gem "colorific", "~> 1.0.0"
-  gem "test_notifier", '~> 0.4.0'
+  gem "test_notifier", '~> 1.0.0'
 end
 
 group :production do

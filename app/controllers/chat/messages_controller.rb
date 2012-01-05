@@ -19,8 +19,10 @@ class Chat::MessagesController < ApplicationController
                     @since, params[:last_id].to_i])
     else
       total_messages = @messages.count
+      limit = (params[:limit] || 200).to_i
+      offset = (params[:offset] || 0).to_i * limit
 
-      @messages = @messages.limit(params[:limit] || 200) unless params[:full_log]
+      @messages = @messages.limit(limit).offset(offset) unless params[:full_log]
 
       @more_messages = total_messages > @messages.length
     end
@@ -50,7 +52,7 @@ class Chat::MessagesController < ApplicationController
     #strip non-word chars, which confuse postgresql's search method
     params[:search].gsub!(/\W/," ")
 
-    @messages = Chat::Message.search({body: params[:search]})
+    @messages = Chat::Message.search_within_channel(@channel, {body: params[:search]})
     @num_results = @messages.count.to_s
 
     respond_to do |format|

@@ -4,33 +4,24 @@
     %title
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
       \- Mendicant University
-    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/print.css', :media => 'print'
-    /[if IE]
-      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'buttons.css', 'smoothness/jquery-ui.css'
-
-    = javascript_include_tag 'jquery-1.4.3.js', 'jquery.scrollTo',
-      'jquery.infieldlabel.min.js', 'jquery.jeditable.js', 'jquery-ui',
-      'showdown', 'application', 'rails', 'dropdownmenu', 'sidebarmenu',
-      'uw', 'uw.timezones', 'uw.admissions', 'uw.comments',
-      'uw.submissions', 'uw.preview', 'jquery.popup', 'cocoon'
-    = csrf_meta_tag
+    = render :partial => "shared/js_css_header"
 
     = yield(:header_bottom)
 
-  %body
+  %body{:class => yield(:body_class)}
     #wrap
-      = render :partial => "shared/dev_warning"
-      #header
-        .centered
-          %h1 Mendicant University
+      #header_container
+        = render :partial => "shared/dev_warning"
+        #header
+          .centered
+            %h1= link_to "Mendicant University", "http://mendicantuniversity.org"
 
-          - if current_user
-            = render :partial => "shared/user"
+            - if current_user
+              = render :partial => "shared/user"
 
-      = render :partial => "shared/nav"
-      = render :partial => "shared/flash", :locals => {:flash => flash}
+        = render :partial => "shared/nav"
+        = yield(:subnav)
+        = render :partial => "shared/flash", :locals => {:flash => flash}
       #content= yield
       .clear
 

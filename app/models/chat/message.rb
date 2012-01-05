@@ -6,6 +6,10 @@ module Chat
     belongs_to :handle
     belongs_to :topic
 
+    def self.search_within_channel(channel, search_options)
+      where(:channel_id => channel.id).search(search_options)
+    end
+
     def check_action
       regex = /^\u0001ACTION(.*)\u0001$/
       if body =~ regex

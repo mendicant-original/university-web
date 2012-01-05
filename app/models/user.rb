@@ -42,7 +42,8 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for       :admissions_submission
 
-  attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year
+  attr_protected :access_level, :alumni_number, :alumni_month, :alumni_year,
+                 :inactive
 
   has_one                       :alumni_preferences
   accepts_nested_attributes_for :alumni_preferences
@@ -123,7 +124,7 @@ class User < ActiveRecord::Base
 
   def alumni_number=(number)
     if alumni_number.nil? and not number.blank?
-      alumni_channel = Chat::Channel.find_by_name("#rmu-alumni")
+      alumni_channel = Chat::Channel.find_by_name("#mendicant-alumni")
       if alumni_channel
         alumni_channel_membership = chat_channel_memberships.
           find_by_channel_id(alumni_channel.id)
@@ -145,6 +146,10 @@ class User < ActiveRecord::Base
 
   def staff?
     access_level.to_s == "admin"
+  end
+
+  def visiting_teacher?
+    access_level.to_s == "visiting teacher"
   end
 
   # Returns a date object based on the alumni year and month

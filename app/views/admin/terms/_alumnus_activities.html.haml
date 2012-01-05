@@ -1,0 +1,34 @@
+:javascript
+  $(function(){
+    var editPath = '#{admin_alumnus_activities_path}/';
+    var loadPath = '#{statuses_admin_alumnus_activities_path(:format => :json)}';
+
+    $('.activity-status').each(function(i,el){
+      id = $(el).attr('data-id');
+
+      $(el).editable(editPath + id, {
+        type:      'select',
+        method:    'PUT',
+        indicator: 'Saving ...',
+        cancel:    'Cancel',
+        submit:    'Save',
+        loadurl:   loadPath,
+        onblur:    'ignore'
+      });
+    });
+  });
+
+%table.admin.full
+  %tr
+    %th Name
+    %th Email
+    %th Github
+    %th Status
+  - @alumni.each do |alumnus|
+    %tr
+      %td= link_to alumnus.name, admin_user_path(alumnus)
+      %td= alumnus.email
+      %td= github_account_link alumnus.github_account_name
+      %td
+        .activity-status{:'data-id' => @term.activity_for(alumnus).id}
+          = @term.activity_for(alumnus).status

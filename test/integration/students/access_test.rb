@@ -10,16 +10,14 @@ module Students
 
       test "sign in" do
         visit root_path
-        assert_current_path "/"
-        
-        click_link "University Web"
+
         assert_current_path new_user_session_path
 
         fill_in "Email",    :with => "rmu@test.com"
         fill_in "Password", :with => "123456"
         click_button "Sign in"
 
-        assert_current_path dashboard_path
+        assert_current_path root_path
         assert_flash "Signed in successfully"
         assert_content "IRC Channels"
         assert_link "Sign Out"
@@ -43,7 +41,7 @@ module Students
 
         click_link "Sign Out"
 
-        assert_current_path "/"
+        assert_current_path new_user_session_path
       end
     end
   end

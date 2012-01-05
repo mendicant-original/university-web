@@ -1,6 +1,4 @@
-$rmu_blue: #00316a
-$rmu_yellow: #fbe482
-$rmu_red: #70130B
+$mu_red: #70130B
 
 =dropdown_container
   position: relative
@@ -77,7 +75,6 @@ body
   padding: 1em 20px 20px
   min-height: 725px
 
-
 #header, #nav
   div.centered
     margin: 0 auto
@@ -89,12 +86,15 @@ body
   padding: 1em 20px
 
   h1
-    color: #fff
-    font-family: "ThryomanesNormal","Baskerville Old Face","Century Schoolbook","Tw Cen MT", serif
     letter-spacing: 3px
     display: inline-block
     margin: 0.25em 0
     font-size: 2.5em
+    a
+      color: #fff
+      font-family: "ThryomanesNormal","Baskerville Old Face","Century Schoolbook","Tw Cen MT", serif
+      &:hover
+        color: #eee
 
   #user
     color: #fff
@@ -153,7 +153,7 @@ body
     color: #fff
     margin-top: 5px
     &:hover
-      color: #7F92B1
+      color: #eee
 
 div#warning
   padding: 0.5em 20px

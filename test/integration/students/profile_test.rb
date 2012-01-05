@@ -96,6 +96,19 @@ module Students
         assert_errors "Email is invalid",
           "Twitter account name can only contain letters, numbers or underscores"
       end
+
+      test "attempt to hide an irc channel" do
+        @chat_channel = Factory(:chat_channel)
+        @user.chat_channels << @chat_channel
+
+        click_link_within '#header', 'Edit Profile'
+
+        assert_content @chat_channel.name
+        uncheck @chat_channel.name
+        click_button "Update"
+
+        refute @user.chat_channel_memberships.where(:channel_id => @chat_channel).first.visible_on_dashboard
+      end
     end
 
     private

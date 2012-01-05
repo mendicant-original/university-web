@@ -4,13 +4,7 @@
     %title
       = yield(:title).blank? ? controller_name.humanize : yield(:title)
       \- Mendicant University
-    = stylesheet_link_tag 'compiled/screen.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'compiled/print.css', :media => 'print'
-    /[if IE]
-      = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'buttons.css'
-    = javascript_include_tag 'jquery-1.4.2.js', 'jquery.scrollTo', 'jquery.infieldlabel.min.js', 'application', 'rails'
-    = csrf_meta_tag
+    = render :partial => "shared/js_css_header"
 
     = yield(:header_bottom)
 

@@ -16,7 +16,7 @@
                     %li.term= term.name
                   - courses.each do |course|
                     %li= link_to course.name, course_path(course)
-                - if current_user.courses.archived.any?  
+                - if current_user.courses.archived.any?
                   %li.small= link_to "Archived Courses", courses_path
         - if current_access_level.allows? :view_directory
           %li
@@ -46,6 +46,6 @@
     :javascript
       DropdownMenu.register('courses');
       DropdownMenu.register('administration');
-      
-    = link_to "Public site", "/", :id => "public_link"
+
+    = link_to "Public site", "http://mendicantuniversity.org", :id => "public_link"
     .clear

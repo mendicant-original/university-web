@@ -24,7 +24,7 @@ class Assignment
     end
 
     def is_a_github_commit?
-      description[/github/i]
+      description[/committed|github/i]
     end
 
     private

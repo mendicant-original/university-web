@@ -17,12 +17,3 @@ lib/development_mail_interceptor.rb
 .idea/*
 users.csv
 config/github.yml
-
-
-# Static Site [rake public-site:generate]
-
-app/views/layouts/static.html.haml
-public/about/
-public/index.html
-public/resources/
-public/stylesheets/public.css

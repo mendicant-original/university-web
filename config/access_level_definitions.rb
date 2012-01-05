@@ -1,10 +1,10 @@
 AccessLevel::User.instance_eval do
   define "guest",
     :permissions => []
-    
+
   define "applicant",
     :permissions => []
-  
+
   define "student",
     :permissions => [:view_directory, :view_courses]
 
@@ -18,24 +18,25 @@ AccessLevel::User.instance_eval do
 
   define "admin",
     :parent      => "alumnus",
-    :permissions => [:manage_users, :manage_documents, :update_admissions_status]
+    :permissions => [:manage_users, :manage_documents, :update_admissions_status,
+                     :view_all_courses]
 end
 
 AccessLevel::Course.instance_eval do
   define "student",
-    :permissions => [:comment, :create_submissions]    
-  
-  define "mentor", 
+    :permissions => [:comment, :create_submissions]
+
+  define "mentor",
     :permissions => [:comment]
-    
-  define "assistant instructor", 
+
+  define "assistant instructor",
     :parent => "mentor",
     :permissions => []
-    
-  define "visiting teacher", 
+
+  define "visiting teacher",
     :parent => "ta",
     :permissions => []
-  
-  define "instructor",  
+
+  define "instructor",
     :permissions => [:comment, :create_assignments]
 end
