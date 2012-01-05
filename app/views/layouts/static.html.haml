@@ -1,0 +1,84 @@
+!!! Strict
+%html
+  %head
+    %title Mendicant University
+    %meta{:"http-equiv"=>"Content-Type",:content=>"text/html;charset=utf-8"}
+    %link{:href=>"/stylesheets/public.css",:type=>"text/css",:rel=>"stylesheet"}
+    :plain
+      <script src="/javascripts/jquery-1.4.3.js" type="text/javascript"></script>
+      <script src="/javascripts/dropdownmenu.js" type="text/javascript"></script>
+      <link rel="alternate" type="application/rss+xml" title="Ruby Mendicant University's News Feed" href="http://university.rubymendicant.com/changelog.rss" />
+
+  %body
+    #header
+      %h1 Mendicant University
+
+      - # HACK for Rails layout
+      - current = @current if @current
+
+      #menu_bar
+        %ul.menu
+          %li.main.first
+            %a{:href=>"/", :class => current_page('index', current)} Home
+          %li.main
+            %a{:href=>"/changelog.html",
+              :class => current_page('news', current)} News
+          %li.main#about
+            %a.dropdown{:href=>"#",
+              :class => current_page('about', current)}
+              About RMU
+              %span.arrow
+            #about_dropdown
+              %ul
+                %li
+                  %a{:href => "/about/courses.html"} Courses
+                %li
+                  %a{:href => "/about/admissions.html"} Admissions
+                %li
+                  %a{:href => "/about/staff.html"} Staff
+                %li
+                  %a{:href => "/about/contact.html"} Contact Us
+
+            :javascript
+              DropdownMenu.register('about');
+
+          %li.main#resources
+            %a.dropdown{:href=>"/projects.html",
+              :class => current_page('resources', current)}
+              Resources
+              %span.arrow
+            #resources_dropdown
+              %ul
+                %li
+                  %a{:href => "/resources/learning_materials.html"} Learning Materials
+                %li
+                  %a{:href => "/resources/core_projects.html"} Core Projects
+                %li
+                  %a{:href => "/resources/student_projects.html"} Student Projects
+
+            :javascript
+              DropdownMenu.register('resources');
+
+          %li.main
+            %a{:href=>"/alumni/recent.html",
+              :class => current_page('alumni', current)} Alumni List
+          %li.main.last
+            %a{:href=>"/dashboard"} University Web
+    #container
+      #content
+        = yield
+        #footer
+          An
+          %a{:href=>"http://educationreimagined.com"} Education Reimagined
+          Project
+
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-15397397-3']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
