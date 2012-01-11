@@ -43,8 +43,8 @@ class Assignment::SubmissionTest < ActiveSupport::TestCase
 
       activity = @submission.activities.last
       assert_equal "committed: commit message", activity.description
-      assert_equal "commit id-commit message", activity.context
-      assert_equal @now, activity.created_at
+      assert_equal "commit id-commit message",  activity.context
+      assert_equal @now.to_i,                   activity.created_at.to_i
     end
 
   end

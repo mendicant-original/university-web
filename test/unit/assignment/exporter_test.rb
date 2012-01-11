@@ -34,9 +34,9 @@ class Assignment::ExporterTest < ActiveSupport::TestCase
       data         = @exporter.export
       comment_data = data[:submissions].first[:comments].first
 
-      assert_equal comment.updated_at,   comment_data[:updated_at]
-      assert_equal comment.user.name,    comment_data[:user]
-      assert_equal comment.comment_text, comment_data[:comment_text]
+      assert_equal comment.updated_at.to_i, comment_data[:updated_at].to_i
+      assert_equal comment.user.name,       comment_data[:user]
+      assert_equal comment.comment_text,    comment_data[:comment_text]
     end
 
     test "exports activity details" do
@@ -46,9 +46,9 @@ class Assignment::ExporterTest < ActiveSupport::TestCase
       data          = @exporter.export
       activity_data = data[:submissions].first[:activities].first
 
-      assert_equal activity.updated_at,  activity_data[:updated_at]
-      assert_equal activity.user.name,   activity_data[:user]
-      assert_equal activity.description, activity_data[:description]
+      assert_equal activity.updated_at.to_i, activity_data[:updated_at].to_i
+      assert_equal activity.user.name,       activity_data[:user]
+      assert_equal activity.description,     activity_data[:description]
     end
   end
 end
