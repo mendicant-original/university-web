@@ -48,6 +48,10 @@ class Course < ActiveRecord::Base
     course_member_by_type('mentor')
   end
 
+  def submissions
+    Assignment::Submission.where :assignment_id => assignments
+  end
+
   def reviews(user=nil)
     reviews = Assignment::Review.includes(:submission => {:assignment => :course}).
       where("courses.id = ? and assignment_reviews.closed = ?", id, false).
@@ -93,38 +97,60 @@ class Course < ActiveRecord::Base
     assignments.map { |a| a.recent_activities }.flatten.
       sort_by { |a| a.created_at }.reverse
   end                                     
-  
+
   def search_course_resources(search_key)
-    results = Hash.new()                    
+    results = {}
 
     results[:course_description] = Course.search({description: search_key}, self)
-
     results[:notes] = Course.search({notes: search_key}, self)
+    results[:assignments] = search_assignments(search_key)
+    results[:submissions] = search_submissions(search_key)
+    results[:submission_comments] = search_submission_comments(search_key)
+    results[:irc_messages] = search_irc_messages(search_key)
 
-    results[:assignments] = Assignment.search(search_key, self.assignments)
-
-    results[:submission] = Assignment::Submission.search(search_key, self.assignments.each.map {|a| a.submissions}.flatten)
-
-    results[:submission_comments] = []
-    (self.assignments.each.map &:submissions).flatten.each do |submission|
-      Comment.search(search_key, submission.comments).each do |comment|
-        results[:submission_comments] << comment.commentable
-      end      
-    end    
-                                                                                                
-    if self.channel
-      results[:irc_messages] = Chat::Message.search(search_key, self.channel.messages)
-    else                     
-      results[:irc_messages] = []
-    end        
     results
   end
-  
+
   private
 
   def course_member_by_type(type)
     User.includes(:course_memberships).
       where(["course_memberships.course_id = ? AND " +
-             "course_memberships.access_level = ?  ", id, type])
+            "course_memberships.access_level = ?  ", id, type])
   end
+
+  def search_assignments(search_key)
+    assignments.empty? ? [] :
+      Assignment.search(search_key, self.assignments)
+  end
+
+  def search_submissions(search_key)
+    submissions.empty? ? [] :
+      Assignment::Submission.search(search_key, submissions)
+  end
+
+  def search_submission_comments(search_key)
+    result = []
+
+    submissions.each do |sub|
+      unless sub.comments.empty?
+        Comment.search(search_key, sub.comments).each do |comment|
+          result << comment
+        end
+      end
+    end
+
+    result
+  end
+
+  def search_irc_messages(search_key)
+    result = []
+
+    if channel && !channel.messages.empty?
+      result = Chat::Message.search(search_key, channel.messages)
+    end
+
+    result
+  end
+
 end

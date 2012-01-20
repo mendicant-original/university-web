@@ -142,7 +142,7 @@ class CourseTest < ActiveSupport::TestCase
       test "should return submission" do
         assignment = Factory(:assignment, :course => @course)
         Factory(:submission, :assignment => assignment, :description => "This is a submission")
-        assert !@course.search_course_resources('submission')[:submission].empty?
+        assert !@course.search_course_resources('submission')[:submissions].empty?
       end
 
       test "should return submission's comments" do

@@ -16,19 +16,21 @@
         - @results[:assignments].each do |assignment|
           = link_to assignment.name, course_assignment_path(@course, assignment)
 
-    - unless @results[:submission].empty?
+    - unless @results[:submissions].empty?
       %h3 Submissions
-      - @results[:submission].each do |submission|
+      - @results[:submissions].each do |submission|
         %ul
           %li
             = link_to submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
 
     - unless @results[:submission_comments].empty?
       %h3 Submission Comments
-      - @results[:submission_comments].each do |submission|
+      - @results[:submission_comments].each do |comment|
+        - submission = comment.commentable
+        - link_text = 'A comment in ' + submission.user.name + "'s submission for " + submission.assignment.name
         %ul
           %li
-            = link_to 'A comment in ' + submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
+            = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
 
     - unless @results[:irc_messages].empty?
       %h3 Irc Channel
