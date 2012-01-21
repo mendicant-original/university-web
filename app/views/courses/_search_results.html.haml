@@ -21,7 +21,8 @@
       - @results[:submissions].each do |submission|
         %ul
           %li
-            = link_to submission.user.name + "'s submission", course_assignment_submission_path(@course, submission.assignment, submission)
+            - link_text = submission.user.name + "'s submission for " + submission.assignment.name
+            = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
 
     - unless @results[:submission_comments].empty?
       %h3 Submission Comments
