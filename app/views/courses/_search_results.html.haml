@@ -4,17 +4,21 @@
   %ul
     - unless @results[:course_description].empty?
       %h3 Course's description
-      = highlight(@course.description, @search_key)
+      = highlighted_snippet(@course.description, @search_key, surround: 100)
+      %br
 
     - unless @results[:notes].empty?
       %h3 Shared Notes
-      = highlight(@course.notes, @search_key)
+      = highlighted_snippet(@course.notes, @search_key)
+      %br
 
     - unless @results[:assignments].empty?
       %h3 Assignments
       %ul
         - @results[:assignments].each do |assignment|
           = link_to assignment.name, course_assignment_path(@course, assignment)
+          .context= highlighted_snippet(assignment.name, @search_key)
+          %br
 
     - unless @results[:submissions].empty?
       %h3 Submissions
@@ -23,6 +27,8 @@
           %li
             - link_text = submission.user.name + "'s submission for " + submission.assignment.name
             = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
+            .context= highlighted_snippet(submission.description, @search_key)
+            %br
 
     - unless @results[:submission_comments].empty?
       %h3 Submission Comments
@@ -32,10 +38,13 @@
         %ul
           %li
             = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
+            .context= highlighted_snippet(comment.comment_text, @search_key)
+            %br
 
     - unless @results[:irc_messages].empty?
       %h3 Irc Channel
       - results[:irc_messages].each do |message|
         %ul
           %li
-            = message.body
+            .context= highlighted_snippet(message.body, @search_key)
+            %br

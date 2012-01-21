@@ -46,4 +46,25 @@ module CoursesHelper
      }
   end
 
+  def highlighted_snippet(text, key, opts={})
+    opts[:surround] ||= 30
+
+    index = text.index(/#{key}/i)
+    if index
+      start = index - opts[:surround]
+      start = 0 if start < 0
+
+      prefix = start == 0 ? "" : "..."
+
+      finish = index + key.length + opts[:surround]
+      finish = -1 if finish >= text.length
+
+      suffix = finish == -1 ? "" : "..."
+
+      highlight prefix + text[start..finish] + suffix, key
+    else
+      text[0, opts[:surround] * 2]
+    end
+  end
+
 end
