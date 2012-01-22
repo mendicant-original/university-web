@@ -1,48 +1,57 @@
-- if @results.values.flatten.empty?
-  %h1 No matches found
+- count = @results.values.flatten.count
+- if count == 0
+  %h1 Found 0 results
 - else
+  %h1= "Found #{count} results"
+  %br
   %ul
     - unless @results[:course_description].empty?
-      %h3 Course's description
+      %h2 Course's description
+      %hr
       = highlighted_snippet(@course.description, @search_key, surround: 100)
       %br
 
     - unless @results[:notes].empty?
-      %h3 Shared Notes
+      %h2 Shared Notes
+      %hr
       = highlighted_snippet(@course.notes, @search_key)
       %br
 
     - unless @results[:assignments].empty?
-      %h3 Assignments
+      %h2 Assignments
+      %hr
       %ul
         - @results[:assignments].each do |assignment|
-          = link_to assignment.name, course_assignment_path(@course, assignment)
+          %b= link_to assignment.name, course_assignment_path(@course, assignment)
           .context= highlighted_snippet(assignment.name, @search_key)
           %br
 
     - unless @results[:submissions].empty?
-      %h3 Submissions
+      %h2 Submissions
+      %hr
       - @results[:submissions].each do |submission|
         %ul
           %li
             - link_text = submission.user.name + "'s submission for " + submission.assignment.name
-            = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
+            %b= link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
             .context= highlighted_snippet(submission.description, @search_key)
             %br
 
     - unless @results[:submission_comments].empty?
-      %h3 Submission Comments
+      %h2 Submission Comments
+      %hr
       - @results[:submission_comments].each do |comment|
         - submission = comment.commentable
         - link_text = 'A comment in ' + submission.user.name + "'s submission for " + submission.assignment.name
         %ul
           %li
-            = link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
+            %b= link_to link_text, course_assignment_submission_path(@course, submission.assignment, submission)
             .context= highlighted_snippet(comment.comment_text, @search_key)
             %br
 
     - unless @results[:irc_messages].empty?
-      %h3 Irc Channel
+      %h2 Irc Channel
+      %hr
       - results[:irc_messages].each do |message|
         %ul
           %li
