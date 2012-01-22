@@ -1,8 +1,7 @@
 = form_tag search_course_path, :method => "get", :remote => true,
-  do
-  = label_tag :search, "Keyword",
-    :class => "infield"
-  = text_field_tag :search, params[:search]
-  = submit_tag 'Search'
+  :class => "bp search" do
+  = text_field_tag :search, params[:search], :placeholder => "Search current course"
+  = submit_tag 'Search', :class => "inline"
+.clear
   
 #search-results
