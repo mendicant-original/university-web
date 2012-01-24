@@ -158,6 +158,22 @@ class CourseTest < ActiveSupport::TestCase
         @course      = Factory(:course, :channel => channel)
         assert !@course.search_course_resources('message')[:irc_messages].empty?
       end
+
+      test 'should not return assignments of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment,
+                               :course => other_course,
+                               :description => 'test')
+        assert @course.search_course_resources('test')[:assignments].empty?
+      end
+
+      test 'should not return submissions of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment, :course => other_course)
+        submission   = Factory(:submission, :assignment => assignment,
+                               :description => 'test')
+        assert @course.search_course_resources('test')[:submissions].empty?
+      end
     end
   end
 end
