@@ -80,9 +80,7 @@ module CoursesHelper
 
     haml_tag :br
 
-    haml_tag '.context' do
-      haml_concat highlighted_snippet(submission.description, @search_key)
-    end
+    haml_concat highlighted_snippet(submission.description, @search_key)
   end
 
   def submission_comment_search_result(comment)
@@ -101,9 +99,7 @@ module CoursesHelper
 
     haml_tag :br
 
-    haml_tag '.context' do
-      haml_concat highlighted_snippet(comment.comment_text, @search_key)
-    end
+    haml_concat highlighted_snippet(comment.comment_text, @search_key)
   end
 
 end

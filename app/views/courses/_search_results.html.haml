@@ -24,7 +24,8 @@
         %li
           .search_result
             %b= link_to assignment.name, course_assignment_path(@course, assignment)
-            .context= highlighted_snippet(assignment.name, @search_key)
+            %br
+            = highlighted_snippet(assignment.name, @search_key)
 
   - unless @results[:submissions].empty?
     %h2 Submissions
@@ -51,4 +52,4 @@
       %ul
         %li
           .search_result
-            .context= highlighted_snippet(message.body, @search_key)
+            = highlighted_snippet(message.body, @search_key)
