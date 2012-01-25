@@ -120,13 +120,13 @@ class Course < ActiveRecord::Base
   end
 
   def search_assignments(search_key)
-    assignments.empty? ? [] :
-      Assignment.search(search_key, self.assignments)
+    return [] if assignments.empty?
+    Assignment.search(search_key, assignments)
   end
 
   def search_submissions(search_key)
-    submissions.empty? ? [] :
-      Assignment::Submission.search(search_key, submissions)
+    return [] if submissions.empty?
+    Assignment::Submission.search(search_key, submissions)
   end
 
   def search_submission_comments(search_key)
