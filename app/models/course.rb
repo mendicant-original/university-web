@@ -98,7 +98,7 @@ class Course < ActiveRecord::Base
       sort_by { |a| a.created_at }.reverse
   end                                     
 
-  def search_course_resources(search_key)
+  def search(search_key)
     results = {}
 
     results[:course_description] = Course.search({description: search_key}, self)
