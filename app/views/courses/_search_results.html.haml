@@ -3,19 +3,18 @@
   %h1 Found 0 results
 - else
   %h1= "Found #{count} results"
-  %br
 
   - unless @results[:course_description].empty?
     %h2 Course's description
     %hr
-    = highlighted_snippet(@course.description, @search_key, surround: 100)
-    %br
+    .search_result
+      = highlighted_snippet(@course.description, @search_key, surround: 100)
 
   - unless @results[:notes].empty?
     %h2 Shared Notes
     %hr
-    = highlighted_snippet(@course.notes, @search_key)
-    %br
+    .search_result
+      = highlighted_snippet(@course.notes, @search_key)
 
   - unless @results[:assignments].empty?
     %h2 Assignments
@@ -23,9 +22,9 @@
     %ul
       - @results[:assignments].each do |assignment|
         %li
-          %b= link_to assignment.name, course_assignment_path(@course, assignment)
-          .context= highlighted_snippet(assignment.name, @search_key)
-          %br
+          .search_result
+            %b= link_to assignment.name, course_assignment_path(@course, assignment)
+            .context= highlighted_snippet(assignment.name, @search_key)
 
   - unless @results[:submissions].empty?
     %h2 Submissions
@@ -33,8 +32,8 @@
     %ul
       - @results[:submissions].each do |submission|
         %li
-          - submission_search_result submission
-          %br
+          .search_result
+            - submission_search_result submission
 
   - unless @results[:submission_comments].empty?
     %h2 Submission Comments
@@ -42,8 +41,8 @@
     %ul
       - @results[:submission_comments].each do |comment|
         %li
-          - submission_comment_search_result comment
-          %br
+          .search_result
+            - submission_comment_search_result comment
 
   - unless @results[:irc_messages].empty?
     %h2 Irc Channel
@@ -51,5 +50,5 @@
     - results[:irc_messages].each do |message|
       %ul
         %li
-          .context= highlighted_snippet(message.body, @search_key)
-          %br
+          .search_result
+            .context= highlighted_snippet(message.body, @search_key)
