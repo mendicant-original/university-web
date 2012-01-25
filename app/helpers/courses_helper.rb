@@ -67,4 +67,43 @@ module CoursesHelper
     end
   end
 
+  def submission_search_result(submission)
+    link_text = submission.user.name + "'s submission for " + submission.assignment.name
+
+    haml_tag :b do
+      haml_concat(
+        link_to link_text, course_assignment_submission_path(
+          @course, submission.assignment, submission
+        )
+      )
+    end
+
+    haml_tag :br
+
+    haml_tag '.context' do
+      haml_concat highlighted_snippet(submission.description, @search_key)
+    end
+  end
+
+  def submission_comment_search_result(comment)
+    submission = comment.commentable
+    link_text = 'A comment in ' +
+      submission.user.name + "'s submission for " +
+      submission.assignment.name
+
+    haml_tag :b do
+      haml_concat(
+        link_to link_text, course_assignment_submission_path(
+          @course, submission.assignment, submission
+        )
+      )
+    end
+
+    haml_tag :br
+
+    haml_tag '.context' do
+      haml_concat highlighted_snippet(comment.comment_text, @search_key)
+    end
+  end
+
 end
