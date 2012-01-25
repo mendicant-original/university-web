@@ -2,6 +2,30 @@
   :class => "bp search" do
   = text_field_tag :search, params[:search], :placeholder => "Search current course"
   = submit_tag 'Search', :class => "inline"
+
 .clear
+
+#search_spinner
+
+:javascript
+  var opts = {
+    lines: 12, // The number of lines to draw
+    length: 3, // The length of each line
+    width: 2, // The line thickness
+    radius: 5, // The radius of the inner circle
+    color: '#000', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: false // Whether to render a shadow
+  };
+  var target = document.getElementById('search_spinner');
+  var spinner = new Spinner(opts);
+
+  $("#search_spinner").bind("ajaxSend", function(){
+    spinner.spin(target);
+  }).bind("ajaxComplete", function(){
+    spinner.stop();
+  });
+
   
 #search-results
