@@ -101,12 +101,12 @@ class Course < ActiveRecord::Base
   def search(search_key)
     results = {}
 
-    results[:course_description] = Course.search({description: search_key}, self)
-    results[:notes] = Course.search({notes: search_key}, self)
-    results[:assignments] = search_assignments(search_key)
-    results[:submissions] = search_submissions(search_key)
+    results[:course_description]  = Course.search({description: search_key}, self)
+    results[:notes]               = Course.search({notes: search_key}, self)
+    results[:assignments]         = search_assignments(search_key)
+    results[:submissions]         = search_submissions(search_key)
     results[:submission_comments] = search_submission_comments(search_key)
-    results[:irc_messages] = search_irc_messages(search_key)
+    results[:irc_messages]        = search_irc_messages(search_key)
 
     results
   end
