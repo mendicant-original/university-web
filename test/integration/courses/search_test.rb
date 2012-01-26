@@ -6,9 +6,9 @@ module Courses
     context "As a user, I want to have full text-search capabilities" do            
       context "# In a course" do
         setup do
-          Capybara.current_driver = Capybara.javascript_driver
+          tests_javascript
 
-          @course = Factory(:course)
+          @course = Factory(:course, :description => 'lorem')
           @user = sign_user_in
           Factory(:course_membership, :user => @user, :course => @course)
           2.times do |i|
@@ -25,11 +25,10 @@ module Courses
         end
         
         test "I get results from the course's description" do
-          pending()
-          #visit course_path(@course, :anchor => "search")
-          #fill_in 'search', with: 'lorem'
-          #click_button('Search')
-          #assert_content "Course's Description"
+          visit course_path(@course, :anchor => "search")
+          fill_in 'search', with: 'lorem'
+          click_button('Search')
+          assert_content "Course's description"
         end                                            
         
         test "I get results from the Notes" do
