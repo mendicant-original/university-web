@@ -47,9 +47,8 @@
 
   - unless @results[:irc_messages].empty?
     %h2 Irc Channel
-    %hr
     %ul
       - @results[:irc_messages].each do |message|
         %li
           .search_result
-            = highlighted_snippet(message.body, @search_key)
+            = render :partial => "chat/messages/search_result", :locals => {:message => message}

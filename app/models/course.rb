@@ -147,7 +147,7 @@ class Course < ActiveRecord::Base
     result = []
 
     if channel && !channel.messages.empty?
-      result = Chat::Message.search(search_key, channel.messages)
+      result = Chat::Message.search_within_channel(channel, {body: search_key})
     end
 
     result
