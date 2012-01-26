@@ -12,5 +12,10 @@ class ActionDispatch::IntegrationTest
   include Capybara
   include Support::Integration
 
-  teardown { Capybara.reset_sessions! }
+  Capybara.javascript_driver = :webkit
+
+  teardown do
+    Capybara.reset_sessions!
+    Capybara.use_default_driver
+  end
 end
