@@ -37,10 +37,13 @@ gem 'capistrano'
 group :test do
   gem "minitest",  "~> 2.3.1"
   gem "capybara",  "~> 1.1.2"
+  gem "capybara-webkit"
+  gem "capybara-screenshot"
   gem "factory_girl_rails"
   gem "mocha"
-  gem "colorific", "~> 1.0.0"
-  gem "test_notifier", '~> 1.0.0'
+  gem "database_cleaner"
+  gem "colorific",     "~> 1.0.0"
+  gem "test_notifier", "~> 1.0.0"
 end
 
 group :production do
