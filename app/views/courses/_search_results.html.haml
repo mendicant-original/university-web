@@ -48,8 +48,8 @@
   - unless @results[:irc_messages].empty?
     %h2 Irc Channel
     %hr
-    - results[:irc_messages].each do |message|
-      %ul
+    %ul
+      - @results[:irc_messages].each do |message|
         %li
           .search_result
             = highlighted_snippet(message.body, @search_key)
