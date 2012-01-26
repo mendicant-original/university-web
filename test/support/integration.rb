@@ -65,6 +65,16 @@ module Support
       within(scope) { click_link(text) }
     end
 
+    # Saves HTML and PNG (if using capybara-webkit) output to tmp/capybara
+    #
+    def capture
+      Capybara::Screenshot::Saver.screen_shot_and_save_page Capybara, Capybara.body
+    end
+
+    def tests_javascript
+      Capybara.current_driver = Capybara.javascript_driver
+    end
+
     def sign_user_in(user=Factory(:user, :email => "rmu@test.com"))
       visit new_user_session_path
 

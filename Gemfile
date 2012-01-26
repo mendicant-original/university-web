@@ -4,9 +4,8 @@ source "http://rubygems.org"
 # Core #
 ########
 
-gem "rails",  "~> 3.0.7"
+gem "rails",  "~> 3.0.11"
 gem "devise", "~> 1.4.2"
-gem "rack",   "~> 1.2.1"
 
 ########
 # Data #
@@ -37,12 +36,14 @@ gem 'capistrano'
 
 group :test do
   gem "minitest",  "~> 2.3.1"
-  gem "capybara",  "~> 0.4.1.1"
+  gem "capybara",  "~> 1.1.2"
   gem "capybara-webkit"
+  gem "capybara-screenshot"
   gem "factory_girl_rails"
   gem "mocha"
-  gem "colorific", "~> 1.0.0"
-  gem "test_notifier", '~> 1.0.0'
+  gem "database_cleaner"
+  gem "colorific",     "~> 1.0.0"
+  gem "test_notifier", "~> 1.0.0"
 end
 
 group :production do
