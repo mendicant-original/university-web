@@ -96,7 +96,7 @@ module CoursesHelper
     haml_tag :b do
       haml_concat(
         link_to link_text, course_assignment_submission_path(
-          @course, submission.assignment, submission
+          @course, submission.assignment, submission, :anchor => comment.index
         )
       )
     end
