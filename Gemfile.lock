@@ -194,6 +194,6 @@ DEPENDENCIES
   sanitize (~> 2.0.0)
   sass
   test_notifier (~> 1.0.0)
-  texticle (~> 2.0.2)
+  texticle!
   whenever (~> 0.6.8)
   will_paginate (~> 3.0)
