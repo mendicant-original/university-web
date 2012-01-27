@@ -125,7 +125,10 @@ class CourseTest < ActiveSupport::TestCase
       setup do
         channel      = Factory(:chat_channel)
         chat_message = Factory(:chat_message, :channel => channel, :body => 'message')
-        @course = Factory(:course, :notes => 'note', :description => 'Lorem ipsum')
+        @course = Factory(:course,
+                          :notes => 'note',
+                          :description => 'Lorem ipsum',
+                          :channel => channel)
         @assignment = Factory(:assignment,
           :course      => @course,
           :description => "This is an assigment"
