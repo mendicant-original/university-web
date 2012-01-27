@@ -49,7 +49,7 @@ class Course < ActiveRecord::Base
   end
 
   def submissions
-    Assignment::Submission.where :assignment_id => assignments
+    Assignment::Submission.where :assignment_id => assignments.map(&:id)
   end
 
   def reviews(user=nil)
@@ -96,7 +96,7 @@ class Course < ActiveRecord::Base
   def activities
     assignments.map { |a| a.recent_activities }.flatten.
       sort_by { |a| a.created_at }.reverse
-  end                                     
+  end
 
   def search(search_key)
     results = {}
@@ -133,11 +133,7 @@ class Course < ActiveRecord::Base
     result = []
 
     submissions.each do |sub|
-      unless sub.comments.empty?
-        Comment.search(search_key, sub.comments).each do |comment|
-          result << comment
-        end
-      end
+      result += Comment.search(search_key, sub.comments) unless sub.comments.empty?
     end
 
     result
