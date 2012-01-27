@@ -120,20 +120,20 @@ class Course < ActiveRecord::Base
   end
 
   def search_assignments(search_key)
-    return [] if assignments.empty?
-    Assignment.search(search_key, assignments)
+    Assignment.search(search_key, assignments).where(:course_id => self.id)
   end
 
   def search_submissions(search_key)
-    return [] if submissions.empty?
-    Assignment::Submission.search(search_key, submissions)
+    Assignment::Submission.search(search_key).
+      where(:assignment_id => assignments)
   end
 
   def search_submission_comments(search_key)
     result = []
 
     submissions.each do |sub|
-      result += Comment.search(search_key, sub.comments) unless sub.comments.empty?
+      result += Comment.search(search_key).
+        where(:commentable_id => sub.id, :commentable_type => sub.class.to_s)
     end
 
     result
