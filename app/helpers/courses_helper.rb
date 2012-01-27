@@ -85,6 +85,10 @@ module CoursesHelper
 
   def submission_comment_search_result(comment)
     submission = comment.commentable
+
+    # This happens when we delete students from courses
+    return nil unless submission
+
     link_text = 'A comment in ' +
       submission.user.name + "'s submission for " +
       submission.assignment.name
