@@ -1,5 +1,5 @@
 = form_tag search_course_path, :method => "get", :remote => true,
-  :class => "bp search" do
+  :class => "bp search", :id => "course_search" do
   = text_field_tag :search, params[:search], :placeholder => "Search current course"
   = submit_tag 'Search', :class => "inline"
 
@@ -8,6 +8,7 @@
 #search_spinner
 
 :javascript
+  // TODO: Move this somewhere else so it can be reused
   var opts = {
     lines: 12, // The number of lines to draw
     length: 3, // The length of each line
@@ -21,11 +22,16 @@
   var target = document.getElementById('search_spinner');
   var spinner = new Spinner(opts);
 
-  $("#search_spinner").bind("ajaxSend", function(){
+  $("#course_search").bind("ajax:loading", function(){
     spinner.spin(target);
-  }).bind("ajaxComplete", function(){
+    $('#course_search input[type=submit]').attr('disabled', true);
+  }).bind("ajax:complete", function(){
     spinner.stop();
+    $('#course_search input[type=submit]').attr('disabled', null);
+  }).bind("ajax:failure", function(xhr, status, error){
+    $('#search-results').html("<h1>Error loading results</h1><p>" +
+      status.statusText + "</p>");
   });
 
-  
+
 #search-results
