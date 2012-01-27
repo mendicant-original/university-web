@@ -123,7 +123,21 @@ class CourseTest < ActiveSupport::TestCase
   context "Course#search" do
     context "when you search" do
       setup do
+        channel      = Factory(:chat_channel)
+        chat_message = Factory(:chat_message, :channel => channel, :body => 'message')
         @course = Factory(:course, :notes => 'note', :description => 'Lorem ipsum')
+        @assignment = Factory(:assignment,
+          :course      => @course,
+          :description => "This is an assigment"
+        )
+        @submission = Factory(:submission,
+          :assignment => @assignment,
+          :description => "This is a submission"
+        )
+        @comment    = Factory(:comment,
+          :commentable => @submission,
+          :comment_text => 'comment'
+        )
       end
 
       test "should return an empty array" do
@@ -131,32 +145,23 @@ class CourseTest < ActiveSupport::TestCase
       end
 
       test "should return notes" do
-        assert !@course.search('note')[:notes].empty?
+        assert @course.search('note')[:notes].any?
       end
 
       test "should return assignments" do
-        assignment = Factory(:assignment, :course => @course, :description => "This is an assigment")
-        assert !@course.search('assigment')[:assignments].empty?
+        assert @course.search('assigment')[:assignments].any?
       end
 
       test "should return submission" do
-        assignment = Factory(:assignment, :course => @course)
-        Factory(:submission, :assignment => assignment, :description => "This is a submission")
-        assert !@course.search('submission')[:submissions].empty?
+        assert @course.search('submission')[:submissions].any?
       end
 
       test "should return submission's comments" do
-        assignment = Factory(:assignment, :course => @course)
-        submission = Factory(:submission, :assignment => assignment)
-        comment    = Factory(:comment, :commentable => submission, :comment_text => 'comment')
-        assert !@course.search('comment')[:submission_comments].empty?
+        assert @course.search('comment')[:submission_comments].any?
       end
 
       test "should return irc messages" do
-        channel      = Factory(:chat_channel)
-        chat_message = Factory(:chat_message, :channel => channel, :body => 'message')
-        @course      = Factory(:course, :channel => channel)
-        assert !@course.search('message')[:irc_messages].empty?
+        assert @course.search('message')[:irc_messages].any?
       end
 
       test 'should not return assignments of other courses' do
@@ -164,7 +169,8 @@ class CourseTest < ActiveSupport::TestCase
         assignment   = Factory(:assignment,
                                :course => other_course,
                                :description => 'test')
-        assert @course.search('test')[:assignments].empty?
+        assert @course.search('test')[:assignments].empty?,
+               "Assignments from another course returned in results"
       end
 
       test 'should not return submissions of other courses' do
@@ -172,7 +178,22 @@ class CourseTest < ActiveSupport::TestCase
         assignment   = Factory(:assignment, :course => other_course)
         submission   = Factory(:submission, :assignment => assignment,
                                :description => 'test')
-        assert @course.search('test')[:submissions].empty?
+        assert @course.search('test')[:submissions].empty?,
+              "Submissions from another course returned in results"
+      end
+
+      test 'should not return submission comments of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment, :course => other_course)
+        submission   = Factory(:submission, :assignment => assignment)
+
+        Factory(:comment,
+          :commentable  => submission,
+          :user         => submission.user,
+          :comment_text => 'test')
+
+        assert @course.search('test')[:submission_comments].empty?,
+               "Submission comments from another course returned in results"
       end
     end
   end
