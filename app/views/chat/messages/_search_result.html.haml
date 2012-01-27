@@ -1,4 +1,8 @@
-%h4= link_to "On #{message.recorded_at.strftime('%a, %b %d')}", chat_messages_path(:channel => params[:channel], :since => message.nearby_messages.first.recorded_at, :highlight => params[:search])
+%h4
+  = link_to "On #{message.recorded_at.strftime('%a, %b %d')}",
+  chat_messages_path(:channel => message.channel.name,
+    :since => message.nearby_messages.first.recorded_at,
+    :highlight => params[:search])
 %hr
 %table.messages
   - message.nearby_messages.each do |context_message|
