@@ -22,6 +22,8 @@ class UsersController < ApplicationController
 
         github_users = @users.map do |user|
           { :github           => user.github_account_name,
+            :name             => user.name,
+            :email            => user.email,
             :alumnus          => user.alumnus?,
             :staff            => user.staff?,
             :visiting_teacher => user.visiting_teacher? }
