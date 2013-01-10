@@ -1,7 +1,7 @@
 require 'bundler/capistrano'
 
 set :application, "university-web"
-set :repository,  "git://github.com/mendicant-university/university-web.git"
+set :repository,  "git://github.com/mendicant-original/university-web.git"
 
 set :scm, :git
 set :deploy_to, "/var/rapp/#{application}"
