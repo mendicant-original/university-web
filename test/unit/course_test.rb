@@ -119,4 +119,85 @@ class CourseTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context "Course#search" do
+    context "when you search" do
+      setup do
+        channel      = Factory(:chat_channel)
+        chat_message = Factory(:chat_message, :channel => channel, :body => 'message')
+        @course = Factory(:course,
+                          :notes => 'note',
+                          :description => 'Lorem ipsum',
+                          :channel => channel)
+        @assignment = Factory(:assignment,
+          :course      => @course,
+          :description => "This is an assigment"
+        )
+        @submission = Factory(:submission,
+          :assignment => @assignment,
+          :description => "This is a submission"
+        )
+        @comment    = Factory(:comment,
+          :commentable => @submission,
+          :comment_text => 'comment'
+        )
+      end
+
+      test "should return an empty array" do
+        assert @course.search('qdwkrvekrvjbnerkjn').values.all? {|k| k.empty? }
+      end
+
+      test "should return notes" do
+        assert @course.search('note')[:notes].any?
+      end
+
+      test "should return assignments" do
+        assert @course.search('assigment')[:assignments].any?
+      end
+
+      test "should return submission" do
+        assert @course.search('submission')[:submissions].any?
+      end
+
+      test "should return submission's comments" do
+        assert @course.search('comment')[:submission_comments].any?
+      end
+
+      test "should return irc messages" do
+        assert @course.search('message')[:irc_messages].any?
+      end
+
+      test 'should not return assignments of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment,
+                               :course => other_course,
+                               :description => 'test')
+        assert @course.search('test')[:assignments].empty?,
+               "Assignments from another course returned in results"
+      end
+
+      test 'should not return submissions of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment, :course => other_course)
+        submission   = Factory(:submission, :assignment => assignment,
+                               :description => 'test')
+        assert @course.search('test')[:submissions].empty?,
+              "Submissions from another course returned in results"
+      end
+
+      test 'should not return submission comments of other courses' do
+        other_course = Factory(:course)
+        assignment   = Factory(:assignment, :course => other_course)
+        submission   = Factory(:submission, :assignment => assignment)
+
+        Factory(:comment,
+          :commentable  => submission,
+          :user         => submission.user,
+          :comment_text => 'test')
+
+        assert @course.search('test')[:submission_comments].empty?,
+               "Submission comments from another course returned in results"
+      end
+    end
+  end
 end

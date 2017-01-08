@@ -48,6 +48,10 @@ class Course < ActiveRecord::Base
     course_member_by_type('mentor')
   end
 
+  def submissions
+    Assignment::Submission.where :assignment_id => assignments.map(&:id)
+  end
+
   def reviews(user=nil)
     reviews = Assignment::Review.includes(:submission => {:assignment => :course}).
       where("courses.id = ? and assignment_reviews.closed = ?", id, false).
@@ -94,11 +98,55 @@ class Course < ActiveRecord::Base
       sort_by { |a| a.created_at }.reverse
   end
 
+  def search(search_key)
+    results = {}
+
+    results[:course_description]  = Course.search({description: search_key}, self)
+    results[:notes]               = Course.search({notes: search_key}, self)
+    results[:assignments]         = search_assignments(search_key)
+    results[:submissions]         = search_submissions(search_key)
+    results[:submission_comments] = search_submission_comments(search_key)
+    results[:irc_messages]        = search_irc_messages(search_key)
+
+    results
+  end
+
   private
 
   def course_member_by_type(type)
     User.includes(:course_memberships).
       where(["course_memberships.course_id = ? AND " +
-             "course_memberships.access_level = ?  ", id, type])
+            "course_memberships.access_level = ?  ", id, type])
   end
+
+  def search_assignments(search_key)
+    Assignment.search(search_key, assignments).where(:course_id => self.id)
+  end
+
+  def search_submissions(search_key)
+    Assignment::Submission.search(search_key).
+      where(:assignment_id => assignments)
+  end
+
+  def search_submission_comments(search_key)
+    result = []
+
+    submissions.each do |sub|
+      result += Comment.search(search_key).
+        where(:commentable_id => sub.id, :commentable_type => sub.class.to_s)
+    end
+
+    result
+  end
+
+  def search_irc_messages(search_key)
+    result = []
+
+    if channel && !channel.messages.empty?
+      result = Chat::Message.search_within_channel(channel, {body: search_key})
+    end
+
+    result
+  end
+
 end

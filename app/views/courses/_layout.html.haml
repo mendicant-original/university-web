@@ -36,7 +36,10 @@
             :"data-id" => "irc_log"
       %li
         = link_to "Participants", course_path(@course, :anchor => "participants"),
-          :"data-id" => "participants"
+          :"data-id" => "participants"   
+      %li 
+        = link_to "Search", course_path(@course, :anchor => "search"),
+          :"data-id" => "search"
 
   .main
     #bucket= yield(:bucket)

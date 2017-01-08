@@ -46,4 +46,64 @@ module CoursesHelper
      }
   end
 
+  def highlighted_snippet(text, key, opts={})
+    opts[:surround] ||= 30
+
+    index = text.index(/#{key}/i)
+    if index
+      start = index - opts[:surround]
+      start = 0 if start < 0
+
+      prefix = start == 0 ? "" : "..."
+
+      finish = index + key.length + opts[:surround]
+      finish = -1 if finish >= text.length
+
+      suffix = finish == -1 ? "" : "..."
+
+      highlight prefix + text[start..finish] + suffix, key
+    else
+      text[0, opts[:surround] * 2]
+    end
+  end
+
+  def submission_search_result(submission)
+    link_text = submission.user.name + "'s submission for " + submission.assignment.name
+
+    haml_tag :b do
+      haml_concat(
+        link_to link_text, course_assignment_submission_path(
+          @course, submission.assignment, submission
+        )
+      )
+    end
+
+    haml_tag :br
+
+    haml_concat highlighted_snippet(submission.description, @search_key)
+  end
+
+  def submission_comment_search_result(comment)
+    submission = comment.commentable
+
+    # This happens when we delete students from courses
+    return nil unless submission
+
+    link_text = 'A comment in ' +
+      submission.user.name + "'s submission for " +
+      submission.assignment.name
+
+    haml_tag :b do
+      haml_concat(
+        link_to link_text, course_assignment_submission_path(
+          @course, submission.assignment, submission, :anchor => comment.index
+        )
+      )
+    end
+
+    haml_tag :br
+
+    haml_concat highlighted_snippet(comment.comment_text, @search_key)
+  end
+
 end

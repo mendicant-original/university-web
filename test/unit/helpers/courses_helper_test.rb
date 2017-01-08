@@ -27,4 +27,25 @@ class CoursesHelperTest < ActionView::TestCase
       end
     end
   end
+
+  context '#highlighted_snippet' do
+    context 'for a string that does not contain the keyword' do
+      test 'return a prefix of the string' do
+        string  = "this is a sample text that does not contain the keyword"
+        keyword = "test"
+        snippet = highlighted_snippet(string, keyword)
+        assert string.start_with? snippet
+      end
+    end
+
+    context 'for a string that contains the keyword' do
+      test 'returns a substring that contains the keyword' do
+        string  = "this is a test text that does contain the keyword"
+        keyword = 'test'
+        snippet = highlighted_snippet(string, keyword, :surround => 5)
+
+        assert snippet.include? keyword
+      end
+    end
+  end
 end

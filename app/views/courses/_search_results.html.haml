@@ -1,0 +1,54 @@
+- count = @results.values.flatten.count
+- if count == 0
+  %h1 Found 0 results
+- else
+  %h1= "Found #{count} results"
+
+  - unless @results[:course_description].empty?
+    %h2 Course's description
+    %hr
+    .search_result
+      = highlighted_snippet(@course.description, @search_key, surround: 100)
+
+  - unless @results[:notes].empty?
+    %h2 Shared Notes
+    %hr
+    .search_result
+      = highlighted_snippet(@course.notes, @search_key)
+
+  - unless @results[:assignments].empty?
+    %h2 Assignments
+    %hr
+    %ul
+      - @results[:assignments].each do |assignment|
+        %li
+          .search_result
+            %b= link_to assignment.name, course_assignment_path(@course, assignment)
+            %br
+            = highlighted_snippet(assignment.name, @search_key)
+
+  - unless @results[:submissions].empty?
+    %h2 Submissions
+    %hr
+    %ul
+      - @results[:submissions].each do |submission|
+        %li
+          .search_result
+            - submission_search_result submission
+
+  - unless @results[:submission_comments].empty?
+    %h2 Submission Comments
+    %hr
+    %ul
+      - @results[:submission_comments].each do |comment|
+        %li
+          .search_result
+            - submission_comment_search_result comment
+
+  - unless @results[:irc_messages].empty?
+    %h2 Irc Channel
+    %ul
+      - @results[:irc_messages].each do |message|
+        %li
+          .search_result
+            = render :partial => "chat/messages/search_result", :locals => {:message => message}

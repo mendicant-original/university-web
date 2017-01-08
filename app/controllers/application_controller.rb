@@ -63,6 +63,5 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |id, password|
       id == RMU_SERVICE_ID && password == RMU_SERVICE_PASS
     end
-  end
-
+  end  
 end

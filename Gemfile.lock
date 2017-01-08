@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/tenderlove/texticle.git
+  revision: 24a2e30a35208e2ab772a99fe1070ff7875a5426
+  specs:
+    texticle (2.0.2)
+      activerecord (~> 3.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -148,8 +155,6 @@ GEM
       rubyzip
     test_notifier (1.0.0)
       notifier
-    texticle (2.0.2)
-      activerecord (>= 3.0.0)
     thor (0.14.6)
     treetop (1.4.12)
       polyglot
@@ -189,6 +194,6 @@ DEPENDENCIES
   sanitize (~> 2.0.0)
   sass
   test_notifier (~> 1.0.0)
-  texticle (~> 2.0.2)
+  texticle!
   whenever (~> 0.6.8)
   will_paginate (~> 3.0)

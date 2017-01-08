@@ -1,0 +1,37 @@
+= form_tag search_course_path, :method => "get", :remote => true,
+  :class => "bp search", :id => "course_search" do
+  = text_field_tag :search, params[:search], :placeholder => "Search current course"
+  = submit_tag 'Search', :class => "inline"
+
+.clear
+
+#search_spinner
+
+:javascript
+  // TODO: Move this somewhere else so it can be reused
+  var opts = {
+    lines: 12, // The number of lines to draw
+    length: 3, // The length of each line
+    width: 2, // The line thickness
+    radius: 5, // The radius of the inner circle
+    color: '#000', // #rgb or #rrggbb
+    speed: 1, // Rounds per second
+    trail: 60, // Afterglow percentage
+    shadow: false // Whether to render a shadow
+  };
+  var target = document.getElementById('search_spinner');
+  var spinner = new Spinner(opts);
+
+  $("#course_search").bind("ajax:loading", function(){
+    spinner.spin(target);
+    $('#course_search input[type=submit]').attr('disabled', true);
+  }).bind("ajax:complete", function(){
+    spinner.stop();
+    $('#course_search input[type=submit]').attr('disabled', null);
+  }).bind("ajax:failure", function(xhr, status, error){
+    $('#search-results').html("<h1>Error loading results</h1><p>" +
+      status.statusText + "</p>");
+  });
+
+
+#search-results
